@@ -1,5 +1,29 @@
-# Logs
-logs
+# ==========================================
+# Vue3 + TypeScript + Vite 项目 .gitignore 配置文件
+# ==========================================
+
+# 1. 第三方依赖包（防止本地依赖上传，体积巨大）
+node_modules/
+jspm_packages/
+web_modules/
+
+# 2. 构建产物 / 打包输出目录（避免将编译生成的静态资源提交到仓库）
+dist/
+dist-ssr/
+build/
+out/
+
+# 3. 本地环境变量与密钥配置（极其重要：防止 API 密钥、数据库凭证等私密配置泄露到 GitHub 仓库）
+# 过滤所有 .env 相关的本地配置文件，但通常保留 .env.example 等声明模板提交
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+.env.*.local
+
+# 4. 日志文件与调试输出（过滤运行、安装依赖或测试时产生的日志文件）
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,33 +31,41 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-.DS_Store
-dist
-dist-ssr
-coverage
-*.local
-
-# Editor directories and files
+# 5. 编辑器 / IDE 缓存与配置文件（过滤本地编辑器的个性化配置，避免团队内多人冲突）
+# VS Code 相关配置（排除工作区本地配置，但保留共享的推荐插件/任务配置）
 .vscode/*
 !.vscode/extensions.json
-.idea
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+# WebStorm / IntelliJ IDEA 配置文件
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swp
 
-*.tsbuildinfo
+# 6. 系统临时垃圾文件（过滤操作系统自动生成的缩略图和系统配置文件）
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
 
+# 7. 测试、覆盖率报告以及语法检查/格式化缓存
+coverage/
+*.lcov
+.nyc_output/
 .eslintcache
+.stylelintcache
+.prettiercache
+*.tsbuildinfo
+.rollup.cache/
 
-# Cypress
-/cypress/videos/
-/cypress/screenshots/
-
-# Vitest
-__screenshots__/
-
-# Vite
+# 8. Vite 特有临时文件（Vite 运行或热更新时生成的临时构建文件）
 *.timestamp-*-*.mjs
+*.timestamp-*-*.js
+*.timestamp-*-*.ts
