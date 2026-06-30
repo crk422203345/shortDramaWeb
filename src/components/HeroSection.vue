@@ -71,7 +71,7 @@ const emit = defineEmits<{
   position: relative;
   display: grid;
   min-height: 100svh;
-  padding: calc(var(--header-height) + 100px) 24px 96px;
+  padding: calc(var(--header-height) + 88px) var(--page-gutter) 86px;
   overflow: hidden;
   place-items: center;
   background:
@@ -107,7 +107,7 @@ const emit = defineEmits<{
   border-radius: 999px;
   background: rgba(0, 169, 198, 0.16);
   color: var(--color-cyan);
-  font-size: 20px;
+  font-size: 13.6px;
   font-weight: 950;
   letter-spacing: 0.28em;
   box-shadow: 0 0 32px rgba(0, 216, 245, 0.16);
@@ -125,7 +125,7 @@ const emit = defineEmits<{
   gap: clamp(18px, 2.4vw, 36px);
   margin: 72px 0 0;
   color: var(--color-text);
-  font-size: clamp(76px, 11.6vw, 156px);
+  font-size: clamp(52.8px, 7.84vw, 105.6px);
   font-weight: 1000;
   line-height: 0.86;
   letter-spacing: 0;
@@ -139,13 +139,13 @@ const emit = defineEmits<{
 }
 
 .hero-x {
-  font-size: 0.66em;
+  font-size: 0.528em;
 }
 
 .hero-subtitle {
   margin: 64px 0 0;
   color: #c6ccd3;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: clamp(19.2px, 2vw, 27.2px);
   font-weight: 400;
   line-height: 1.2;
 }
@@ -153,7 +153,7 @@ const emit = defineEmits<{
 .hero-slogan {
   margin: 22px 0 0;
   color: var(--color-text);
-  font-size: clamp(32px, 3.4vw, 48px);
+  font-size: clamp(22.4px, 2.32vw, 32px);
   font-weight: 950;
   line-height: 1.14;
 }
@@ -162,8 +162,9 @@ const emit = defineEmits<{
   max-width: 820px;
   margin: 28px auto 0;
   color: #8795a4;
-  font-size: 21px;
+  font-size: 14.4px;
   line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .platform-strip {
@@ -182,7 +183,7 @@ const emit = defineEmits<{
   gap: 10px;
   min-height: 42px;
   border-radius: 999px;
-  font-size: 17px;
+  font-size: 12px;
   font-weight: 900;
   white-space: nowrap;
 }
@@ -242,7 +243,7 @@ const emit = defineEmits<{
   }
 
   .hero-kicker {
-    font-size: 14px;
+    font-size: 11.2px;
     letter-spacing: 0.12em;
   }
 
@@ -260,14 +261,14 @@ const emit = defineEmits<{
 
 @media (max-width: 640px) {
   .hero-section {
-    padding-inline: 14px;
+    padding-inline: var(--page-gutter);
     padding-bottom: 72px;
     min-width: 0;
   }
 
   .hero-content {
     width: 100%;
-    max-width: calc(100vw - 28px);
+    max-width: calc(100vw - var(--page-gutter) * 2);
     overflow: hidden;
   }
 
@@ -278,7 +279,7 @@ const emit = defineEmits<{
     max-width: 100%;
     min-height: auto;
     padding: 12px 14px;
-    font-size: 11px;
+    font-size: 8.8px;
     line-height: 1.35;
     letter-spacing: 0.04em;
     text-align: center;
@@ -299,7 +300,7 @@ const emit = defineEmits<{
     max-width: 100%;
     display: grid;
     gap: 4px;
-    font-size: clamp(56px, 18vw, 74px);
+    font-size: clamp(40px, 12.8vw, 52.8px);
     overflow-wrap: anywhere;
   }
 
@@ -311,13 +312,14 @@ const emit = defineEmits<{
     display: grid;
     max-width: 100%;
     margin-top: 42px;
-    font-size: 24px;
+    font-size: 16.8px;
     overflow-wrap: anywhere;
     word-break: break-all;
   }
 
   .hero-copy {
-    font-size: 16px;
+    font-size: 12px;
+    word-break: break-all;
   }
 
   .platform-strip {
@@ -330,7 +332,7 @@ const emit = defineEmits<{
   .strip-label {
     width: 100%;
     justify-content: center;
-    font-size: 14px;
+    font-size: 10.4px;
     white-space: normal;
     text-align: center;
   }

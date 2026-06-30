@@ -83,7 +83,7 @@ defineProps<{
 .stat-card h3 {
   margin: 0;
   color: var(--color-text);
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 950;
 }
 
@@ -91,7 +91,7 @@ defineProps<{
 .stat-card p {
   margin: 12px 0 0;
   color: #7f8e9e;
-  font-size: 18px;
+  font-size: 12.8px;
   line-height: 1.55;
 }
 
@@ -115,14 +115,14 @@ defineProps<{
 
 .stat-label {
   color: rgba(0, 216, 245, 0.66);
-  font-size: 16px;
+  font-size: 11.2px;
   font-weight: 800;
 }
 
 .stat-metric {
   margin: 30px 0 14px !important;
   color: var(--color-cyan) !important;
-  font-size: clamp(44px, 4.7vw, 66px) !important;
+  font-size: clamp(30.4px, 3.2vw, 44.8px) !important;
   font-weight: 950;
   line-height: 1;
 }

@@ -101,7 +101,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 
 .earth-column {
   position: relative;
-  min-height: 600px;
+  min-height: 720px;
 }
 
 .earth-column :deep(.lazy-image) {
@@ -111,12 +111,13 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 
 .pillar-tabs {
   position: absolute;
-  inset: 60px 0 auto;
+  inset: 0;
   pointer-events: none;
 }
 
 .pillar-tab {
   position: absolute;
+  z-index: 2;
   display: grid;
   justify-items: center;
   gap: 8px;
@@ -139,7 +140,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 
 .pillar-tab:nth-child(3) {
   left: 50%;
-  bottom: -500px;
+  top: 560px;
   transform: translateX(-50%);
 }
 
@@ -155,14 +156,14 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 
 .pillar-tab span {
   color: #a4adb7;
-  font-size: 22px;
+  font-size: 15.2px;
   font-weight: 950;
 }
 
 .pillar-tab small {
   color: #4e5660;
   font-family: Consolas, monospace;
-  font-size: 15px;
+  font-size: 10.4px;
 }
 
 .pillar-tab.active svg {
@@ -195,7 +196,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 .pillar-detail h3 {
   margin: 54px 0 0;
   color: var(--color-text);
-  font-size: clamp(36px, 4vw, 52px);
+  font-size: clamp(24px, 2.72vw, 35.2px);
   font-weight: 950;
   line-height: 1.12;
 }
@@ -206,7 +207,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
   align-items: center;
   margin: 24px 0 0;
   color: var(--color-cyan);
-  font-size: clamp(20px, 2.1vw, 27px);
+  font-size: clamp(14.4px, 1.48vw, 18.4px);
   font-weight: 950;
   line-height: 1.35;
 }
@@ -222,7 +223,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
   padding-bottom: 42px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: #8794a2;
-  font-size: 23px;
+  font-size: 15.2px;
   line-height: 1.55;
 }
 
@@ -244,7 +245,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 .metric-row span {
   display: block;
   color: #5f6872;
-  font-size: 15px;
+  font-size: 10.4px;
   font-weight: 800;
 }
 
@@ -252,7 +253,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
   display: block;
   margin-top: 14px;
   color: var(--color-text);
-  font-size: 29px;
+  font-size: 20px;
   font-weight: 950;
 }
 

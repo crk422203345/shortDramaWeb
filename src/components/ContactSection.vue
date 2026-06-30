@@ -83,27 +83,27 @@ const submitContact = (): void => {
 
 .contact-form {
   display: grid;
-  gap: 34px;
-  width: min(100%, 1280px);
-  margin: 96px auto 0;
-  padding: clamp(34px, 5vw, 72px);
-  border-radius: 42px;
+  gap: 22px;
+  width: min(100%, 980px);
+  margin: 64px auto 0;
+  padding: clamp(26px, 3.2vw, 46px);
+  border-radius: 28px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 34px;
+  gap: 24px;
 }
 
 label {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 label span {
   color: #98a3af;
-  font-size: 17px;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -114,11 +114,11 @@ label b {
 input,
 textarea {
   width: 100%;
-  border: 2px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   background: rgba(0, 0, 0, 0.35);
   color: var(--color-text);
-  font-size: 22px;
+  font-size: 14.4px;
   font-weight: 650;
   outline: none;
   transition:
@@ -128,14 +128,14 @@ textarea {
 }
 
 input {
-  height: 84px;
-  padding: 0 34px;
+  height: 54px;
+  padding: 0 20px;
 }
 
 textarea {
-  min-height: 188px;
+  min-height: 116px;
   resize: vertical;
-  padding: 28px 34px;
+  padding: 16px 20px;
 }
 
 input::placeholder,
@@ -154,27 +154,29 @@ textarea:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 10px;
   width: 100%;
-  min-height: 86px;
-  margin-top: 8px;
-  border-radius: 18px;
+  min-height: 56px;
+  margin-top: 4px;
+  border-radius: 12px;
   background: var(--color-blue);
   color: #001117;
-  font-size: 25px;
+  font-size: 16.8px;
   font-weight: 950;
-  box-shadow: 0 22px 62px rgba(19, 185, 255, 0.26);
+  box-shadow: 0 14px 42px rgba(19, 185, 255, 0.22);
 }
 
 .submit-button svg {
-  width: 29px;
-  height: 29px;
+  width: 21px;
+  height: 21px;
 }
 
 @media (max-width: 760px) {
   .contact-form {
-    margin-top: 60px;
-    border-radius: 28px;
+    gap: 18px;
+    margin-top: 44px;
+    padding: 24px 18px;
+    border-radius: 20px;
   }
 
   .form-row {
@@ -183,22 +185,22 @@ textarea:focus {
 
   input,
   textarea {
-    font-size: 17px;
+    font-size: 13.6px;
   }
 
   input {
-    height: 62px;
-    padding-inline: 20px;
+    height: 48px;
+    padding-inline: 16px;
   }
 
   textarea {
-    min-height: 150px;
-    padding: 20px;
+    min-height: 104px;
+    padding: 14px 16px;
   }
 
   .submit-button {
-    min-height: 62px;
-    font-size: 18px;
+    min-height: 50px;
+    font-size: 14.4px;
   }
 }
 </style>

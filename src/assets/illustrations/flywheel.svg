@@ -6,8 +6,8 @@
   <circle cx="380" cy="380" r="90" fill="#03080B" stroke="#03D9F6" stroke-opacity=".45"/>
   <rect x="344" y="324" width="72" height="72" rx="18" fill="#073747"/>
   <path d="M364 362h32M368 376h24M372 348h16M358 384h44M380 332l26 14h-52l26-14ZM362 350v28M376 350v28M390 350v28M398 350v28" stroke="#03D9F6" stroke-width="3" stroke-linecap="round"/>
-  <text x="336" y="435" fill="#03D9F6" font-family="Consolas, monospace" font-size="18" font-weight="800" letter-spacing="3">GGC / WEBX</text>
-  <text x="304" y="470" fill="#F7FBFF" font-family="Arial, sans-serif" font-size="26" font-weight="900">全球平台底层</text>
+  <text x="336" y="435" fill="#03D9F6" font-family="Consolas, monospace" font-size="14.4" font-weight="800" letter-spacing="3">GGC / WEBX</text>
+  <text x="304" y="470" fill="#F7FBFF" font-family="Arial, sans-serif" font-size="20.8" font-weight="900">全球平台底层</text>
   <g filter="url(#nodeGlow)">
     <circle cx="160" cy="315" r="42" fill="#03D9F6"/>
     <path d="M166 330v-8a14 14 0 0 0-14-14h-6a14 14 0 0 0-14 14v8M149 296a12 12 0 1 0 0-24 12 12 0 0 0 0 24M188 330v-5a13 13 0 0 0-10-12M174 272a12 12 0 0 1 0 23" stroke="#031015" stroke-width="4" stroke-linecap="round"/>

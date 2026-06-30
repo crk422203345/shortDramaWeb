@@ -28,7 +28,7 @@ import { footerGroups } from '@/data/landing'
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 80px;
-  width: min(100% - 96px, 1680px);
+  width: min(calc(100% - var(--page-gutter) * 2), 1560px);
   min-height: 230px;
   margin-inline: auto;
   padding: 76px 0 62px;
@@ -36,14 +36,14 @@ import { footerGroups } from '@/data/landing'
 
 .footer-brand strong {
   color: var(--color-text);
-  font-size: 28px;
+  font-size: 19.2px;
   font-weight: 950;
 }
 
 .footer-brand p {
   margin: 24px 0 0;
   color: #323b46;
-  font-size: 16px;
+  font-size: 11.2px;
   font-weight: 900;
   letter-spacing: 0.1em;
 }
@@ -57,7 +57,7 @@ import { footerGroups } from '@/data/landing'
 .footer-group h2 {
   margin: 0 0 4px;
   color: #7e8994;
-  font-size: 15px;
+  font-size: 10.4px;
   font-weight: 950;
   letter-spacing: 0.1em;
 }
@@ -70,7 +70,7 @@ import { footerGroups } from '@/data/landing'
 .footer-group a {
   width: fit-content;
   color: #717b86;
-  font-size: 20px;
+  font-size: 13.6px;
   font-weight: 750;
 }
 
@@ -81,7 +81,7 @@ import { footerGroups } from '@/data/landing'
 @media (max-width: 760px) {
   .footer-inner {
     grid-template-columns: 1fr;
-    width: min(100% - 36px, 420px);
+    width: min(calc(100% - var(--page-gutter) * 2), 420px);
     gap: 44px;
     padding: 56px 0;
   }

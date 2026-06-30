@@ -89,7 +89,7 @@ const activeRegion = computed<Region>(() => regions.find((region) => region.id =
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.055);
   color: #9aa8b5;
-  font-size: 18px;
+  font-size: 12.8px;
   font-weight: 900;
   text-align: left;
   transition:
@@ -115,14 +115,14 @@ const activeRegion = computed<Region>(() => regions.find((region) => region.id =
 .region-card h3 {
   margin: 28px 0 0;
   color: var(--color-text);
-  font-size: clamp(34px, 3.5vw, 48px);
+  font-size: clamp(24px, 2.4vw, 32px);
   font-weight: 950;
 }
 
 .coverage {
   margin: 18px 0 0;
   color: var(--color-cyan);
-  font-size: 22px;
+  font-size: 15.2px;
   font-weight: 950;
   line-height: 1.4;
 }
@@ -130,7 +130,7 @@ const activeRegion = computed<Region>(() => regions.find((region) => region.id =
 .description {
   margin: 30px 0 0;
   color: #9aa4af;
-  font-size: 22px;
+  font-size: 14.4px;
   line-height: 1.62;
 }
 
@@ -144,7 +144,7 @@ const activeRegion = computed<Region>(() => regions.find((region) => region.id =
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.07);
   color: #8f9ca8;
-  font-size: 18px;
+  font-size: 12.8px;
   line-height: 1.52;
 }
 
@@ -175,7 +175,7 @@ const activeRegion = computed<Region>(() => regions.find((region) => region.id =
   }
 
   .description {
-    font-size: 17px;
+    font-size: 13.6px;
   }
 }
 </style>

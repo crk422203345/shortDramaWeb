@@ -88,7 +88,7 @@ defineProps<{
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.06);
   color: #98a5b3;
-  font-size: 18px;
+  font-size: 12.8px;
   font-weight: 900;
 }
 
@@ -114,14 +114,14 @@ defineProps<{
 .card-title h3 {
   margin: 0;
   color: var(--color-text);
-  font-size: clamp(30px, 3.2vw, 44px);
+  font-size: clamp(21.6px, 2.24vw, 30.4px);
   font-weight: 950;
 }
 
 .beach-card p {
   margin: 26px 0 0;
   color: #8b96a2;
-  font-size: 21px;
+  font-size: 14.4px;
   line-height: 1.64;
 }
 
@@ -145,7 +145,7 @@ defineProps<{
   .tag-list span {
     width: 100%;
     justify-content: center;
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .card-title {
@@ -153,7 +153,7 @@ defineProps<{
   }
 
   .beach-card p {
-    font-size: 17px;
+    font-size: 13.6px;
   }
 }
 </style>

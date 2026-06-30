@@ -90,7 +90,7 @@ const handleNavigate = (sectionId: SectionId): void => {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  width: min(100% - 48px, 1700px);
+  width: min(calc(100% - var(--page-gutter) * 2), 1560px);
   height: 100%;
   margin-inline: auto;
 }
@@ -106,7 +106,7 @@ const handleNavigate = (sectionId: SectionId): void => {
 }
 
 .brand-main {
-  font-size: 31px;
+  font-size: 22.4px;
   font-weight: 950;
   line-height: 1;
 }
@@ -120,7 +120,7 @@ const handleNavigate = (sectionId: SectionId): void => {
   border-radius: 6px;
   color: var(--color-cyan);
   font-family: 'JetBrains Mono', Consolas, monospace;
-  font-size: 15px;
+  font-size: 10.4px;
   font-weight: 800;
   letter-spacing: 0.08em;
 }
@@ -128,8 +128,9 @@ const handleNavigate = (sectionId: SectionId): void => {
 .desktop-nav {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(28px, 4vw, 58px);
+  justify-content: flex-end;
+  gap: clamp(22px, 2.4vw, 42px);
+  margin-right: clamp(24px, 3vw, 58px);
 }
 
 .nav-link {
@@ -137,7 +138,7 @@ const handleNavigate = (sectionId: SectionId): void => {
   padding: 10px 0;
   background: transparent;
   color: #6f7781;
-  font-size: 19px;
+  font-size: 13.6px;
   font-weight: 800;
   transition: color 180ms ease;
 }
@@ -188,7 +189,7 @@ const handleNavigate = (sectionId: SectionId): void => {
   border: 1px solid rgba(0, 216, 245, 0.46);
   border-radius: 999px;
   background: rgba(0, 164, 196, 0.1);
-  font-size: 16px;
+  font-size: 11.2px;
   font-weight: 900;
 }
 
@@ -225,7 +226,7 @@ const handleNavigate = (sectionId: SectionId): void => {
 
 @media (max-width: 980px) {
   .header-inner {
-    width: min(100% - 32px, 720px);
+    width: min(calc(100% - var(--page-gutter) * 2), 720px);
   }
 
   .desktop-nav {
@@ -233,12 +234,12 @@ const handleNavigate = (sectionId: SectionId): void => {
   }
 
   .brand-main {
-    font-size: 24px;
+    font-size: 17.6px;
   }
 
   .brand-badge {
     min-height: 26px;
-    font-size: 12px;
+    font-size: 9.6px;
   }
 
   .language-button {
