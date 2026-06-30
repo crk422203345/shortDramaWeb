@@ -1,0 +1,31 @@
+<svg width="860" height="540" viewBox="0 0 860 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="858" height="538" rx="42" fill="#060A0D" stroke="#8BA1AE" stroke-opacity=".12" stroke-width="2"/>
+  <path d="M80 108h700M80 190h700M80 272h700M80 354h700M80 436h700M200 70v400M360 70v400M520 70v400M680 70v400" stroke="#0ADDF8" stroke-opacity=".05"/>
+  <path d="M135 170c72-28 153 4 207 70 42 52 8 98-56 110-42 8-78 23-82 56-4 38-53 55-80 25-37-42-2-120 15-168 10-31-35-61-4-93Z" fill="#0B1418" stroke="#334047" stroke-opacity=".45"/>
+  <path d="M455 178c72-32 120 42 176 72 70 38 104-40 139 20 20 34-34 92-88 108-59 18-88-29-146-22-64 8-124-14-136-65-11-47 9-92 55-113Z" fill="#0B1418" stroke="#334047" stroke-opacity=".45"/>
+  <path d="M590 228c45 30 78 42 120 30" stroke="#0ADDF8" stroke-opacity=".13" stroke-width="2"/>
+  <g filter="url(#pinGlow)">
+    <circle cx="622" cy="306" r="28" fill="#03D9F6"/>
+    <path d="M622 322s14-13 14-27a14 14 0 1 0-28 0c0 14 14 27 14 27Z" fill="#021217"/>
+    <circle cx="622" cy="294" r="5" fill="#03D9F6"/>
+  </g>
+  <g opacity=".82">
+    <circle cx="560" cy="246" r="22" fill="#061015" stroke="#03D9F6" stroke-width="3"/>
+    <path d="M560 259s10-10 10-20a10 10 0 1 0-20 0c0 10 10 20 10 20Z" stroke="#03D9F6" stroke-width="3"/>
+    <circle cx="560" cy="239" r="3" fill="#03D9F6"/>
+    <circle cx="584" cy="284" r="22" fill="#061015" stroke="#03D9F6" stroke-width="3"/>
+    <path d="M584 297s10-10 10-20a10 10 0 1 0-20 0c0 10 10 20 10 20Z" stroke="#03D9F6" stroke-width="3"/>
+    <circle cx="584" cy="277" r="3" fill="#03D9F6"/>
+    <circle cx="608" cy="326" r="22" fill="#061015" stroke="#03D9F6" stroke-width="3"/>
+    <path d="M608 339s10-10 10-20a10 10 0 1 0-20 0c0 10 10 20 10 20Z" stroke="#03D9F6" stroke-width="3"/>
+    <circle cx="608" cy="319" r="3" fill="#03D9F6"/>
+  </g>
+  <circle cx="58" cy="62" r="24" stroke="#03D9F6" stroke-opacity=".18" stroke-width="6"/>
+  <path d="M49 52 67 62 49 72l5-10-5-10Z" stroke="#03D9F6" stroke-opacity=".28" stroke-width="3" stroke-linejoin="round"/>
+  <defs>
+    <filter id="pinGlow" x="564" y="248" width="116" height="116" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>

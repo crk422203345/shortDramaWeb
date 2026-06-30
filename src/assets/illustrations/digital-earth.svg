@@ -1,0 +1,35 @@
+<svg width="760" height="760" viewBox="0 0 760 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="760" height="760" fill="none"/>
+  <circle cx="380" cy="390" r="248" stroke="#0ADDF8" stroke-opacity=".11" stroke-width="2"/>
+  <circle cx="380" cy="390" r="178" stroke="#0ADDF8" stroke-opacity=".22" stroke-width="2"/>
+  <circle cx="380" cy="390" r="132" fill="#071729" stroke="#05D9F7" stroke-width="4"/>
+  <circle cx="380" cy="390" r="104" fill="#0A2D68" opacity=".68"/>
+  <path d="M248 390h264M380 258c42 47 63 91 63 132s-21 85-63 132c-42-47-63-91-63-132s21-85 63-132Z" stroke="#0ADDF8" stroke-opacity=".65" stroke-width="3"/>
+  <path d="M286 316c48 18 136 18 188 0M286 464c48-18 136-18 188 0" stroke="#0ADDF8" stroke-opacity=".24" stroke-width="3" stroke-dasharray="8 10"/>
+  <path d="M246 390c24-82 75-124 134-124 58 0 110 42 134 124-24 82-76 124-134 124-59 0-110-42-134-124Z" stroke="#0ADDF8" stroke-opacity=".22" stroke-width="2"/>
+  <g filter="url(#glow)">
+    <circle cx="360" cy="330" r="8" fill="#03D9F6"/>
+    <circle cx="450" cy="476" r="9" fill="#08D891"/>
+    <circle cx="306" cy="405" r="6" fill="#C077FF"/>
+    <circle cx="506" cy="400" r="7" fill="#F8FFFF"/>
+    <circle cx="340" cy="488" r="9" fill="#03D9F6"/>
+    <circle cx="288" cy="356" r="6" fill="#F8FFFF"/>
+  </g>
+  <rect x="210" y="522" width="340" height="44" rx="22" fill="#081013" stroke="#6D747B" stroke-opacity=".44"/>
+  <path d="M314 544a12 12 0 1 0 0-24 12 12 0 0 0 0 24Zm-12-12h24M314 520c3 4 5 8 5 12s-2 8-5 12M314 520c-3 4-5 8-5 12s2 8 5 12" stroke="#03D9F6" stroke-width="3"/>
+  <text x="342" y="548" fill="#F7FBFF" font-family="Consolas, monospace" font-size="21" font-weight="800" letter-spacing="3">BINGO DIGITAL EARTH</text>
+  <g filter="url(#cyanGlow)">
+    <rect x="330" y="560" width="100" height="100" rx="24" fill="#063330" stroke="#08D891" stroke-width="3"/>
+    <path d="M388 633v-8a18 18 0 0 0-18-18h-8a18 18 0 0 0-18 18v8M366 590a15 15 0 1 0 0-30 15 15 0 0 0 0 30M416 633v-6a17 17 0 0 0-13-16M396 560a15 15 0 0 1 0 29" stroke="#08D891" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <defs>
+    <filter id="glow" x="260" y="300" width="280" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cyanGlow" x="292" y="520" width="176" height="178" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
