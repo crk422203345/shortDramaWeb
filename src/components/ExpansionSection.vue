@@ -63,7 +63,7 @@ const setActiveRegion = (regionId: string): void => {
         label="全球化规划"
         title="一个在中国市场验证的模式"
         highlight="正在走向全球十亿人口"
-        description="中国大陆、中国香港、马来西亚、东南亚三个结构性机会窗口正在开启。内容本地化、补贴全球化、广告生态标准化。"
+        description="中国大陆、中国香港、马来西亚、东南亚四个结构性机会窗口正在开启。内容本地化、补贴全球化、广告生态标准化。"
       />
 
       <div class="expansion-grid">
