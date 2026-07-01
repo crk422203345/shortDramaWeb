@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import { marketStats, painPoints } from '@/data/landing'
 import type { SectionId } from '@/types/landing'
@@ -6,6 +7,96 @@ import type { SectionId } from '@/types/landing'
 defineProps<{
   id: SectionId
 }>()
+
+interface MetricParts {
+  target: number
+  suffix: string
+  decimals: number
+}
+
+const statGridRef = ref<HTMLElement | null>(null)
+const animatedMetrics = ref<string[]>(marketStats.map((stat) => formatMetric(stat.metric, 0)))
+let observer: IntersectionObserver | null = null
+let animationFrameId: number | null = null
+let hasAnimated = false
+
+function parseMetric(metric: string): MetricParts | null {
+  const match = metric.match(/\d+(?:\.\d+)?/)
+  if (!match) return null
+
+  const rawNumber = match[0]
+  return {
+    target: Number(rawNumber),
+    suffix: metric.replace(rawNumber, ''),
+    decimals: rawNumber.includes('.') ? rawNumber.split('.')[1]?.length ?? 0 : 0,
+  }
+}
+
+function formatMetric(metric: string, progress: number): string {
+  const parts = parseMetric(metric)
+  if (!parts) return metric
+
+  const easedProgress = 1 - Math.pow(1 - progress, 3)
+  const currentValue = parts.target * easedProgress
+  const numberText =
+    parts.decimals > 0 ? currentValue.toFixed(parts.decimals) : Math.round(currentValue).toString()
+
+  return `${numberText}${parts.suffix}`
+}
+
+function startMetricAnimation(): void {
+  if (hasAnimated) return
+  hasAnimated = true
+
+  const duration = 1400
+  const stagger = 120
+  let startTime: number | null = null
+
+  const tick = (timestamp: number): void => {
+    startTime ??= timestamp
+
+    animatedMetrics.value = marketStats.map((stat, index) => {
+      const rawProgress = (timestamp - startTime! - index * stagger) / duration
+      const progress = Math.min(Math.max(rawProgress, 0), 1)
+      return formatMetric(stat.metric, progress)
+    })
+
+    const lastItemDelay = (marketStats.length - 1) * stagger
+    if (timestamp - startTime < duration + lastItemDelay) {
+      animationFrameId = window.requestAnimationFrame(tick)
+      return
+    }
+
+    animatedMetrics.value = marketStats.map((stat) => stat.metric)
+    animationFrameId = null
+  }
+
+  animationFrameId = window.requestAnimationFrame(tick)
+}
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry?.isIntersecting) return
+      startMetricAnimation()
+      observer?.disconnect()
+    },
+    {
+      root: null,
+      rootMargin: '-8% 0px -18% 0px',
+      threshold: 0.28,
+    },
+  )
+
+  if (statGridRef.value) observer.observe(statGridRef.value)
+})
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
+  if (animationFrameId !== null) {
+    window.cancelAnimationFrame(animationFrameId)
+  }
+})
 </script>
 
 <template>
@@ -26,15 +117,15 @@ defineProps<{
         </div>
       </div>
 
-      <div class="stat-grid">
-        <article v-for="stat in marketStats" :key="stat.title" class="stat-card glass-panel">
+      <div ref="statGridRef" class="stat-grid">
+        <article v-for="(stat, index) in marketStats" :key="stat.title" class="stat-card glass-panel">
           <div class="stat-top">
             <span class="icon-box">
               <BaseIcon :name="stat.icon" />
             </span>
             <span class="stat-label">{{ stat.label }}</span>
           </div>
-          <p class="stat-metric">{{ stat.metric }}</p>
+          <p class="stat-metric">{{ animatedMetrics[index] ?? stat.metric }}</p>
           <h3>{{ stat.title }}</h3>
           <p>{{ stat.description }}</p>
         </article>
@@ -50,26 +141,26 @@ defineProps<{
 
 .market-grid {
   display: grid;
-  grid-template-columns: minmax(360px, 0.8fr) minmax(520px, 1.2fr);
-  gap: clamp(60px, 6vw, 110px);
-  align-items: center;
+  grid-template-columns: minmax(420px, 0.95fr) minmax(560px, 1.05fr);
+  gap: clamp(46px, 5vw, 78px);
+  align-items: start;
 }
 
 .market-copy .section-title {
-  max-width: 680px;
+  max-width: 560px;
 }
 
 .pain-list {
   display: grid;
-  gap: 34px;
-  margin-top: 46px;
+  gap: 24px;
+  margin-top: 38px;
 }
 
 .pain-card {
   display: grid;
   grid-template-columns: 34px 1fr;
-  gap: 20px;
-  padding: 27px 32px;
+  gap: 18px;
+  padding: 24px 28px;
   border-radius: 16px;
 }
 
@@ -98,13 +189,24 @@ defineProps<{
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 34px;
+  gap: 24px;
 }
 
 .stat-card {
-  min-height: 322px;
-  padding: 48px;
-  border-radius: 24px;
+  min-height: 232px;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.stat-card .icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+}
+
+.stat-card .icon-box svg {
+  width: 23px;
+  height: 23px;
 }
 
 .stat-top {
@@ -120,7 +222,7 @@ defineProps<{
 }
 
 .stat-metric {
-  margin: 30px 0 14px !important;
+  margin: 22px 0 12px !important;
   color: var(--color-cyan) !important;
   font-size: clamp(30.4px, 3.2vw, 44.8px) !important;
   font-weight: 950;

@@ -8,25 +8,4 @@
   <path d="M364 362h32M368 376h24M372 348h16M358 384h44M380 332l26 14h-52l26-14ZM362 350v28M376 350v28M390 350v28M398 350v28" stroke="#03D9F6" stroke-width="3" stroke-linecap="round"/>
   <text x="336" y="435" fill="#03D9F6" font-family="Consolas, monospace" font-size="14.4" font-weight="800" letter-spacing="3">GGC / WEBX</text>
   <text x="304" y="470" fill="#F7FBFF" font-family="Arial, sans-serif" font-size="20.8" font-weight="900">全球平台底层</text>
-  <g filter="url(#nodeGlow)">
-    <circle cx="160" cy="315" r="42" fill="#03D9F6"/>
-    <path d="M166 330v-8a14 14 0 0 0-14-14h-6a14 14 0 0 0-14 14v8M149 296a12 12 0 1 0 0-24 12 12 0 0 0 0 24M188 330v-5a13 13 0 0 0-10-12M174 272a12 12 0 0 1 0 23" stroke="#031015" stroke-width="4" stroke-linecap="round"/>
-  </g>
-  <circle cx="380" cy="120" r="42" fill="#020506" stroke="#27313A" stroke-width="3"/>
-  <path d="M364 116c0-10 8-18 18-18s18 8 18 18-8 18-18 18M380 106v20M390 116h20" stroke="#9BA8B4" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="600" cy="250" r="42" fill="#020506" stroke="#27313A" stroke-width="3"/>
-  <path d="M592 274l18-28h-18l18-28" stroke="#9BA8B4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="600" cy="510" r="42" fill="#020506" stroke="#27313A" stroke-width="3"/>
-  <path d="M582 516a28 28 0 0 1 36 0M582 490h36M592 490v-14h16v14M594 516v18M606 516v18" stroke="#9BA8B4" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="380" cy="640" r="42" fill="#020506" stroke="#27313A" stroke-width="3"/>
-  <path d="M380 614v18M380 632h-18v24h36v-24h-18ZM350 656h60M350 656v22M410 656v22" stroke="#9BA8B4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="160" cy="510" r="42" fill="#020506" stroke="#27313A" stroke-width="3"/>
-  <path d="M172 490c-20 15-32 30-25 47 5 11 19 14 29 7 14-10 3-30-4-54Z" stroke="#9BA8B4" stroke-width="4" stroke-linejoin="round"/>
-  <path d="M160 315 308 380" stroke="#03D9F6" stroke-width="4" stroke-dasharray="8 12"/>
-  <defs>
-    <filter id="nodeGlow" x="88" y="243" width="144" height="144" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="15" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
 </svg>
