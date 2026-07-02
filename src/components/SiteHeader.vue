@@ -59,18 +59,20 @@ const handleNavigate = (sectionId: SectionId): void => {
       </div>
     </div>
 
-    <nav v-if="isMenuOpen" class="mobile-nav" aria-label="移动端导航">
-      <button
-        v-for="item in items"
-        :key="item.id"
-        class="mobile-link"
-        :class="{ active: activeId === item.id }"
-        type="button"
-        @click="handleNavigate(item.id)"
-      >
-        {{ item.label }}
-      </button>
-    </nav>
+    <Transition name="slide-fade">
+      <nav v-if="isMenuOpen" class="mobile-nav" aria-label="移动端导航">
+        <button
+          v-for="item in items"
+          :key="item.id"
+          class="mobile-link"
+          :class="{ active: activeId === item.id }"
+          type="button"
+          @click="handleNavigate(item.id)"
+        >
+          {{ item.label }}
+        </button>
+      </nav>
+    </Transition>
   </header>
 </template>
 
@@ -246,11 +248,16 @@ const handleNavigate = (sectionId: SectionId): void => {
     display: none;
   }
 
+  .header-actions {
+    justify-self: end;
+  }
+
   .mobile-nav {
     position: fixed;
     top: calc(var(--header-height) - 8px);
-    right: 16px;
-    left: 16px;
+    right: var(--page-gutter);
+    left: auto;
+    width: 220px;
     display: grid;
     gap: 8px;
     padding: 16px;
@@ -258,6 +265,7 @@ const handleNavigate = (sectionId: SectionId): void => {
     border-radius: 16px;
     background: rgba(6, 12, 15, 0.96);
     box-shadow: var(--shadow-panel);
+    transform-origin: top right;
   }
 
   .mobile-link {
@@ -273,6 +281,17 @@ const handleNavigate = (sectionId: SectionId): void => {
   .mobile-link.active {
     background: rgba(0, 216, 245, 0.12);
     color: var(--color-cyan);
+  }
+
+  .slide-fade-enter-active,
+  .slide-fade-leave-active {
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .slide-fade-enter-from,
+  .slide-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
   }
 }
 </style>

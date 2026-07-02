@@ -326,7 +326,7 @@ const setActiveRegion = (regionId: string): void => {
   color: var(--color-cyan);
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1280px) {
   .expansion-grid {
     grid-template-columns: 1fr;
     margin-top: 70px;

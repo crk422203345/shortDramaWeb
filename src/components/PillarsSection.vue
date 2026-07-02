@@ -286,7 +286,7 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
   font-weight: 900;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1260px) {
   .pillar-stage {
     grid-template-columns: 1fr;
     margin-top: 70px;

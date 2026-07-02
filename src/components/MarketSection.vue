@@ -229,7 +229,7 @@ onBeforeUnmount(() => {
   line-height: 1;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1260px) {
   .market-grid {
     grid-template-columns: 1fr;
   }

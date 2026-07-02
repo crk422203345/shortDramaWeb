@@ -423,7 +423,7 @@ const setActiveNode = (nodeId: string): void => {
   font-weight: 950;
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1210px) {
   .ecosystem-grid {
     grid-template-columns: 1fr;
     margin-top: 66px;
