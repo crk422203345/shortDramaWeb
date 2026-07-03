@@ -2,11 +2,12 @@
   <rect width="760" height="760" fill="none"/>
   <circle cx="380" cy="390" r="248" stroke="#0ADDF8" stroke-opacity=".11" stroke-width="2"/>
   <circle cx="380" cy="390" r="178" stroke="#0ADDF8" stroke-opacity=".22" stroke-width="2"/>
-  <circle cx="380" cy="390" r="132" fill="#071729" stroke="#05D9F7" stroke-width="4"/>
+  <circle cx="380" cy="390" r="132" fill="#071729" stroke="#05D9F7" stroke-width="3.2"/>
   <circle cx="380" cy="390" r="104" fill="#0A2D68" opacity=".68"/>
-  <path d="M248 390h264M380 258c42 47 63 91 63 132s-21 85-63 132c-42-47-63-91-63-132s21-85 63-132Z" stroke="#0ADDF8" stroke-opacity=".65" stroke-width="3"/>
-  <path d="M286 316c48 18 136 18 188 0M286 464c48-18 136-18 188 0" stroke="#0ADDF8" stroke-opacity=".24" stroke-width="3" stroke-dasharray="8 10"/>
-  <path d="M246 390c24-82 75-124 134-124 58 0 110 42 134 124-24 82-76 124-134 124-59 0-110-42-134-124Z" stroke="#0ADDF8" stroke-opacity=".22" stroke-width="2"/>
+  <path d="M248 390h264" stroke="#0ADDF8" stroke-opacity=".52" stroke-width="1.6"/>
+  <ellipse cx="380" cy="390" rx="62" ry="132" stroke="#0ADDF8" stroke-opacity=".62" stroke-width="1.6"/>
+  <path d="M338 270c-28 58-28 182 0 240M422 270c28 58 28 182 0 240" stroke="#0ADDF8" stroke-opacity=".28" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="6 9"/>
+  <path d="M246 390c24-82 75-124 134-124 58 0 110 42 134 124-24 82-76 124-134 124-59 0-110-42-134-124Z" stroke="#0ADDF8" stroke-opacity=".18" stroke-width="1.6"/>
   <g filter="url(#glow)">
     <circle cx="360" cy="330" r="8" fill="#03D9F6"/>
     <circle cx="450" cy="476" r="9" fill="#08D891"/>
