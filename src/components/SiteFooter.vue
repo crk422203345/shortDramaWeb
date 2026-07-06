@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { footerGroups } from '@/data/landing'
+import { useI18n } from '@/i18n'
+
+const { copy } = useI18n()
 </script>
 
 <template>
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <strong>Bingo文娱</strong>
-        <p>次世代 Web3 娱乐生态系统</p>
+        <strong>{{ copy.footer.brand }}</strong>
+        <p>{{ copy.footer.tagline }}</p>
       </div>
 
-      <div v-for="group in footerGroups" :key="group.title" class="footer-group">
+      <div v-for="group in copy.footer.groups" :key="group.title" class="footer-group">
         <h2>{{ group.title }} <span>/ {{ group.english }}</span></h2>
         <a v-for="link in group.links" :key="link" href="#home">{{ link }}</a>
       </div>

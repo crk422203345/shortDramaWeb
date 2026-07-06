@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
-import { marketStats, painPoints } from '@/data/landing'
+import { useI18n } from '@/i18n'
 import type { SectionId } from '@/types/landing'
 
 defineProps<{
@@ -22,8 +22,11 @@ const METRIC_OBSERVER_OPTIONS: IntersectionObserverInit = {
   threshold: 0.28,
 }
 
+const { copy } = useI18n()
+const painPoints = computed(() => copy.value.painPoints)
+const marketStats = computed(() => copy.value.marketStats)
 const statGridRef = ref<HTMLElement | null>(null)
-const animatedMetrics = ref<string[]>(marketStats.map((stat) => formatMetric(stat.metric, 0)))
+const animatedMetrics = ref<string[]>(marketStats.value.map((stat) => formatMetric(stat.metric, 0)))
 let observer: IntersectionObserver | null = null
 let animationFrameId: number | null = null
 let hasAnimated = false
@@ -66,6 +69,12 @@ function getAnimatedMetric(metric: string, timestamp: number, startTime: number,
   return formatMetric(metric, clampProgress(rawProgress))
 }
 
+function cancelMetricAnimation(): void {
+  if (animationFrameId === null) return
+  window.cancelAnimationFrame(animationFrameId)
+  animationFrameId = null
+}
+
 function startMetricAnimation(): void {
   if (hasAnimated) return
   hasAnimated = true
@@ -75,22 +84,27 @@ function startMetricAnimation(): void {
   const tick = (timestamp: number): void => {
     startTime ??= timestamp
 
-    animatedMetrics.value = marketStats.map((stat, index) => {
+    animatedMetrics.value = marketStats.value.map((stat, index) => {
       return getAnimatedMetric(stat.metric, timestamp, startTime!, index)
     })
 
-    const lastItemDelay = (marketStats.length - 1) * METRIC_ANIMATION_STAGGER_MS
+    const lastItemDelay = (marketStats.value.length - 1) * METRIC_ANIMATION_STAGGER_MS
     if (timestamp - startTime < METRIC_ANIMATION_DURATION_MS + lastItemDelay) {
       animationFrameId = window.requestAnimationFrame(tick)
       return
     }
 
-    animatedMetrics.value = marketStats.map((stat) => stat.metric)
+    animatedMetrics.value = marketStats.value.map((stat) => stat.metric)
     animationFrameId = null
   }
 
   animationFrameId = window.requestAnimationFrame(tick)
 }
+
+watch(marketStats, (stats) => {
+  cancelMetricAnimation()
+  animatedMetrics.value = stats.map((stat) => formatMetric(stat.metric, hasAnimated ? 1 : 0))
+})
 
 onMounted(() => {
   observer = new IntersectionObserver(
@@ -107,9 +121,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   observer?.disconnect()
-  if (animationFrameId !== null) {
-    window.cancelAnimationFrame(animationFrameId)
-  }
+  cancelMetricAnimation()
 })
 </script>
 
@@ -117,8 +129,8 @@ onBeforeUnmount(() => {
   <section :id="id" class="market-section" aria-labelledby="market-title">
     <div class="section-shell market-grid">
       <div class="market-copy">
-        <span class="section-label">市场痛点与机遇</span>
-        <h2 id="market-title" class="section-title">冲破传统文娱天花板</h2>
+        <span class="section-label">{{ copy.market.label }}</span>
+        <h2 id="market-title" class="section-title">{{ copy.market.title }}</h2>
 
         <div class="pain-list">
           <article v-for="point in painPoints" :key="point.title" class="pain-card glass-panel">

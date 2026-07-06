@@ -4,7 +4,7 @@ import marketMapUrl from '@/assets/illustrations/market-map.svg'
 import BaseIcon from '@/components/BaseIcon.vue'
 import LazyImage from '@/components/LazyImage.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
-import { regions } from '@/data/landing'
+import { useI18n } from '@/i18n'
 import type { Region, SectionId } from '@/types/landing'
 
 interface RegionMarker {
@@ -28,13 +28,13 @@ const regionMarkers: readonly RegionMarker[] = [
   { id: 'sea', x: 66, y: 72 },
 ]
 
-const fallbackRegion = regions[0]!
+const { copy } = useI18n()
+const activeRegionId = ref<RegionId>(DEFAULT_REGION_ID)
+const regions = computed(() => copy.value.expansion.regions)
 const fallbackMarker = regionMarkers[0]!
 
-const activeRegionId = ref<RegionId>(DEFAULT_REGION_ID)
-
 const findRegion = (regionId: RegionId): Region | undefined => {
-  return regions.find((region) => region.id === regionId)
+  return regions.value.find((region) => region.id === regionId)
 }
 
 const findMarker = (regionId: RegionId): RegionMarker | undefined => {
@@ -49,8 +49,10 @@ const buildRoutePoints = (markers: readonly RegionMarker[]): string => {
   return markers.map(markerToSvgPoint).join(' ')
 }
 
+const fallbackRegion = computed<Region>(() => regions.value[0]!)
+
 const activeRegion = computed<Region>(() => {
-  return findRegion(activeRegionId.value) ?? fallbackRegion
+  return findRegion(activeRegionId.value) ?? fallbackRegion.value
 })
 
 const activeMarker = computed<RegionMarker>(() => {
@@ -83,15 +85,15 @@ const setActiveRegion = (regionId: RegionId): void => {
   <section :id="id" class="expansion-section" aria-labelledby="expansion-title">
     <div class="section-shell">
       <SectionHeading
-        label="全球化规划"
-        title="一个在中国市场验证的模式"
-        highlight="正在走向全球十亿人口"
-        description="中国大陆、中国香港、马来西亚、东南亚四个结构性机会窗口正在开启。内容本地化、补贴全球化、广告生态标准化。"
+        :label="copy.expansion.heading.label"
+        :title="copy.expansion.heading.title"
+        :highlight="copy.expansion.heading.highlight"
+        :description="copy.expansion.heading.description"
       />
 
       <div class="expansion-grid">
-        <div class="region-map-card" aria-label="全球化区域点位地图">
-          <LazyImage :src="marketMapUrl" alt="全球化区域地图底图" :width="860" :height="540" />
+        <div class="region-map-card" :aria-label="copy.expansion.mapAriaLabel">
+          <LazyImage :src="marketMapUrl" :alt="copy.expansion.mapAlt" :width="860" :height="540" />
 
           <svg class="route-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <polyline class="route-line route-line-base" :points="fullRoutePoints" vector-effect="non-scaling-stroke" />
@@ -109,7 +111,7 @@ const setActiveRegion = (regionId: RegionId): void => {
             :class="{ active: activeMarker.id === marker.id }"
             :style="{ left: `${marker.x}%`, top: `${marker.y}%` }"
             type="button"
-            :aria-label="`查看${getRegionName(marker.id)}`"
+            :aria-label="`${copy.expansion.markerAriaPrefix}${getRegionName(marker.id)}`"
             :aria-pressed="activeMarker.id === marker.id"
             @click="setActiveRegion(marker.id)"
           >
@@ -120,7 +122,7 @@ const setActiveRegion = (regionId: RegionId): void => {
         </div>
 
         <div class="region-column">
-          <div class="region-tabs" aria-label="区域规划切换">
+          <div class="region-tabs" :aria-label="copy.expansion.tabsAriaLabel">
             <button
               v-for="region in regions"
               :key="region.id"

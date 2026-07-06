@@ -8,19 +8,18 @@ import timeIconUrl from '@/assets/illustrations/时间.svg'
 import userIconUrl from '@/assets/illustrations/用户.svg'
 import BaseIcon from '@/components/BaseIcon.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
+import { useI18n } from '@/i18n'
+import type { EcosystemNodeCopy } from '@/i18n/messages'
 import type { SectionId } from '@/types/landing'
 
-interface EcosystemNode {
+interface EcosystemNodeLayout {
   id: string
-  tag: string
-  title: string
-  subtitle: string
-  description: string
   iconUrl: string
   x: number
   y: number
 }
 
+type EcosystemNode = EcosystemNodeCopy & EcosystemNodeLayout
 type EcosystemNodeId = EcosystemNode['id']
 
 defineProps<{
@@ -29,84 +28,33 @@ defineProps<{
 
 const DEFAULT_ACTIVE_NODE_ID = 'beach'
 
-const ecosystemNodes: EcosystemNode[] = [
-  {
-    id: 'pos',
-    tag: 'POS掘金 + GGC链',
-    title: 'POS掘金 + GGC链',
-    subtitle: '以链上权益沉淀内容价值，形成可持续的生态收益池。',
-    description:
-      '通过 GGC 链承接平台内容、用户行为与权益凭证，让创作者、用户与资本在透明规则下共享长期增长收益。',
-    iconUrl: timeIconUrl,
-    x: 50,
-    y: 9,
-  },
-  {
-    id: 'matrix',
-    tag: 'IAA+IAP混变矩阵',
-    title: 'IAA+IAP混变矩阵',
-    subtitle: '广告变现与内购付费并行，提高内容商业转化效率。',
-    description:
-      '面向短剧、小游戏与社交场景建立混合变现模型，兼顾用户规模、留存深度与单用户价值释放。',
-    iconUrl: energyIconUrl,
-    x: 83,
-    y: 30,
-  },
-  {
-    id: 'triad',
-    tag: '短剧+游戏+社交三轮驱动',
-    title: '短剧+游戏+社交三轮驱动',
-    subtitle: '用内容吸引、用游戏承接、用社交沉淀关系网络。',
-    description:
-      '短剧提供高频入口，小游戏提升互动与裂变，社交关系沉淀长期社区价值，三类业务互相导流、互相放大。',
-    iconUrl: gameIconUrl,
-    x: 83,
-    y: 72,
-  },
-  {
-    id: 'loop',
-    tag: '生态价值闭环',
-    title: '生态价值闭环',
-    subtitle: '让流量、内容、权益与收益在同一个生态内循环增长。',
-    description:
-      '平台通过标准化底层能力连接用户增长、内容生产、版权管理与收益分配，形成可持续复利的 Web3 娱乐闭环。',
-    iconUrl: dataIconUrl,
-    x: 50,
-    y: 92,
-  },
-  {
-    id: 'wave',
-    tag: '浪潮计划 (Wave Plan)',
-    title: '浪潮计划 (Wave Plan)',
-    subtitle: '扶持成熟内容团队快速进入 Web3 娱乐增长通道。',
-    description:
-      '面向具备内容生产与运营能力的合作方，提供平台流量、发行工具和收益机制，共同打造面向全球的数字娱乐产品。',
-    iconUrl: fireIconUrl,
-    x: 17,
-    y: 72,
-  },
-  {
-    id: 'beach',
-    tag: '沙滩计划 (Beach Plan)',
-    title: '沙滩计划 (Beach Plan)',
-    subtitle: '支持创作者、资本与平台“三位一体”，共同富裕。',
-    description:
-      '“沙滩计划”旨在孵化“一人公司 (OPC)”及独立创客工作室。由资本池提供冷启动投资，由平台提供高匹配流量与 GGC 合规版权管理工具，由创作者产出爆款，三位一体打通 Web3 时代最高效的内容孵化飞轮。',
-    iconUrl: userIconUrl,
-    x: 17,
-    y: 30,
-  },
+const nodeLayouts: readonly EcosystemNodeLayout[] = [
+  { id: 'pos', iconUrl: timeIconUrl, x: 50, y: 9 },
+  { id: 'matrix', iconUrl: energyIconUrl, x: 83, y: 30 },
+  { id: 'triad', iconUrl: gameIconUrl, x: 83, y: 72 },
+  { id: 'loop', iconUrl: dataIconUrl, x: 50, y: 92 },
+  { id: 'wave', iconUrl: fireIconUrl, x: 17, y: 72 },
+  { id: 'beach', iconUrl: userIconUrl, x: 17, y: 30 },
 ]
 
-const defaultNode: EcosystemNode = ecosystemNodes[0]!
+const { copy } = useI18n()
 const activeNodeId = ref<EcosystemNodeId>(DEFAULT_ACTIVE_NODE_ID)
 
+const ecosystemNodes = computed<readonly EcosystemNode[]>(() => {
+  return copy.value.ecosystem.nodes.map((node) => {
+    const layout = nodeLayouts.find((item) => item.id === node.id) ?? nodeLayouts[0]!
+    return { ...node, ...layout }
+  })
+})
+
+const defaultNode = computed<EcosystemNode>(() => ecosystemNodes.value[0]!)
+
 const findEcosystemNode = (nodeId: EcosystemNodeId): EcosystemNode | undefined => {
-  return ecosystemNodes.find((node) => node.id === nodeId)
+  return ecosystemNodes.value.find((node) => node.id === nodeId)
 }
 
 const activeNode = computed<EcosystemNode>(() => {
-  return findEcosystemNode(activeNodeId.value) ?? defaultNode
+  return findEcosystemNode(activeNodeId.value) ?? defaultNode.value
 })
 
 const setActiveNode = (nodeId: EcosystemNodeId): void => {
@@ -118,14 +66,14 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
   <section :id="id" class="ecosystem-section" aria-labelledby="ecosystem-title">
     <div class="section-shell">
       <SectionHeading
-        label="生态布局飞轮"
-        title="三位一体生态布局"
-        highlight="打造Web3娱乐黄金闭环"
-        description="打破Web2平台的流量垄断与利益固化，Bingo文娱携手用户、创作者与合规资本，在 GGC/WEBX 全球平台的底层架构上，构筑互利共赢、指数增长的文娱生态。"
+        :label="copy.ecosystem.heading.label"
+        :title="copy.ecosystem.heading.title"
+        :highlight="copy.ecosystem.heading.highlight"
+        :description="copy.ecosystem.heading.description"
       />
 
       <div class="ecosystem-grid">
-        <div class="orbit-visual" aria-label="Web3娱乐生态飞轮交互图">
+        <div class="orbit-visual" :aria-label="copy.ecosystem.visualAriaLabel">
           <div class="orbit-rings">
             <span class="ring ring-outer" aria-hidden="true"></span>
             <span class="ring ring-middle" aria-hidden="true"></span>
@@ -147,7 +95,7 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
                 <BaseIcon name="bank" />
               </span>
               <strong>GGC / WEBX</strong>
-              <p>全球平台底层</p>
+              <p>{{ copy.ecosystem.centerLabel }}</p>
             </div>
 
             <button
@@ -158,7 +106,7 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
               :style="{ left: `${node.x}%`, top: `${node.y}%` }"
               type="button"
               :aria-pressed="activeNode.id === node.id"
-              :aria-label="`查看${node.tag}`"
+              :aria-label="`${copy.ecosystem.nodeAriaPrefix}${node.tag}`"
               @click="setActiveNode(node.id)"
             >
               <img :src="node.iconUrl" :alt="node.tag" loading="lazy" decoding="async" />
@@ -167,7 +115,7 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
         </div>
 
         <div class="flywheel-panel">
-          <div class="tag-list" aria-label="生态方案切换">
+          <div class="tag-list" :aria-label="copy.ecosystem.tagListAriaLabel">
             <button
               v-for="node in ecosystemNodes"
               :key="node.id"

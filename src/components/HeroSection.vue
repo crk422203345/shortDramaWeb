@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseIcon from '@/components/BaseIcon.vue'
-import { platformLinks } from '@/data/landing'
+import { useI18n } from '@/i18n'
 import type { SectionId } from '@/types/landing'
 
 defineProps<{
@@ -10,6 +10,8 @@ defineProps<{
 const emit = defineEmits<{
   navigate: [sectionId: SectionId]
 }>()
+
+const { copy } = useI18n()
 </script>
 
 <template>
@@ -18,7 +20,7 @@ const emit = defineEmits<{
     <div class="hero-content">
       <div class="hero-kicker">
         <BaseIcon name="spark" />
-        <span>BINGO文娱 · 三位一体 WEB3 娱乐新浪潮</span>
+        <span>{{ copy.hero.kicker }}</span>
       </div>
 
       <h1 id="hero-title" class="hero-title">
@@ -28,21 +30,19 @@ const emit = defineEmits<{
       </h1>
 
       <p class="hero-subtitle">
-        <span>Bingo文娱生态：</span>
-        <span>三位一体，乘Web3浪潮</span>
+        <span>{{ copy.hero.subtitlePrefix }}</span>
+        <span>{{ copy.hero.subtitleText }}</span>
       </p>
-      <p class="hero-slogan">共创娱乐新纪元</p>
-      <p class="hero-copy">
-        在这里，娱乐不再是单向消费，而是价值共创的起点。三位一体，让每个人发挥专长，共同致富。
-      </p>
+      <p class="hero-slogan">{{ copy.hero.slogan }}</p>
+      <p class="hero-copy">{{ copy.hero.description }}</p>
 
-      <div class="platform-strip glass-panel" aria-label="三大板块首发上线">
+      <div class="platform-strip glass-panel" :aria-label="copy.hero.platformStripAriaLabel">
         <span class="strip-label">
           <BaseIcon name="mail" />
-          三大板块首发上线：
+          {{ copy.hero.platformStripLabel }}
         </span>
         <span
-          v-for="platform in platformLinks"
+          v-for="platform in copy.platformLinks"
           :key="platform.label"
           class="platform-pill"
           :class="`tone-${platform.tone}`"
@@ -55,11 +55,11 @@ const emit = defineEmits<{
 
       <div class="hero-actions">
         <button class="primary-button" type="button" @click="emit('navigate', 'market')">
-          了解我们
+          {{ copy.hero.primaryCta }}
           <BaseIcon name="arrow" />
         </button>
         <button class="ghost-button" type="button" @click="emit('navigate', 'contact')">
-          洽谈合作
+          {{ copy.hero.secondaryCta }}
         </button>
       </div>
     </div>
@@ -148,6 +148,10 @@ const emit = defineEmits<{
   font-size: clamp(19.2px, 2vw, 27.2px);
   font-weight: 400;
   line-height: 1.2;
+}
+
+.hero-subtitle span + span {
+  margin-left: 0.2em;
 }
 
 .hero-slogan {
@@ -315,6 +319,10 @@ const emit = defineEmits<{
     font-size: 16.8px;
     overflow-wrap: anywhere;
     word-break: break-all;
+  }
+
+  .hero-subtitle span + span {
+    margin-left: 0;
   }
 
   .hero-copy {

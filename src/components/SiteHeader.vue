@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
+import { useI18n } from '@/i18n'
+import type { Locale } from '@/i18n'
 import type { NavItem, SectionId } from '@/types/landing'
 
 defineProps<{
@@ -12,23 +14,35 @@ const emit = defineEmits<{
   navigate: [sectionId: SectionId]
 }>()
 
+const { activeLocaleOption, copy, locale, localeOptions, setLocale } = useI18n()
 const isMenuOpen = ref<boolean>(false)
+const isLanguageMenuOpen = ref<boolean>(false)
+
+const closeMenus = (): void => {
+  isMenuOpen.value = false
+  isLanguageMenuOpen.value = false
+}
 
 const handleNavigate = (sectionId: SectionId): void => {
-  isMenuOpen.value = false
+  closeMenus()
   emit('navigate', sectionId)
+}
+
+const handleSelectLocale = (nextLocale: Locale): void => {
+  setLocale(nextLocale)
+  closeMenus()
 }
 </script>
 
 <template>
   <header class="site-header">
     <div class="header-inner">
-      <button class="brand" type="button" aria-label="回到首页" @click="handleNavigate('home')">
-        <span class="brand-main">Bingo文娱</span>
+      <button class="brand" type="button" :aria-label="copy.header.backHomeLabel" @click="handleNavigate('home')">
+        <span class="brand-main">{{ copy.header.brand }}</span>
         <span class="brand-badge">WEB3</span>
       </button>
 
-      <nav class="desktop-nav" aria-label="主导航">
+      <nav class="desktop-nav" :aria-label="copy.header.desktopNavLabel">
         <button
           v-for="item in items"
           :key="item.id"
@@ -42,16 +56,43 @@ const handleNavigate = (sectionId: SectionId): void => {
       </nav>
 
       <div class="header-actions">
-        <button class="language-button" type="button" aria-label="当前语言：简体中文">
-          <BaseIcon name="globe" />
-          <span>简体中文</span>
-          <span class="chevron" />
-        </button>
+        <div class="language-picker">
+          <button
+            class="language-button"
+            type="button"
+            :aria-expanded="isLanguageMenuOpen"
+            :aria-label="copy.header.languageAriaLabel"
+            @click="isLanguageMenuOpen = !isLanguageMenuOpen"
+          >
+            <BaseIcon name="globe" />
+            <span>{{ activeLocaleOption.label }}</span>
+            <span class="chevron" :class="{ open: isLanguageMenuOpen }" />
+          </button>
+
+          <Transition name="language-pop">
+            <div v-if="isLanguageMenuOpen" class="language-menu" role="listbox">
+              <button
+                v-for="option in localeOptions"
+                :key="option.code"
+                class="language-option"
+                :class="{ active: locale === option.code }"
+                type="button"
+                role="option"
+                :aria-selected="locale === option.code"
+                @click="handleSelectLocale(option.code)"
+              >
+                <span>{{ option.nativeLabel }}</span>
+                <small>{{ option.code }}</small>
+              </button>
+            </div>
+          </Transition>
+        </div>
+
         <button
           class="menu-button"
           type="button"
           :aria-expanded="isMenuOpen"
-          aria-label="打开导航菜单"
+          :aria-label="copy.header.openMenuLabel"
           @click="isMenuOpen = !isMenuOpen"
         >
           <BaseIcon name="menu" />
@@ -60,7 +101,7 @@ const handleNavigate = (sectionId: SectionId): void => {
     </div>
 
     <Transition name="slide-fade">
-      <nav v-if="isMenuOpen" class="mobile-nav" aria-label="移动端导航">
+      <nav v-if="isMenuOpen" class="mobile-nav" :aria-label="copy.header.mobileNavLabel">
         <button
           v-for="item in items"
           :key="item.id"
@@ -71,6 +112,20 @@ const handleNavigate = (sectionId: SectionId): void => {
         >
           {{ item.label }}
         </button>
+
+        <div class="mobile-language-list" :aria-label="copy.header.languageAriaLabel">
+          <button
+            v-for="option in localeOptions"
+            :key="option.code"
+            class="mobile-link mobile-language"
+            :class="{ active: locale === option.code }"
+            type="button"
+            @click="handleSelectLocale(option.code)"
+          >
+            <BaseIcon name="globe" />
+            {{ option.nativeLabel }}
+          </button>
+        </div>
       </nav>
     </Transition>
   </header>
@@ -176,6 +231,10 @@ const handleNavigate = (sectionId: SectionId): void => {
   gap: 24px;
 }
 
+.language-picker {
+  position: relative;
+}
+
 .language-button,
 .menu-button {
   display: inline-flex;
@@ -206,6 +265,64 @@ const handleNavigate = (sectionId: SectionId): void => {
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: translateY(-2px) rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.chevron.open {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.language-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  display: grid;
+  width: 180px;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid rgba(0, 216, 245, 0.28);
+  border-radius: 14px;
+  background: rgba(6, 12, 15, 0.98);
+  box-shadow: var(--shadow-panel);
+}
+
+.language-option {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: #93a0ad;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.language-option small {
+  color: #53606d;
+  font-family: var(--font-mono);
+  font-size: 9.6px;
+}
+
+.language-option:hover,
+.language-option:focus-visible,
+.language-option.active {
+  border-color: rgba(0, 216, 245, 0.5);
+  background: rgba(0, 216, 245, 0.12);
+  color: var(--color-cyan);
+  outline: none;
+}
+
+.language-option.active::after {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  content: '';
+  background: var(--color-cyan);
+  box-shadow: 0 0 12px rgba(0, 216, 245, 0.72);
 }
 
 .menu-button {
@@ -226,6 +343,17 @@ const handleNavigate = (sectionId: SectionId): void => {
   display: none;
 }
 
+.language-pop-enter-active,
+.language-pop-leave-active {
+  transition: all 0.18s ease;
+}
+
+.language-pop-enter-from,
+.language-pop-leave-to {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+}
+
 @media (max-width: 980px) {
   .header-inner {
     width: min(calc(100% - var(--page-gutter) * 2), 720px);
@@ -244,7 +372,7 @@ const handleNavigate = (sectionId: SectionId): void => {
     font-size: 9.6px;
   }
 
-  .language-button {
+  .language-picker {
     display: none;
   }
 
@@ -276,6 +404,24 @@ const handleNavigate = (sectionId: SectionId): void => {
     font-weight: 800;
     text-align: left;
     padding-inline: 14px;
+  }
+
+  .mobile-language-list {
+    display: grid;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .mobile-language {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mobile-language svg {
+    width: 18px;
+    height: 18px;
   }
 
   .mobile-link.active {

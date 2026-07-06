@@ -8,9 +8,10 @@ import MarketSection from '@/components/MarketSection.vue'
 import PillarsSection from '@/components/PillarsSection.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 import SiteHeader from '@/components/SiteHeader.vue'
-import { navItems } from '@/data/landing'
+import { useI18n } from '@/i18n'
 import type { SectionId } from '@/types/landing'
 
+const { copy } = useI18n()
 const activeSection = ref<SectionId>('home')
 const sectionIds: readonly SectionId[] = ['home', 'market', 'business', 'ecosystem', 'global', 'contact']
 let scrollTicking = false
@@ -69,7 +70,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <SiteHeader :items="navItems" :active-id="activeNavId" @navigate="scrollToSection" />
+  <SiteHeader :items="copy.navItems" :active-id="activeNavId" @navigate="scrollToSection" />
 
   <main class="landing-page">
     <HeroSection id="home" @navigate="scrollToSection" />

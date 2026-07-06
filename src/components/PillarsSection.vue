@@ -4,36 +4,35 @@ import digitalEarthUrl from '@/assets/illustrations/digital-earth.svg'
 import BaseIcon from '@/components/BaseIcon.vue'
 import LazyImage from '@/components/LazyImage.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
-import { pillars } from '@/data/landing'
+import { useI18n } from '@/i18n'
 import type { Pillar, SectionId } from '@/types/landing'
 
 defineProps<{
   id: SectionId
 }>()
 
+const { copy } = useI18n()
 const activeIndex = ref<number>(2)
+const pillars = computed(() => copy.value.pillars.items)
 
-const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillars[2] ?? pillars[0]!)
+const activePillar = computed<Pillar>(() => {
+  return pillars.value[activeIndex.value] ?? pillars.value[2] ?? pillars.value[0]!
+})
 </script>
 
 <template>
   <section :id="id" class="pillars-section" aria-labelledby="pillars-title">
     <div class="section-shell">
       <SectionHeading
-        label="业务模式"
-        title="三大核心业务支柱"
-        description="以数字地球为生态核心，精品短剧、休闲游戏与共建共享的社交生态彼此咬合，编织出繁荣的 Web3 价值网络。"
+        :label="copy.pillars.heading.label"
+        :title="copy.pillars.heading.title"
+        :description="copy.pillars.heading.description"
       />
 
       <div class="pillar-stage">
         <div class="earth-column">
-          <LazyImage
-            :src="digitalEarthUrl"
-            alt="Bingo 数字地球与三大业务支柱示意图"
-            :width="760"
-            :height="760"
-          />
-          <div class="pillar-tabs" aria-label="业务支柱切换">
+          <LazyImage :src="digitalEarthUrl" :alt="copy.pillars.imageAlt" :width="760" :height="760" />
+          <div class="pillar-tabs" :aria-label="copy.pillars.tabsAriaLabel">
             <button
               v-for="(pillar, index) in pillars"
               :key="pillar.index"
@@ -51,7 +50,9 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 
         <article class="pillar-detail glass-panel">
           <div class="detail-top">
-            <span class="section-label">核心支柱 {{ activePillar.index }} / {{ activePillar.title }}</span>
+            <span class="section-label">
+              {{ copy.pillars.detailLabelPrefix }} {{ activePillar.index }} / {{ activePillar.title }}
+            </span>
             <span class="icon-box">
               <BaseIcon :name="activePillar.icon" />
             </span>
@@ -66,18 +67,18 @@ const activePillar = computed<Pillar>(() => pillars[activeIndex.value] ?? pillar
 
           <div class="metric-row">
             <div>
-              <span>回购储备</span>
+              <span>{{ copy.pillars.primaryMetricLabel }}</span>
               <strong>{{ activePillar.primaryMetric }}</strong>
             </div>
             <div>
-              <span>目标创客</span>
+              <span>{{ copy.pillars.secondaryMetricLabel }}</span>
               <strong>{{ activePillar.secondaryMetric }}</strong>
             </div>
           </div>
 
           <div class="outcome-row">
             <BaseIcon name="growth" />
-            <span>成果效益</span>
+            <span>{{ copy.pillars.outcomeLabel }}</span>
             <strong>{{ activePillar.outcome }}</strong>
           </div>
         </article>

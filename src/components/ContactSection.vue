@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
+import { useI18n } from '@/i18n'
 import type { ContactFormModel, SectionId } from '@/types/landing'
 
 defineProps<{
@@ -10,6 +11,7 @@ defineProps<{
 
 const SUBMISSION_FEEDBACK_DURATION_MS = 3200
 
+const { copy } = useI18n()
 const form = reactive<ContactFormModel>({
   name: '',
   company: '',
@@ -31,46 +33,41 @@ const submitContact = (): void => {
   <section :id="id" class="contact-section" aria-labelledby="contact-title">
     <div class="section-shell">
       <SectionHeading
-        label="联系我们"
-        title="开启对话"
-        description="我们随时欢迎全球战略投资方、内容分发伙伴以及主权牌照持有机构与我们展开多元对话。所有来函通常将在 48 小时内给予回复。"
+        :label="copy.contact.heading.label"
+        :title="copy.contact.heading.title"
+        :description="copy.contact.heading.description"
       />
 
       <form class="contact-form glass-panel" @submit.prevent="submitContact">
         <div class="form-row">
           <label>
-            <span>姓名 <b>*</b></span>
-            <input v-model.trim="form.name" type="text" autocomplete="name" placeholder="您的姓名" required />
+            <span>{{ copy.contact.nameLabel }} <b>*</b></span>
+            <input v-model.trim="form.name" type="text" autocomplete="name" :placeholder="copy.contact.namePlaceholder" required />
           </label>
           <label>
-            <span>机构 / 公司 <b>*</b></span>
+            <span>{{ copy.contact.companyLabel }} <b>*</b></span>
             <input
               v-model.trim="form.company"
               type="text"
               autocomplete="organization"
-              placeholder="机构或公司名称"
+              :placeholder="copy.contact.companyPlaceholder"
               required
             />
           </label>
         </div>
 
         <label>
-          <span>邮箱地址 <b>*</b></span>
-          <input v-model.trim="form.email" type="email" autocomplete="email" placeholder="your@email.com" required />
+          <span>{{ copy.contact.emailLabel }} <b>*</b></span>
+          <input v-model.trim="form.email" type="email" autocomplete="email" :placeholder="copy.contact.emailPlaceholder" required />
         </label>
 
         <label>
-          <span>合作意向或问题描述 <b>*</b></span>
-          <textarea
-            v-model.trim="form.message"
-            rows="7"
-            placeholder="请简要描述您的合作意向、首期开发预算或牌照资源..."
-            required
-          />
+          <span>{{ copy.contact.messageLabel }} <b>*</b></span>
+          <textarea v-model.trim="form.message" rows="7" :placeholder="copy.contact.messagePlaceholder" required />
         </label>
 
         <button class="submit-button" type="submit">
-          {{ submitted ? '已收到，我们会尽快联系' : '提交合作意向' }}
+          {{ submitted ? copy.contact.submitDone : copy.contact.submitIdle }}
           <BaseIcon name="send" />
         </button>
       </form>
