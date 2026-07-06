@@ -13,9 +13,13 @@ interface RegionMarker {
   y: number
 }
 
+type RegionId = RegionMarker['id']
+
 defineProps<{
   id: SectionId
 }>()
+
+const DEFAULT_REGION_ID = 'sea'
 
 const regionMarkers: readonly RegionMarker[] = [
   { id: 'mainland', x: 45, y: 34 },
@@ -24,34 +28,53 @@ const regionMarkers: readonly RegionMarker[] = [
   { id: 'sea', x: 66, y: 72 },
 ]
 
-const activeRegionId = ref<string>('sea')
+const fallbackRegion = regions[0]!
+const fallbackMarker = regionMarkers[0]!
+
+const activeRegionId = ref<RegionId>(DEFAULT_REGION_ID)
+
+const findRegion = (regionId: RegionId): Region | undefined => {
+  return regions.find((region) => region.id === regionId)
+}
+
+const findMarker = (regionId: RegionId): RegionMarker | undefined => {
+  return regionMarkers.find((marker) => marker.id === regionId)
+}
+
+const markerToSvgPoint = (marker: RegionMarker): string => {
+  return `${marker.x},${marker.y}`
+}
+
+const buildRoutePoints = (markers: readonly RegionMarker[]): string => {
+  return markers.map(markerToSvgPoint).join(' ')
+}
 
 const activeRegion = computed<Region>(() => {
-  return regions.find((region) => region.id === activeRegionId.value) ?? regions[0]!
+  return findRegion(activeRegionId.value) ?? fallbackRegion
 })
 
 const activeMarker = computed<RegionMarker>(() => {
-  return regionMarkers.find((marker) => marker.id === activeRegionId.value) ?? regionMarkers[0]!
+  return findMarker(activeRegionId.value) ?? fallbackMarker
 })
 
-const activeRoutePoints = computed<string>(() => {
-  const activeIndex = regionMarkers.findIndex((marker) => marker.id === activeRegionId.value)
-  const endIndex = activeIndex >= 0 ? activeIndex : 0
-  return regionMarkers
-    .slice(0, endIndex + 1)
-    .map((marker) => `${marker.x},${marker.y}`)
-    .join(' ')
+const activeMarkerIndex = computed<number>(() => {
+  const markerIndex = regionMarkers.findIndex((marker) => marker.id === activeRegionId.value)
+  return markerIndex >= 0 ? markerIndex : 0
 })
 
 const fullRoutePoints = computed<string>(() => {
-  return regionMarkers.map((marker) => `${marker.x},${marker.y}`).join(' ')
+  return buildRoutePoints(regionMarkers)
 })
 
-const getRegionName = (regionId: string): string => {
-  return regions.find((region) => region.id === regionId)?.name ?? regionId
+const activeRoutePoints = computed<string>(() => {
+  return buildRoutePoints(regionMarkers.slice(0, activeMarkerIndex.value + 1))
+})
+
+const getRegionName = (regionId: RegionId): string => {
+  return findRegion(regionId)?.name ?? regionId
 }
 
-const setActiveRegion = (regionId: string): void => {
+const setActiveRegion = (regionId: RegionId): void => {
   activeRegionId.value = regionId
 }
 </script>

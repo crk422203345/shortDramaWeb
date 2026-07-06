@@ -8,6 +8,8 @@ defineProps<{
   id: SectionId
 }>()
 
+const SUBMISSION_FEEDBACK_DURATION_MS = 3200
+
 const form = reactive<ContactFormModel>({
   name: '',
   company: '',
@@ -21,7 +23,7 @@ const submitContact = (): void => {
   submitted.value = true
   window.setTimeout(() => {
     submitted.value = false
-  }, 3200)
+  }, SUBMISSION_FEEDBACK_DURATION_MS)
 }
 </script>
 

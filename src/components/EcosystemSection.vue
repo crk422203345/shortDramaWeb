@@ -21,9 +21,13 @@ interface EcosystemNode {
   y: number
 }
 
+type EcosystemNodeId = EcosystemNode['id']
+
 defineProps<{
   id: SectionId
 }>()
+
+const DEFAULT_ACTIVE_NODE_ID = 'beach'
 
 const ecosystemNodes: EcosystemNode[] = [
   {
@@ -94,14 +98,18 @@ const ecosystemNodes: EcosystemNode[] = [
   },
 ]
 
-const activeNodeId = ref<string>('beach')
 const defaultNode: EcosystemNode = ecosystemNodes[0]!
+const activeNodeId = ref<EcosystemNodeId>(DEFAULT_ACTIVE_NODE_ID)
+
+const findEcosystemNode = (nodeId: EcosystemNodeId): EcosystemNode | undefined => {
+  return ecosystemNodes.find((node) => node.id === nodeId)
+}
 
 const activeNode = computed<EcosystemNode>(() => {
-  return ecosystemNodes.find((node) => node.id === activeNodeId.value) ?? defaultNode
+  return findEcosystemNode(activeNodeId.value) ?? defaultNode
 })
 
-const setActiveNode = (nodeId: string): void => {
+const setActiveNode = (nodeId: EcosystemNodeId): void => {
   activeNodeId.value = nodeId
 }
 </script>

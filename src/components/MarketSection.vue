@@ -14,6 +14,14 @@ interface MetricParts {
   decimals: number
 }
 
+const METRIC_ANIMATION_DURATION_MS = 1400
+const METRIC_ANIMATION_STAGGER_MS = 120
+const METRIC_OBSERVER_OPTIONS: IntersectionObserverInit = {
+  root: null,
+  rootMargin: '-8% 0px -18% 0px',
+  threshold: 0.28,
+}
+
 const statGridRef = ref<HTMLElement | null>(null)
 const animatedMetrics = ref<string[]>(marketStats.map((stat) => formatMetric(stat.metric, 0)))
 let observer: IntersectionObserver | null = null
@@ -32,11 +40,19 @@ function parseMetric(metric: string): MetricParts | null {
   }
 }
 
+function clampProgress(value: number): number {
+  return Math.min(Math.max(value, 0), 1)
+}
+
+function easeOutCubic(progress: number): number {
+  return 1 - Math.pow(1 - progress, 3)
+}
+
 function formatMetric(metric: string, progress: number): string {
   const parts = parseMetric(metric)
   if (!parts) return metric
 
-  const easedProgress = 1 - Math.pow(1 - progress, 3)
+  const easedProgress = easeOutCubic(progress)
   const currentValue = parts.target * easedProgress
   const numberText =
     parts.decimals > 0 ? currentValue.toFixed(parts.decimals) : Math.round(currentValue).toString()
@@ -44,25 +60,27 @@ function formatMetric(metric: string, progress: number): string {
   return `${numberText}${parts.suffix}`
 }
 
+function getAnimatedMetric(metric: string, timestamp: number, startTime: number, index: number): string {
+  const rawProgress =
+    (timestamp - startTime - index * METRIC_ANIMATION_STAGGER_MS) / METRIC_ANIMATION_DURATION_MS
+  return formatMetric(metric, clampProgress(rawProgress))
+}
+
 function startMetricAnimation(): void {
   if (hasAnimated) return
   hasAnimated = true
 
-  const duration = 1400
-  const stagger = 120
   let startTime: number | null = null
 
   const tick = (timestamp: number): void => {
     startTime ??= timestamp
 
     animatedMetrics.value = marketStats.map((stat, index) => {
-      const rawProgress = (timestamp - startTime! - index * stagger) / duration
-      const progress = Math.min(Math.max(rawProgress, 0), 1)
-      return formatMetric(stat.metric, progress)
+      return getAnimatedMetric(stat.metric, timestamp, startTime!, index)
     })
 
-    const lastItemDelay = (marketStats.length - 1) * stagger
-    if (timestamp - startTime < duration + lastItemDelay) {
+    const lastItemDelay = (marketStats.length - 1) * METRIC_ANIMATION_STAGGER_MS
+    if (timestamp - startTime < METRIC_ANIMATION_DURATION_MS + lastItemDelay) {
       animationFrameId = window.requestAnimationFrame(tick)
       return
     }
@@ -81,11 +99,7 @@ onMounted(() => {
       startMetricAnimation()
       observer?.disconnect()
     },
-    {
-      root: null,
-      rootMargin: '-8% 0px -18% 0px',
-      threshold: 0.28,
-    },
+    METRIC_OBSERVER_OPTIONS,
   )
 
   if (statGridRef.value) observer.observe(statGridRef.value)
