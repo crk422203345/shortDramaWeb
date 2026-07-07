@@ -4,11 +4,11 @@ import { ref } from 'vue'
 const activeIndex = ref(2) // Card 3 (index 2) is active by default
 
 const cards = [
-  { id: 1, name: '苍穹神女', img: '/images/char_1.png' },
-  { id: 2, name: '琉璃仙子', img: '/images/char_2.png' },
-  { id: 3, name: '九天玄女', img: '/images/char_3.png' },
-  { id: 4, name: '凌风剑客', img: '/images/char_4.png' },
-  { id: 5, name: '幽冥圣女', img: '/images/char_5.png' }
+  { id: 1, name: '苍穹神女', img: '/img/1(1).png' },
+  { id: 2, name: '琉璃仙子', img: '/img/2(1).png' },
+  { id: 3, name: '九天玄女', img: '/img/3(1).png' },
+  { id: 4, name: '凌风剑客', img: '/img/4(1).png' },
+  { id: 5, name: '幽冥圣女', img: '/img/5.png' }
 ]
 </script>
 

@@ -13,11 +13,11 @@
       <!-- PAIN POINTS SUBSECTION -->
       <div class="subsection">
         <div class="sub-header">
-          <span class="arrow-left">&lt;&lt;&lt;</span>
+          <img src="/img/箭头左.png" alt="" class="sub-arrow arrow-left" />
           <span class="sub-title">痛点</span>
-          <span class="arrow-right">&gt;&gt;&gt;</span>
+          <img src="/img/箭头右.png" alt="" class="sub-arrow arrow-right" />
         </div>
-        
+
         <div class="pain-points-grid">
           <!-- Card 1 -->
           <div class="pain-card glass-card">
@@ -49,14 +49,14 @@
       <!-- OPPORTUNITIES SUBSECTION -->
       <div class="subsection opportunity-section">
         <div class="sub-header">
-          <span class="arrow-left">&lt;&lt;&lt;</span>
+          <img src="/img/箭头左.png" alt="" class="sub-arrow arrow-left" />
           <span class="sub-title">机遇</span>
-          <span class="arrow-right">&gt;&gt;&gt;</span>
+          <img src="/img/箭头右.png" alt="" class="sub-arrow arrow-right" />
         </div>
 
         <div class="opp-cards-grid">
-          <!-- Card 1 (Red Gradient) -->
-          <div class="opp-card red-gradient-card">
+          <!-- Card 1 -->
+          <div class="opp-card opportunity-bg-1">
             <div class="opp-card-inner">
               <span class="opp-title">Web3娱乐/游戏市场规模</span>
               <div class="opp-stat">
@@ -68,8 +68,8 @@
             </div>
           </div>
 
-          <!-- Card 2 (Orange Gradient) -->
-          <div class="opp-card orange-gradient-card">
+          <!-- Card 2 -->
+          <div class="opp-card opportunity-bg-2">
             <div class="opp-card-inner">
               <span class="opp-title">超休闲小游戏市场规模</span>
               <div class="opp-stat">
@@ -81,8 +81,8 @@
             </div>
           </div>
 
-          <!-- Card 3 (Blue Gradient) -->
-          <div class="opp-card blue-gradient-card">
+          <!-- Card 3 -->
+          <div class="opp-card opportunity-bg-3">
             <div class="opp-card-inner">
               <span class="opp-title">全球数字游民体量</span>
               <div class="opp-stat">
@@ -93,8 +93,8 @@
             </div>
           </div>
 
-          <!-- Card 4 (Purple Gradient) -->
-          <div class="opp-card purple-gradient-card">
+          <!-- Card 4 -->
+          <div class="opp-card opportunity-bg-4">
             <div class="opp-card-inner">
               <span class="opp-title">香港Web3桥头堡地位</span>
               <div class="opp-stat">
@@ -132,14 +132,12 @@
   margin-bottom: 32px;
 }
 
-.sub-header .arrow-left,
-.sub-header .arrow-right {
-  font-family: monospace;
-  font-size: 1.1rem;
-  color: var(--accent-cyan);
-  opacity: 0.8;
-  letter-spacing: -2px;
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+.sub-arrow {
+  width: 46px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.35));
 }
 
 .sub-header .sub-title {
@@ -205,8 +203,12 @@
   position: relative;
   height: 320px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   transition: var(--transition-normal);
 }
@@ -218,83 +220,74 @@
 }
 
 .opp-card-inner {
-  padding: 24px;
+  padding: 28px 22px;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.16) 100%);
 }
 
 .opp-title {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.35;
 }
 
 .opp-stat {
   display: flex;
   align-items: baseline;
-  justify-content: flex-start;
-  margin: 16px 0;
+  justify-content: center;
+  margin: 24px 0 18px;
 }
 
 .opp-stat .symbol {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 2.1rem;
+  font-weight: 800;
   margin-right: 4px;
   color: #ffffff;
 }
 
 .opp-stat .number {
-  font-size: 3.25rem;
-  font-weight: 800;
+  font-size: 4.3rem;
+  font-weight: 900;
   color: #ffffff;
   line-height: 1;
 }
 
 .opp-stat .unit {
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.7rem;
+  font-weight: 800;
   margin-left: 4px;
   color: #ffffff;
 }
 
 .opp-desc {
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 300;
+  max-width: 190px;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 500;
 }
 
-/* Gradients corresponding to mockup */
-.red-gradient-card {
-  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
-}
-.red-gradient-card:hover {
-  box-shadow: 0 12px 30px rgba(185, 28, 28, 0.3);
+.opportunity-bg-1 {
+  background-image: url('/img/1.png');
 }
 
-.orange-gradient-card {
-  background: linear-gradient(135deg, #c2410c 0%, #7c2d12 100%);
-}
-.orange-gradient-card:hover {
-  box-shadow: 0 12px 30px rgba(194, 65, 12, 0.3);
+.opportunity-bg-2 {
+  background-image: url('/img/2.png');
 }
 
-.blue-gradient-card {
-  background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
-}
-.blue-gradient-card:hover {
-  box-shadow: 0 12px 30px rgba(3, 105, 161, 0.3);
+.opportunity-bg-3 {
+  background-image: url('/img/3.png');
 }
 
-.purple-gradient-card {
-  background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
-}
-.purple-gradient-card:hover {
-  box-shadow: 0 12px 30px rgba(109, 40, 217, 0.3);
+.opportunity-bg-4 {
+  background-image: url('/img/4.png');
 }
 
 /* Responsive adjustments */
@@ -309,6 +302,7 @@
     grid-template-columns: 1fr;
     gap: 16px;
   }
+
   .pain-card {
     height: auto;
     padding: 24px;
@@ -319,8 +313,13 @@
   .opp-cards-grid {
     grid-template-columns: 1fr;
   }
+
   .opp-card {
     height: 280px;
+  }
+
+  .opp-stat .number {
+    font-size: 3.7rem;
   }
 }
 </style>

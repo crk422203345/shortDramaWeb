@@ -4,13 +4,7 @@
       <!-- Left side: Brand Logo -->
       <div class="footer-brand">
         <div class="logo-area">
-          <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="18" r="16" stroke="white" stroke-width="2"/>
-            <circle cx="18" cy="18" r="12" stroke="white" stroke-width="1" stroke-dasharray="2 2"/>
-            <path d="M11 18H15M13 16V20" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <path d="M21 15L26 18L21 21V15Z" fill="white"/>
-          </svg>
-          <span class="logo-text">BINGO文娱</span>
+          <img src="/img/bingo.png" alt="BINGO文娱" class="logo-img" />
         </div>
       </div>
       
@@ -57,14 +51,12 @@
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
-.logo-text {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.5px;
+.logo-img {
+  width: 166px;
+  height: auto;
+  display: block;
 }
 
 /* Columns layout */

@@ -61,32 +61,30 @@ const pillars = {
             <div class="orbit-ring ring-outer"></div>
             <div class="orbit-ring ring-middle"></div>
             <div class="orbit-ring ring-inner"></div>
+
+            <div class="pillar-connector" :class="`connector-${activePillar}`"></div>
             
             <!-- Central Node -->
             <div class="center-node">
               <div class="center-glow"></div>
+              <div class="center-particles" aria-hidden="true">
+                <span class="particle particle-white"></span>
+                <span class="particle particle-blue"></span>
+                <span class="particle particle-red"></span>
+                <span class="particle particle-purple"></span>
+                <span class="particle particle-yellow"></span>
+              </div>
               <div class="center-content">
-                <svg width="24" height="24" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="18" cy="18" r="16" stroke="white" stroke-width="2"/>
-                  <path d="M11 18H15M13 16V20" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M21 15L26 18L21 21V15Z" fill="white"/>
-                </svg>
-                <span>BINGO文娱</span>
+                <img src="/img/logo.png" alt="BINGO文娱" class="center-logo-img" />
               </div>
             </div>
-            
+
             <!-- Orbit Nodes (Clickable) -->
             <!-- 1. Game Node (Top) -->
-            <div 
-              class="orbit-node node-game" 
-              :class="{ active: activePillar === 'game' }"
-              @click="activePillar = 'game'"
-            >
+            <div class="orbit-node node-game" :class="{ active: activePillar === 'game' }"
+              @click="activePillar = 'game'">
               <div class="node-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                  <path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"></path>
-                </svg>
+                <img src="/img/logo(1).png" alt="小游戏" class="node-icon-img" />
               </div>
               <div class="node-label">
                 <span class="sub-brand">OLÉ GAME</span>
@@ -95,15 +93,10 @@ const pillars = {
             </div>
 
             <!-- 2. Drama Node (Bottom-Left) -->
-            <div 
-              class="orbit-node node-drama" 
-              :class="{ active: activePillar === 'drama' }"
-              @click="activePillar = 'drama'"
-            >
+            <div class="orbit-node node-drama" :class="{ active: activePillar === 'drama' }"
+              @click="activePillar = 'drama'">
               <div class="node-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
+                <img src="/img/omo.png" alt="短剧" class="node-icon-img" />
               </div>
               <div class="node-label">
                 <span class="sub-brand">OHO DRAMA</span>
@@ -112,15 +105,10 @@ const pillars = {
             </div>
 
             <!-- 3. Social Node (Bottom-Right) -->
-            <div 
-              class="orbit-node node-social" 
-              :class="{ active: activePillar === 'social' }"
-              @click="activePillar = 'social'"
-            >
+            <div class="orbit-node node-social" :class="{ active: activePillar === 'social' }"
+              @click="activePillar = 'social'">
               <div class="node-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
+                <img src="/img/社交-对话框1.png" alt="社交生态" class="node-icon-img" />
               </div>
               <div class="node-label">
                 <span class="sub-brand">社交生态</span>
@@ -136,15 +124,12 @@ const pillars = {
             <div :key="activePillar" class="pillar-detail-card glass-card">
               <!-- Banner Image with color filters for distinct pillars -->
               <div class="banner-wrapper">
-                <img 
-                  :src="pillars[activePillar as keyof typeof pillars].img" 
-                  :alt="pillars[activePillar as keyof typeof pillars].title"
-                  class="banner-img"
-                  :style="{ filter: pillars[activePillar as keyof typeof pillars].filter }"
-                />
+                <img :src="pillars[activePillar as keyof typeof pillars].img"
+                  :alt="pillars[activePillar as keyof typeof pillars].title" class="banner-img"
+                  :style="{ filter: pillars[activePillar as keyof typeof pillars].filter }" />
                 <div class="banner-overlay"></div>
               </div>
-              
+
               <!-- Text details -->
               <div class="pillar-text-content">
                 <h3 class="pillar-title">{{ pillars[activePillar as keyof typeof pillars].title }}</h3>
@@ -215,15 +200,59 @@ const pillars = {
   animation: rotateCounterClockwise 25s linear infinite;
 }
 
+.pillar-connector {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 1px;
+  background-image: linear-gradient(to right, #0654f2 50%, transparent 50%);
+  background-size: 8px 1px;
+  transform-origin: left center;
+  z-index: 8;
+  pointer-events: none;
+  transition:
+    width 0.4s ease,
+    transform 0.4s ease;
+}
+
+.pillar-connector::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0654f2;
+  box-shadow: 0 0 12px rgba(6, 84, 242, 0.75);
+  transform: translateY(-50%);
+}
+
+.connector-game {
+  width: 176px;
+  transform: rotate(-90deg);
+}
+
+.connector-drama {
+  width: 190px;
+  transform: rotate(142deg);
+}
+
+.connector-social {
+  width: 190px;
+  transform: rotate(38deg);
+}
+
 /* Center core node */
 .center-node {
   position: relative;
   z-index: 10;
-  width: 110px;
-  height: 110px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
-  background: radial-gradient(circle, #251e62 0%, #0e0a30 100%);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: #030763;
+  border: 2px solid #323CC6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -242,7 +271,68 @@ const pillars = {
   animation: pulseGlow 3s ease-in-out infinite;
 }
 
+.center-particles {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.9;
+  animation: particleDrift 4.8s ease-in-out infinite alternate;
+}
+
+.particle-white {
+  top: 18%;
+  left: 28%;
+  background: #ffffff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
+  animation-delay: -0.6s;
+}
+
+.particle-blue {
+  top: 24%;
+  right: 22%;
+  background: #07a8ff;
+  box-shadow: 0 0 16px rgba(7, 168, 255, 0.9);
+  animation-delay: -1.3s;
+}
+
+.particle-red {
+  right: 18%;
+  bottom: 30%;
+  background: #ff315a;
+  box-shadow: 0 0 16px rgba(255, 49, 90, 0.9);
+  animation-delay: -2.1s;
+}
+
+.particle-purple {
+  bottom: 18%;
+  left: 30%;
+  background: #a855f7;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.9);
+  animation-delay: -2.8s;
+}
+
+.particle-yellow {
+  top: 52%;
+  left: 14%;
+  background: #ffd84d;
+  box-shadow: 0 0 16px rgba(255, 216, 77, 0.9);
+  animation-delay: -3.5s;
+}
+
 .center-content {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -254,6 +344,34 @@ const pillars = {
   font-weight: 600;
   color: #ffffff;
   letter-spacing: 1px;
+}
+
+.center-logo-img {
+  width: 70px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@keyframes particleDrift {
+  0% {
+    transform: translate3d(-4px, 3px, 0) scale(0.8);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(5px, -5px, 0) scale(1.18);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(8px, 4px, 0) scale(0.95);
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle {
+    animation: none;
+  }
 }
 
 /* Orbit Clickable Nodes general styling */
@@ -269,17 +387,25 @@ const pillars = {
 }
 
 .node-icon {
-  width: 50px;
-  height: 50px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: #12102e;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #222560;
+  border: 1px solid #2E3280;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
+}
+
+.node-icon-img {
+  max-width: 42px;
+  max-height: 38px;
+  display: block;
+  object-fit: contain;
 }
 
 .node-label {
@@ -312,13 +438,15 @@ const pillars = {
 }
 
 .node-game .node-icon {
-  border-color: rgba(0, 240, 255, 0.4);
+  border-color: #2E3280;
 }
 
 .node-game.active .node-icon {
-  background: var(--accent-cyan);
+  background:
+    linear-gradient(#222560, #222560) padding-box,
+    linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #0b091a;
-  border-color: var(--accent-cyan);
+  border: 2px solid transparent;
   box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
 }
 
@@ -329,13 +457,15 @@ const pillars = {
 }
 
 .node-drama .node-icon {
-  border-color: rgba(236, 72, 153, 0.4);
+  border-color: #2E3280;
 }
 
 .node-drama.active .node-icon {
-  background: var(--accent-pink);
+  background:
+    linear-gradient(#222560, #222560) padding-box,
+    linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #ffffff;
-  border-color: var(--accent-pink);
+  border: 2px solid transparent;
   box-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
 }
 
@@ -346,13 +476,15 @@ const pillars = {
 }
 
 .node-social .node-icon {
-  border-color: rgba(139, 92, 246, 0.4);
+  border-color: #2E3280;
 }
 
 .node-social.active .node-icon {
-  background: var(--accent-purple);
+  background:
+    linear-gradient(#222560, #222560) padding-box,
+    linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #ffffff;
-  border-color: var(--accent-purple);
+  border: 2px solid transparent;
   box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
 }
 
@@ -365,6 +497,10 @@ const pillars = {
 .orbit-node:hover .node-icon {
   transform: scale(1.1);
   border-color: #ffffff;
+}
+
+.orbit-node.active:hover .node-icon {
+  border-color: transparent;
 }
 
 /* Right Detail Column styling */
@@ -425,13 +561,16 @@ const pillars = {
 .slide-fade-enter-active {
   transition: all 0.4s ease-out;
 }
+
 .slide-fade-leave-active {
   transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
+
 .slide-fade-enter-from {
   transform: translateX(30px);
   opacity: 0;
 }
+
 .slide-fade-leave-to {
   transform: translateX(-30px);
   opacity: 0;
@@ -450,29 +589,50 @@ const pillars = {
     width: 320px;
     height: 320px;
   }
+
   .ring-outer {
     width: 300px;
     height: 300px;
   }
+
   .ring-middle {
     width: 210px;
     height: 210px;
   }
+
   .ring-inner {
     width: 120px;
     height: 120px;
   }
+
   .center-node {
-    width: 90px;
-    height: 90px;
+    width: 104px;
+    height: 104px;
   }
+
+  .center-logo-img {
+    width: 58px;
+  }
+
+  .node-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .node-icon-img {
+    max-width: 36px;
+    max-height: 32px;
+  }
+
   .node-game {
     top: 5px;
   }
+
   .node-drama {
     bottom: 15px;
     left: 15px;
   }
+
   .node-social {
     bottom: 15px;
     right: 15px;
