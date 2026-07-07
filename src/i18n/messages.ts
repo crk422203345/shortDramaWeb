@@ -2388,7 +2388,6 @@ const baseMessages: Record<Exclude<Locale, 'zh-TW'>, LandingMessages> = {
     marketStats: [
       {
         metric: '330亿',
-        unit: '美元',
         title: 'Web3娱乐/游戏市场规模',
         description: '2025年预计超过330亿美元，蕴藏庞大代币化流媒体与分发需求。',
         label: '美元',
@@ -2396,7 +2395,6 @@ const baseMessages: Record<Exclude<Locale, 'zh-TW'>, LandingMessages> = {
       },
       {
         metric: '200亿',
-        unit: '美元',
         title: '超休闲小游戏市场规模',
         description: '2025年预计达200亿美元，兼具极高用户触达率与即时买量转化。',
         label: '美元',
@@ -2671,7 +2669,6 @@ const baseMessages: Record<Exclude<Locale, 'zh-TW'>, LandingMessages> = {
     marketStats: [
       {
         metric: '33B',
-        unit: 'USD',
         title: 'Web3 Entertainment / Gaming Market',
         description:
           'Expected to exceed USD 33B in 2025, with major demand for tokenized streaming media and distribution.',
@@ -2680,7 +2677,6 @@ const baseMessages: Record<Exclude<Locale, 'zh-TW'>, LandingMessages> = {
       },
       {
         metric: '20B',
-        unit: 'USD',
         title: 'Hyper-Casual Mini Game Market',
         description:
           'Expected to reach USD 20B in 2025, combining massive user reach with instant acquisition conversion.',

@@ -37,7 +37,6 @@ export interface PainPoint {
 
 export interface StatCard {
   metric: string
-  unit?: string
   title: string
   description: string
   label: string
@@ -53,11 +52,6 @@ export interface Pillar {
   secondaryMetric: string
   outcome: string
   icon: IconName
-}
-
-export interface FlywheelTag {
-  label: string
-  active?: boolean
 }
 
 export interface Region {

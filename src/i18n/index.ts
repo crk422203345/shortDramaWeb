@@ -37,7 +37,6 @@ const getBrowserLocale = (): Locale => {
 
 const locale = ref<Locale>(getBrowserLocale())
 const copy = computed<LandingMessages>(() => messages[locale.value])
-const availableLocales = computed<readonly Locale[]>(() => LOCALES)
 const localeOptions = computed<readonly LocaleOption[]>(() => LOCALE_OPTIONS)
 const activeLocaleOption = computed<LocaleOption>(() => {
   return LOCALE_OPTIONS.find((option) => option.code === locale.value) ?? LOCALE_OPTIONS[0]!
@@ -63,7 +62,6 @@ watch(
 
 export const useI18n = () => {
   return {
-    availableLocales,
     activeLocaleOption,
     copy,
     locale,

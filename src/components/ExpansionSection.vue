@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import marketMapUrl from '@/assets/illustrations/market-map.svg'
 import BaseIcon from '@/components/BaseIcon.vue'
 import LazyImage from '@/components/LazyImage.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
+import { useActiveItem } from '@/composables/useActiveItem'
 import { useI18n } from '@/i18n'
 import type { Region, SectionId } from '@/types/landing'
 
@@ -29,9 +30,13 @@ const regionMarkers: readonly RegionMarker[] = [
 ]
 
 const { copy } = useI18n()
-const activeRegionId = ref<RegionId>(DEFAULT_REGION_ID)
 const regions = computed(() => copy.value.expansion.regions)
 const fallbackMarker = regionMarkers[0]!
+const {
+  activeId: activeRegionId,
+  activeItem: activeRegion,
+  setActiveItem: setActiveRegion,
+} = useActiveItem(regions, DEFAULT_REGION_ID)
 
 const findRegion = (regionId: RegionId): Region | undefined => {
   return regions.value.find((region) => region.id === regionId)
@@ -48,12 +53,6 @@ const markerToSvgPoint = (marker: RegionMarker): string => {
 const buildRoutePoints = (markers: readonly RegionMarker[]): string => {
   return markers.map(markerToSvgPoint).join(' ')
 }
-
-const fallbackRegion = computed<Region>(() => regions.value[0]!)
-
-const activeRegion = computed<Region>(() => {
-  return findRegion(activeRegionId.value) ?? fallbackRegion.value
-})
 
 const activeMarker = computed<RegionMarker>(() => {
   return findMarker(activeRegionId.value) ?? fallbackMarker
@@ -75,10 +74,6 @@ const activeRoutePoints = computed<string>(() => {
 const getRegionName = (regionId: RegionId): string => {
   return findRegion(regionId)?.name ?? regionId
 }
-
-const setActiveRegion = (regionId: RegionId): void => {
-  activeRegionId.value = regionId
-}
 </script>
 
 <template>
@@ -95,8 +90,17 @@ const setActiveRegion = (regionId: RegionId): void => {
         <div class="region-map-card" :aria-label="copy.expansion.mapAriaLabel">
           <LazyImage :src="marketMapUrl" :alt="copy.expansion.mapAlt" :width="860" :height="540" />
 
-          <svg class="route-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <polyline class="route-line route-line-base" :points="fullRoutePoints" vector-effect="non-scaling-stroke" />
+          <svg
+            class="route-layer"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <polyline
+              class="route-line route-line-base"
+              :points="fullRoutePoints"
+              vector-effect="non-scaling-stroke"
+            />
             <polyline
               class="route-line route-line-active"
               :points="activeRoutePoints"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import dataIconUrl from '@/assets/illustrations/数据层级.svg'
 import fireIconUrl from '@/assets/illustrations/火热.svg'
 import gameIconUrl from '@/assets/illustrations/游戏.svg'
@@ -8,6 +8,7 @@ import timeIconUrl from '@/assets/illustrations/时间.svg'
 import userIconUrl from '@/assets/illustrations/用户.svg'
 import BaseIcon from '@/components/BaseIcon.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
+import { useActiveItem } from '@/composables/useActiveItem'
 import { useI18n } from '@/i18n'
 import type { EcosystemNodeCopy } from '@/i18n/messages'
 import type { SectionId } from '@/types/landing'
@@ -20,7 +21,6 @@ interface EcosystemNodeLayout {
 }
 
 type EcosystemNode = EcosystemNodeCopy & EcosystemNodeLayout
-type EcosystemNodeId = EcosystemNode['id']
 
 defineProps<{
   id: SectionId
@@ -38,7 +38,6 @@ const nodeLayouts: readonly EcosystemNodeLayout[] = [
 ]
 
 const { copy } = useI18n()
-const activeNodeId = ref<EcosystemNodeId>(DEFAULT_ACTIVE_NODE_ID)
 
 const ecosystemNodes = computed<readonly EcosystemNode[]>(() => {
   return copy.value.ecosystem.nodes.map((node) => {
@@ -47,19 +46,10 @@ const ecosystemNodes = computed<readonly EcosystemNode[]>(() => {
   })
 })
 
-const defaultNode = computed<EcosystemNode>(() => ecosystemNodes.value[0]!)
-
-const findEcosystemNode = (nodeId: EcosystemNodeId): EcosystemNode | undefined => {
-  return ecosystemNodes.value.find((node) => node.id === nodeId)
-}
-
-const activeNode = computed<EcosystemNode>(() => {
-  return findEcosystemNode(activeNodeId.value) ?? defaultNode.value
-})
-
-const setActiveNode = (nodeId: EcosystemNodeId): void => {
-  activeNodeId.value = nodeId
-}
+const { activeItem: activeNode, setActiveItem: setActiveNode } = useActiveItem(
+  ecosystemNodes,
+  DEFAULT_ACTIVE_NODE_ID,
+)
 </script>
 
 <template>
@@ -79,7 +69,12 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
             <span class="ring ring-middle" aria-hidden="true"></span>
             <span class="ring ring-inner" aria-hidden="true"></span>
 
-            <svg class="connector-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <svg
+              class="connector-layer"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
               <line
                 :x1="activeNode.x"
                 :y1="activeNode.y"
@@ -130,7 +125,12 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
           <article class="solution-card glass-panel">
             <div class="card-title">
               <span class="icon-box">
-                <img :src="activeNode.iconUrl" :alt="activeNode.tag" loading="lazy" decoding="async" />
+                <img
+                  :src="activeNode.iconUrl"
+                  :alt="activeNode.tag"
+                  loading="lazy"
+                  decoding="async"
+                />
               </span>
               <h3>{{ activeNode.title }}</h3>
             </div>
@@ -145,9 +145,7 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
 
 <style scoped>
 .ecosystem-section {
-  background:
-    radial-gradient(circle at 62% 28%, rgba(0, 216, 245, 0.08), transparent 30%),
-    #020707;
+  background: radial-gradient(circle at 62% 28%, rgba(0, 216, 245, 0.08), transparent 30%), #020707;
 }
 
 .ecosystem-grid {
@@ -189,7 +187,12 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
 
 .ring-inner {
   inset: 33%;
-  background: radial-gradient(circle, rgba(0, 216, 245, 0.12), rgba(0, 216, 245, 0.02) 65%, transparent);
+  background: radial-gradient(
+    circle,
+    rgba(0, 216, 245, 0.12),
+    rgba(0, 216, 245, 0.02) 65%,
+    transparent
+  );
 }
 
 .connector-layer {
@@ -278,7 +281,9 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
   height: 32px;
   object-fit: contain;
   opacity: 0.9;
-  transition: filter 0.25s ease, opacity 0.25s ease;
+  transition:
+    filter 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .orbit-node:hover,
@@ -298,7 +303,8 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
 
 .orbit-node.active img {
   opacity: 1;
-  filter: brightness(0) saturate(100%) invert(3%) sepia(21%) saturate(1343%) hue-rotate(139deg) brightness(95%) contrast(98%);
+  filter: brightness(0) saturate(100%) invert(3%) sepia(21%) saturate(1343%) hue-rotate(139deg)
+    brightness(95%) contrast(98%);
 }
 
 .flywheel-panel {
@@ -364,7 +370,8 @@ const setActiveNode = (nodeId: EcosystemNodeId): void => {
   width: 26px;
   height: 26px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(76%) sepia(58%) saturate(6743%) hue-rotate(138deg) brightness(107%) contrast(104%);
+  filter: brightness(0) saturate(100%) invert(76%) sepia(58%) saturate(6743%) hue-rotate(138deg)
+    brightness(107%) contrast(104%);
 }
 
 .solution-card p {
