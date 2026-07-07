@@ -153,6 +153,12 @@ const submitForm = () => {
   border-radius: 24px;
 }
 
+.form-container:hover {
+  background: rgba(13, 11, 36, 0.4);
+  border-color: var(--card-border);
+  box-shadow: none;
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;

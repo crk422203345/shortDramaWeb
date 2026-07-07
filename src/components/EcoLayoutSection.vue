@@ -6,17 +6,17 @@ const tabs = {
     id: 'pos',
     tabLabel: 'POS价值成长 + GGC链',
     title: 'POS价值成长 + GGC链',
-    subtitle: '流量越大，用户越多，生态价值和用户权益越高',
-    description: '通过独创的“注意力证明 (POS)”激励机制与自研GGC链，用户看短剧、玩游戏的时间和互动数据会立即转化为生态积分权益。将平台利润通过智能合约直接倾斜给生态建设者。',
+    subtitle: '流量越大，用户越多，生态价值和用户权益越高。',
+    description: '通过独创的“注意力证明（POS）”激励机制与自研GGC链，用户看短剧、玩游戏的时间和互动数据会即时转化为生态积分权益。将平台利润通过智能合约直接倾斜给生态建设者。',
     nodeIndex: 0,
     color: '#00f0ff'
   },
   iaa_iap: {
     id: 'iaa_iap',
-    tabLabel: 'IAA+IAP裂变矩阵',
-    title: 'IAA+IAP裂变矩阵',
-    subtitle: '广告(IAA)与内购(IAP)双轨并行，兼顾极高用户变现与长线留存',
-    description: '结合Web2成熟的广告商业化模式与Web3通证内购体系。通过IAA为免费用户提供积分产出渠道，通过IAP深度释放高净值用户消费潜力，同时设计社交裂变奖励，实现全层级用户变现与指数级裂变增长。',
+    tabLabel: 'IAA+IAP混变矩阵',
+    title: 'IAA+IAP混变矩阵',
+    subtitle: '自研极致高效变现模型，实现用户与平台利益共赢。',
+    description: '打通了IAA（广告变现）与IAP（积分/数字道具付费）的双轮壁垒。平台通过全球高单价数字广告主竞价填充，将大比例广告收益投入GGC生态池，或直接向活跃看剧玩游戏的用户分配生态红利，彻底破除零和博弈。',
     nodeIndex: 1,
     color: '#ec4899'
   },
@@ -24,8 +24,8 @@ const tabs = {
     id: 'three_engines',
     tabLabel: '短剧+游戏+社交三轮驱动',
     title: '短剧+游戏+社交三轮驱动',
-    subtitle: '三大支柱相互咬合，打造无缝流转的泛娱乐价值圈',
-    description: '精品短剧带来高频海量初始流量，超休闲小游戏提供丰富的内容消耗场景与积分交互玩法，SBT社交关系链沉淀用户信任。三轮驱动，让用户在游玩与社交的过程中实现注意力的资产化与价值沉淀。',
+    subtitle: '短剧、小游戏与社交平台协同，高速凝聚海量流量。',
+    description: '以精品短剧与轻量化游戏构建内容引擎，结合社交互动与本地生活场景，打造集娱乐、社交与消费体验于一体的数字生态。短剧内容、游戏资产、社交权益与生活服务相互联动，通过多场景触达与生态协同运营，激发用户参与和分享动力，助力平台实现更高效的用户增长与价值沉淀。',
     nodeIndex: 2,
     color: '#8b5cf6'
   },
@@ -33,8 +33,8 @@ const tabs = {
     id: 'eco_loop',
     tabLabel: '生态价值闭环',
     title: '生态价值闭环',
-    subtitle: '链上通证与积分生态深度绑定，抑制通胀，确保持续繁荣',
-    description: '设计严密的积分消耗与回收机制，涵盖短剧解锁、游戏道具购买、社交身份升级等多元场景。通过生态手续费回购、通证销毁等模型，确保生态循环的正向运转，让增长红利真正回馈全体共建者。',
+    subtitle: '结合区块链分布式科技，构建持续健康增长的网络。',
+    description: 'GGC通证在游戏、短剧解锁、NFT二创版权、DAO治理投票等场景形成多重消耗和流通刚需。配合手续费循环、平台盈利生态分配和生态基金沉淀，构成生态价值稳健增值的良性螺旋。',
     nodeIndex: 3,
     color: '#10b981'
   },
@@ -42,8 +42,8 @@ const tabs = {
     id: 'wave_plan',
     tabLabel: '浪潮计划 (Wave Plan)',
     title: '浪潮计划 (Wave Plan)',
-    subtitle: '扶持优质创作者与游戏研发，源源不断孵化出海精品',
-    description: '设立专项生态扶持基金，面向全球短剧制作团队与小游戏独立开发者。提供资金资助、AI多语种音色翻译克隆技术支持以及Web3宣发资源，孵化全球本地化爆款，掀起Web3出海新浪潮。',
+    subtitle: '孵化庞大的UGC内容生态与全球数字游民社区。',
+    description: '“浪潮计划”专门扶持全球超5,000万数字游民、独立剪辑手、编剧及创客授权使用Bingo文娱官方版权库，在TikTok、YouTube等社交平台进行碎片化剪辑与引流，享有超额的GGC链上二创返税与流量分成。',
     nodeIndex: 4,
     color: '#f59e0b'
   },
@@ -51,14 +51,15 @@ const tabs = {
     id: 'beach_plan',
     tabLabel: '沙滩计划 (Beach Plan)',
     title: '沙滩计划 (Beach Plan)',
-    subtitle: '全球公会联盟与地推社区落地，汇聚亿万量级Web3新用户',
-    description: '针对东南亚等新兴市场，深度联手各大地推团队与游戏公会，建设高黏性线上线下社区。通过零门槛的Web3钱包接入、详尽的新手引导和极具吸引力的初期共建福利，引流亿万量级用户平滑迁入生态。',
+    subtitle: '支持创作者、资本与平台“三位一体”，共同富裕。',
+    description: '“沙滩计划”旨在孵化“一人公司（OPC）”及独立创客工作室。由资本池提供冷启动投资，由平台提供高匹配流量与GGC合规版权管理工具，由创作者产出爆款，三位一体打通Web3时代最高效的内容孵化飞轮。',
     nodeIndex: 5,
     color: '#3b82f6'
   }
 } as const
 
 const activeTab = ref<keyof typeof tabs>('pos')
+const orbitActiveColor = '#07A8FF'
 
 // Computed properties for template type safety
 const activeTabData = computed(() => tabs[activeTab.value])
@@ -69,18 +70,16 @@ const tabLayout = [
   ['eco_loop', 'wave_plan', 'beach_plan']
 ] as const
 
-// Angle coordinates for the 6 nodes on the outer orbit ring
-// System: 380x380px, outer-ring: 320px (radius 160px), center at 190px
-// Node position = (center ± 160 * sin/cos) / 380 * 100
-// 0: 12-o'clock  1: 2-o'clock  2: 4-o'clock
-// 3: 6-o'clock   4: 8-o'clock  5: 10-o'clock
+// Node positions and connector angles for the 6 nodes on the outer orbit ring.
+// The connector is a horizontal line that starts at center and rotates toward
+// the selected node, matching the browser coordinate system.
 const nodePositions = [
-  { top: '7.9%',  left: '50%',   transform: 'translate(-50%, -50%)', angle: 270 }, // top
-  { top: '29%',   left: '86.5%', transform: 'translate(-50%, -50%)', angle: 330 }, // top-right
-  { top: '71%',   left: '86.5%', transform: 'translate(-50%, -50%)', angle: 30  }, // bottom-right
-  { top: '92.1%', left: '50%',   transform: 'translate(-50%, -50%)', angle: 90  }, // bottom
-  { top: '71%',   left: '13.5%', transform: 'translate(-50%, -50%)', angle: 150 }, // bottom-left
-  { top: '29%',   left: '13.5%', transform: 'translate(-50%, -50%)', angle: 210 }, // top-left
+  { top: '7.9%',  left: '50%',   transform: 'translate(-50%, -50%)', angle: -90  }, // top
+  { top: '29%',   left: '86.5%', transform: 'translate(-50%, -50%)', angle: -30  }, // top-right
+  { top: '71%',   left: '86.5%', transform: 'translate(-50%, -50%)', angle: 30   }, // bottom-right
+  { top: '92.1%', left: '50%',   transform: 'translate(-50%, -50%)', angle: 90   }, // bottom
+  { top: '71%',   left: '13.5%', transform: 'translate(-50%, -50%)', angle: 150  }, // bottom-left
+  { top: '29%',   left: '13.5%', transform: 'translate(-50%, -50%)', angle: -150 }, // top-left
 ] as const
 </script>
 
@@ -120,8 +119,8 @@ const nodePositions = [
               class="active-connector"
               :style="{
                 transform: `rotate(${nodePositions[activeTabData.nodeIndex].angle}deg)`,
-                borderColor: activeTabData.color,
-                boxShadow: `0 0 10px ${activeTabData.color}`
+                color: orbitActiveColor,
+                boxShadow: `0 0 10px ${orbitActiveColor}`
               }"
             ></div>
 
@@ -259,36 +258,21 @@ const nodePositions = [
         <div class="eco-details-column">
           <!-- 6 Grid Tabs -->
           <div class="eco-tabs-grid">
-            <div 
-              v-for="(row, rowIndex) in tabLayout" 
-              :key="rowIndex" 
-              class="eco-tabs-row"
+            <button
+              v-for="tabKey in tabLayout.flat()"
+              :key="tabKey"
+              class="eco-tab-card"
+              :class="{ active: activeTab === tabKey }"
+              @click="activeTab = tabKey"
             >
-              <button 
-                v-for="tabKey in row" 
-                :key="tabKey"
-                class="eco-tab-card"
-                :class="{ active: activeTab === tabKey }"
-                :style="{
-                  borderColor: activeTab === tabKey ? tabs[tabKey].color : 'rgba(255,255,255,0.08)',
-                  color: activeTab === tabKey ? tabs[tabKey].color : '#ffffff'
-                }"
-                @click="activeTab = tabKey"
-              >
-                {{ tabs[tabKey].tabLabel }}
-              </button>
-            </div>
+              <span>{{ tabs[tabKey].tabLabel }}</span>
+            </button>
           </div>
 
           <!-- Underneath Detail Box -->
           <transition name="fade-eco" mode="out-in">
-            <div :key="activeTab" class="eco-detail-box glass-card">
-              <h4 
-                class="eco-detail-title"
-                :style="{ color: activeTabData.color }"
-              >
-                {{ activeTabData.title }}
-              </h4>
+            <div :key="activeTab" class="eco-detail-box">
+              <h4 class="eco-detail-title">{{ activeTabData.title }}</h4>
               <p class="eco-detail-subtitle">
                 {{ activeTabData.subtitle }}
               </p>
@@ -332,7 +316,7 @@ const nodePositions = [
 
 .eco-layout {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: 0.9fr 1.2fr;
   gap: 60px;
   align-items: center;
 }
@@ -381,13 +365,13 @@ const nodePositions = [
 /* Connecting Dotted Line to active node */
 .active-connector {
   position: absolute;
-  width: 1px;
-  height: 160px;
-  background-image: linear-gradient(to top, currentColor 50%, transparent 50%);
-  background-size: 1px 8px;
+  width: 160px;
+  height: 1px;
+  background-image: linear-gradient(to right, currentColor 50%, transparent 50%);
+  background-size: 8px 1px;
   top: 50%;
   left: 50%;
-  transform-origin: top center;
+  transform-origin: left center;
   z-index: 5;
   pointer-events: none;
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s ease;
@@ -471,46 +455,11 @@ const nodePositions = [
 }
 
 .outer-node.active .node-circle {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
+  background: #07A8FF;
+  border-color: #07A8FF;
   color: #0b091a;
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 20px rgba(7, 168, 255, 0.6);
   transform: scale(1.1);
-}
-
-.outer-node.node-1.active .node-circle {
-  background: var(--accent-pink);
-  border-color: var(--accent-pink);
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
-}
-
-.outer-node.node-2.active .node-circle {
-  background: var(--accent-purple);
-  border-color: var(--accent-purple);
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
-}
-
-.outer-node.node-3.active .node-circle {
-  background: #10b981;
-  border-color: #10b981;
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
-}
-
-.outer-node.node-4.active .node-circle {
-  background: #f59e0b;
-  border-color: #f59e0b;
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
-}
-
-.outer-node.node-5.active .node-circle {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
 }
 
 .outer-node:hover .node-circle {
@@ -524,75 +473,99 @@ const nodePositions = [
 }
 
 .eco-tabs-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.eco-tabs-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 22px 28px;
+  margin-bottom: 56px;
 }
 
 .eco-tab-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  padding: 14px 8px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  position: relative;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 0;
+  background: rgba(3, 4, 31, 0.78);
+  color: rgba(0, 240, 255, 0.48);
+  font-size: 0.95rem;
+  font-weight: 800;
   text-align: center;
+  letter-spacing: 0;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
+  box-shadow: inset 0 0 0 2px rgba(90, 84, 176, 0.76), 0 10px 18px rgba(0, 0, 0, 0.18);
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   cursor: pointer;
 }
 
+.eco-tab-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 240, 255, 0.16) 1px, transparent 1px);
+  background-size: 7px 7px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.eco-tab-card span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .eco-tab-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(0, 240, 255, 0.85);
+  box-shadow: inset 0 0 0 2px rgba(0, 240, 255, 0.72), 0 12px 22px rgba(0, 0, 0, 0.22);
 }
 
 .eco-tab-card.active {
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  font-weight: 700;
+  background: linear-gradient(90deg, #00c8ff 0%, #00a9ff 100%);
+  color: #030729;
+  box-shadow: 0 0 22px rgba(0, 200, 255, 0.26);
+}
+
+.eco-tab-card.active::before {
+  opacity: 0.48;
 }
 
 .eco-detail-box {
-  padding: 36px;
-  min-height: 220px;
+  padding: 62px 70px;
+  min-height: 260px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 20px;
-  background: rgba(13, 11, 36, 0.6);
+  border: 1px solid rgba(7, 8, 42, 0.96);
+  border-radius: 34px;
+  background: rgba(3, 4, 31, 0.92);
+  box-shadow: inset 0 0 0 1px rgba(12, 13, 54, 0.68), 0 24px 60px rgba(0, 0, 0, 0.22);
 }
 
 .eco-detail-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  letter-spacing: 0.5px;
+  font-size: 2.35rem;
+  font-weight: 900;
+  color: #00c8ff;
+  margin-bottom: 22px;
+  line-height: 1.15;
+  letter-spacing: 0;
 }
 
 .eco-detail-subtitle {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 1.28rem;
+  font-weight: 800;
   color: #ffffff;
-  margin-bottom: 16px;
-  line-height: 1.4;
+  margin-bottom: 28px;
+  line-height: 1.45;
 }
 
 .eco-detail-desc {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  font-weight: 300;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.95;
+  font-weight: 700;
 }
 
 /* Animations & Transitions */
@@ -627,12 +600,25 @@ const nodePositions = [
 }
 
 @media (max-width: 600px) {
-  .eco-tabs-row {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
   .eco-tabs-grid {
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .eco-tab-card {
+    min-height: 48px;
+  }
+  .eco-detail-box {
+    padding: 40px 28px;
+  }
+  .eco-detail-title {
+    font-size: 1.8rem;
+  }
+  .eco-detail-subtitle {
+    font-size: 1.05rem;
+  }
+  .eco-detail-desc {
+    font-size: 0.92rem;
   }
 }
 
@@ -665,7 +651,7 @@ const nodePositions = [
   }
   /* Dotted line height shrink */
   .active-connector {
-    height: 130px;
+    width: 130px;
   }
 }
 </style>
