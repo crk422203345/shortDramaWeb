@@ -128,12 +128,7 @@ const nodePositions = [
             <div class="central-base">
               <div class="base-glow"></div>
               <div class="base-content">
-                <!-- Globe SVG -->
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="globe-icon">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                  <path d="M2 12h20"></path>
-                </svg>
+                <img src="/img/地球,地理,全球 (3).png" alt="全球平台底层" class="globe-icon" />
                 <span class="base-title">GGC / Web3</span>
                 <span class="base-desc">全球<br/>平台底层</span>
               </div>
@@ -189,10 +184,7 @@ const nodePositions = [
               @click="activeTab = 'three_engines'"
             >
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                  <path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"></path>
-                </svg>
+                <img src="/img/游戏 (11).png" alt="短剧+游戏+社交三轮驱动" class="node-icon-img" />
               </div>
             </div>
 
@@ -208,9 +200,7 @@ const nodePositions = [
               @click="activeTab = 'eco_loop'"
             >
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
-                </svg>
+                <img src="/img/闭环.png" alt="生态价值闭环" class="node-icon-img" />
               </div>
             </div>
 
@@ -226,9 +216,7 @@ const nodePositions = [
               @click="activeTab = 'wave_plan'"
             >
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
+                <img src="/img/浪高.png" alt="浪潮计划" class="node-icon-img" />
               </div>
             </div>
 
@@ -244,10 +232,7 @@ const nodePositions = [
               @click="activeTab = 'beach_plan'"
             >
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
+                <img src="/img/计划.png" alt="沙滩计划" class="node-icon-img" />
               </div>
             </div>
 
@@ -413,6 +398,9 @@ const nodePositions = [
 }
 
 .globe-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
   color: var(--accent-cyan);
   filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.6));
   margin-bottom: 2px;
@@ -452,6 +440,13 @@ const nodePositions = [
   color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
+}
+
+.node-icon-img {
+  max-width: 24px;
+  max-height: 24px;
+  display: block;
+  object-fit: contain;
 }
 
 .outer-node.active .node-circle {
@@ -648,6 +643,10 @@ const nodePositions = [
   .node-circle {
     width: 38px;
     height: 38px;
+  }
+  .node-icon-img {
+    max-width: 21px;
+    max-height: 21px;
   }
   /* Dotted line height shrink */
   .active-connector {
