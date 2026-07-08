@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { contactApi } from '@/api/contact'
 
 const name = ref('')
 const company = ref('')
@@ -8,26 +9,50 @@ const description = ref('')
 
 const isSubmitted = ref(false)
 const isLoading = ref(false)
+let submitTimer: ReturnType<typeof setTimeout> | null = null
 
-const submitForm = () => {
-  if (!name.value || !company.value || !email.value || !description.value) {
-    alert('请填写所有必填字段')
+const submitContact = async () => {
+  if (isLoading.value) {
     return
   }
-  
+
   isLoading.value = true
-  
-  // Simulate API call
-  setTimeout(() => {
-    isLoading.value = false
+
+  try {
+    await contactApi.submit({
+      name: name.value.trim(),
+      organization: company.value.trim(),
+      email: email.value.trim(),
+      message: description.value.trim(),
+    })
+
     isSubmitted.value = true
-    
-    // Reset form fields
     name.value = ''
     company.value = ''
     email.value = ''
     description.value = ''
-  }, 1200)
+  } catch (error) {
+    console.error('[Contact Submit Error]:', error)
+    alert(error instanceof Error ? error.message : '提交失败，请稍后重试')
+  } finally {
+    isLoading.value = false
+    submitTimer = null
+  }
+}
+
+const submitForm = () => {
+  if (!name.value.trim() || !company.value.trim() || !email.value.trim() || !description.value.trim()) {
+    alert('请填写所有必填字段')
+    return
+  }
+
+  if (submitTimer) {
+    clearTimeout(submitTimer)
+  }
+
+  submitTimer = setTimeout(() => {
+    void submitContact()
+  }, 500)
 }
 </script>
 

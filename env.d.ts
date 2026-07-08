@@ -9,3 +9,4 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
+declare const __API_BASE_URL__: string
