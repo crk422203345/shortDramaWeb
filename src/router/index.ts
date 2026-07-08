@@ -14,6 +14,11 @@ const router = createRouter({
       name: 'join',
       component: () => import('@/views/JoinPage.vue'),
     },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: () => import('@/views/PrivacyPage.vue'),
+    },
   ],
   scrollBehavior(to, _from, savedPosition) {
     // Honor saved scroll position on back/forward; otherwise jump to any hash.

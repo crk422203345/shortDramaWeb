@@ -21,7 +21,7 @@
         <div class="footer-column">
           <h4>法律信息</h4>
           <ul>
-            <li><a href="javascript:void(0)">隐私政策</a></li>
+            <li><a href="/privacy" target="_blank">隐私政策</a></li>
           </ul>
         </div>
       </div>

@@ -73,15 +73,31 @@ button {
   font-family: inherit;
 }
 
-/* Hide Scrollbar (keep scroll functionality) */
-html {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE / Edge */
-}
+/* Premium Web3 Custom Scrollbar */
 ::-webkit-scrollbar {
-  display: none; /* Chrome / Safari / Opera */
-  width: 0;
-  height: 0;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020518;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 9999px;
+  border: 2px solid #020518;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.8);
+}
+
+/* Firefox scrollbar compatibility */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.4) #020518;
 }
 
 /* Common Layout Utilities */

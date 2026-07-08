@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+const isPrivacyPage = computed(() => route.path === '/privacy')
 
 const activeItem = ref('首页')
 const menuItems = [
@@ -8,6 +12,20 @@ const menuItems = [
   { label: '业务模式', href: '#business-mode' },
   { label: '生态布局', href: '#eco-layout' },
 ]
+
+const navigateTo = (item: { label: string; href: string }) => {
+  activeItem.value = item.label
+  const hash = item.href
+  if (route.path === '/') {
+    // Already on home – just smooth scroll to section
+    const el = document.querySelector(hash)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    // On another page (e.g. /join) – navigate home then scroll to section
+    router.push({ path: '/', hash })
+  }
+}
+
 
 /* Language dropdown */
 const showLanguageDropdown = ref(false)
@@ -33,7 +51,6 @@ const closeLanguageDropdown = () => {
 }
 
 /* Contact dropdown */
-const router = useRouter()
 const showContactDropdown = ref(false)
 let contactTimer: any = null
 
@@ -51,7 +68,7 @@ const closeContactDropdown = () => {
   if (contactTimer) clearTimeout(contactTimer)
   contactTimer = setTimeout(() => {
     showContactDropdown.value = false
-  }, 350) // 350ms delay
+  }, 600) // 600ms delay – prevents accidental close on slow mouse movement
 }
 
 // Go to the contact form at the bottom of the home page.
@@ -117,7 +134,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="main-header">
+  <header class="main-header" :class="{ 'privacy-header': isPrivacyPage }">
     <div class="header-container">
       <!-- Logo Section -->
       <div class="logo-area">
@@ -125,48 +142,56 @@ onUnmounted(() => {
       </div>
 
       <!-- Navigation Menu -->
-      <nav class="nav-menu">
+      <nav class="nav-menu" v-if="!isPrivacyPage">
         <ul>
           <li
             v-for="item in menuItems"
             :key="item.label"
             :class="{ active: activeItem === item.label }"
           >
-            <a :href="item.href" @click="activeItem = item.label">{{ item.label }}</a>
+            <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
           </li>
 
           <!-- Contact with dropdown -->
           <li
             class="has-dropdown"
             :class="{ active: activeItem === '联系我们' }"
-            @mouseenter="openContactDropdown"
-            @mouseleave="closeContactDropdown"
           >
-            <a
-              href="javascript:void(0)"
-              role="button"
-              @click="toggleContactDropdown"
+            <div
+              class="contact-wrapper"
+              @mouseenter="openContactDropdown"
+              @mouseleave="closeContactDropdown"
             >
-              联系我们
-              <svg class="caret" :class="{ rotated: showContactDropdown }" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </a>
+              <a
+                href="javascript:void(0)"
+                role="button"
+                @click="toggleContactDropdown"
+              >
+                联系我们
+                <svg class="caret" :class="{ rotated: showContactDropdown }" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </a>
 
-            <transition name="fade">
-              <div v-if="showContactDropdown" class="contact-dropdown">
-                <div class="contact-dropdown-inner">
-                  <div class="dropdown-item" @click="goToContact">洽谈合作</div>
-                  <div class="dropdown-item" @click="goToJoin">加入我们</div>
+              <transition name="fade">
+                <div v-if="showContactDropdown" class="contact-dropdown">
+                  <div class="contact-dropdown-inner">
+                    <div class="dropdown-item" @click="goToContact">洽谈合作</div>
+                    <RouterLink
+                      to="/join"
+                      class="dropdown-item"
+                      @click="showContactDropdown = false"
+                    >加入我们</RouterLink>
+                  </div>
                 </div>
-              </div>
-            </transition>
+              </transition>
+            </div>
           </li>
         </ul>
       </nav>
 
       <!-- Right Actions (Language & Extras) -->
-      <div class="header-actions">
+      <div class="header-actions" v-if="!isPrivacyPage">
         <!-- Language Selector -->
         <div 
           class="lang-selector" 
@@ -249,6 +274,14 @@ onUnmounted(() => {
   z-index: 100;
   display: flex;
   align-items: center;
+}
+
+/* Override header background on privacy page */
+.main-header.privacy-header {
+  position: fixed;
+  background: #020626;
+  backdrop-filter: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .header-container {
@@ -481,13 +514,20 @@ onUnmounted(() => {
   transform: rotate(180deg);
 }
 
+.contact-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .has-dropdown .contact-dropdown {
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
   min-width: 140px;
-  padding-top: 8px; /* bridges the gap so mouse pointer stays in hover area */
+  padding-top: 6px;
   z-index: 101;
 }
 
@@ -503,6 +543,10 @@ onUnmounted(() => {
   padding: 10px 18px;
   font-size: 0.88rem;
   text-align: center;
+  display: block;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
 }
 
 /* Animations */
