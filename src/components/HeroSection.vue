@@ -1,7 +1,17 @@
 <template>
-  <section class="hero-section">
-    <!-- Hero Background Image with Overlay -->
-    <div class="hero-bg" style="background-image: url('/images/hero_bg.png');">
+  <section id="home" class="hero-section">
+    <!-- Hero Background Video with Overlay -->
+    <div class="hero-bg">
+      <video
+        class="hero-video"
+        src="https://game.igcdn.cn/Ggame/videos/video1.94041431.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/images/hero_bg.png"
+      ></video>
       <div class="hero-overlay"></div>
     </div>
     
@@ -39,10 +49,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center 30%;
   transform: scale(1.05);
   animation: slowZoom 20s ease-out infinite alternate;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
 .hero-overlay {

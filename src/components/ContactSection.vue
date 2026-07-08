@@ -32,7 +32,7 @@ const submitForm = () => {
 </script>
 
 <template>
-  <section class="contact-section section-padding">
+  <section id="contact" class="contact-section section-padding">
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
@@ -137,6 +137,7 @@ const submitForm = () => {
 <style scoped>
 .contact-section {
   background: transparent;
+  scroll-margin-top: 24px;
 }
 
 .font-light {

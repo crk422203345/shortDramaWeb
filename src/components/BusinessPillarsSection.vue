@@ -38,7 +38,7 @@ const pillars = {
 </script>
 
 <template>
-  <section class="pillars-section section-padding">
+  <section id="business-mode" class="pillars-section section-padding">
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
@@ -147,6 +147,7 @@ const pillars = {
 .pillars-section {
   background: transparent;
   overflow: hidden;
+  scroll-margin-top: 24px;
 }
 
 .pillars-layout {

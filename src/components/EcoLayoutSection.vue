@@ -74,17 +74,17 @@ const tabLayout = [
 // The connector is a horizontal line that starts at center and rotates toward
 // the selected node, matching the browser coordinate system.
 const nodePositions = [
-  { top: '7.9%',  left: '50%',   transform: 'translate(-50%, -50%)', angle: -90  }, // top
-  { top: '29%',   left: '86.5%', transform: 'translate(-50%, -50%)', angle: -30  }, // top-right
-  { top: '71%',   left: '86.5%', transform: 'translate(-50%, -50%)', angle: 30   }, // bottom-right
-  { top: '92.1%', left: '50%',   transform: 'translate(-50%, -50%)', angle: 90   }, // bottom
-  { top: '71%',   left: '13.5%', transform: 'translate(-50%, -50%)', angle: 150  }, // bottom-left
-  { top: '29%',   left: '13.5%', transform: 'translate(-50%, -50%)', angle: -150 }, // top-left
+  { top: '7.9%', left: '50%', transform: 'translate(-50%, -50%)', angle: -90 }, // top
+  { top: '29%', left: '86.5%', transform: 'translate(-50%, -50%)', angle: -30 }, // top-right
+  { top: '71%', left: '86.5%', transform: 'translate(-50%, -50%)', angle: 30 }, // bottom-right
+  { top: '92.1%', left: '50%', transform: 'translate(-50%, -50%)', angle: 90 }, // bottom
+  { top: '71%', left: '13.5%', transform: 'translate(-50%, -50%)', angle: 150 }, // bottom-left
+  { top: '29%', left: '13.5%', transform: 'translate(-50%, -50%)', angle: -150 }, // top-left
 ] as const
 </script>
 
 <template>
-  <section class="eco-section section-padding">
+  <section id="eco-layout" class="eco-section section-padding">
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
@@ -113,16 +113,13 @@ const nodePositions = [
             <div class="orbit-ring outer-ring"></div>
             <div class="orbit-ring middle-ring"></div>
             <div class="orbit-ring inner-ring"></div>
-            
+
             <!-- Connection Line from Center to Active Node -->
-            <div 
-              class="active-connector"
-              :style="{
-                transform: `rotate(${nodePositions[activeTabData.nodeIndex].angle}deg)`,
-                color: orbitActiveColor,
-                boxShadow: `0 0 10px ${orbitActiveColor}`
-              }"
-            ></div>
+            <div class="active-connector" :style="{
+              transform: `rotate(${nodePositions[activeTabData.nodeIndex].angle}deg)`,
+              color: orbitActiveColor,
+              boxShadow: `0 0 10px ${orbitActiveColor}`
+            }"></div>
 
             <!-- Central Node: GGC / Web3 Platform Base -->
             <div class="central-base">
@@ -130,24 +127,20 @@ const nodePositions = [
               <div class="base-content">
                 <img src="/img/地球,地理,全球 (3).png" alt="全球平台底层" class="globe-icon" />
                 <span class="base-title">GGC / Web3</span>
-                <span class="base-desc">全球<br/>平台底层</span>
+                <span class="base-desc">全球<br />平台底层</span>
               </div>
             </div>
 
             <!-- 6 Nodes on Outer Ring -->
             <!-- 0: Chain Link node -->
-            <div 
-              class="outer-node node-0" 
-              :class="{ active: activeTabData.nodeIndex === 0 }"
-              :style="{ 
-                top: nodePositions[0].top, 
-                left: nodePositions[0].left, 
-                transform: nodePositions[0].transform 
-              }"
-              @click="activeTab = 'pos'"
-            >
+            <div class="outer-node node-0" :class="{ active: activeTabData.nodeIndex === 0 }" :style="{
+              top: nodePositions[0].top,
+              left: nodePositions[0].left,
+              transform: nodePositions[0].transform
+            }" @click="activeTab = 'pos'">
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                   <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                 </svg>
@@ -155,84 +148,60 @@ const nodePositions = [
             </div>
 
             <!-- 1: Lightning node -->
-            <div 
-              class="outer-node node-1" 
-              :class="{ active: activeTabData.nodeIndex === 1 }"
-              :style="{ 
-                top: nodePositions[1].top, 
-                left: nodePositions[1].left, 
-                transform: nodePositions[1].transform 
-              }"
-              @click="activeTab = 'iaa_iap'"
-            >
+            <div class="outer-node node-1" :class="{ active: activeTabData.nodeIndex === 1 }" :style="{
+              top: nodePositions[1].top,
+              left: nodePositions[1].left,
+              transform: nodePositions[1].transform
+            }" @click="activeTab = 'iaa_iap'">
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                 </svg>
               </div>
             </div>
 
             <!-- 2: Game node -->
-            <div 
-              class="outer-node node-2" 
-              :class="{ active: activeTabData.nodeIndex === 2 }"
-              :style="{ 
-                top: nodePositions[2].top, 
-                left: nodePositions[2].left, 
-                transform: nodePositions[2].transform 
-              }"
-              @click="activeTab = 'three_engines'"
-            >
+            <div class="outer-node node-2" :class="{ active: activeTabData.nodeIndex === 2 }" :style="{
+              top: nodePositions[2].top,
+              left: nodePositions[2].left,
+              transform: nodePositions[2].transform
+            }" @click="activeTab = 'three_engines'">
               <div class="node-circle">
-                <img src="/img/游戏 (11).png" alt="短剧+游戏+社交三轮驱动" class="node-icon-img" />
+                <img src="/img/游戏.svg" alt="短剧+游戏+社交三轮驱动" class="node-icon-img" />
               </div>
             </div>
 
             <!-- 3: Sync node -->
-            <div 
-              class="outer-node node-3" 
-              :class="{ active: activeTabData.nodeIndex === 3 }"
-              :style="{ 
-                top: nodePositions[3].top, 
-                left: nodePositions[3].left, 
-                transform: nodePositions[3].transform 
-              }"
-              @click="activeTab = 'eco_loop'"
-            >
+            <div class="outer-node node-3" :class="{ active: activeTabData.nodeIndex === 3 }" :style="{
+              top: nodePositions[3].top,
+              left: nodePositions[3].left,
+              transform: nodePositions[3].transform
+            }" @click="activeTab = 'eco_loop'">
               <div class="node-circle">
-                <img src="/img/闭环.png" alt="生态价值闭环" class="node-icon-img" />
+                <img src="/img/闭环.svg" alt="生态价值闭环" class="node-icon-img" />
               </div>
             </div>
 
             <!-- 4: Chat node -->
-            <div 
-              class="outer-node node-4" 
-              :class="{ active: activeTabData.nodeIndex === 4 }"
-              :style="{ 
-                top: nodePositions[4].top, 
-                left: nodePositions[4].left, 
-                transform: nodePositions[4].transform 
-              }"
-              @click="activeTab = 'wave_plan'"
-            >
+            <div class="outer-node node-4" :class="{ active: activeTabData.nodeIndex === 4 }" :style="{
+              top: nodePositions[4].top,
+              left: nodePositions[4].left,
+              transform: nodePositions[4].transform
+            }" @click="activeTab = 'wave_plan'">
               <div class="node-circle">
-                <img src="/img/浪高.png" alt="浪潮计划" class="node-icon-img" />
+                <img src="/img/浪高.svg" alt="浪潮计划" class="node-icon-img" />
               </div>
             </div>
 
             <!-- 5: Settings node -->
-            <div 
-              class="outer-node node-5" 
-              :class="{ active: activeTabData.nodeIndex === 5 }"
-              :style="{ 
-                top: nodePositions[5].top, 
-                left: nodePositions[5].left, 
-                transform: nodePositions[5].transform 
-              }"
-              @click="activeTab = 'beach_plan'"
-            >
+            <div class="outer-node node-5" :class="{ active: activeTabData.nodeIndex === 5 }" :style="{
+              top: nodePositions[5].top,
+              left: nodePositions[5].left,
+              transform: nodePositions[5].transform
+            }" @click="activeTab = 'beach_plan'">
               <div class="node-circle">
-                <img src="/img/计划.png" alt="沙滩计划" class="node-icon-img" />
+                <img src="/img/需用计划.svg" alt="沙滩计划" class="node-icon-img" />
               </div>
             </div>
 
@@ -243,13 +212,8 @@ const nodePositions = [
         <div class="eco-details-column">
           <!-- 6 Grid Tabs -->
           <div class="eco-tabs-grid">
-            <button
-              v-for="tabKey in tabLayout.flat()"
-              :key="tabKey"
-              class="eco-tab-card"
-              :class="{ active: activeTab === tabKey }"
-              @click="activeTab = tabKey"
-            >
+            <button v-for="tabKey in tabLayout.flat()" :key="tabKey" class="eco-tab-card"
+              :class="{ active: activeTab === tabKey }" @click="activeTab = tabKey">
               <span>{{ tabs[tabKey].tabLabel }}</span>
             </button>
           </div>
@@ -276,6 +240,7 @@ const nodePositions = [
 .eco-section {
   background: transparent;
   overflow: hidden;
+  scroll-margin-top: 24px;
 }
 
 .mid-title-wrap {
@@ -447,14 +412,19 @@ const nodePositions = [
   max-height: 24px;
   display: block;
   object-fit: contain;
+  transition: filter 0.3s ease;
 }
 
 .outer-node.active .node-circle {
   background: #07A8FF;
   border-color: #07A8FF;
-  color: #0b091a;
+  color: #0B091A;
   box-shadow: 0 0 20px rgba(7, 168, 255, 0.6);
   transform: scale(1.1);
+}
+
+.outer-node.active .node-icon-img {
+  filter: brightness(0) saturate(100%) invert(4%) sepia(34%) saturate(2535%) hue-rotate(223deg) brightness(91%) contrast(99%);
 }
 
 .outer-node:hover .node-circle {
@@ -488,7 +458,7 @@ const nodePositions = [
   letter-spacing: 0;
   transition: all 0.3s ease;
   clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
-  box-shadow: inset 0 0 0 2px rgba(90, 84, 176, 0.76), 0 10px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 0 0 2px #514AA0, 0 10px 18px rgba(0, 0, 0, 0.18);
   overflow: hidden;
   cursor: pointer;
 }
@@ -514,17 +484,17 @@ const nodePositions = [
 
 .eco-tab-card:hover {
   color: rgba(0, 240, 255, 0.85);
-  box-shadow: inset 0 0 0 2px rgba(0, 240, 255, 0.72), 0 12px 22px rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 0 0 2px #514AA0, 0 12px 22px rgba(0, 0, 0, 0.22);
 }
 
 .eco-tab-card.active {
-  background: linear-gradient(90deg, #00c8ff 0%, #00a9ff 100%);
-  color: #030729;
+  background: url('/img/底框.png') center / 100% 100% no-repeat;
+  color: #092559;
   box-shadow: 0 0 22px rgba(0, 200, 255, 0.26);
 }
 
 .eco-tab-card.active::before {
-  opacity: 0.48;
+  opacity: 0;
 }
 
 .eco-detail-box {
@@ -567,13 +537,16 @@ const nodePositions = [
 .fade-eco-enter-active {
   transition: all 0.3s ease-out;
 }
+
 .fade-eco-leave-active {
   transition: all 0.2s ease-in;
 }
+
 .fade-eco-enter-from {
   opacity: 0;
   transform: translateY(10px);
 }
+
 .fade-eco-leave-to {
   opacity: 0;
   transform: translateY(-10px);
@@ -588,6 +561,7 @@ const nodePositions = [
 }
 
 @media (max-width: 768px) {
+
   .mid-title-primary,
   .mid-title-secondary {
     font-size: 1.75rem;
@@ -600,18 +574,23 @@ const nodePositions = [
     gap: 12px;
     margin-bottom: 32px;
   }
+
   .eco-tab-card {
     min-height: 48px;
   }
+
   .eco-detail-box {
     padding: 40px 28px;
   }
+
   .eco-detail-title {
     font-size: 1.8rem;
   }
+
   .eco-detail-subtitle {
     font-size: 1.05rem;
   }
+
   .eco-detail-desc {
     font-size: 0.92rem;
   }
@@ -622,32 +601,40 @@ const nodePositions = [
     width: 320px;
     height: 320px;
   }
+
   .outer-ring {
     width: 260px;
     height: 260px;
   }
+
   .inner-ring {
     width: 120px;
     height: 120px;
   }
+
   .central-base {
     width: 105px;
     height: 105px;
   }
+
   .base-title {
     font-size: 0.65rem;
   }
+
   .base-desc {
     font-size: 0.6rem;
   }
+
   .node-circle {
     width: 38px;
     height: 38px;
   }
+
   .node-icon-img {
     max-width: 21px;
     max-height: 21px;
   }
+
   /* Dotted line height shrink */
   .active-connector {
     width: 130px;

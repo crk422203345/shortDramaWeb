@@ -2,7 +2,12 @@
 import { ref } from 'vue'
 
 const activeItem = ref('首页')
-const menuItems = ['首页', '业务模式', '生态布局', '联系我们']
+const menuItems = [
+  { label: '首页', href: '#home' },
+  { label: '业务模式', href: '#business-mode' },
+  { label: '生态布局', href: '#eco-layout' },
+  { label: '联系我们', href: '#contact' },
+]
 const showLanguageDropdown = ref(false)
 const selectedLanguage = ref('简体中文')
 const languages = ['简体中文', 'English', '繁體中文']
@@ -26,11 +31,10 @@ const selectLanguage = (lang: string) => {
         <ul>
           <li 
             v-for="item in menuItems" 
-            :key="item" 
-            :class="{ active: activeItem === item }"
-            @click="activeItem = item"
+            :key="item.label" 
+            :class="{ active: activeItem === item.label }"
           >
-            <a href="javascript:void(0)">{{ item }}</a>
+            <a :href="item.href" @click="activeItem = item.label">{{ item.label }}</a>
           </li>
         </ul>
       </nav>
