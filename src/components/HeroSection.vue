@@ -2,19 +2,13 @@
   <section id="home" class="hero-section">
     <!-- Hero Background Video with Overlay -->
     <div class="hero-bg">
-      <video
-        class="hero-video"
-        src="https://game.igcdn.cn/Ggame/videos/video1.94041431.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        poster="/images/hero_bg.png"
-      ></video>
+      <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <!-- <source src="https://game.igcdn.cn/Ggame/videos/video1.94041431.mp4" type="video/mp4" /> -->
+        <source src="https://www.bingo.vip/ad3.mp4" type="video/mp4" />
+      </video>
       <div class="hero-overlay"></div>
     </div>
-    
+
     <!-- Hero Content -->
     <div class="hero-content container">
       <div class="hero-title-wrap">
@@ -67,17 +61,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* Dark overlay to match mockup. Vignette and bottom gradient */
+  /* Dark overlay to match mockup. Vignette and bottom gradient.
+     Bottom stop aligns with the page background (#1c1f54) so the video
+     fades seamlessly into the content below instead of a hard seam. */
   background: linear-gradient(
-    180deg,
-    rgba(8, 6, 23, 0.4) 0%,
-    rgba(8, 6, 23, 0.2) 60%,
-    rgba(11, 9, 26, 1) 100%
-  ), radial-gradient(
-    circle at center,
-    rgba(11, 9, 26, 0.1) 0%,
-    rgba(8, 6, 23, 0.7) 100%
-  );
+      180deg,
+      rgba(8, 6, 23, 0.4) 0%,
+      rgba(8, 6, 23, 0.2) 55%,
+      rgba(28, 31, 84, 1) 100%
+    ),
+    radial-gradient(circle at center, rgba(11, 9, 26, 0.1) 0%, rgba(8, 6, 23, 0.7) 100%);
 }
 
 .hero-content {
@@ -103,11 +96,11 @@
   gap: 16px;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(79, 70, 229, 0.2);
   line-height: 1.1;
+  font-family: 'Source Han Sans CN', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans', 'Microsoft YaHei', sans-serif;
 }
 
 .italic-text {
   font-style: italic;
-  font-family: Georgia, 'Playfair Display', serif;
   letter-spacing: -2px;
 }
 
@@ -126,7 +119,8 @@
   font-style: italic;
   color: #ffffff;
   letter-spacing: 12px;
-  text-indent: 12px; /* balance centering due to letter-spacing */
+  text-indent: 12px;
+  /* balance centering due to letter-spacing */
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   opacity: 0.95;
   margin-top: 8px;
@@ -137,6 +131,7 @@
   0% {
     transform: scale(1.02) translateY(0);
   }
+
   100% {
     transform: scale(1.08) translateY(-10px);
   }
@@ -148,9 +143,11 @@
     font-size: 3.5rem;
     gap: 8px;
   }
+
   .cross {
     font-size: 2.5rem;
   }
+
   .hero-subtitle {
     font-size: 1.25rem;
     letter-spacing: 6px;
@@ -162,6 +159,7 @@
   .hero-title {
     font-size: 2.75rem;
   }
+
   .hero-subtitle {
     font-size: 1rem;
     letter-spacing: 4px;

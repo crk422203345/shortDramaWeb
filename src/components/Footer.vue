@@ -13,18 +13,15 @@
         <div class="footer-column">
           <h4>关注我们</h4>
           <ul>
-            <li><a href="javascript:void(0)">WebX 官网</a></li>
-            <li><a href="javascript:void(0)">短剧平台</a></li>
-            <li><a href="javascript:void(0)">小游戏平台</a></li>
-            <li><a href="javascript:void(0)">UGC 社交平台</a></li>
+            <li><a href="https://webx.ai/" target="_blank" rel="noopener noreferrer">WebX 官网</a></li>
+            <li><a href="https://tv.bingo.vip/#/" target="_blank" rel="noopener noreferrer">短剧平台</a></li>
+            <li><a href="https://g.bingo.vip/#/front-page/recommendgame?key=XC9RdtCC" target="_blank" rel="noopener noreferrer">小游戏平台</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>法律信息</h4>
           <ul>
-            <li><a href="javascript:void(0)">法律条款</a></li>
             <li><a href="javascript:void(0)">隐私政策</a></li>
-            <li><a href="javascript:void(0)">媒体资源</a></li>
           </ul>
         </div>
       </div>

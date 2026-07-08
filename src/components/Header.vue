@@ -1,21 +1,119 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 const activeItem = ref('首页')
 const menuItems = [
   { label: '首页', href: '#home' },
   { label: '业务模式', href: '#business-mode' },
   { label: '生态布局', href: '#eco-layout' },
-  { label: '联系我们', href: '#contact' },
 ]
+
+/* Language dropdown */
 const showLanguageDropdown = ref(false)
 const selectedLanguage = ref('简体中文')
 const languages = ['简体中文', 'English', '繁體中文']
+let langTimer: any = null
 
 const selectLanguage = (lang: string) => {
   selectedLanguage.value = lang
   showLanguageDropdown.value = false
 }
+
+const openLanguageDropdown = () => {
+  if (langTimer) clearTimeout(langTimer)
+  showLanguageDropdown.value = true
+}
+
+const closeLanguageDropdown = () => {
+  if (langTimer) clearTimeout(langTimer)
+  langTimer = setTimeout(() => {
+    showLanguageDropdown.value = false
+  }, 350) // 350ms delay to prevent accidental mouseleave closes
+}
+
+/* Contact dropdown */
+const router = useRouter()
+const showContactDropdown = ref(false)
+let contactTimer: any = null
+
+const toggleContactDropdown = () => {
+  if (contactTimer) clearTimeout(contactTimer)
+  showContactDropdown.value = !showContactDropdown.value
+}
+
+const openContactDropdown = () => {
+  if (contactTimer) clearTimeout(contactTimer)
+  showContactDropdown.value = true
+}
+
+const closeContactDropdown = () => {
+  if (contactTimer) clearTimeout(contactTimer)
+  contactTimer = setTimeout(() => {
+    showContactDropdown.value = false
+  }, 350) // 350ms delay
+}
+
+// Go to the contact form at the bottom of the home page.
+const goToContact = () => {
+  showContactDropdown.value = false
+  activeItem.value = '联系我们'
+  if (router.currentRoute.value.path === '/') {
+    const el = document.getElementById('contact')
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+      return
+    }
+  }
+  router.push({ path: '/', hash: '#contact' })
+}
+
+const goToJoin = () => {
+  showContactDropdown.value = false
+  activeItem.value = '联系我们'
+  router.push('/join')
+}
+
+/* More menu dropdown */
+const showMoreDropdown = ref(false)
+let moreTimer: any = null
+
+const openMoreDropdown = () => {
+  if (moreTimer) clearTimeout(moreTimer)
+  showMoreDropdown.value = true
+}
+
+const closeMoreDropdown = () => {
+  if (moreTimer) clearTimeout(moreTimer)
+  moreTimer = setTimeout(() => {
+    showMoreDropdown.value = false
+  }, 350)
+}
+
+// Global click outside to close dropdowns
+const handleClickOutside = (event: MouseEvent) => {
+  const target = event.target as HTMLElement
+  if (!target.closest('.has-dropdown')) {
+    showContactDropdown.value = false
+  }
+  if (!target.closest('.lang-selector')) {
+    showLanguageDropdown.value = false
+  }
+  if (!target.closest('.more-menu-container')) {
+    showMoreDropdown.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+  if (langTimer) clearTimeout(langTimer)
+  if (contactTimer) clearTimeout(contactTimer)
+  if (moreTimer) clearTimeout(moreTimer)
+})
 </script>
 
 <template>
@@ -29,12 +127,40 @@ const selectLanguage = (lang: string) => {
       <!-- Navigation Menu -->
       <nav class="nav-menu">
         <ul>
-          <li 
-            v-for="item in menuItems" 
-            :key="item.label" 
+          <li
+            v-for="item in menuItems"
+            :key="item.label"
             :class="{ active: activeItem === item.label }"
           >
             <a :href="item.href" @click="activeItem = item.label">{{ item.label }}</a>
+          </li>
+
+          <!-- Contact with dropdown -->
+          <li
+            class="has-dropdown"
+            :class="{ active: activeItem === '联系我们' }"
+            @mouseenter="openContactDropdown"
+            @mouseleave="closeContactDropdown"
+          >
+            <a
+              href="javascript:void(0)"
+              role="button"
+              @click="toggleContactDropdown"
+            >
+              联系我们
+              <svg class="caret" :class="{ rotated: showContactDropdown }" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+
+            <transition name="fade">
+              <div v-if="showContactDropdown" class="contact-dropdown">
+                <div class="contact-dropdown-inner">
+                  <div class="dropdown-item" @click="goToContact">洽谈合作</div>
+                  <div class="dropdown-item" @click="goToJoin">加入我们</div>
+                </div>
+              </div>
+            </transition>
           </li>
         </ul>
       </nav>
@@ -42,7 +168,11 @@ const selectLanguage = (lang: string) => {
       <!-- Right Actions (Language & Extras) -->
       <div class="header-actions">
         <!-- Language Selector -->
-        <div class="lang-selector" @mouseleave="showLanguageDropdown = false">
+        <div 
+          class="lang-selector" 
+          @mouseenter="openLanguageDropdown"
+          @mouseleave="closeLanguageDropdown"
+        >
           <button class="lang-btn" @click="showLanguageDropdown = !showLanguageDropdown">
             <!-- Globe Icon SVG -->
             <svg class="icon-globe" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -52,7 +182,7 @@ const selectLanguage = (lang: string) => {
             </svg>
             <span>{{ selectedLanguage }}</span>
             <!-- Down Arrow Icon -->
-            <svg class="icon-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="icon-arrow" :class="{ rotated: showLanguageDropdown }" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </button>
@@ -60,28 +190,47 @@ const selectLanguage = (lang: string) => {
           <!-- Dropdown items -->
           <transition name="fade">
             <div v-if="showLanguageDropdown" class="lang-dropdown">
-              <div 
-                v-for="lang in languages" 
-                :key="lang" 
-                class="dropdown-item"
-                :class="{ active: lang === selectedLanguage }"
-                @click="selectLanguage(lang)"
-              >
-                {{ lang }}
+              <div class="lang-dropdown-inner">
+                <div 
+                  v-for="lang in languages" 
+                  :key="lang" 
+                  class="dropdown-item"
+                  :class="{ active: lang === selectedLanguage }"
+                  @click="selectLanguage(lang)"
+                >
+                  {{ lang }}
+                </div>
               </div>
             </div>
           </transition>
         </div>
 
         <!-- 3 Dots Menu Button -->
-        <button class="more-btn" aria-label="More Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/>
-            <circle cx="8" cy="12" r="1" fill="currentColor"/>
-            <circle cx="12" cy="12" r="1" fill="currentColor"/>
-            <circle cx="16" cy="12" r="1" fill="currentColor"/>
-          </svg>
-        </button>
+        <div 
+          class="more-menu-container"
+          @mouseenter="openMoreDropdown"
+          @mouseleave="closeMoreDropdown"
+        >
+          <button class="more-btn" aria-label="More Menu" @click="showMoreDropdown = !showMoreDropdown">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/>
+              <circle cx="8" cy="12" r="1" fill="currentColor"/>
+              <circle cx="12" cy="12" r="1" fill="currentColor"/>
+              <circle cx="16" cy="12" r="1" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <!-- Dropdown items -->
+          <transition name="fade">
+            <div v-if="showMoreDropdown" class="more-dropdown">
+              <div class="more-dropdown-inner">
+                <a href="https://webx.ai/" target="_blank" class="dropdown-item" @click="showMoreDropdown = false">
+                  WebX 官网
+                </a>
+              </div>
+            </div>
+          </transition>
+        </div>
       </div>
     </div>
   </header>
@@ -195,6 +344,7 @@ const selectLanguage = (lang: string) => {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.85);
   transition: var(--transition-normal);
+  cursor: pointer;
 }
 
 .lang-btn:hover {
@@ -212,21 +362,25 @@ const selectLanguage = (lang: string) => {
   transition: transform 0.3s ease;
 }
 
-.lang-btn:focus .icon-arrow {
+.icon-arrow.rotated {
   transform: rotate(180deg);
 }
 
 .lang-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: 100%;
   right: 0;
   width: 130px;
+  padding-top: 8px; /* bridges the gap so mouse pointer stays in hover area */
+  z-index: 101;
+}
+
+.lang-dropdown-inner {
   background: #0f0d22;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  z-index: 101;
 }
 
 .dropdown-item {
@@ -248,6 +402,20 @@ const selectLanguage = (lang: string) => {
   font-weight: 500;
 }
 
+/* Specific active/hover style for language selector items */
+.lang-dropdown-inner .dropdown-item:hover,
+.lang-dropdown-inner .dropdown-item.active {
+  background: #1B192D;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.more-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .more-btn {
   display: flex;
   align-items: center;
@@ -255,11 +423,86 @@ const selectLanguage = (lang: string) => {
   color: rgba(255, 255, 255, 0.7);
   transition: var(--transition-normal);
   padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .more-btn:hover {
   color: #ffffff;
   transform: scale(1.05);
+}
+
+.more-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 140px;
+  padding-top: 8px; /* gap bridge */
+  z-index: 101;
+}
+
+.more-dropdown-inner {
+  background: #0f0d22;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.more-dropdown-inner .dropdown-item {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+  transition: var(--transition-normal);
+}
+
+.more-dropdown-inner .dropdown-item:hover {
+  background: #1B192D;
+  color: #ffffff;
+}
+
+/* Contact dropdown */
+.has-dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.caret {
+  opacity: 0.5;
+  transition: transform 0.3s ease;
+}
+
+.caret.rotated {
+  transform: rotate(180deg);
+}
+
+.has-dropdown .contact-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 140px;
+  padding-top: 8px; /* bridges the gap so mouse pointer stays in hover area */
+  z-index: 101;
+}
+
+.contact-dropdown-inner {
+  background: #0f0d22;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.has-dropdown .contact-dropdown .dropdown-item {
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  text-align: center;
 }
 
 /* Animations */

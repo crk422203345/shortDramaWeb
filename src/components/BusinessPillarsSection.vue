@@ -9,7 +9,7 @@ const pillars = {
     label: '小游戏',
     title: '小游戏：1分钟上手 轻松共享生态红利',
     description: '高粘度超休闲小游戏，将碎片化娱乐时间转化为生态积分权益产出。结合GGC底层链，让游戏所有权还给生态共建者。',
-    img: '/images/pillar_game.png',
+    img: '/img/小游戏.png',
     subBrand: 'OLÉ GAME',
     color: '#00f0ff', // cyan
     filter: 'hue-rotate(0deg)'
@@ -19,7 +19,7 @@ const pillars = {
     label: '短剧',
     title: '短剧：精品竖屏 极低门槛看剧赚积分',
     description: '精品内容库，低消费无感观看，刷剧享受生态红利，结合实时多模态 AI，打通跨国流量与高效增值通道。',
-    img: '/images/pillar_game.png',
+    img: '/img/小游戏.png',
     subBrand: 'OHO DRAMA',
     color: '#ec4899', // pink
     filter: 'hue-rotate(300deg) saturate(1.2)'
@@ -29,7 +29,7 @@ const pillars = {
     label: '社交生态',
     title: 'UGC & 数字游民社区',
     description: '构建新型的全球化社区与价值网络。',
-    img: '/images/pillar_game.png',
+    img: '/img/小游戏.png',
     subBrand: 'BINGO SOCIAL',
     color: '#8b5cf6', // purple
     filter: 'hue-rotate(240deg) brightness(0.9)'
@@ -42,7 +42,7 @@ const pillars = {
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Product</span>
+        <span class="bg-text">Business</span>
         <div class="title-wrap">
           <h2>三大核心业务支柱</h2>
           <div class="divider-line"></div>
@@ -513,6 +513,7 @@ const pillars = {
   overflow: hidden;
   height: 100%;
   border-radius: 24px;
+  background-color: #0F0F31 !important;
 }
 
 .banner-wrapper {

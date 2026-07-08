@@ -5,9 +5,9 @@ const activeIndex = ref(2) // Card 3 (index 2) is active by default
 
 const cards = [
   { id: 1, name: '苍穹神女', img: '/img/1(1).png' },
-  { id: 2, name: '琉璃仙子', img: '/img/2(1).png' },
+  { id: 2, name: '凌风剑客', img: '/img/2(1).png' },
   { id: 3, name: '九天玄女', img: '/img/3(1).png' },
-  { id: 4, name: '凌风剑客', img: '/img/4(1).png' },
+  { id: 4, name: '琉璃仙子', img: '/img/4(1).png' },
   { id: 5, name: '幽冥圣女', img: '/img/5.png' }
 ]
 </script>
@@ -26,13 +26,8 @@ const cards = [
 
       <!-- Character Cards Container -->
       <div class="cards-container">
-        <div 
-          v-for="(card, index) in cards" 
-          :key="card.id" 
-          class="character-card"
-          :class="{ active: activeIndex === index }"
-          @mouseenter="activeIndex = index"
-        >
+        <div v-for="(card, index) in cards" :key="card.id" class="character-card"
+          :class="{ active: activeIndex === index }" @mouseenter="activeIndex = index">
           <div class="card-inner">
             <img :src="card.img" :alt="card.name" class="character-img" />
             <div class="card-overlay">
@@ -104,12 +99,10 @@ const cards = [
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to top,
-    rgba(15, 13, 43, 0.95) 0%,
-    rgba(15, 13, 43, 0.4) 40%,
-    rgba(15, 13, 43, 0) 100%
-  );
+  background: linear-gradient(to top,
+      rgba(15, 13, 43, 0.95) 0%,
+      rgba(15, 13, 43, 0.4) 40%,
+      rgba(15, 13, 43, 0) 100%);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -214,14 +207,14 @@ const cards = [
     flex-wrap: wrap;
     align-items: stretch;
   }
-  
+
   .character-card {
     flex: none;
     width: calc(33.33% - 14px);
     height: 320px;
     max-width: none;
   }
-  
+
   .character-card.active {
     flex: none;
     width: calc(33.33% - 14px);
@@ -231,26 +224,29 @@ const cards = [
 }
 
 @media (max-width: 640px) {
-  .character-card, 
+
+  .character-card,
   .character-card.active {
     width: calc(50% - 10px);
     height: 280px;
   }
-  
+
   .cta-buttons {
     flex-direction: column;
     align-items: center;
     gap: 16px;
   }
-  
-  .btn-purple, .btn-outline-purple {
+
+  .btn-purple,
+  .btn-outline-purple {
     width: 100%;
     max-width: 280px;
   }
 }
 
 @media (max-width: 400px) {
-  .character-card, 
+
+  .character-card,
   .character-card.active {
     width: 100%;
     height: 300px;

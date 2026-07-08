@@ -88,7 +88,7 @@ const nodePositions = [
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Product</span>
+        <span class="bg-text">Layout</span>
         <div class="title-wrap">
           <h2>生态布局</h2>
           <div class="divider-line"></div>

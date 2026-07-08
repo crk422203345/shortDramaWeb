@@ -61,7 +61,7 @@ const submitForm = () => {
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Product</span>
+        <span class="bg-text">Contact</span>
         <div class="title-wrap">
           <h2>联系我们</h2>
           <div class="divider-line"></div>

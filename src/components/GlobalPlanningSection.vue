@@ -12,7 +12,7 @@ const regions = {
     title: '全球覆盖：强大的研发实力 & 出海产品源泉',
     description: '大中华区是Bingo文娱最坚实的技术后方。自研的核心小游戏引擎、高动态AI多语种音色克隆模型和实时同声传译算法均在此沉淀研发，为全球数十个出海国家提供源源不断的创新科技助力。',
     alertBox: '依托成熟的数字文创供应链与极佳的工程师红利，全天候保障全球服务器的高性能、低损耗流转。',
-    img: '/images/global_china.png'
+    img: '/img/dalu.png'
   },
   hk: {
     id: 'hk',
@@ -21,7 +21,7 @@ const regions = {
     title: '全球覆盖：持牌基金支持 & 国际资本汇聚地',
     description: '作为最理想的Web3合规港湾，香港为Bingo文娱提供了完备的虚拟资产牌照框架、持牌托管基金、及全球化跨国出海通道。',
     alertBox: '在这里，我们与多方内容及法律合规合伙人深度结合，筑牢资金流通与资产确权基石，全力推进通证生态安全建设。',
-    img: '/images/global_china.png'
+    img: '/img/dalu.png'
   },
   malaysia: {
     id: 'malaysia',
@@ -30,7 +30,7 @@ const regions = {
     title: '全球覆盖：10万名数字内容创客孵化地',
     description: '依托“沙滩计划”与“浪潮计划”，马来西亚是Bingo文娱内容二创的最强前沿。汇聚数万名高素质跨语种短视频剪辑达人和数字游民，通过多模态AI工具实现裂变式本地宣发。',
     alertBox: '深度整合本地创意资源与流媒体推广联盟，打造高效合规的一人公司(OPC)分发变现闭环。',
-    img: '/images/global_china.png'
+    img: '/img/dalu.png'
   },
   sea: {
     id: 'sea',
@@ -39,7 +39,7 @@ const regions = {
     title: '全球覆盖：6.8亿 增量数字娱乐用户',
     description: '东南亚具有极高频的数字娱乐及超休闲游戏交互习惯。Bingo文娱通过“看剧/玩游戏享生态红利”的超低门槛、即点即玩模式快速席卷多国应用商店下载排行。',
     alertBox: '结合东南亚本地电子钱包（Touch \'n Go、GrabPay等），实现零延迟、超轻量的小额收益即时分发，裂变系数高达2.5倍。',
-    img: '/images/global_china.png'
+    img: '/img/dalu.png'
   }
 }
 
@@ -91,7 +91,7 @@ onMounted(() => {
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Product</span>
+        <span class="bg-text">Planning</span>
         <div class="title-wrap">
           <h2>全球化规划</h2>
           <div class="divider-line"></div>
@@ -180,7 +180,7 @@ onMounted(() => {
 
 .tabs-capsule {
   display: inline-flex;
-  background: rgba(255, 255, 255, 0.02);
+  background: #160940;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 9999px;
   padding: 4px;
@@ -195,7 +195,7 @@ onMounted(() => {
   top: 4px;
   bottom: 4px;
   left: 0;
-  background: #362E9B;
+  background: #382189;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   border-radius: 9999px;
@@ -242,6 +242,8 @@ onMounted(() => {
   padding: 48px;
   min-height: 380px;
   align-items: center;
+  background: linear-gradient(135deg, #020626 0%, #370D69 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .region-info {

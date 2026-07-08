@@ -15,6 +15,10 @@ export default defineConfig({
   define: {
     __API_BASE_URL__: JSON.stringify(apiBaseUrl),
   },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

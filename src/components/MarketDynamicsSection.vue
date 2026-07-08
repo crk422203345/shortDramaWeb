@@ -3,7 +3,7 @@
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Product</span>
+        <span class="bg-text">Market</span>
         <div class="title-wrap">
           <h2>市场痛点与机遇</h2>
           <div class="divider-line"></div>
@@ -144,8 +144,8 @@
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 4px;
-  color: #ffffff;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  color: #B4EFFE;
+  text-shadow: 0 0 15px rgba(180, 239, 254, 0.25);
 }
 
 /* Pain Points Layout */
@@ -162,6 +162,7 @@
   display: flex;
   align-items: center;
   padding: 30px;
+  background-color: #131546;
 }
 
 .pattern-bg {
@@ -179,7 +180,7 @@
 .pain-card h3 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #B4EFFE;
   margin-bottom: 12px;
   letter-spacing: 0.5px;
 }
