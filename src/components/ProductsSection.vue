@@ -4,11 +4,36 @@ import { ref } from 'vue'
 const activeIndex = ref(2) // Card 3 (index 2) is active by default
 
 const cards = [
-  { id: 1, name: '苍穹神女', img: '/img/1(1).png' },
-  { id: 2, name: '凌风剑客', img: '/img/2(1).png' },
-  { id: 3, name: '九天玄女', img: '/img/3(1).png' },
-  { id: 4, name: '琉璃仙子', img: '/img/4(1).png' },
-  { id: 5, name: '幽冥圣女', img: '/img/5.png' }
+  {
+    id: 1,
+    name: '隐秘的荣耀',
+    img: '/img/短剧1.png',
+    link: 'https://tv.bingo.vip/#/me/detail/detail?id=1259&courseDetailsId=68205',
+  },
+  {
+    id: 2,
+    name: '醉红楼',
+    img: '/img/4(1).png',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=28&edition=0&key=XC9RdtCC',
+  },
+  {
+    id: 3,
+    name: '魔物迷宫',
+    img: '/img/5.png',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=8&edition=0&key=XC9RdtCC',
+  },
+  {
+    id: 4,
+    name: '仙剑缘',
+    img: '/img/2(1).png',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=3&edition=0&key=XC9RdtCC',
+  },
+  {
+    id: 5,
+    name: '甜蜜约会',
+    img: '/img/短剧2.png',
+    link: 'https://tv.bingo.vip/#/me/detail/detail?id=1253&courseDetailsId=67803',
+  },
 ]
 
 const scrollToSection = (id: string) => {
@@ -18,6 +43,10 @@ const scrollToSection = (id: string) => {
     const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
     window.scrollTo({ top: y, behavior: 'smooth' })
   }
+}
+
+const openLink = (url: string) => {
+  if (url) window.open(url, '_blank', 'noopener,noreferrer')
 }
 </script>
 
@@ -35,15 +64,21 @@ const scrollToSection = (id: string) => {
 
       <!-- Character Cards Container -->
       <div class="cards-container">
-        <div v-for="(card, index) in cards" :key="card.id" class="character-card"
-          :class="{ active: activeIndex === index }" @mouseenter="activeIndex = index">
+        <div
+          v-for="(card, index) in cards"
+          :key="card.id"
+          class="character-card"
+          :class="{ active: activeIndex === index, 'has-link': card.link }"
+          @mouseenter="activeIndex = index"
+          @click="openLink(card.link)"
+        >
           <div class="card-inner">
             <img :src="card.img" :alt="card.name" class="character-img" />
             <div class="card-overlay">
               <div class="card-info">
                 <span class="card-title">{{ card.name }}</span>
                 <div class="divider"></div>
-                <span class="learn-more">了解更多 &gt;</span>
+                <span class="learn-more">{{ card.link ? '立即体验 >' : '了解更多 >' }}</span>
               </div>
             </div>
           </div>
@@ -52,8 +87,12 @@ const scrollToSection = (id: string) => {
 
       <!-- CTA Buttons -->
       <div class="cta-buttons">
-        <button class="btn btn-primary btn-purple" @click="scrollToSection('business-mode')">了解我们</button>
-        <button class="btn btn-secondary btn-outline-purple" @click="scrollToSection('contact')">浅谈合作</button>
+        <button class="btn btn-primary btn-purple" @click="scrollToSection('business-mode')">
+          了解我们
+        </button>
+        <button class="btn btn-secondary btn-outline-purple" @click="scrollToSection('contact')">
+          浅谈合作
+        </button>
       </div>
     </div>
   </section>
@@ -89,6 +128,15 @@ const scrollToSection = (id: string) => {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.character-card.has-link {
+  border-color: rgba(0, 240, 255, 0.15);
+}
+
+.character-card.has-link:hover {
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
 .card-inner {
   width: 100%;
   height: 100%;
@@ -108,10 +156,12 @@ const scrollToSection = (id: string) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top,
-      rgba(15, 13, 43, 0.95) 0%,
-      rgba(15, 13, 43, 0.4) 40%,
-      rgba(15, 13, 43, 0) 100%);
+  background: linear-gradient(
+    to top,
+    rgba(15, 13, 43, 0.95) 0%,
+    rgba(15, 13, 43, 0.4) 40%,
+    rgba(15, 13, 43, 0) 100%
+  );
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -233,7 +283,6 @@ const scrollToSection = (id: string) => {
 }
 
 @media (max-width: 640px) {
-
   .character-card,
   .character-card.active {
     width: calc(50% - 10px);
@@ -254,7 +303,6 @@ const scrollToSection = (id: string) => {
 }
 
 @media (max-width: 400px) {
-
   .character-card,
   .character-card.active {
     width: 100%;
