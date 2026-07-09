@@ -143,6 +143,55 @@ const toggleExpand = (id: number) => {
 }
 
 const isExpanded = (id: number) => expandedJobIds.value.includes(id)
+
+// Smooth height transition hooks
+const beforeEnter = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.height = '0'
+  htmlEl.style.opacity = '0'
+  htmlEl.style.overflow = 'hidden'
+}
+
+const enter = (el: Element, done: () => void) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.offsetHeight // force reflow
+  htmlEl.style.transition = 'height 0.45s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.45s ease'
+  htmlEl.style.height = htmlEl.scrollHeight + 'px'
+  htmlEl.style.opacity = '1'
+  setTimeout(done, 450)
+}
+
+const afterEnter = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.height = ''
+  htmlEl.style.opacity = ''
+  htmlEl.style.transition = ''
+  htmlEl.style.overflow = ''
+}
+
+const beforeLeave = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.height = htmlEl.scrollHeight + 'px'
+  htmlEl.style.opacity = '1'
+  htmlEl.style.overflow = 'hidden'
+}
+
+const leave = (el: Element, done: () => void) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.offsetHeight // force reflow
+  htmlEl.style.transition = 'height 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.35s ease'
+  htmlEl.style.height = '0'
+  htmlEl.style.opacity = '0'
+  setTimeout(done, 350)
+}
+
+const afterLeave = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.height = ''
+  htmlEl.style.opacity = ''
+  htmlEl.style.transition = ''
+  htmlEl.style.overflow = ''
+}
 </script>
 
 <template>
@@ -208,7 +257,15 @@ const isExpanded = (id: number) => expandedJobIds.value.includes(id)
             </div>
 
             <!-- Expanded Details -->
-            <transition name="expand-fade">
+            <transition 
+              name="expand-fade"
+              @before-enter="beforeEnter"
+              @enter="enter"
+              @after-enter="afterEnter"
+              @before-leave="beforeLeave"
+              @leave="leave"
+              @after-leave="afterLeave"
+            >
               <div v-if="isExpanded(job.id)" class="job-details">
                 <div class="job-divider"></div>
                 
@@ -512,25 +569,7 @@ const isExpanded = (id: number) => expandedJobIds.value.includes(id)
   opacity: 0.8;
 }
 
-/* Transitions */
-.expand-fade-enter-active {
-  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-  max-height: 1000px;
-  overflow: hidden;
-}
-
-.expand-fade-leave-active {
-  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-  max-height: 1000px;
-  overflow: hidden;
-}
-
-.expand-fade-enter-from,
-.expand-fade-leave-to {
-  opacity: 0;
-  max-height: 0 !important;
-  transform: translateY(-10px);
-}
+/* Transitions (Chevron rotation transition remains in style) */
 
 /* Responsive */
 @media (max-width: 1024px) {
