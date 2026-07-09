@@ -435,6 +435,7 @@ const nodePositions = [
 /* Right Details Column */
 .eco-details-column {
   width: 100%;
+  overflow: hidden;
 }
 
 .eco-tabs-grid {
@@ -598,46 +599,20 @@ const nodePositions = [
 
 @media (max-width: 520px) {
   .eco-orbit-system {
-    width: 320px;
-    height: 320px;
+    transform: scale(0.8);
+    transform-origin: center;
+    margin: -30px 0;
   }
-
-  .outer-ring {
-    width: 260px;
-    height: 260px;
+  .eco-detail-box {
+    padding: 24px 16px;
   }
+}
 
-  .inner-ring {
-    width: 120px;
-    height: 120px;
-  }
-
-  .central-base {
-    width: 105px;
-    height: 105px;
-  }
-
-  .base-title {
-    font-size: 0.65rem;
-  }
-
-  .base-desc {
-    font-size: 0.6rem;
-  }
-
-  .node-circle {
-    width: 38px;
-    height: 38px;
-  }
-
-  .node-icon-img {
-    max-width: 21px;
-    max-height: 21px;
-  }
-
-  /* Dotted line height shrink */
-  .active-connector {
-    width: 130px;
+@media (max-width: 380px) {
+  .eco-orbit-system {
+    transform: scale(0.68);
+    transform-origin: center;
+    margin: -50px 0;
   }
 }
 </style>

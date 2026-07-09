@@ -699,6 +699,8 @@ onUnmounted(() => {
 }
 
 .drawer-nav li a {
+  display: block;
+  padding: 8px 0;
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
@@ -729,6 +731,8 @@ onUnmounted(() => {
 }
 
 .drawer-subitem {
+  display: block;
+  padding: 6px 0;
   font-size: 1rem !important;
   color: rgba(255, 255, 255, 0.8) !important;
   text-decoration: none;
@@ -752,7 +756,7 @@ onUnmounted(() => {
 }
 
 .drawer-lang-btn {
-  padding: 8px 18px;
+  padding: 10px 20px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -781,7 +785,7 @@ onUnmounted(() => {
 }
 
 /* Responsive Menu */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .nav-menu,
   .header-actions {
     display: none !important;
@@ -792,7 +796,7 @@ onUnmounted(() => {
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .mobile-drawer {
     display: none !important;
   }

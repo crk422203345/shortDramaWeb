@@ -348,4 +348,16 @@ onMounted(() => {
     font-size: 5rem;
   }
 }
+
+@media (max-width: 480px) {
+  .privacy-card {
+    padding: 20px;
+  }
+  .privacy-title {
+    font-size: 1.8rem;
+  }
+  .hero-bg-text {
+    font-size: 3.5rem;
+  }
+}
 </style>

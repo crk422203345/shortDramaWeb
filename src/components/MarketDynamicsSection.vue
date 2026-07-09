@@ -308,6 +308,18 @@
     height: auto;
     padding: 24px;
   }
+
+  .opp-stat .number {
+    font-size: 3.5rem;
+  }
+
+  .opp-stat .symbol {
+    font-size: 1.8rem;
+  }
+
+  .opp-stat .unit {
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -320,7 +332,15 @@
   }
 
   .opp-stat .number {
-    font-size: 3.7rem;
+    font-size: 3.0rem;
+  }
+
+  .opp-stat .symbol {
+    font-size: 1.5rem;
+  }
+
+  .opp-stat .unit {
+    font-size: 1.2rem;
   }
 
   .sub-arrow {

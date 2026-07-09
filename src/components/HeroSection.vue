@@ -138,6 +138,28 @@
 }
 
 /* Responsive design */
+@media (max-width: 1024px) {
+  .hero-section {
+    padding-top: 30vh;
+  }
+
+  .hero-title {
+    font-size: 4.2rem;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .cross {
+    font-size: 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.6rem;
+    letter-spacing: 8px;
+    text-indent: 8px;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-section {
     padding-top: 32vh; /* Give more vertical breathing room */

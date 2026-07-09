@@ -398,7 +398,7 @@ onMounted(() => {
   }
 
   .tab-btn {
-    padding: 8px 16px;
+    padding: 12px 20px;
   }
 }
 

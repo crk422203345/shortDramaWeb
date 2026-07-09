@@ -26,5 +26,8 @@ import './assets/global.css'
   flex-direction: column;
   background: transparent;
   color: var(--text-primary);
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 </style>

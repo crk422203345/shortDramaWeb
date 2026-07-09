@@ -8,21 +8,23 @@ const pillars = {
     id: 'game',
     label: '小游戏',
     title: '小游戏：1分钟上手 轻松共享生态红利',
-    description: '高粘度超休闲小游戏，将碎片化娱乐时间转化为生态积分权益产出。结合GGC底层链，让游戏所有权还给生态共建者。',
+    description:
+      '高粘度超休闲小游戏，将碎片化娱乐时间转化为生态积分权益产出。结合GGC底层链，让游戏所有权还给生态共建者。',
     img: '/img/小游戏.png',
     subBrand: 'OLÉ GAME',
     color: '#00f0ff', // cyan
-    filter: 'hue-rotate(0deg)'
+    filter: 'hue-rotate(0deg)',
   },
   drama: {
     id: 'drama',
     label: '短剧',
     title: '短剧：精品竖屏 极低门槛看剧赚积分',
-    description: '精品内容库，低消费无感观看，刷剧享受生态红利，结合实时多模态 AI，打通跨国流量与高效增值通道。',
+    description:
+      '精品内容库，低消费无感观看，刷剧享受生态红利，结合实时多模态 AI，打通跨国流量与高效增值通道。',
     img: '/img/小游戏.png',
     subBrand: 'OHO DRAMA',
     color: '#ec4899', // pink
-    filter: 'hue-rotate(300deg) saturate(1.2)'
+    filter: 'hue-rotate(300deg) saturate(1.2)',
   },
   social: {
     id: 'social',
@@ -32,8 +34,8 @@ const pillars = {
     img: '/img/小游戏.png',
     subBrand: 'BINGO SOCIAL',
     color: '#8b5cf6', // purple
-    filter: 'hue-rotate(240deg) brightness(0.9)'
-  }
+    filter: 'hue-rotate(240deg) brightness(0.9)',
+  },
 }
 </script>
 
@@ -48,7 +50,8 @@ const pillars = {
           <div class="divider-line"></div>
         </div>
         <p class="section-subtitle">
-          以数字地球为生态核心，精品短剧、休闲游戏与共建共享的社交生态彼此咬合，编织出繁荣的 Web3 价值网络。
+          以数字地球为生态核心，精品短剧、休闲游戏与共建共享的社交生态彼此咬合，编织出繁荣的 Web3
+          价值网络。
         </p>
       </div>
 
@@ -63,7 +66,7 @@ const pillars = {
             <div class="orbit-ring ring-inner"></div>
 
             <div class="pillar-connector" :class="`connector-${activePillar}`"></div>
-            
+
             <!-- Central Node -->
             <div class="center-node">
               <div class="center-glow"></div>
@@ -81,8 +84,11 @@ const pillars = {
 
             <!-- Orbit Nodes (Clickable) -->
             <!-- 1. Game Node (Top) -->
-            <div class="orbit-node node-game" :class="{ active: activePillar === 'game' }"
-              @click="activePillar = 'game'">
+            <div
+              class="orbit-node node-game"
+              :class="{ active: activePillar === 'game' }"
+              @click="activePillar = 'game'"
+            >
               <div class="node-icon">
                 <img src="/img/logo(1).png" alt="小游戏" class="node-icon-img" />
               </div>
@@ -93,8 +99,11 @@ const pillars = {
             </div>
 
             <!-- 2. Drama Node (Bottom-Left) -->
-            <div class="orbit-node node-drama" :class="{ active: activePillar === 'drama' }"
-              @click="activePillar = 'drama'">
+            <div
+              class="orbit-node node-drama"
+              :class="{ active: activePillar === 'drama' }"
+              @click="activePillar = 'drama'"
+            >
               <div class="node-icon">
                 <img src="/img/omo.png" alt="短剧" class="node-icon-img" />
               </div>
@@ -105,8 +114,11 @@ const pillars = {
             </div>
 
             <!-- 3. Social Node (Bottom-Right) -->
-            <div class="orbit-node node-social" :class="{ active: activePillar === 'social' }"
-              @click="activePillar = 'social'">
+            <div
+              class="orbit-node node-social"
+              :class="{ active: activePillar === 'social' }"
+              @click="activePillar = 'social'"
+            >
               <div class="node-icon">
                 <img src="/img/社交-对话框1.png" alt="社交生态" class="node-icon-img" />
               </div>
@@ -124,16 +136,23 @@ const pillars = {
             <div :key="activePillar" class="pillar-detail-card glass-card">
               <!-- Banner Image with color filters for distinct pillars -->
               <div class="banner-wrapper">
-                <img :src="pillars[activePillar as keyof typeof pillars].img"
-                  :alt="pillars[activePillar as keyof typeof pillars].title" class="banner-img"
-                  :style="{ filter: pillars[activePillar as keyof typeof pillars].filter }" />
+                <img
+                  :src="pillars[activePillar as keyof typeof pillars].img"
+                  :alt="pillars[activePillar as keyof typeof pillars].title"
+                  class="banner-img"
+                  :style="{ filter: pillars[activePillar as keyof typeof pillars].filter }"
+                />
                 <div class="banner-overlay"></div>
               </div>
 
               <!-- Text details -->
               <div class="pillar-text-content">
-                <h3 class="pillar-title">{{ pillars[activePillar as keyof typeof pillars].title }}</h3>
-                <p class="pillar-desc">{{ pillars[activePillar as keyof typeof pillars].description }}</p>
+                <h3 class="pillar-title">
+                  {{ pillars[activePillar as keyof typeof pillars].title }}
+                </h3>
+                <p class="pillar-desc">
+                  {{ pillars[activePillar as keyof typeof pillars].description }}
+                </p>
               </div>
             </div>
           </transition>
@@ -212,9 +231,7 @@ const pillars = {
   transform-origin: left center;
   z-index: 8;
   pointer-events: none;
-  transition:
-    width 0.4s ease,
-    transform 0.4s ease;
+  transition: width 0.4s ease, transform 0.4s ease;
 }
 
 .pillar-connector::after {
@@ -253,7 +270,7 @@ const pillars = {
   height: 128px;
   border-radius: 50%;
   background: #030763;
-  border: 2px solid #323CC6;
+  border: 2px solid #323cc6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -392,7 +409,7 @@ const pillars = {
   height: 64px;
   border-radius: 50%;
   background: #222560;
-  border: 1px solid #2E3280;
+  border: 1px solid #2e3280;
   position: relative;
   display: flex;
   align-items: center;
@@ -439,12 +456,11 @@ const pillars = {
 }
 
 .node-game .node-icon {
-  border-color: #2E3280;
+  border-color: #2e3280;
 }
 
 .node-game.active .node-icon {
-  background:
-    linear-gradient(#222560, #222560) padding-box,
+  background: linear-gradient(#222560, #222560) padding-box,
     linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #0b091a;
   border: 2px solid transparent;
@@ -458,12 +474,11 @@ const pillars = {
 }
 
 .node-drama .node-icon {
-  border-color: #2E3280;
+  border-color: #2e3280;
 }
 
 .node-drama.active .node-icon {
-  background:
-    linear-gradient(#222560, #222560) padding-box,
+  background: linear-gradient(#222560, #222560) padding-box,
     linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #ffffff;
   border: 2px solid transparent;
@@ -477,12 +492,11 @@ const pillars = {
 }
 
 .node-social .node-icon {
-  border-color: #2E3280;
+  border-color: #2e3280;
 }
 
 .node-social.active .node-icon {
-  background:
-    linear-gradient(#222560, #222560) padding-box,
+  background: linear-gradient(#222560, #222560) padding-box,
     linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #ffffff;
   border: 2px solid transparent;
@@ -507,13 +521,14 @@ const pillars = {
 /* Right Detail Column styling */
 .detail-column {
   width: 100%;
+  overflow: hidden;
 }
 
 .pillar-detail-card {
   overflow: hidden;
   height: 100%;
   border-radius: 24px;
-  background-color: #0F0F31 !important;
+  background-color: #0f0f31 !important;
 }
 
 .banner-wrapper {
@@ -584,60 +599,33 @@ const pillars = {
     grid-template-columns: 1fr;
     gap: 48px;
   }
+  .detail-column {
+    width: 96%;
+  }
+  .pillar-text-content {
+    text-align: center;
+  }
 }
 
 @media (max-width: 520px) {
   .orbit-system {
-    width: 320px;
-    height: 320px;
+    transform: scale(0.8);
+    transform-origin: center;
+    margin: -30px 0;
   }
-
-  .ring-outer {
-    width: 300px;
-    height: 300px;
+  .pillar-text-content {
+    padding: 20px 16px;
   }
-
-  .ring-middle {
-    width: 210px;
-    height: 210px;
+  .banner-wrapper {
+    height: 180px;
   }
+}
 
-  .ring-inner {
-    width: 120px;
-    height: 120px;
-  }
-
-  .center-node {
-    width: 104px;
-    height: 104px;
-  }
-
-  .center-logo-img {
-    width: 58px;
-  }
-
-  .node-icon {
-    width: 54px;
-    height: 54px;
-  }
-
-  .node-icon-img {
-    max-width: 36px;
-    max-height: 32px;
-  }
-
-  .node-game {
-    top: 5px;
-  }
-
-  .node-drama {
-    bottom: 15px;
-    left: 15px;
-  }
-
-  .node-social {
-    bottom: 15px;
-    right: 15px;
+@media (max-width: 380px) {
+  .orbit-system {
+    transform: scale(0.68);
+    transform-origin: center;
+    margin: -50px 0;
   }
 }
 </style>

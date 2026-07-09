@@ -280,6 +280,18 @@ const openLink = (url: string) => {
     height: 320px;
     max-width: none;
   }
+
+  .card-overlay {
+    opacity: 1 !important;
+  }
+
+  .card-info {
+    transform: translateY(0) !important;
+  }
+
+  .divider {
+    width: 60% !important;
+  }
 }
 
 @media (max-width: 640px) {

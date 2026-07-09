@@ -83,6 +83,8 @@
   color: rgba(255, 255, 255, 0.6);
   transition: var(--transition-normal);
   font-weight: 300;
+  padding: 4px 0;
+  display: inline-block;
 }
 
 .footer-column a:hover {
