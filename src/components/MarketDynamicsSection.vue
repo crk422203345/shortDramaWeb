@@ -322,5 +322,14 @@
   .opp-stat .number {
     font-size: 3.7rem;
   }
+
+  .sub-arrow {
+    width: 32px;
+  }
+
+  .sub-header .sub-title {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+  }
 }
 </style>

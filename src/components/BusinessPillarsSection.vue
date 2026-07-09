@@ -586,7 +586,7 @@ const pillars = {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   .orbit-system {
     width: 320px;
     height: 320px;

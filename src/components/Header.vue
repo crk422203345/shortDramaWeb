@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -13,9 +13,26 @@ const menuItems = [
   { label: '生态布局', href: '#eco-layout' },
 ]
 
+const isMobileMenuOpen = ref(false)
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
+}
+
+watch(isMobileMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
+
 const navigateTo = (item: { label: string; href: string }) => {
   activeItem.value = item.label
   const hash = item.href
+  closeMobileMenu()
   if (route.path === '/') {
     // Already on home – just smooth scroll to section
     const el = document.querySelector(hash)
@@ -74,6 +91,7 @@ const closeContactDropdown = () => {
 // Go to the contact form at the bottom of the home page.
 const goToContact = () => {
   showContactDropdown.value = false
+  closeMobileMenu()
   activeItem.value = '联系我们'
   if (router.currentRoute.value.path === '/') {
     const el = document.getElementById('contact')
@@ -87,6 +105,7 @@ const goToContact = () => {
 
 const goToJoin = () => {
   showContactDropdown.value = false
+  closeMobileMenu()
   activeItem.value = '联系我们'
   router.push('/join')
 }
@@ -127,6 +146,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
+  document.body.style.overflow = ''
   if (langTimer) clearTimeout(langTimer)
   if (contactTimer) clearTimeout(contactTimer)
   if (moreTimer) clearTimeout(moreTimer)
@@ -257,7 +277,58 @@ onUnmounted(() => {
           </transition>
         </div>
       </div>
+
+      <!-- Hamburger Button (Mobile Only) -->
+      <button 
+        v-if="!isPrivacyPage"
+        class="hamburger-btn" 
+        :class="{ active: isMobileMenuOpen }" 
+        @click="toggleMobileMenu"
+        aria-label="Toggle Menu"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
+
+    <!-- Mobile Drawer Menu (Mobile Only) -->
+    <transition name="drawer-fade">
+      <div v-if="isMobileMenuOpen && !isPrivacyPage" class="mobile-drawer">
+        <div class="drawer-content">
+          <ul class="drawer-nav">
+            <li v-for="item in menuItems" :key="item.label" :class="{ active: activeItem === item.label }">
+              <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
+            </li>
+            <li :class="{ active: activeItem === '联系我们' }">
+              <div class="drawer-section-title">联系我们</div>
+              <div class="drawer-submenu">
+                <a href="javascript:void(0)" class="drawer-subitem" @click="goToContact">洽谈合作</a>
+                <RouterLink to="/join" class="drawer-subitem" @click="closeMobileMenu">加入我们</RouterLink>
+              </div>
+            </li>
+          </ul>
+
+          <div class="drawer-divider"></div>
+
+          <!-- Language Selector inside Drawer -->
+          <div class="drawer-language">
+            <div class="drawer-section-title">语言 / Language</div>
+            <div class="drawer-lang-options">
+              <button 
+                v-for="lang in languages" 
+                :key="lang" 
+                class="drawer-lang-btn"
+                :class="{ active: lang === selectedLanguage }"
+                @click="selectLanguage(lang); closeMobileMenu()"
+              >
+                {{ lang }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </header>
 </template>
 
@@ -561,10 +632,169 @@ onUnmounted(() => {
   transform: translateY(-5px);
 }
 
+/* Hamburger Button */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 110;
+}
+
+.hamburger-btn .bar {
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Transform to X on active */
+.hamburger-btn.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-btn.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Drawer styles */
+.mobile-drawer {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+  background: rgba(11, 9, 26, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 105;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  overflow-y: auto;
+}
+
+.drawer-nav {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.drawer-nav li a {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-normal);
+}
+
+.drawer-nav li.active > a,
+.drawer-nav li a:hover {
+  color: var(--accent-cyan);
+}
+
+.drawer-section-title {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.drawer-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 8px;
+}
+
+.drawer-subitem {
+  font-size: 1rem !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: none;
+  font-weight: 400 !important;
+}
+
+.drawer-subitem:hover {
+  color: var(--accent-cyan) !important;
+}
+
+.drawer-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.drawer-lang-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.drawer-lang-btn {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.drawer-lang-btn.active {
+  background: #382189;
+  border-color: #382189;
+  color: #ffffff;
+}
+
+/* Drawer transitions */
+.drawer-fade-enter-active,
+.drawer-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.drawer-fade-enter-from,
+.drawer-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
 /* Responsive Menu */
 @media (max-width: 768px) {
-  .nav-menu {
-    display: none; /* In production we would add a hamburger menu. Since it's a simple layout, we can simplify */
+  .nav-menu,
+  .header-actions {
+    display: none !important;
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-drawer {
+    display: none !important;
   }
 }
 </style>

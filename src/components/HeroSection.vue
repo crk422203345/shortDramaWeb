@@ -139,13 +139,19 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
+  .hero-section {
+    padding-top: 32vh; /* Give more vertical breathing room */
+  }
+
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     gap: 8px;
+    justify-content: center;
   }
 
   .cross {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    margin: 0 4px;
   }
 
   .hero-subtitle {
@@ -156,14 +162,27 @@
 }
 
 @media (max-width: 480px) {
+  .hero-section {
+    padding-top: 35vh;
+  }
+
   .hero-title {
-    font-size: 2.75rem;
+    font-size: 2.2rem;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cross {
+    font-size: 1.8rem;
+    margin: 0 4px;
   }
 
   .hero-subtitle {
-    font-size: 1rem;
-    letter-spacing: 4px;
-    text-indent: 4px;
+    font-size: 0.95rem;
+    letter-spacing: 3px;
+    text-indent: 3px;
+    white-space: nowrap;
   }
 }
 </style>

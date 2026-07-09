@@ -10,6 +10,15 @@ const cards = [
   { id: 4, name: '琉璃仙子', img: '/img/4(1).png' },
   { id: 5, name: '幽冥圣女', img: '/img/5.png' }
 ]
+
+const scrollToSection = (id: string) => {
+  const el = document.getElementById(id)
+  if (el) {
+    const yOffset = -80
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
@@ -43,8 +52,8 @@ const cards = [
 
       <!-- CTA Buttons -->
       <div class="cta-buttons">
-        <button class="btn btn-primary btn-purple">了解我们</button>
-        <button class="btn btn-secondary btn-outline-purple">浅谈合作</button>
+        <button class="btn btn-primary btn-purple" @click="scrollToSection('business-mode')">了解我们</button>
+        <button class="btn btn-secondary btn-outline-purple" @click="scrollToSection('contact')">浅谈合作</button>
       </div>
     </div>
   </section>

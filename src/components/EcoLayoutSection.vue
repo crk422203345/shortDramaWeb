@@ -596,7 +596,7 @@ const nodePositions = [
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   .eco-orbit-system {
     width: 320px;
     height: 320px;

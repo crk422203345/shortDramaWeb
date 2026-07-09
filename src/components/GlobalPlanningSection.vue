@@ -379,11 +379,22 @@ onMounted(() => {
     font-size: 1.5rem;
   }
 
+  .tabs-wrapper {
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+    justify-content: flex-start;
+  }
+
+  .tabs-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
   .tabs-capsule {
-    flex-wrap: wrap;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 8px;
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    min-width: max-content;
+    padding: 4px;
   }
 
   .tab-btn {
