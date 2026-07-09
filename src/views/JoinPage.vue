@@ -7,6 +7,7 @@ interface Job {
   location: string
   experience: string
   education: string
+  salary: string
   responsibilities: string[]
   requirements: string[]
 }
@@ -18,6 +19,7 @@ const jobs: Job[] = [
     location: '深圳 / 远程',
     experience: '3-5年',
     education: '本科及以上',
+    salary: '25k - 40k',
     responsibilities: [
       '负责超休闲小游戏产品规划与版本迭代，把控核心玩法与留存指标',
       '基于数据分析持续优化用户体验，提升活跃、留存与变现效率',
@@ -37,6 +39,7 @@ const jobs: Job[] = [
     location: '深圳 / 马来西亚',
     experience: '2-4年',
     education: '本科及以上',
+    salary: '18k - 30k',
     responsibilities: [
       '负责精品短剧内容选题、排期与分发策略，挖掘高潜力题材',
       '跟踪多平台数据表现，持续优化内容投放与流量转化路径',
@@ -56,6 +59,7 @@ const jobs: Job[] = [
     location: '香港 / 深圳',
     experience: '3年以上',
     education: '本科及以上',
+    salary: '30k - 60k',
     responsibilities: [
       '负责生态通证体系与智能合约的设计、开发及安全审计',
       '搭建链上数据与业务系统的对接通道，保障资产流转安全',
@@ -75,6 +79,7 @@ const jobs: Job[] = [
     location: '深圳',
     experience: '3年以上',
     education: '硕士及以上',
+    salary: '35k - 65k',
     responsibilities: [
       '负责多语种音色克隆与实时同声传译模型的研发与调优',
       '构建多模态 AI 工具链，赋能内容二创与本地化宣发',
@@ -94,6 +99,7 @@ const jobs: Job[] = [
     location: '香港 / 东南亚',
     experience: '3年以上',
     education: '本科及以上',
+    salary: '25k - 45k',
     responsibilities: [
       '负责东南亚及全球市场的渠道拓展与生态合作落地',
       '对接本地电子钱包、流媒体与发行联盟，搭建分发闭环',
@@ -113,6 +119,7 @@ const jobs: Job[] = [
     location: '深圳 / 远程',
     experience: '2-5年',
     education: '专科及以上',
+    salary: '15k - 28k',
     responsibilities: [
       '负责产品界面与品牌视觉的整体设计与规范沉淀',
       '产出高质量视觉稿与动效，提升产品质感与沉浸感',
@@ -242,6 +249,13 @@ const afterLeave = (el: Element) => {
                   <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
                 </svg>
                 {{ job.education }}
+              </span>
+              <span class="meta-item meta-salary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                {{ job.salary }}
               </span>
             </div>
 
@@ -436,6 +450,20 @@ const afterLeave = (el: Element) => {
 .meta-item svg {
   color: var(--accent-purple);
   opacity: 0.9;
+}
+
+.meta-salary {
+  color: var(--accent-cyan) !important;
+  font-weight: 500;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-radius: 9999px;
+  padding: 2px 10px 2px 6px;
+}
+
+.meta-salary svg {
+  color: var(--accent-cyan) !important;
+  opacity: 1 !important;
 }
 
 /* Expand button styling */
