@@ -73,9 +73,9 @@
     "title": "Tiga Pilar Perniagaan Teras",
     "subtitle": "Berpusat pada bumi digital, drama menegak premium, permainan mini kasual, dan ekosistem sosial yang boleh dikongsi dikaitkan bersama untuk membina rangkaian nilai Web3 yang makmur.",
     "nodes": {
-      "game_sub": "OLÉ GAME",
+      "game_sub": "OLé GAME",
       "game_main": "Permainan",
-      "drama_sub": "OHO DRAMA",
+      "drama_sub": "OMO DRAMA",
       "drama_main": "Drama",
       "social_sub": "Sosial",
       "social_main": "Sosial"
@@ -374,6 +374,7 @@
     "drama": "Drama Pendek",
     "game": "Permainan Mini",
     "privacy": "Dasar Privasi",
+    "terms": "Terma Penggunaan",
     "copyright": "© {year} BINGO. Hak cipta terpelihara."
   }
 }

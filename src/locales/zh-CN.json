@@ -71,11 +71,11 @@
   "pillars": {
     "badge": "Business",
     "title": "三大核心业务支柱",
-    "subtitle": "以数字地球为生态核心，精品短剧、休闲游戏与共建共享的社交生态彼此咬合，编织出繁荣 of Web3 价值网络。",
+    "subtitle": "以数字地球为生态核心，精品短剧、休闲游戏与共建共享的社交生态彼此咬合，编织出繁荣的 Web3 价值网络。",
     "nodes": {
-      "game_sub": "OLÉ GAME",
+      "game_sub": "OLé GAME",
       "game_main": "小游戏",
-      "drama_sub": "OHO DRAMA",
+      "drama_sub": "OMO DRAMA",
       "drama_main": "短剧",
       "social_sub": "社交生态",
       "social_main": "社交生态"
@@ -374,6 +374,7 @@
     "drama": "短剧平台",
     "game": "小游戏平台",
     "privacy": "隐私政策",
+    "terms": "使用条款",
     "copyright": "© {year} BINGO. 保留所有权利。"
   }
 }

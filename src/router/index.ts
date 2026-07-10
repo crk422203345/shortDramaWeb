@@ -25,6 +25,11 @@ const router = createRouter({
           name: 'privacy',
           component: () => import('@/views/PrivacyPage.vue'),
         },
+        {
+          path: 'terms',
+          name: 'terms',
+          component: () => import('@/views/TermsPage.vue'),
+        },
       ],
     },
     // Fallback for unmatched routes

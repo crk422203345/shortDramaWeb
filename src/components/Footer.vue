@@ -46,6 +46,11 @@ const { t } = useI18n()
                 t('footer.privacy')
               }}</RouterLink>
             </li>
+            <li>
+              <RouterLink :to="{ name: 'terms' }" target="_blank">{{
+                t('footer.terms')
+              }}</RouterLink>
+            </li>
           </ul>
         </div>
       </div>

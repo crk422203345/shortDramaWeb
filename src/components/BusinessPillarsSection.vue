@@ -624,6 +624,7 @@ const activePillarData = computed(() => {
   }
   .detail-column {
     width: 96%;
+    margin: 0 auto;
   }
   .pillar-text-content {
     text-align: center;
@@ -632,23 +633,16 @@ const activePillarData = computed(() => {
 
 @media (max-width: 520px) {
   .orbit-system {
-    transform: scale(0.8);
+    left: 50%;
+    transform: translateX(-50%) scale(min(1, calc((100vw - 32px) / 420)));
     transform-origin: center;
-    margin: -30px 0;
+    margin: min(0px, calc((100vw - 420px - 32px) / 4)) 0;
   }
   .pillar-text-content {
     padding: 20px 16px;
   }
   .banner-wrapper {
     height: 180px;
-  }
-}
-
-@media (max-width: 380px) {
-  .orbit-system {
-    transform: scale(0.68);
-    transform-origin: center;
-    margin: -50px 0;
   }
 }
 </style>

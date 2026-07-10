@@ -8,7 +8,7 @@ const { t, locale } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
-const isPrivacyPage = computed(() => route.name === 'privacy')
+const isMinimalHeader = computed(() => route.name === 'privacy' || route.name === 'terms')
 
 const activeItem = ref('home')
 const menuItems = computed(() => [
@@ -186,7 +186,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="main-header" :class="{ 'privacy-header': isPrivacyPage }">
+  <header class="main-header" :class="{ 'privacy-header': isMinimalHeader }">
     <div class="header-container">
       <!-- Logo Section -->
       <div class="logo-area">
@@ -194,7 +194,7 @@ onUnmounted(() => {
       </div>
 
       <!-- Navigation Menu -->
-      <nav class="nav-menu" v-if="!isPrivacyPage">
+      <nav class="nav-menu" v-if="!isMinimalHeader">
         <ul>
           <li
             v-for="item in menuItems"
@@ -250,7 +250,7 @@ onUnmounted(() => {
       </nav>
 
       <!-- Right Actions (Language & Extras) -->
-      <div class="header-actions" v-if="!isPrivacyPage">
+      <div class="header-actions" v-if="!isMinimalHeader">
         <!-- Language Selector -->
         <div
           class="lang-selector"
@@ -358,7 +358,7 @@ onUnmounted(() => {
 
       <!-- Hamburger Button (Mobile Only) -->
       <button
-        v-if="!isPrivacyPage"
+        v-if="!isMinimalHeader"
         class="hamburger-btn"
         :class="{ active: isMobileMenuOpen }"
         @click="toggleMobileMenu"
@@ -372,7 +372,7 @@ onUnmounted(() => {
 
     <!-- Mobile Drawer Menu (Mobile Only) -->
     <transition name="drawer-fade">
-      <div v-if="isMobileMenuOpen && !isPrivacyPage" class="mobile-drawer">
+      <div v-if="isMobileMenuOpen && !isMinimalHeader" class="mobile-drawer">
         <div class="drawer-content">
           <ul class="drawer-nav">
             <li
@@ -423,7 +423,7 @@ onUnmounted(() => {
 
 <style scoped>
 .main-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

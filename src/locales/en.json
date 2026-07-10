@@ -73,9 +73,9 @@
     "title": "Three Core Business Pillars",
     "subtitle": "Centering on the digital earth, premium vertical dramas, casual minigames, and a shareable social ecosystem link together to weave a prosperous Web3 value network.",
     "nodes": {
-      "game_sub": "OLÉ GAME",
+      "game_sub": "OLé GAME",
       "game_main": "Games",
-      "drama_sub": "OHO DRAMA",
+      "drama_sub": "OMO DRAMA",
       "drama_main": "Dramas",
       "social_sub": "Social",
       "social_main": "Social"
@@ -374,6 +374,7 @@
     "drama": "Short Drama",
     "game": "Minigame",
     "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
     "copyright": "© {year} BINGO. All rights reserved."
   }
 }
