@@ -1,12 +1,12 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 import {
   dramaApi,
   type DramaItem,
   type DramaDetail,
   type DramaListParams,
   type PlayRecord,
-} from '@/api/drama';
+} from '@/api/drama'
 
 /**
  * 短剧模块全局状态仓库
@@ -16,17 +16,17 @@ export const useDramaStore = defineStore('drama', () => {
   // ==========================================
   // 1. 响应式状态声明 (State)
   // ==========================================
-  
+
   // 短剧列表数据
-  const dramaList = ref<DramaItem[]>([]);
+  const dramaList = ref<DramaItem[]>([])
   // 短剧总条数（用于分页）
-  const total = ref<number>(0);
+  const total = ref<number>(0)
   // 当前正在浏览或播放的短剧详情
-  const currentDrama = ref<DramaDetail | null>(null);
+  const currentDrama = ref<DramaDetail | null>(null)
   // 全局请求加载状态
-  const loading = ref<boolean>(false);
+  const loading = ref<boolean>(false)
   // 播放记录映射表，以短剧ID为 key 缓存，提高查询效率
-  const playRecords = ref<Record<number, PlayRecord>>({});
+  const playRecords = ref<Record<number, PlayRecord>>({})
 
   // ==========================================
   // 2. 业务动作封装 (Actions)
@@ -37,36 +37,36 @@ export const useDramaStore = defineStore('drama', () => {
    * @param params 筛选及分页参数
    */
   const fetchDramaList = async (params: DramaListParams): Promise<void> => {
-    loading.value = true;
+    loading.value = true
     try {
-      const res = await dramaApi.getDramaList(params);
-      dramaList.value = res.list;
-      total.value = res.total;
+      const res = await dramaApi.getDramaList(params)
+      dramaList.value = res.list
+      total.value = res.total
     } catch (error) {
-      console.error('[Store Error]: fetchDramaList failed', error);
-      throw error; // 向上抛出错误，让组件层可以捕获并进行特定处理
+      console.error('[Store Error]: fetchDramaList failed', error)
+      throw error // 向上抛出错误，让组件层可以捕获并进行特定处理
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
+  }
 
   /**
    * 获取指定短剧的详细数据
    * @param id 短剧 ID
    */
   const fetchDramaDetail = async (id: number): Promise<DramaDetail> => {
-    loading.value = true;
+    loading.value = true
     try {
-      const res = await dramaApi.getDramaDetail(id);
-      currentDrama.value = res;
-      return res;
+      const res = await dramaApi.getDramaDetail(id)
+      currentDrama.value = res
+      return res
     } catch (error) {
-      console.error(`[Store Error]: fetchDramaDetail failed for ID: ${id}`, error);
-      throw error;
+      console.error(`[Store Error]: fetchDramaDetail failed for ID: ${id}`, error)
+      throw error
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
+  }
 
   /**
    * 加载指定短剧的播放记录进度，并更新到本地缓存中
@@ -74,16 +74,16 @@ export const useDramaStore = defineStore('drama', () => {
    */
   const fetchPlayRecord = async (dramaId: number): Promise<PlayRecord | null> => {
     try {
-      const record = await dramaApi.getPlayRecord(dramaId);
+      const record = await dramaApi.getPlayRecord(dramaId)
       if (record) {
-        playRecords.value[dramaId] = record;
+        playRecords.value[dramaId] = record
       }
-      return record;
+      return record
     } catch (error) {
-      console.warn(`[Store Warning]: fetchPlayRecord failed for ID: ${dramaId}`, error);
-      return null;
+      console.warn(`[Store Warning]: fetchPlayRecord failed for ID: ${dramaId}`, error)
+      return null
     }
-  };
+  }
 
   /**
    * 上报最新的短剧播放进度并更新缓存
@@ -94,20 +94,20 @@ export const useDramaStore = defineStore('drama', () => {
   const reportPlayProgress = async (
     dramaId: number,
     episodeIndex: number,
-    progressTime: number
+    progressTime: number,
   ): Promise<PlayRecord> => {
     try {
-      const res = await dramaApi.updatePlayRecord(dramaId, episodeIndex, progressTime);
+      const res = await dramaApi.updatePlayRecord(dramaId, episodeIndex, progressTime)
       if (res.success && res.record) {
         // 同步更新本地 Store 中的播放记录缓存
-        playRecords.value[dramaId] = res.record;
+        playRecords.value[dramaId] = res.record
       }
-      return res.record;
+      return res.record
     } catch (error) {
-      console.error('[Store Error]: reportPlayProgress failed', error);
-      throw error;
+      console.error('[Store Error]: reportPlayProgress failed', error)
+      throw error
     }
-  };
+  }
 
   // ==========================================
   // 3. 暴露属性与方法
@@ -124,5 +124,5 @@ export const useDramaStore = defineStore('drama', () => {
     fetchDramaDetail,
     fetchPlayRecord,
     reportPlayProgress,
-  };
-});
+  }
+})

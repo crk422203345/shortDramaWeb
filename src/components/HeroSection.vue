@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
+
 <template>
   <section id="home" class="hero-section">
     <!-- Hero Background Video with Overlay -->
@@ -17,7 +22,7 @@
           <span class="cross">&times;</span>
           <span class="italic-text">Web3</span>
         </h1>
-        <p class="hero-subtitle">全场景娱乐 &nbsp;&nbsp;&nbsp;&nbsp; 一站式精彩</p>
+        <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
       </div>
     </div>
   </section>
@@ -64,7 +69,8 @@
   /* Dark overlay to match mockup. Vignette and bottom gradient.
      Bottom stop aligns with the page background (#1c1f54) so the video
      fades seamlessly into the content below instead of a hard seam. */
-  background: linear-gradient(
+  background:
+    linear-gradient(
       180deg,
       rgba(8, 6, 23, 0.4) 0%,
       rgba(8, 6, 23, 0.2) 55%,
@@ -94,9 +100,13 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(79, 70, 229, 0.2);
+  text-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(79, 70, 229, 0.2);
   line-height: 1.1;
-  font-family: 'Source Han Sans CN', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans', 'Microsoft YaHei', sans-serif;
+  font-family:
+    'Source Han Sans CN', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans',
+    'Microsoft YaHei', sans-serif;
 }
 
 .italic-text {

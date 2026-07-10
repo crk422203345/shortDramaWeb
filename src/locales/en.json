@@ -1,0 +1,379 @@
+{
+  "seo": {
+    "title": "BINGO Entertainment - All-Scene Entertainment · One-Stop Excitement",
+    "keywords": "BINGO, BINGO Entertainment, Web3, Short Drama, Mini Game, Social Ecosystem, GGC, Tokenomics",
+    "description": "BINGO Entertainment is committed to breaking the Web2 platform traffic monopoly and benefit consolidation through the GGC base chain. Boutique short dramas, casual games, and a co-built social ecosystem interlock with each other to construct a mutually beneficial, exponentially growing digital entertainment value network."
+  },
+  "nav": {
+    "home": "Home",
+    "business": "Business Model",
+    "eco": "Eco Layout",
+    "join": "Careers",
+    "contact": "Contact Us",
+    "wechat_popup": "Scan WeChat for Collaboration",
+    "telegram": "Telegram Channel",
+    "email": "Email Us"
+  },
+  "hero": {
+    "subtitle": "All-Scene Entertainment · One-Stop Excitement"
+  },
+  "products": {
+    "badge": "Product",
+    "title": "Platform Products",
+    "experience": "Experience Now",
+    "learn_more": "Learn More",
+    "know_us": "About Us",
+    "talk_collab": "Collaborations",
+    "items": {
+      "glory": "Hidden Glory",
+      "sword": "Sword & Fate",
+      "dating": "Sweet Date",
+      "red_chamber": "Dream of Red Chambers",
+      "monster": "Monster Maze"
+    }
+  },
+  "dynamics": {
+    "badge": "Market",
+    "title": "Pain Points & Opportunities",
+    "pain_title": "Pain Points",
+    "opp_title": "Opportunities",
+    "pains": {
+      "item1_title": "Web2 Platform Model",
+      "item1_desc": "High traffic costs vs. low retention make user value monetization highly challenging.",
+      "item2_title": "Traditional Web3 Projects",
+      "item2_desc": "Mainly speculative and short-term driven, neglecting core content and utility.",
+      "item3_title": "Low Capital Efficiency",
+      "item3_desc": "Extremely difficult for capital to identify and filter high-retention prospective projects."
+    },
+    "opps": {
+      "item1_title": "Web3 Entertainment/Game Market",
+      "item1_stat": "33",
+      "item1_unit": "B",
+      "item1_symbol": "$",
+      "item1_desc": "Expected to exceed $33B by 2025, driving massive tokenized distribution.",
+      "item2_title": "Hyper-Casual Game Market Size",
+      "item2_stat": "20",
+      "item2_unit": "B",
+      "item2_symbol": "$",
+      "item2_desc": "Expected to reach $20B by 2025, combining high user reach with instant conversion.",
+      "item3_title": "Global Digital Nomad Base",
+      "item3_stat": "50",
+      "item3_unit": "M+",
+      "item3_symbol": "",
+      "item3_desc": "Over 50M digital nomads, fueling remote creative output and collaborative growth.",
+      "item4_title": "HK Web3 Strategic Hub",
+      "item4_stat": "No.1",
+      "item4_unit": "",
+      "item4_symbol": "",
+      "item4_desc": "Compliant funds & policies make HK BINGO's gateway to global blue oceans."
+    }
+  },
+  "pillars": {
+    "badge": "Business",
+    "title": "Three Core Business Pillars",
+    "subtitle": "Centering on the digital earth, premium vertical dramas, casual minigames, and a shareable social ecosystem link together to weave a prosperous Web3 value network.",
+    "nodes": {
+      "game_sub": "OLÉ GAME",
+      "game_main": "Games",
+      "drama_sub": "OHO DRAMA",
+      "drama_main": "Dramas",
+      "social_sub": "Social",
+      "social_main": "Social"
+    },
+    "items": {
+      "game": {
+        "title": "Minigames: Start in 1 Minute, Share Ecological Dividends",
+        "desc": "Highly engaging hyper-casual minigames converting fragmented leisure hours into ecological point rights. Backed by GGC protocol, returning game ownership back to community co-builders."
+      },
+      "drama": {
+        "title": "Dramas: Premium Vertical Screens, Watch & Earn Points",
+        "desc": "Premium content library, seamless watch-to-earn logic with low barrier, and real-time multi-modal AI translations bridging international traffic with highly efficient monetization channels."
+      },
+      "social": {
+        "title": "UGC & Digital Nomad Community",
+        "desc": "Constructing a brand-new globalized collaborative community and decentralized value network."
+      }
+    }
+  },
+  "planning": {
+    "badge": "Planning",
+    "title": "Global Strategic Layout",
+    "subtitle": "China Mainland, Hong Kong, and Malaysia — three structural opportunity windows are opening. Localized content, global incentives, and standardized ad networks.",
+    "mid_title": "From China Prototypes to 1 Billion User Markets",
+    "regions": {
+      "china": {
+        "label": "China Mainland",
+        "tag": "Core Tech R&D & Ecological Foundation",
+        "title": "Global Coverage: Strong R&D Power & Source of Global Products",
+        "description": "The Greater China region is the most solid tech backend for BINGO. Self-developed core minigame engines, multi-lingual AI voice cloning models, and real-time translation algorithms are built here, empowering dozens of international markets."
+      },
+      "hk": {
+        "label": "Hong Kong, China",
+        "tag": "Asia HQ & Web3 Compliance Harbor",
+        "title": "Global Coverage: Licensed Funds Support & International Capital Hub",
+        "description": "As the ideal compliant Web3 harbor, Hong Kong provides BINGO with robust virtual asset licensing frameworks, licensed custodian funds, and globalized multi-national expansion gateways."
+      },
+      "malaysia": {
+        "label": "Malaysia",
+        "tag": "SE Asia Creative Hub & Nomad Center",
+        "title": "Global Coverage: Incubator of 100,000 Digital Content Creators",
+        "description": "Driven by the 'Beach' and 'Wave' campaigns, Malaysia is BINGO's content adaptation frontier, gathering thousands of high-quality multi-lingual short video creators and digital nomads leveraging multi-modal AI."
+      },
+      "sea": {
+        "label": "Southeast Asia",
+        "tag": "Viral Traffic & User Growth Highground",
+        "title": "Global Coverage: 680M Incremental Digital Entertainment Users",
+        "description": "Southeast Asia possesses high-frequency digital entertainment and casual gaming habits. BINGO's low-barrier watch-to-earn and play-to-earn instant-play model easily sweeps regional app store lists."
+      }
+    }
+  },
+  "eco": {
+    "badge": "Layout",
+    "title": "Eco Layout",
+    "subtitle": "Breaking Web2 traffic monopolies and profit locking. BINGO collaborates with users, creators, and compliant capital to build a mutually beneficial, exponentially growing entertainment ecosystem on the bottom architecture of GGC & WebX global platforms.",
+    "mid_title_primary": "Three-in-One Ecological Layout",
+    "mid_title_secondary": "Building the Ultimate Web3 Entertainment Closed Loop",
+    "center_title": "GGC / Web3",
+    "center_desc": "Global Platform<br />Base",
+    "tabs": {
+      "pos": {
+        "tabLabel": "POS Value Growth + GGC Chain",
+        "title": "POS Value Growth + GGC Chain",
+        "subtitle": "The larger the traffic and user base, the higher the ecosystem value and user rights.",
+        "description": "Through our unique 'Proof of Stake/Attention (POS)' incentive system and self-developed GGC chain, users' time spent watching dramas or playing games and interaction data instantly convert to ecological point rights, distributing profit directly to builders via smart contracts."
+      },
+      "iaa_iap": {
+        "tabLabel": "IAA+IAP Hybrid Matrix",
+        "title": "IAA+IAP Hybrid Matrix",
+        "subtitle": "Self-developed highly efficient monetization model for win-win results.",
+        "description": "Breaking barriers between IAA (ad monetization) and IAP (in-app/points purchases). High-value global advertisers bid for display, allowing a large share of ad revenues to go back into the GGC ecosystem pool or directly reward users, ending zero-sum games."
+      },
+      "three_engines": {
+        "tabLabel": "Dramas + Games + Social Triple Engines",
+        "title": "Dramas + Games + Social Triple Engines",
+        "subtitle": "Dramas, minigames, and social platform synergy capturing massive traffic.",
+        "description": "Combining premium vertical dramas and lightweight games with social features and local scenes. Drama content, game assets, social rights, and local services link together. Leveraging multi-scene touchpoints and synergistic operations, it triggers sharing dynamics and scales user growth."
+      },
+      "eco_loop": {
+        "tabLabel": "Ecological Value Loop",
+        "title": "Ecological Value Loop",
+        "subtitle": "Integrating decentralized blockchain tech to build a sustainable network.",
+        "description": "GGC tokens establish multiple utilities across drama unlocking, minigames, NFT co-creation copyright royalties, and DAO voting. Supported by fee burns, platform dividend distribution, and ecosystem fund accumulations, it drives robust token appreciation."
+      },
+      "wave_plan": {
+        "tabLabel": "Wave Plan",
+        "title": "Wave Plan",
+        "subtitle": "Incubating a massive UGC content ecosystem and global digital nomad community.",
+        "description": "The 'Wave Plan' supports over 50 million digital nomads, independent video editors, and creators globally by authorizing access to BINGO's premium copyright library, driving social media traffic on platforms like TikTok and YouTube while enjoying on-chain creative royalties."
+      },
+      "beach_plan": {
+        "tabLabel": "Beach Plan",
+        "title": "Beach Plan",
+        "subtitle": "Supporting creators, capital, and platform in a 'Three-in-One' common prosperity.",
+        "description": "The 'Beach Plan' incubates 'One Person Companies (OPC)' and creator studios. Initial funding from capital pools, high-matching traffic and GGC copyright tools from BINGO, and hits from creators build a top-tier Web3 content engine."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We welcome strategic global investors, content distribution partners, and sovereign licensing bodies to engage in dialog. All inquiries are typically replied to within 48 hours.",
+    "name": "Name",
+    "name_placeholder": "Please enter your name",
+    "company": "Organization/Company",
+    "company_placeholder": "Please enter your organization or company name",
+    "email": "Email Address",
+    "email_placeholder": "Please enter your email address",
+    "desc": "Collaboration Proposal or Message",
+    "desc_placeholder": "Please describe your collaboration intent or specific questions in detail",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "success": "Submitted successfully! We will contact you soon.",
+    "success_title": "Form Submitted Successfully!",
+    "success_desc": "Thank you for your message. Our team will contact you within 48 hours.",
+    "again": "Send Another Message",
+    "failed": "Submission failed. Please try again later.",
+    "required_fields_empty": "Please fill in all required fields.",
+    "required": "*"
+  },
+  "join": {
+    "title": "Careers",
+    "subtitle": "Join BINGO to co-create the global Web3 entertainment ecosystem. Here, every creative spark is valued.",
+    "email_label": "Please send your resume to:",
+    "location": "Location",
+    "experience": "Experience",
+    "education": "Education",
+    "salary": "Salary Range",
+    "expand": "Expand Details",
+    "collapse": "Collapse Details",
+    "responsibilities": "Key Responsibilities",
+    "requirements": "Requirements",
+    "jobs": {
+      "pm": {
+        "title": "Minigame Product Manager",
+        "location": "Shenzhen / Remote",
+        "experience": "3-5 Years",
+        "education": "Bachelor and Above",
+        "salary": "25k - 40k",
+        "responsibilities": [
+          "Responsible for hyper-casual minigames planning and iterations, overseeing core mechanics and retention metrics.",
+          "Optimize user experience continuously based on data, raising active metrics, retention, and monetization efficiency.",
+          "Coordinate with R&D, Art, and Publishing teams to drive high-quality and timely project deliveries.",
+          "Conduct competitor analysis and formulate localization strategies and operations plans for global game releases.",
+          "Explore tokenized system design and deep integration with in-game reward/points protocols."
+        ],
+        "requirements": [
+          "3-5+ years product management experience in minigames or hyper-casual games, with successful live operations records.",
+          "Keen insights into market trends and user psychology, proficient in game balancing and level designs.",
+          "Excellent data analysis, communication, collaboration, and pressure management skills."
+        ]
+      },
+      "operations": {
+        "title": "Drama Content Specialist",
+        "location": "Shenzhen / Malaysia",
+        "experience": "2-4 Years",
+        "education": "Bachelor and Above",
+        "salary": "18k - 30k",
+        "responsibilities": [
+          "Oversee选题, scheduling, and distribution strategies for premium vertical dramas, uncovering high-potential topics.",
+          "Monitor multi-platform data performance, optimizing content placement and traffic conversion funnels.",
+          "Coordinate with multi-lingual editing talent and digital nomad networks to drive localized viral distribution.",
+          "Expand licensing, translation partners, and regional distribution networks to integrate the industry chain.",
+          "Analyze user feedback and behavior profiles to guide the content pipeline for subsequent phases."
+        ],
+        "requirements": [
+          "2-4 years vertical drama, short video, or new media operations experience, familiar with major global video platforms.",
+          "Strong aesthetic senses and content sensitivity, skilled in script analysis and traffic growth mechanics.",
+          "Fluent in English, experience in cross-border/multi-lingual content distribution is highly preferred."
+        ]
+      },
+      "blockchain": {
+        "title": "Web3 Blockchain Engineer",
+        "location": "Hong Kong / Shenzhen",
+        "experience": "3+ Years",
+        "education": "Bachelor and Above",
+        "salary": "30k - 60k",
+        "responsibilities": [
+          "Design, develop, and audit the security of the ecosystem token economy and smart contracts.",
+          "Build secure conduits linking on-chain data with core business systems, protecting asset transaction flows.",
+          "Track compliance and cutting-edge industry technology, optimizing underlying chain and ecosystem architecture.",
+          "Formulate multi-chain deployment solutions, including but not limited to Ethereum, Solana, and Layer 2 networks.",
+          "Optimize consensus mechanics to boost high-concurrency transaction throughput on-chain."
+        ],
+        "requirements": [
+          "3+ years blockchain engineering experience, proficient in Solidity, Rust, or Go.",
+          "Familiar with Ethereum, GGC, and other mainstream public chains, with DeFi or GameFi project histories.",
+          "Strong security awareness, familiar with common smart contract vulnerabilities and defense tactics."
+        ]
+      },
+      "ai": {
+        "title": "AI Algorithm Engineer",
+        "location": "Shenzhen",
+        "experience": "3+ Years",
+        "education": "Master and Above",
+        "salary": "35k - 65k",
+        "responsibilities": [
+          "Research and optimize multi-lingual voice cloning and real-time translation models.",
+          "Construct multi-modal AI toolchains to empower creative adaptations and localized publishing.",
+          "Drive algorithm deployment and engineering, ensuring inference performance and scalability.",
+          "Explore LLM integrations for intelligent customer services, AI scriptwriters, and localized translation agents.",
+          "Maintain algorithm assets and manage preprocessing and feature extraction for large audio-visual data."
+        ],
+        "requirements": [
+          "3+ years research experience in NLP, speech algorithms, or multi-modal algorithms with a Master's degree or above.",
+          "Proficient in PyTorch/TensorFlow, with hands-on experience in LLM fine-tuning methodologies.",
+          "Prior experience in voice cloning, TTS, or real-time translation production deployment is preferred."
+        ]
+      },
+      "market": {
+        "title": "Overseas BD Manager",
+        "location": "Hong Kong / SE Asia",
+        "experience": "3+ Years",
+        "education": "Bachelor and Above",
+        "salary": "25k - 45k",
+        "responsibilities": [
+          "Drive channel expansion and ecosystem partnerships across Southeast Asia and global markets.",
+          "Interface with local e-wallets, streaming sites, and publishing alliances to form distribution loops.",
+          "Formulate regional growth campaigns and incentive schemes to scale users and revenues.",
+          "Represent BINGO at global Web3 & entertainment summits to elevate brand presence.",
+          "Monitor regional competitor activities and compliance frameworks to secure overseas operations."
+        ],
+        "requirements": [
+          "3+ years experience in global market development, business development (BD), or publishing operations.",
+          "Familiar with SE Asian payments and media landscapes, with strong local partnership resources.",
+          "Superb negotiation and cross-cultural communication skills, business fluent in English."
+        ]
+      },
+      "designer": {
+        "title": "UI / Visual Designer",
+        "location": "Shenzhen / Remote",
+        "experience": "2-5 Years",
+        "education": "College and Above",
+        "salary": "15k - 28k",
+        "responsibilities": [
+          "Design product interfaces and build the visual identity guidelines for BINGO.",
+          "Deliver high-fidelity interface layouts and animations to elevate product immersion and aesthetic quality.",
+          "Work closely with front-end developers in design reviews to ensure precise implementation.",
+          "Produce promotional assets, landing page graphics, and community visuals for global markets.",
+          "Participate in user research and run continuous user experience iterations based on testing feedbacks."
+        ],
+        "requirements": [
+          "2-5 years experience designing mobile apps, web, or games, with art or design majors preferred.",
+          "Proficient in Figma, Photoshop, Illustrator, with animation/motion graphics capabilities.",
+          "Great aesthetic sense, detail-oriented, and highly responsive to modern design trends."
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy Statement",
+    "subtitle": "We are committed to protecting your privacy. The following explains our policies and practices on collecting, using, and protecting personal data.",
+    "card_title": "BINGO Entertainment Privacy Policy",
+    "intro": "Last Updated: July 2026",
+    "p1": "BINGO Entertainment ('we', 'us') attaches great importance to user privacy. This policy explains how we collect, use, store, and protect your personal information when using our platform services (including dramas, games, and social ecologies).",
+    "sections": {
+      "s1_title": "1. Information Collection",
+      "s1_p1": "To offer safe and high-quality entertainment, we collect information in the following contexts:",
+      "s1_li1": "Registration & Verification: When registering a BINGO account, we collect usernames, emails, or bound third-party social credentials.",
+      "s1_li2": "Device & Log Data: When visiting our site, we automatically gather your IP address, browser type, OS, timestamps, and page click paths.",
+      "s1_li3": "Communication: When you submit form inquiries or email us, we record your name, company, email, and content of communications.",
+      "s2_title": "2. Information Usage",
+      "s2_p1": "All collected data is strictly utilized for the following purposes:",
+      "s2_li1": "Provide, maintain, and optimize platform services;",
+      "s2_li2": "Process business proposals, inquiries, or career applications;",
+      "s2_li3": "Send notices, security warnings, or ecosystem updates you subscribe to;",
+      "s2_li4": "Fulfill legal compliance obligations and secure our operations.",
+      "s3_title": "3. Share & Disclosure",
+      "s3_p1": "We pledge never to sell or abuse your private data. Information is only disclosed in rare, compliant situations:",
+      "s3_li1": "When we obtain your explicit consent or authorization;",
+      "s3_li2": "In response to court subpoenas, regulatory agencies, or legal processes;",
+      "s3_li3": "With trusted partners helping us deliver services under strict privacy and confidentiality agreements.",
+      "s4_title": "4. Data Storage & Safety",
+      "s4_p1": "We employ top-tier security standards to safeguard your data:",
+      "s4_li1": "On-chain transactions and token flows are protected by cryptography and distributed consensus, storing no plain private credentials.",
+      "s4_li2": "We use TLS/SSL encryption for data in transit and multi-layer encryption for data stored at rest on servers.",
+      "s4_li3": "In case of security breaches, we will initiate emergency response plans and notify affected users in a timely manner.",
+      "s5_title": "5. Your Rights",
+      "s5_p1": "Under relevant legal frameworks, you hold the following rights regarding your data:",
+      "s5_li1": "Access, correct, or update your personal profile records;",
+      "s5_li2": "Request BINGO to delete your account and erase related personal data stores;",
+      "s5_li3": "Manage cookie setups in your browser or unsubscribe from ecosystem update emails.",
+      "s6_title": "6. Updates & Contacts",
+      "s6_p1": "We may update this policy periodically. If key changes are made, we will post notices on our platform showing the revised dates. For privacy-related inquiries, please email us."
+    },
+    "contact_block": {
+      "company": "BINGO Compliance & Fund Committee",
+      "address": "Address: Hong Kong / Shenzhen, China",
+      "email": "Compliance & Privacy Mailbox:"
+    },
+    "note": "Note: This policy is governed and interpreted by BINGO Entertainment and its Compliance Operations Committee."
+  },
+  "footer": {
+    "follow_us": "Follow Us",
+    "legal_info": "Legal Info",
+    "webx": "WebX Portal",
+    "drama": "Short Drama",
+    "game": "Minigame",
+    "privacy": "Privacy Policy",
+    "copyright": "© {year} BINGO. All rights reserved."
+  }
+}

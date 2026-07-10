@@ -1,0 +1,379 @@
+{
+  "seo": {
+    "title": "BINGO Entertainment - Hiburan Semua Senario · Keriangan Hentian Setempat",
+    "keywords": "BINGO, BINGO Entertainment, Web3, Drama Pendek, Permainan Mini, Ekosistem Sosial, GGC, Tokenomik",
+    "description": "BINGO Entertainment komited untuk memecahkan monopoli trafik platform Web2 dan penguncian keuntungan melalui rangkaian asas GGC. Drama menegak premium, permainan kasual, dan ekosistem sosial yang dibina bersama dikaitkan untuk membina rangkaian nilai hiburan digital yang saling menguntungkan dan berkembang pesat."
+  },
+  "nav": {
+    "home": "Utama",
+    "business": "Model Perniagaan",
+    "eco": "Susun Atur Ekologi",
+    "join": "Kerjaya",
+    "contact": "Hubungi Kami",
+    "wechat_popup": "Imbas WeChat untuk Kolaborasi",
+    "telegram": "Saluran Telegram",
+    "email": "E-mel Kami"
+  },
+  "hero": {
+    "subtitle": "Hiburan Semua Senario · Keriangan Hentian Setempat"
+  },
+  "products": {
+    "badge": "Product",
+    "title": "Produk Platform",
+    "experience": "Alami Sekarang",
+    "learn_more": "Ketahui Lebih Lanjut",
+    "know_us": "Tentang Kami",
+    "talk_collab": "Kolaborasi",
+    "items": {
+      "glory": "Hidden Glory",
+      "sword": "Sword & Fate",
+      "dating": "Sweet Date",
+      "red_chamber": "Dream of Red Chambers",
+      "monster": "Monster Maze"
+    }
+  },
+  "dynamics": {
+    "badge": "Market",
+    "title": "Titik Kesukaran & Peluang",
+    "pain_title": "Titik Kesukaran",
+    "opp_title": "Peluang",
+    "pains": {
+      "item1_title": "Model Platform Web2",
+      "item1_desc": "Kos trafik yang tinggi berbanding pengekalan pengguna yang rendah menjadikan monetisasi nilai pengguna sangat mencabar.",
+      "item2_title": "Projek Web3 Tradisional",
+      "item2_desc": "Didorong oleh spekulasi jangka pendek dan mengabaikan utiliti serta kandungan teras.",
+      "item3_title": "Kecekapan Modal Rendah",
+      "item3_desc": "Sangat sukar bagi modal untuk mengenal pasti dan menapis projek berpotensi dengan pengekalan tinggi."
+    },
+    "opps": {
+      "item1_title": "Pasaran Hiburan/Permainan Web3",
+      "item1_stat": "33",
+      "item1_unit": "B",
+      "item1_symbol": "$",
+      "item1_desc": "Melebihi $33B menjelang 2025, memacu permintaan penstriman & pengedaran bertoken.",
+      "item2_title": "Saiz Pasaran Permainan Kasual Hiper",
+      "item2_stat": "20",
+      "item2_unit": "B",
+      "item2_symbol": "$",
+      "item2_desc": "Mencapai $20B menjelang 2025, memadankan capaian tinggi dengan pemerolehan segera.",
+      "item3_title": "Pangkalan Nomad Digital Global",
+      "item3_stat": "50",
+      "item3_unit": "M+",
+      "item3_symbol": "",
+      "item3_desc": "Melebihi 50M nomad digital, memacu kreativiti jarak jauh & ekonomi kolaboratif.",
+      "item4_title": "Hab Strategik Web3 HK",
+      "item4_stat": "No.1",
+      "item4_unit": "",
+      "item4_symbol": "",
+      "item4_desc": "Dana patuh & dasar mesra menjadikan HK hab terbaik ke pasaran global."
+    }
+  },
+  "pillars": {
+    "badge": "Business",
+    "title": "Tiga Pilar Perniagaan Teras",
+    "subtitle": "Berpusat pada bumi digital, drama menegak premium, permainan mini kasual, dan ekosistem sosial yang boleh dikongsi dikaitkan bersama untuk membina rangkaian nilai Web3 yang makmur.",
+    "nodes": {
+      "game_sub": "OLÉ GAME",
+      "game_main": "Permainan",
+      "drama_sub": "OHO DRAMA",
+      "drama_main": "Drama",
+      "social_sub": "Sosial",
+      "social_main": "Sosial"
+    },
+    "items": {
+      "game": {
+        "title": "Permainan Mini: Mula dalam 1 Minit, Kongsi Dividen Ekologi",
+        "desc": "Permainan mini kasual hiper yang sangat menarik menukarkan masa lapang yang berselerak kepada hak mata ekologi. Disokong oleh protokol GGC, mengembalikan pemilikan permainan kepada pembina bersama komuniti."
+      },
+      "drama": {
+        "title": "Drama: Skrin Menegak Premium, Tonton & Dapatkan Mata",
+        "desc": "Perpustakaan kandungan premium, logik tonton-untuk-dapat mata yang lancar dengan halangan rendah, dan terjemahan AI berbilang mod masa nyata yang menghubungkan trafik antarabangsa dengan saluran monetisasi yang sangat cekap."
+      },
+      "social": {
+        "title": "Komuniti UGC & Nomad Digital",
+        "desc": "Membina komuniti kolaboratif global yang serba baharu dan rangkaian nilai terpencar."
+      }
+    }
+  },
+  "planning": {
+    "badge": "Planning",
+    "title": "Susun Atur Strategik Global",
+    "subtitle": "Tanah Besar China, Hong Kong, dan Malaysia — tiga tingkap peluang struktur sedang dibuka. Kandungan tempatan, insentif global, dan rangkaian iklan standard.",
+    "mid_title": "Daripada Prototip China kepada Pasaran 1 Bilion Pengguna",
+    "regions": {
+      "china": {
+        "label": "Tanah Besar China",
+        "tag": "R&D Teknologi Teras & Asas Ekologi",
+        "title": "Liputan Global: Kuasa R&D yang Kuat & Sumber Produk Global",
+        "description": "Rantau Greater China merupakan backend teknologi yang paling kukuh untuk BINGO. Enjin permainan mini teras yang dibangunkan sendiri, model pengklonan suara AI berbilang bahasa, dan algoritma terjemahan masa nyata dibina di sini, memperkasakan berpuluh-puluh pasaran antarabangsa."
+      },
+      "hk": {
+        "label": "Hong Kong, China",
+        "tag": "HQ Asia & Pelabuhan Pematuhan Web3",
+        "title": "Liputan Global: Sokongan Dana Berlesen & Hab Modal Antarabangsa",
+        "description": "Sebagai pelabuhan Web3 patuh yang ideal, Hong Kong menyediakan BINGO dengan rangka kerja pelesenan aset maya yang mantap, dana penjaga berlesen, dan pintu masuk pengembangan pelbagai negara yang global."
+      },
+      "malaysia": {
+        "label": "Malaysia",
+        "tag": "Hab Kreatif Asia Tenggara & Pusat Nomad",
+        "title": "Liputan Global: Inkubator untuk 100,000 Pencipta Kandungan Digital",
+        "description": "Didorong oleh kempen 'Beach' dan 'Wave', Malaysia ialah barisan hadapan penyesuaian kandungan BINGO, menghimpunkan beribu-ribu pencipta video pendek berbilang bahasa yang berkualiti tinggi dan nomad digital yang memanfaatkan AI berbilang mod."
+      },
+      "sea": {
+        "label": "Asia Tenggara",
+        "tag": "Trafik Tular & Pertumbuhan Pengguna Tinggi",
+        "title": "Liputan Global: 680 Juta Pengguna Hiburan Digital Baharu",
+        "description": "Asia Tenggara mempunyai hiburan digital frekuensi tinggi dan tabiat permainan kasual. Model tonton-untuk-dapat dan main-untuk-dapat BINGO yang mudah dengan halangan rendah dengan senang menawan carta kedai aplikasi serantau."
+      }
+    }
+  },
+  "eco": {
+    "badge": "Layout",
+    "title": "Susun Atur Ekologi",
+    "subtitle": "Memecahkan monopoli trafik Web2 dan penguncian keuntungan. BINGO bekerjasama dengan pengguna, pencipta, dan modal patuh untuk membina ekosistem hiburan yang saling menguntungkan dan berkembang pesat pada seni bina bawah platform global GGC & WebX.",
+    "mid_title_primary": "Susun Atur Ekologi Tiga-dalam-Satu",
+    "mid_title_secondary": "Membina Gelung Tertutup Hiburan Web3 Terbaik",
+    "center_title": "GGC / Web3",
+    "center_desc": "Asas Platform<br />Global",
+    "tabs": {
+      "pos": {
+        "tabLabel": "Pertumbuhan Nilai POS + Rangkaian GGC",
+        "title": "Pertumbuhan Nilai POS + Rangkaian GGC",
+        "subtitle": "Lebih besar trafik dan asas pengguna, lebih tinggi nilai ekosistem dan hak pengguna.",
+        "description": "Melalui sistem insentif 'Bukti Kepentingan/Perhatian (POS)' kami yang unik dan rangkaian GGC yang dibangunkan sendiri, masa yang dihabiskan pengguna menonton drama atau bermain permainan serta data interaksi bertukar serta-merta kepada hak mata ekologi, mengedarkan keuntungan secara langsung kepada pembina melalui kontrak pintar."
+      },
+      "iaa_iap": {
+        "tabLabel": "Matriks Hibrid IAA+IAP",
+        "title": "Matriks Hibrid IAA+IAP",
+        "subtitle": "Model monetisasi kecekapan tinggi yang dibangunkan sendiri untuk hasil menang-menang.",
+        "description": "Memecahkan halangan antara IAA (monetisasi iklan) dan IAP (pembelian dalam aplikasi/mata). Pengiklan global bernilai tinggi membida untuk paparan, membolehkan bahagian besar hasil iklan dikembalikan semula ke dalam kolam ekosistem GGC atau memberi ganjaran langsung kepada pengguna, menamatkan permainan sifar-jumlah."
+      },
+      "three_engines": {
+        "tabLabel": "Enjin Tiga Drama + Permainan + Sosial",
+        "title": "Enjin Tiga Drama + Permainan + Sosial",
+        "subtitle": "Sinergi drama, permainan mini, dan platform sosial menangkap trafik yang besar.",
+        "description": "Menggabungkan drama menegak premium dan permainan ringan dengan ciri sosial dan senario tempatan. Kandungan drama, aset permainan, hak sosial, dan perkhidmatan tempatan dihubungkan bersama. Memanfaatkan titik sentuh berbilang senario dan operasi sinergistik, ia mencetuskan dinamik perkongsian dan meningkatkan pertumbuhan pengguna."
+      },
+      "eco_loop": {
+        "tabLabel": "Gelung Nilai Ekologi",
+        "title": "Gelung Nilai Ekologi",
+        "subtitle": "Mengintegrasikan teknologi rantaian blok terpencar untuk membina rangkaian yang mampan.",
+        "description": "Token GGC mewujudkan pelbagai utiliti merentasi pembukaan kunci drama, permainan mini, royalti hak cipta penciptaan bersama NFT, dan pengundian DAO. Disokong oleh pembakaran yuran, pengedaran dividen platform, dan pengumpulan dana ekosistem, ia mendorong apresiasi token yang kukuh."
+      },
+      "wave_plan": {
+        "tabLabel": "Pelan Wave (Wave Plan)",
+        "title": "Pelan Wave (Wave Plan)",
+        "subtitle": "Menginkubasi ekosistem kandungan UGC yang besar dan komuniti nomad digital global.",
+        "description": "The 'Wave Plan' menyokong lebih 50 juta nomad digital, penyunting video bebas, dan pencipta di seluruh dunia dengan membenarkan akses kepada perpustakaan hak cipta premium BINGO, memacu trafik media sosial di platform seperti TikTok dan YouTube sambil menikmati royalti kreatif rantaian blok."
+      },
+      "beach_plan": {
+        "tabLabel": "Pelan Beach (Beach Plan)",
+        "title": "Pelan Beach (Beach Plan)",
+        "subtitle": "Menyokong pencipta, modal, dan platform dalam kemakmuran bersama 'Tiga-dalam-Satu'.",
+        "description": "The 'Beach Plan' menginkubasi 'Syarikat Satu Orang (OPC)' dan studio pencipta. Pembiayaan awal daripada kolam modal, trafik padanan tinggi dan alatan hak cipta GGC daripada BINGO, serta karya hits daripada pencipta membina enjin kandungan Web3 peringkat teratas."
+      }
+    }
+  },
+  "contact": {
+    "title": "Hubungi Kami",
+    "subtitle": "Kami mengalu-alukan pelabur global strategik, rakan kongsi pengedaran kandungan, dan badan pelesenan berdaulat untuk mengadakan dialog. Semua pertanyaan biasanya dijawab dalam tempoh 48 jam.",
+    "name": "Nama",
+    "name_placeholder": "Sila masukkan nama anda",
+    "company": "Organisasi/Syarikat",
+    "company_placeholder": "Sila masukkan nama organisasi atau syarikat anda",
+    "email": "Alamat E-mel",
+    "email_placeholder": "Sila masukkan alamat e-mel anda",
+    "desc": "Cadangan Kolaborasi atau Mesej",
+    "desc_placeholder": "Sila terangkan niat kolaborasi anda atau soalan khusus secara terperinci",
+    "submit": "Hantar",
+    "submitting": "Menghantar...",
+    "success": "Dihantar dengan jaya! Kami akan menghubungi anda tidak lama lagi.",
+    "success_title": "Borang Berjaya Dihantar!",
+    "success_desc": "Terima kasih atas mesej anda. Pasukan kami akan menghubungi anda dalam tempoh 48 jam.",
+    "again": "Hantar Mesej Lain",
+    "failed": "Penghantaran gagal. Sila cuba lagi kemudian.",
+    "required_fields_empty": "Sila isi semua bidang yang diperlukan.",
+    "required": "*"
+  },
+  "join": {
+    "title": "Kerjaya",
+    "subtitle": "Sertai BINGO untuk bersama-sama mencipta ekosistem hiburan Web3 global. Di sini, setiap cetusan kreatif adalah bernilai.",
+    "email_label": "Sila hantar resume anda ke:",
+    "location": "Lokasi",
+    "experience": "Pengalaman",
+    "education": "Pendidikan",
+    "salary": "Julat Gaji",
+    "expand": "Kembangkan Butiran",
+    "collapse": "Sembunyikan Butiran",
+    "responsibilities": "Tanggungjawab Utama",
+    "requirements": "Syarat Kelayakan",
+    "jobs": {
+      "pm": {
+        "title": "Pengurus Produk Permainan Mini",
+        "location": "Shenzhen / Jarak Jauh",
+        "experience": "3-5 Tahun",
+        "education": "Sarjana Muda dan ke Atas",
+        "salary": "25k - 40k",
+        "responsibilities": [
+          "Bertanggungjawab untuk merancang dan lelaran permainan mini kasual hiper, menyelia mekanik teras dan metrik pengekalan.",
+          "Optimumkan pengalaman pengguna secara berterusan berdasarkan data, meningkatkan metrik aktif, pengekalan, dan kecekapan monetisasi.",
+          "Bekerjasama dengan R&D, Seni, dan pasukan Penerbitan untuk memacu penghantaran projek berkualiti tinggi dan tepat pada masanya.",
+          "Menjalankan analisis pesaing dan merangka strategi penyetempatan serta pelan operasi untuk pelepasan permainan global.",
+          "Terokai reka bentuk sistem bertoken dan integrasi mendalam dengan protokol ganjaran/mata dalam permainan."
+        ],
+        "requirements": [
+          "Pengalaman pengurusan produk selama 3-5+ tahun dalam permainan mini atau permainan kasual hiper, dengan rekod operasi langsung yang berjaya.",
+          "Wawasan mendalam tentang trend pasaran dan psikologi pengguna, mahir dalam reka bentuk tahap dan keseimbangan permainan.",
+          "Kemahiran analisis data, komunikasi, kolaborasi, dan pengurusan tekanan yang sangat baik."
+        ]
+      },
+      "operations": {
+        "title": "Pakar Kandungan Drama",
+        "location": "Shenzhen / Malaysia",
+        "experience": "2-4 Tahun",
+        "education": "Sarjana Muda dan ke Atas",
+        "salary": "18k - 30k",
+        "responsibilities": [
+          "Menyelia pemilihan topik, penjadualan, dan strategi pengedaran untuk drama menegak premium, mendedahkan topik yang berpotensi tinggi.",
+          "Pantau prestasi data berbilang platform, mengoptimumkan peletakan kandungan dan corong penukaran trafik.",
+          "Bekerjasama dengan penyunting video berbilang bahasa dan rangkaian nomad digital untuk memacu pengedaran tular tempatan.",
+          "Kembangkan pelesenan, rakan kongsi terjemahan, dan rangkaian pengedaran serantau untuk mengintegrasikan rantaian industri.",
+          "Analisis maklum balas pengguna dan profil tingkah laku untuk membimbing saluran kandungan untuk fasa seterusnya."
+        ],
+        "requirements": [
+          "Pengalaman operasi drama menegak, video pendek, atau media baharu selama 2-4 tahun, biasa dengan platform video global utama.",
+          "Deria estetik dan kepekaan kandungan yang kuat, mahir dalam analisis skrip dan mekanik pertumbuhan trafik.",
+          "Fasih berbahasa Inggeris, pengalaman dalam pengedaran kandungan rentas sempadan/berbilang bahasa adalah sangat diutamakan."
+        ]
+      },
+      "blockchain": {
+        "title": "Jurutera Rantaian Blok Web3",
+        "location": "Hong Kong / Shenzhen",
+        "experience": "3+ Tahun",
+        "education": "Sarjana Muda dan ke Atas",
+        "salary": "30k - 60k",
+        "responsibilities": [
+          "Reka, bangun, dan audit keselamatan ekonomi token ekosistem dan kontrak pintar.",
+          "Bina saluran selamat yang menghubungkan data rantaian dengan sistem perniagaan teras, melindungi aliran transaksi aset.",
+          "Jejaki pematuhan dan teknologi industri termaju, mengoptimumkan rantaian blok asas dan seni bina ekosistem.",
+          "Rangka penyelesaian penempatan berbilang rantaian blok, termasuk tetapi tidak terhad kepada rangkaian Ethereum, Solana, dan Layer 2.",
+          "Optimumkan mekanik konsensus untuk meningkatkan pemprosesan transaksi tinggi pada rantaian blok."
+        ],
+        "requirements": [
+          "Pengalaman kejuruteraan rantaian blok selama 3+ tahun, mahir dalam Solidity, Rust, atau Go.",
+          "Biasa dengan Ethereum, GGC, dan rantaian blok awam arus perdana yang lain, dengan sejarah projek DeFi atau GameFi.",
+          "Kesedaran keselamatan yang kuat, biasa dengan kelemahan kontrak pintar biasa dan taktik pertahanan."
+        ]
+      },
+      "ai": {
+        "title": "Jurutera Algoritma AI",
+        "location": "Shenzhen",
+        "experience": "3+ Tahun",
+        "education": "Sarjana dan ke Atas",
+        "salary": "35k - 65k",
+        "responsibilities": [
+          "Penyelidikan dan pengoptimuman pengklonan suara berbilang bahasa dan model terjemahan masa nyata.",
+          "Bina rantaian alat AI berbilang mod untuk memperkasakan penyesuaian kreatif dan penerbitan tempatan.",
+          "Memacu penempatan algoritma dan kejuruteraan, memastikan prestasi inferens dan kebolehskalaan.",
+          "Terokai penyepaduan LLM untuk perkhidmatan pelanggan pintar, penulis skrip AI, dan ejen terjemahan tempatan.",
+          "Kekalkan aset algoritma dan uruskan pra-pemprosesan serta pengekstrakan ciri untuk data audio-visual yang besar."
+        ],
+        "requirements": [
+          "Penyelidikan algoritma NLP/pertuturan/berbilang mod selama 3+ tahun dengan ijazah Sarjana atau ke atas.",
+          "Mahir dalam PyTorch/TensorFlow, dengan pengalaman praktikal dalam metodologi penalaan halus LLM.",
+          "Pengalaman sedia ada dalam pengklonan suara, TTS, atau penggunaan terjemahan masa nyata adalah diutamakan."
+        ]
+      },
+      "market": {
+        "title": "Pengurus BD Luar Negara",
+        "location": "Hong Kong / Asia Tenggara",
+        "experience": "3+ Tahun",
+        "education": "Sarjana Muda dan ke Atas",
+        "salary": "25k - 45k",
+        "responsibilities": [
+          "Memacu pengembangan saluran dan perkongsian ekosistem merentasi Asia Tenggara dan pasaran global.",
+          "Berhubung dengan e-dompet tempatan, tapak penstriman, dan pakatan penerbitan untuk membentuk gelung pengedaran.",
+          "Rangka kempen pertumbuhan serantau dan skim insentif untuk meningkatkan pengguna dan hasil.",
+          "Mewakili BINGO di sidang kemuncak Web3 & hiburan global untuk meningkatkan kehadiran jenama.",
+          "Pantau aktiviti pesaing serantau dan rangka kerja pematuhan untuk menjamin operasi luar negara."
+        ],
+        "requirements": [
+          "Pengalaman selama 3+ tahun dalam pembangunan pasaran global, pembangunan perniagaan (BD), atau operasi penerbitan.",
+          "Biasa dengan pembayaran Asia Tenggara dan landskap media, dengan sumber perkongsian tempatan yang kuat.",
+          "Kemahiran rundingan dan komunikasi silang budaya yang hebat, fasih berbahasa Inggeris perniagaan."
+        ]
+      },
+      "designer": {
+        "title": "Pereka UI / Visual",
+        "location": "Shenzhen / Jarak Jauh",
+        "experience": "2-5 Tahun",
+        "education": "Kolej dan ke Atas",
+        "salary": "15k - 28k",
+        "responsibilities": [
+          "Reka bentuk antara muka produk dan bina garis panduan identiti visual untuk BINGO.",
+          "Sampaikan susun atur antara muka kesetiaan tinggi dan animasi untuk meningkatkan rendaman produk dan kualiti estetik.",
+          "Bekerjasama rapat dengan pembangun bahagian hadapan dalam semakan reka bentuk untuk memastikan pelaksanaan yang tepat.",
+          "Hasilkan aset promosi, grafik halaman pendaratan, dan visual komuniti untuk pasaran global.",
+          "Mengambil bahagian dalam penyelidikan pengguna dan menjalankan lelaran pengalaman pengguna yang berterusan berdasarkan maklum balas ujian."
+        ],
+        "requirements": [
+          "Pengalaman selama 2-5 tahun merekabentuk aplikasi mudah alih, web, atau permainan, dengan jurusan seni atau reka bentuk diutamakan.",
+          "Mahir dalam Figma, Photoshop, Illustrator, dengan keupayaan animasi/grafik gerakan.",
+          "Deria estetik yang hebat, berorientasikan perincian, dan sangat responsif kepada trend reka bentuk moden."
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "title": "Kenyataan Dasar Privasi",
+    "subtitle": "Kami berkomitmen untuk melindungi privasi data peribadi anda. Berikut menjelaskan dasar dan amalan kami dalam mengumpul, menggunakan, dan melindungi data peribadi anda.",
+    "card_title": "Dasar Privasi BINGO Entertainment",
+    "intro": "Kemas Kini Terakhir: Julai 2026",
+    "p1": "BINGO Entertainment ('kami') sangat mementingkan privasi pengguna. Dasar ini menerangkan cara kami mengumpul, menggunakan, menyimpan, dan melindungi maklumat peribadi anda apabila menggunakan perkhidmatan platform kami (termasuk drama, permainan, dan ekosistem sosial).",
+    "sections": {
+      "s1_title": "1. Pengumpulan Maklumat",
+      "s1_p1": "Untuk menawarkan hiburan yang selamat dan berkualiti tinggi, kami mengumpul maklumat dalam konteks berikut:",
+      "s1_li1": "Pendaftaran & Pengesahan: Apabila mendaftar akaun BINGO, kami mengumpul nama pengguna, e-mel, atau kelayakan sosial pihak ketiga yang terikat.",
+      "s1_li2": "Data Peranti & Log: Apabila melawat tapak kami, kami secara automatik mengumpul alamat IP anda, jenis penyemak imbas, OS, cap masa, dan laluan klik halaman.",
+      "s1_li3": "Komunikasi: Apabila anda menyerahkan borang pertanyaan atau e-mel kepada kami, kami merekodkan nama, syarikat, e-mel anda, dan kandungan komunikasi.",
+      "s2_title": "2. Penggunaan Maklumat",
+      "s2_p1": "Semua data yang dikumpul digunakan secara ketat untuk tujuan berikut:",
+      "s2_li1": "Menyediakan, menyelenggara, dan mengoptimumkan perkhidmatan platform;",
+      "s2_li2": "Memproses cadangan perniagaan, pertanyaan, atau permohonan kerjaya;",
+      "s2_li3": "Menghantar notis, amaran keselamatan, atau kemas kini ekosistem yang anda langgan;",
+      "s2_li4": "Memenuhi kewajipan pematuhan undang-undang dan memastikan operasi kami selamat.",
+      "s3_title": "3. Perkongsian & Pendedahan",
+      "s3_p1": "Kami berikrar tidak akan menjual atau menyalahgunakan data peribadi anda. Maklumat hanya didedahkan dalam situasi pematuhan yang jarang berlaku:",
+      "s3_li1": "Apabila kami mendapat persetujuan atau kebenaran nyata anda;",
+      "s3_li2": "Sebagai tindak balas kepada sepina mahkamah, agensi kawal selia, atau proses undang-undang;",
+      "s3_li3": "Dengan rakan kongsi dipercayai yang membantu kami menyampaikan perkhidmatan di bawah perjanjian privasi dan kerahsiaan yang ketat.",
+      "s4_title": "4. Penyimpanan & Keselamatan Data",
+      "s4_p1": "Kami menggunakan piawaian keselamatan peringkat teratas untuk melindungi data anda:",
+      "s4_li1": "Transaksi rantaian blok dan aliran token dilindungi oleh kriptografi dan konsensus teragih, tidak menyimpan kelayakan peribadi bertulis biasa.",
+      "s4_li2": "Kami menggunakan penyulitan TLS/SSL untuk data dalam transit dan penyulitan berbilang lapisan untuk data yang disimpan pada pelayan.",
+      "s4_li3": "Sekiranya berlaku pelanggaran keselamatan, kami akan memulakan rancangan tindak balas kecemasan dan memberitahu pengguna yang terjejas dalam masa yang sesuai.",
+      "s5_title": "5. Hak Anda",
+      "s5_p1": "Di bawah rangka kerja undang-undang yang relevan, anda memegang hak berikut mengenai data anda:",
+      "s5_li1": "Mengakses, membetulkan, atau mengemas kini rekod profil peribadi anda;",
+      "s5_li2": "Meminta BINGO untuk memadamkan akaun anda dan memadamkan storan data peribadi yang berkaitan;",
+      "s5_li3": "Urus persediaan kuki dalam penyemak imbas anda atau batalkan langganan daripada e-mel kemas kini ekosistem.",
+      "s6_title": "6. Kemas Kini & Hubungan",
+      "s6_p1": "Kami mungkin mengemas kini dasar ini secara berkala. Jika perubahan penting dibuat, kami akan menyiarkan notis di platform kami yang menunjukkan tarikh yang disemak. Untuk sebarang pertanyaan berkaitan privasi, sila e-mel kepada kami."
+    },
+    "contact_block": {
+      "company": "Jawatankuasa Pematuhan & Dana BINGO",
+      "address": "Alamat: Hong Kong / Shenzhen, China",
+      "email": "Peti Mel Pematuhan & Privasi:"
+    },
+    "note": "Nota: Dasar ini ditadbir dan ditafsirkan oleh BINGO Entertainment dan Jawatankuasa Operasi Pematuhannya."
+  },
+  "footer": {
+    "follow_us": "Ikuti Kami",
+    "legal_info": "Maklumat Undang-undang",
+    "webx": "Portal WebX",
+    "drama": "Drama Pendek",
+    "game": "Permainan Mini",
+    "privacy": "Dasar Privasi",
+    "copyright": "© {year} BINGO. Hak cipta terpelihara."
+  }
+}

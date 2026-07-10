@@ -1,11 +1,16 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
+
 <template>
   <section class="dynamics-section section-padding">
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Market</span>
+        <span class="bg-text">{{ t('dynamics.badge') }}</span>
         <div class="title-wrap">
-          <h2>市场痛点与机遇</h2>
+          <h2>{{ t('dynamics.title') }}</h2>
           <div class="divider-line"></div>
         </div>
       </div>
@@ -14,7 +19,7 @@
       <div class="subsection">
         <div class="sub-header">
           <img src="/img/箭头左.png" alt="" class="sub-arrow arrow-left" />
-          <span class="sub-title">痛点</span>
+          <span class="sub-title">{{ t('dynamics.pain_title') }}</span>
           <img src="/img/箭头右.png" alt="" class="sub-arrow arrow-right" />
         </div>
 
@@ -23,24 +28,24 @@
           <div class="pain-card glass-card">
             <div class="pattern-bg"></div>
             <div class="card-content">
-              <h3>Web2平台模式</h3>
-              <p>高买量成本与低留存率的矛盾，使用户价值难以挖掘</p>
+              <h3>{{ t('dynamics.pains.item1_title') }}</h3>
+              <p>{{ t('dynamics.pains.item1_desc') }}</p>
             </div>
           </div>
           <!-- Card 2 -->
           <div class="pain-card glass-card">
             <div class="pattern-bg"></div>
             <div class="card-content">
-              <h3>传统Web3项目</h3>
-              <p>偏向短期投机，忽略内容本质</p>
+              <h3>{{ t('dynamics.pains.item2_title') }}</h3>
+              <p>{{ t('dynamics.pains.item2_desc') }}</p>
             </div>
           </div>
           <!-- Card 3 -->
           <div class="pain-card glass-card">
             <div class="pattern-bg"></div>
             <div class="card-content">
-              <h3>传统Web3项目</h3>
-              <p>资本极难筛选高留存潜力项目</p>
+              <h3>{{ t('dynamics.pains.item3_title') }}</h3>
+              <p>{{ t('dynamics.pains.item3_desc') }}</p>
             </div>
           </div>
         </div>
@@ -50,7 +55,7 @@
       <div class="subsection opportunity-section">
         <div class="sub-header">
           <img src="/img/箭头左.png" alt="" class="sub-arrow arrow-left" />
-          <span class="sub-title">机遇</span>
+          <span class="sub-title">{{ t('dynamics.opp_title') }}</span>
           <img src="/img/箭头右.png" alt="" class="sub-arrow arrow-right" />
         </div>
 
@@ -58,50 +63,56 @@
           <!-- Card 1 -->
           <div class="opp-card opportunity-bg-1">
             <div class="opp-card-inner">
-              <span class="opp-title">Web3娱乐/游戏市场规模</span>
+              <span class="opp-title">{{ t('dynamics.opps.item1_title') }}</span>
               <div class="opp-stat">
-                <span class="symbol">$</span>
-                <span class="number">330</span>
-                <span class="unit">亿</span>
+                <span class="symbol">{{ t('dynamics.opps.item1_symbol') }}</span>
+                <span class="number">{{ t('dynamics.opps.item1_stat') }}</span>
+                <span class="unit">{{ t('dynamics.opps.item1_unit') }}</span>
               </div>
-              <p class="opp-desc">2025年预计超过330亿美元 蕴藏庞大代币化流媒体与分发需求</p>
+              <p class="opp-desc">{{ t('dynamics.opps.item1_desc') }}</p>
             </div>
           </div>
 
           <!-- Card 2 -->
           <div class="opp-card opportunity-bg-2">
             <div class="opp-card-inner">
-              <span class="opp-title">超休闲小游戏市场规模</span>
+              <span class="opp-title">{{ t('dynamics.opps.item2_title') }}</span>
               <div class="opp-stat">
-                <span class="symbol">$</span>
-                <span class="number">200</span>
-                <span class="unit">亿</span>
+                <span class="symbol">{{ t('dynamics.opps.item2_symbol') }}</span>
+                <span class="number">{{ t('dynamics.opps.item2_stat') }}</span>
+                <span class="unit">{{ t('dynamics.opps.item2_unit') }}</span>
               </div>
-              <p class="opp-desc">2025年预计达200亿美元 兼具极高用户触达率与即时获客转化</p>
+              <p class="opp-desc">{{ t('dynamics.opps.item2_desc') }}</p>
             </div>
           </div>
 
           <!-- Card 3 -->
           <div class="opp-card opportunity-bg-3">
             <div class="opp-card-inner">
-              <span class="opp-title">全球数字游民体量</span>
+              <span class="opp-title">{{ t('dynamics.opps.item3_title') }}</span>
               <div class="opp-stat">
-                <span class="number">5000</span>
-                <span class="unit">万+</span>
+                <span v-if="t('dynamics.opps.item3_symbol')" class="symbol">{{
+                  t('dynamics.opps.item3_symbol')
+                }}</span>
+                <span class="number">{{ t('dynamics.opps.item3_stat') }}</span>
+                <span class="unit">{{ t('dynamics.opps.item3_unit') }}</span>
               </div>
-              <p class="opp-desc">数字游民已超5,000万，远程创意产出和协同经济增长需求持续高涨</p>
+              <p class="opp-desc">{{ t('dynamics.opps.item3_desc') }}</p>
             </div>
           </div>
 
           <!-- Card 4 -->
           <div class="opp-card opportunity-bg-4">
             <div class="opp-card-inner">
-              <span class="opp-title">香港Web3桥头堡地位</span>
+              <span class="opp-title">{{ t('dynamics.opps.item4_title') }}</span>
               <div class="opp-stat">
-                <span class="number">1</span>
-                <span class="unit">号</span>
+                <span v-if="t('dynamics.opps.item4_symbol')" class="symbol">{{
+                  t('dynamics.opps.item4_symbol')
+                }}</span>
+                <span class="number">{{ t('dynamics.opps.item4_stat') }}</span>
+                <span class="unit">{{ t('dynamics.opps.item4_unit') }}</span>
               </div>
-              <p class="opp-desc">合规基金框架、政策免登和创新生态红利支持，切入海外蓝海最佳枢纽</p>
+              <p class="opp-desc">{{ t('dynamics.opps.item4_desc') }}</p>
             </div>
           </div>
         </div>
@@ -144,7 +155,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 4px;
-  color: #B4EFFE;
+  color: #b4effe;
   text-shadow: 0 0 15px rgba(180, 239, 254, 0.25);
 }
 
@@ -180,7 +191,7 @@
 .pain-card h3 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #B4EFFE;
+  color: #b4effe;
   margin-bottom: 12px;
   letter-spacing: 0.5px;
 }
@@ -243,7 +254,7 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
-  margin: 24px 0 18px;
+  margin: 16px 0 12px;
 }
 
 .opp-stat .symbol {
@@ -309,6 +320,15 @@
     padding: 24px;
   }
 
+  .opp-card-inner {
+    padding: 20px 16px;
+  }
+
+  .opp-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
   .opp-stat .number {
     font-size: 3.5rem;
   }
@@ -332,7 +352,7 @@
   }
 
   .opp-stat .number {
-    font-size: 3.0rem;
+    font-size: 3rem;
   }
 
   .opp-stat .symbol {

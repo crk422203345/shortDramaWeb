@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { syncHtmlLang } from '@/i18n'
+
+const { t, locale } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
-const isPrivacyPage = computed(() => route.path === '/privacy')
+const isPrivacyPage = computed(() => route.name === 'privacy')
 
-const activeItem = ref('首页')
-const menuItems = [
-  { label: '首页', href: '#home' },
-  { label: '业务模式', href: '#business-mode' },
-  { label: '生态布局', href: '#eco-layout' },
-]
+const activeItem = ref('home')
+const menuItems = computed(() => [
+  { key: 'home', label: t('nav.home'), href: '#home' },
+  { key: 'business', label: t('nav.business'), href: '#business-mode' },
+  { key: 'eco', label: t('nav.eco'), href: '#eco-layout' },
+])
 
 const isMobileMenuOpen = ref(false)
 const toggleMobileMenu = () => {
@@ -29,30 +33,58 @@ watch(isMobileMenuOpen, (isOpen) => {
   }
 })
 
-const navigateTo = (item: { label: string; href: string }) => {
-  activeItem.value = item.label
+const navigateTo = (item: { key: string; label: string; href: string }) => {
+  activeItem.value = item.key
   const hash = item.href
   closeMobileMenu()
-  if (route.path === '/') {
+  if (route.name === 'home') {
     // Already on home – just smooth scroll to section
     const el = document.querySelector(hash)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   } else {
     // On another page (e.g. /join) – navigate home then scroll to section
-    router.push({ path: '/', hash })
+    router.push({ name: 'home', hash })
   }
 }
 
-
 /* Language dropdown */
 const showLanguageDropdown = ref(false)
-const selectedLanguage = ref('简体中文')
-const languages = ['简体中文', 'English', '繁體中文']
+const langMap: Record<string, string> = {
+  'zh-CN': '简体中文',
+  'zh-TW': '繁體中文',
+  en: 'English',
+  ms: 'Bahasa Melayu',
+}
+const selectedLanguage = computed(() => {
+  return langMap[locale.value] || '简体中文'
+})
+const languages = ['简体中文', '繁體中文', 'English', 'Bahasa Melayu']
 let langTimer: any = null
 
 const selectLanguage = (lang: string) => {
-  selectedLanguage.value = lang
+  const reverseMap: Record<string, string> = {
+    简体中文: 'zh-CN',
+    繁體中文: 'zh-TW',
+    English: 'en',
+    'Bahasa Melayu': 'ms',
+  }
+  const targetLocale = reverseMap[lang]
+  if (targetLocale) {
+    locale.value = targetLocale
+    localStorage.setItem('user-language', targetLocale)
+    syncHtmlLang(targetLocale as any)
+
+    // Redirect to prefixed URL
+    const cleanPath = route.fullPath.replace(/^\/(zh-CN|zh-TW|en|ms)/, '')
+    const targetPath = `/${targetLocale}${cleanPath === '/' ? '' : cleanPath}`
+    router.push({ path: targetPath })
+  }
   showLanguageDropdown.value = false
+}
+
+const selectLanguageAndClose = (lang: string) => {
+  selectLanguage(lang)
+  closeMobileMenu()
 }
 
 const openLanguageDropdown = () => {
@@ -92,22 +124,22 @@ const closeContactDropdown = () => {
 const goToContact = () => {
   showContactDropdown.value = false
   closeMobileMenu()
-  activeItem.value = '联系我们'
-  if (router.currentRoute.value.path === '/') {
+  activeItem.value = 'contact'
+  if (route.name === 'home') {
     const el = document.getElementById('contact')
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
       return
     }
   }
-  router.push({ path: '/', hash: '#contact' })
+  router.push({ name: 'home', hash: '#contact' })
 }
 
 const goToJoin = () => {
   showContactDropdown.value = false
   closeMobileMenu()
-  activeItem.value = '联系我们'
-  router.push('/join')
+  activeItem.value = 'contact'
+  router.push({ name: 'join' })
 }
 
 /* More menu dropdown */
@@ -166,29 +198,33 @@ onUnmounted(() => {
         <ul>
           <li
             v-for="item in menuItems"
-            :key="item.label"
-            :class="{ active: activeItem === item.label }"
+            :key="item.key"
+            :class="{ active: activeItem === item.key }"
           >
             <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
           </li>
 
           <!-- Contact with dropdown -->
-          <li
-            class="has-dropdown"
-            :class="{ active: activeItem === '联系我们' }"
-          >
+          <li class="has-dropdown" :class="{ active: activeItem === 'contact' }">
             <div
               class="contact-wrapper"
               @mouseenter="openContactDropdown"
               @mouseleave="closeContactDropdown"
             >
-              <a
-                href="javascript:void(0)"
-                role="button"
-                @click="toggleContactDropdown"
-              >
-                联系我们
-                <svg class="caret" :class="{ rotated: showContactDropdown }" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <a href="javascript:void(0)" role="button" @click="toggleContactDropdown">
+                {{ t('nav.contact') }}
+                <svg
+                  class="caret"
+                  :class="{ rotated: showContactDropdown }"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </a>
@@ -196,12 +232,15 @@ onUnmounted(() => {
               <transition name="fade">
                 <div v-if="showContactDropdown" class="contact-dropdown">
                   <div class="contact-dropdown-inner">
-                    <div class="dropdown-item" @click="goToContact">洽谈合作</div>
+                    <div class="dropdown-item" @click="goToContact">
+                      {{ t('products.talk_collab') }}
+                    </div>
                     <RouterLink
-                      to="/join"
+                      :to="{ name: 'join' }"
                       class="dropdown-item"
                       @click="showContactDropdown = false"
-                    >加入我们</RouterLink>
+                      >{{ t('nav.join') }}</RouterLink
+                    >
                   </div>
                 </div>
               </transition>
@@ -213,32 +252,55 @@ onUnmounted(() => {
       <!-- Right Actions (Language & Extras) -->
       <div class="header-actions" v-if="!isPrivacyPage">
         <!-- Language Selector -->
-        <div 
-          class="lang-selector" 
+        <div
+          class="lang-selector"
           @mouseenter="openLanguageDropdown"
           @mouseleave="closeLanguageDropdown"
         >
           <button class="lang-btn" @click="showLanguageDropdown = !showLanguageDropdown">
             <!-- Globe Icon SVG -->
-            <svg class="icon-globe" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              class="icon-globe"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              ></path>
             </svg>
             <span>{{ selectedLanguage }}</span>
             <!-- Down Arrow Icon -->
-            <svg class="icon-arrow" :class="{ rotated: showLanguageDropdown }" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              class="icon-arrow"
+              :class="{ rotated: showLanguageDropdown }"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </button>
-          
+
           <!-- Dropdown items -->
           <transition name="fade">
             <div v-if="showLanguageDropdown" class="lang-dropdown">
               <div class="lang-dropdown-inner">
-                <div 
-                  v-for="lang in languages" 
-                  :key="lang" 
+                <div
+                  v-for="lang in languages"
+                  :key="lang"
                   class="dropdown-item"
                   :class="{ active: lang === selectedLanguage }"
                   @click="selectLanguage(lang)"
@@ -251,17 +313,28 @@ onUnmounted(() => {
         </div>
 
         <!-- 3 Dots Menu Button -->
-        <div 
+        <div
           class="more-menu-container"
           @mouseenter="openMoreDropdown"
           @mouseleave="closeMoreDropdown"
         >
-          <button class="more-btn" aria-label="More Menu" @click="showMoreDropdown = !showMoreDropdown">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/>
-              <circle cx="8" cy="12" r="1" fill="currentColor"/>
-              <circle cx="12" cy="12" r="1" fill="currentColor"/>
-              <circle cx="16" cy="12" r="1" fill="currentColor"/>
+          <button
+            class="more-btn"
+            aria-label="More Menu"
+            @click="showMoreDropdown = !showMoreDropdown"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" />
+              <circle cx="8" cy="12" r="1" fill="currentColor" />
+              <circle cx="12" cy="12" r="1" fill="currentColor" />
+              <circle cx="16" cy="12" r="1" fill="currentColor" />
             </svg>
           </button>
 
@@ -269,8 +342,13 @@ onUnmounted(() => {
           <transition name="fade">
             <div v-if="showMoreDropdown" class="more-dropdown">
               <div class="more-dropdown-inner">
-                <a href="https://webx.ai/" target="_blank" class="dropdown-item" @click="showMoreDropdown = false">
-                  WebX 官网
+                <a
+                  href="https://webx.ai/"
+                  target="_blank"
+                  class="dropdown-item"
+                  @click="showMoreDropdown = false"
+                >
+                  {{ t('footer.webx') }}
                 </a>
               </div>
             </div>
@@ -279,10 +357,10 @@ onUnmounted(() => {
       </div>
 
       <!-- Hamburger Button (Mobile Only) -->
-      <button 
+      <button
         v-if="!isPrivacyPage"
-        class="hamburger-btn" 
-        :class="{ active: isMobileMenuOpen }" 
+        class="hamburger-btn"
+        :class="{ active: isMobileMenuOpen }"
         @click="toggleMobileMenu"
         aria-label="Toggle Menu"
       >
@@ -297,14 +375,25 @@ onUnmounted(() => {
       <div v-if="isMobileMenuOpen && !isPrivacyPage" class="mobile-drawer">
         <div class="drawer-content">
           <ul class="drawer-nav">
-            <li v-for="item in menuItems" :key="item.label" :class="{ active: activeItem === item.label }">
+            <li
+              v-for="item in menuItems"
+              :key="item.key"
+              :class="{ active: activeItem === item.key }"
+            >
               <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
             </li>
-            <li :class="{ active: activeItem === '联系我们' }">
-              <div class="drawer-section-title">联系我们</div>
+            <li :class="{ active: activeItem === 'contact' }">
+              <div class="drawer-section-title">{{ t('nav.contact') }}</div>
               <div class="drawer-submenu">
-                <a href="javascript:void(0)" class="drawer-subitem" @click="goToContact">洽谈合作</a>
-                <RouterLink to="/join" class="drawer-subitem" @click="closeMobileMenu">加入我们</RouterLink>
+                <a href="javascript:void(0)" class="drawer-subitem" @click="goToContact">{{
+                  t('products.talk_collab')
+                }}</a>
+                <RouterLink
+                  :to="{ name: 'join' }"
+                  class="drawer-subitem"
+                  @click="closeMobileMenu"
+                  >{{ t('nav.join') }}</RouterLink
+                >
               </div>
             </li>
           </ul>
@@ -315,12 +404,12 @@ onUnmounted(() => {
           <div class="drawer-language">
             <div class="drawer-section-title">语言 / Language</div>
             <div class="drawer-lang-options">
-              <button 
-                v-for="lang in languages" 
-                :key="lang" 
+              <button
+                v-for="lang in languages"
+                :key="lang"
                 class="drawer-lang-btn"
                 :class="{ active: lang === selectedLanguage }"
-                @click="selectLanguage(lang); closeMobileMenu()"
+                @click="selectLanguageAndClose(lang)"
               >
                 {{ lang }}
               </button>
@@ -509,7 +598,7 @@ onUnmounted(() => {
 /* Specific active/hover style for language selector items */
 .lang-dropdown-inner .dropdown-item:hover,
 .lang-dropdown-inner .dropdown-item.active {
-  background: #1B192D;
+  background: #1b192d;
   color: #ffffff;
   font-weight: 500;
 }
@@ -565,7 +654,7 @@ onUnmounted(() => {
 }
 
 .more-dropdown-inner .dropdown-item:hover {
-  background: #1B192D;
+  background: #1b192d;
   color: #ffffff;
 }
 
@@ -623,7 +712,9 @@ onUnmounted(() => {
 /* Animations */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .fade-enter-from,
@@ -775,7 +866,9 @@ onUnmounted(() => {
 /* Drawer transitions */
 .drawer-fade-enter-active,
 .drawer-fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .drawer-fade-enter-from,
@@ -793,6 +886,7 @@ onUnmounted(() => {
 
   .hamburger-btn {
     display: flex;
+    margin-left: auto;
   }
 }
 

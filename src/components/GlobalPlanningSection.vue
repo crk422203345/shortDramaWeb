@@ -1,49 +1,54 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // Ordered keys determine slide direction
 const regionKeys = ['china', 'hk', 'malaysia', 'sea'] as const
 
-const regions = {
+const regions = computed(() => ({
   china: {
     id: 'china',
-    label: '中国大陆',
-    tag: '核心技术研发与生态基石',
-    title: '全球覆盖：强大的研发实力 & 出海产品源泉',
-    description: '大中华区是Bingo文娱最坚实的技术后方。自研的核心小游戏引擎、高动态AI多语种音色克隆模型和实时同声传译算法均在此沉淀研发，为全球数十个出海国家提供源源不断的创新科技助力。',
-    alertBox: '依托成熟的数字文创供应链与极佳的工程师红利，全天候保障全球服务器的高性能、低损耗流转。',
-    img: '/img/dalu.png'
+    label: t('planning.regions.china.label'),
+    tag: t('planning.regions.china.tag'),
+    title: t('planning.regions.china.title'),
+    description: t('planning.regions.china.description'),
+    img: '/img/dalu.png',
   },
   hk: {
     id: 'hk',
-    label: '中国香港',
-    tag: '亚洲总部 & WEB3合规港湾',
-    title: '全球覆盖：持牌基金支持 & 国际资本汇聚地',
-    description: '作为最理想的Web3合规港湾，香港为Bingo文娱提供了完备的虚拟资产牌照框架、持牌托管基金、及全球化跨国出海通道。',
-    alertBox: '在这里，我们与多方内容及法律合规合伙人深度结合，筑牢资金流通与资产确权基石，全力推进通证生态安全建设。',
-    img: '/img/dalu.png'
+    label: t('planning.regions.hk.label'),
+    tag: t('planning.regions.hk.tag'),
+    title: t('planning.regions.hk.title'),
+    description: t('planning.regions.hk.description'),
+    img: '/img/dalu.png',
   },
   malaysia: {
     id: 'malaysia',
-    label: '马来西亚',
-    tag: '东南亚二创基地 & 游民枢纽',
-    title: '全球覆盖：10万名数字内容创客孵化地',
-    description: '依托“沙滩计划”与“浪潮计划”，马来西亚是Bingo文娱内容二创的最强前沿。汇聚数万名高素质跨语种短视频剪辑达人和数字游民，通过多模态AI工具实现裂变式本地宣发。',
-    alertBox: '深度整合本地创意资源与流媒体推广联盟，打造高效合规的一人公司(OPC)分发变现闭环。',
-    img: '/img/dalu.png'
+    label: t('planning.regions.malaysia.label'),
+    tag: t('planning.regions.malaysia.tag'),
+    title: t('planning.regions.malaysia.title'),
+    description: t('planning.regions.malaysia.description'),
+    img: '/img/dalu.png',
   },
   sea: {
     id: 'sea',
-    label: '东南亚',
-    tag: '流量爆发 & 用户裂变高地',
-    title: '全球覆盖：6.8亿 增量数字娱乐用户',
-    description: '东南亚具有极高频的数字娱乐及超休闲游戏交互习惯。Bingo文娱通过“看剧/玩游戏享生态红利”的超低门槛、即点即玩模式快速席卷多国应用商店下载排行。',
-    alertBox: '结合东南亚本地电子钱包（Touch \'n Go、GrabPay等），实现零延迟、超轻量的小额收益即时分发，裂变系数高达2.5倍。',
-    img: '/img/dalu.png'
-  }
-}
+    label: t('planning.regions.sea.label'),
+    tag: t('planning.regions.sea.tag'),
+    title: t('planning.regions.sea.title'),
+    description: t('planning.regions.sea.description'),
+    img: '/img/dalu.png',
+  },
+}))
 
-const activeTab = ref<keyof typeof regions>('china')
+type RegionKey = 'china' | 'hk' | 'malaysia' | 'sea'
+
+const activeTab = ref<RegionKey>('china')
+const activeRegionData = computed(() => {
+  return regions.value[activeTab.value]
+})
+
 const activeIndex = ref(0)
 const slideDirection = ref<'left' | 'right'>('left')
 
@@ -51,7 +56,7 @@ const slideDirection = ref<'left' | 'right'>('left')
 const tabRefs = ref<any[]>([])
 const sliderStyle = ref({
   width: '0px',
-  transform: 'translateX(0px)'
+  transform: 'translateX(0px)',
 })
 
 const updateSlider = () => {
@@ -65,14 +70,14 @@ const updateSlider = () => {
         const left = activeRect.left - parentRect.left
         sliderStyle.value = {
           width: `${activeRect.width}px`,
-          transform: `translateX(${left}px)`
+          transform: `translateX(${left}px)`,
         }
       }
     }
   })
 }
 
-const switchTab = (newId: keyof typeof regions, index: number) => {
+const switchTab = (newId: RegionKey, index: number) => {
   const currentIndex = activeIndex.value
   slideDirection.value = index >= currentIndex ? 'left' : 'right'
   activeTab.value = newId
@@ -91,27 +96,37 @@ onMounted(() => {
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Planning</span>
+        <span class="bg-text">{{ t('planning.badge') }}</span>
         <div class="title-wrap">
-          <h2>全球化规划</h2>
+          <h2>{{ t('planning.title') }}</h2>
           <div class="divider-line"></div>
         </div>
         <p class="section-subtitle font-light">
-          中国大陆、中国香港、马来西亚——三个结构性机会窗口正在开启。内容本地化、补贴全球化、广告生态标准化。
+          {{ t('planning.subtitle') }}
         </p>
       </div>
 
       <!-- Mid Subtitle (Huge typography in center) -->
       <div class="mid-title-wrap">
-        <h3 class="mid-title">从中国模式样板 到十亿人口蓝海</h3>
+        <h3 class="mid-title">{{ t('planning.mid_title') }}</h3>
       </div>
 
       <!-- Navigation Tabs Capsule -->
       <div class="tabs-wrapper">
         <div class="tabs-capsule">
           <div class="tabs-slider" :style="sliderStyle"></div>
-          <button v-for="(key, index) in regionKeys" :key="key" :ref="(el: any) => { if (el) tabRefs[index] = el }"
-            class="tab-btn" :class="{ active: activeTab === key }" @click="switchTab(key, index)">
+          <button
+            v-for="(key, index) in regionKeys"
+            :key="key"
+            :ref="
+              (el: any) => {
+                if (el) tabRefs[index] = el
+              }
+            "
+            class="tab-btn"
+            :class="{ active: activeTab === key }"
+            @click="switchTab(key, index)"
+          >
             {{ regions[key].label }}
           </button>
         </div>
@@ -123,19 +138,29 @@ onMounted(() => {
           <div :key="activeTab" class="region-detail-card glass-card">
             <!-- Left Info -->
             <div class="region-info">
-              <span class="region-tag">{{ regions[activeTab].label }}</span>
-              <h4 class="region-title">{{ regions[activeTab].title }}</h4>
-              <p class="region-desc">{{ regions[activeTab].description }}</p>
+              <span class="region-tag">{{ activeRegionData.label }}</span>
+              <h4 class="region-title">{{ activeRegionData.title }}</h4>
+              <p class="region-desc">{{ activeRegionData.description }}</p>
             </div>
 
             <!-- Right Futuristic Visual -->
             <div class="region-visual">
               <div class="visual-border-wrap">
-                <img :src="regions[activeTab].img" alt="Futuristic Tech Cube" class="visual-img" :style="{
-                  filter: activeTab === 'china' ? 'hue-rotate(0deg)' :
-                    activeTab === 'hk' ? 'hue-rotate(180deg)' :
-                      activeTab === 'malaysia' ? 'hue-rotate(90deg)' : 'hue-rotate(270deg)'
-                }" />
+                <img
+                  :src="activeRegionData.img"
+                  :alt="activeRegionData.title"
+                  class="visual-img"
+                  :style="{
+                    filter:
+                      activeTab === 'china'
+                        ? 'hue-rotate(0deg)'
+                        : activeTab === 'hk'
+                          ? 'hue-rotate(180deg)'
+                          : activeTab === 'malaysia'
+                            ? 'hue-rotate(90deg)'
+                            : 'hue-rotate(270deg)',
+                  }"
+                />
                 <!-- Glowing borders & particles -->
                 <div class="glow-layer"></div>
               </div>
@@ -199,7 +224,9 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   border-radius: 9999px;
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  transition:
+    transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 1;
 }
 
@@ -242,7 +269,7 @@ onMounted(() => {
   padding: 48px;
   min-height: 380px;
   align-items: center;
-  background: linear-gradient(135deg, #020626 0%, #370D69 100%) !important;
+  background: linear-gradient(135deg, #020626 0%, #370d69 100%) !important;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -306,9 +333,7 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg,
-      rgba(0, 240, 255, 0.1) 0%,
-      rgba(139, 92, 246, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
   pointer-events: none;
 }
 

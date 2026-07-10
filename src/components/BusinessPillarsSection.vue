@@ -1,42 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const activePillar = ref('game')
 
-const pillars = {
+const pillars = computed(() => ({
   game: {
     id: 'game',
-    label: '小游戏',
-    title: '小游戏：1分钟上手 轻松共享生态红利',
-    description:
-      '高粘度超休闲小游戏，将碎片化娱乐时间转化为生态积分权益产出。结合GGC底层链，让游戏所有权还给生态共建者。',
+    label: t('pillars.nodes.game_main'),
+    title: t('pillars.items.game.title'),
+    description: t('pillars.items.game.desc'),
     img: '/img/小游戏.png',
-    subBrand: 'OLÉ GAME',
+    subBrand: t('pillars.nodes.game_sub'),
     color: '#00f0ff', // cyan
     filter: 'hue-rotate(0deg)',
   },
   drama: {
     id: 'drama',
-    label: '短剧',
-    title: '短剧：精品竖屏 极低门槛看剧赚积分',
-    description:
-      '精品内容库，低消费无感观看，刷剧享受生态红利，结合实时多模态 AI，打通跨国流量与高效增值通道。',
+    label: t('pillars.nodes.drama_main'),
+    title: t('pillars.items.drama.title'),
+    description: t('pillars.items.drama.desc'),
     img: '/img/小游戏.png',
-    subBrand: 'OHO DRAMA',
+    subBrand: t('pillars.nodes.drama_sub'),
     color: '#ec4899', // pink
     filter: 'hue-rotate(300deg) saturate(1.2)',
   },
   social: {
     id: 'social',
-    label: '社交生态',
-    title: 'UGC & 数字游民社区',
-    description: '构建新型的全球化社区与价值网络。',
+    label: t('pillars.nodes.social_main'),
+    title: t('pillars.items.social.title'),
+    description: t('pillars.items.social.desc'),
     img: '/img/小游戏.png',
-    subBrand: 'BINGO SOCIAL',
+    subBrand: t('pillars.nodes.social_sub'),
     color: '#8b5cf6', // purple
     filter: 'hue-rotate(240deg) brightness(0.9)',
   },
-}
+}))
+
+const activePillarData = computed(() => {
+  return pillars.value[activePillar.value as keyof typeof pillars.value]
+})
 </script>
 
 <template>
@@ -44,14 +49,13 @@ const pillars = {
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Business</span>
+        <span class="bg-text">{{ t('pillars.badge') }}</span>
         <div class="title-wrap">
-          <h2>三大核心业务支柱</h2>
+          <h2>{{ t('pillars.title') }}</h2>
           <div class="divider-line"></div>
         </div>
         <p class="section-subtitle">
-          以数字地球为生态核心，精品短剧、休闲游戏与共建共享的社交生态彼此咬合，编织出繁荣的 Web3
-          价值网络。
+          {{ t('pillars.subtitle') }}
         </p>
       </div>
 
@@ -90,11 +94,15 @@ const pillars = {
               @click="activePillar = 'game'"
             >
               <div class="node-icon">
-                <img src="/img/logo(1).png" alt="小游戏" class="node-icon-img" />
+                <img
+                  src="/img/logo(1).png"
+                  :alt="t('pillars.nodes.game_main')"
+                  class="node-icon-img"
+                />
               </div>
               <div class="node-label">
-                <span class="sub-brand">OLÉ GAME</span>
-                <span class="main-label">小游戏</span>
+                <span class="sub-brand">{{ t('pillars.nodes.game_sub') }}</span>
+                <span class="main-label">{{ t('pillars.nodes.game_main') }}</span>
               </div>
             </div>
 
@@ -105,11 +113,15 @@ const pillars = {
               @click="activePillar = 'drama'"
             >
               <div class="node-icon">
-                <img src="/img/omo.png" alt="短剧" class="node-icon-img" />
+                <img
+                  src="/img/omo.png"
+                  :alt="t('pillars.nodes.drama_main')"
+                  class="node-icon-img"
+                />
               </div>
               <div class="node-label">
-                <span class="sub-brand">OHO DRAMA</span>
-                <span class="main-label">短剧</span>
+                <span class="sub-brand">{{ t('pillars.nodes.drama_sub') }}</span>
+                <span class="main-label">{{ t('pillars.nodes.drama_main') }}</span>
               </div>
             </div>
 
@@ -120,11 +132,15 @@ const pillars = {
               @click="activePillar = 'social'"
             >
               <div class="node-icon">
-                <img src="/img/社交-对话框1.png" alt="社交生态" class="node-icon-img" />
+                <img
+                  src="/img/社交-对话框1.png"
+                  :alt="t('pillars.nodes.social_main')"
+                  class="node-icon-img"
+                />
               </div>
               <div class="node-label">
-                <span class="sub-brand">社交生态</span>
-                <span class="main-label">社交生态</span>
+                <span class="sub-brand">{{ t('pillars.nodes.social_sub') }}</span>
+                <span class="main-label">{{ t('pillars.nodes.social_main') }}</span>
               </div>
             </div>
           </div>
@@ -137,10 +153,10 @@ const pillars = {
               <!-- Banner Image with color filters for distinct pillars -->
               <div class="banner-wrapper">
                 <img
-                  :src="pillars[activePillar as keyof typeof pillars].img"
-                  :alt="pillars[activePillar as keyof typeof pillars].title"
+                  :src="activePillarData.img"
+                  :alt="activePillarData.title"
                   class="banner-img"
-                  :style="{ filter: pillars[activePillar as keyof typeof pillars].filter }"
+                  :style="{ filter: activePillarData.filter }"
                 />
                 <div class="banner-overlay"></div>
               </div>
@@ -148,10 +164,10 @@ const pillars = {
               <!-- Text details -->
               <div class="pillar-text-content">
                 <h3 class="pillar-title">
-                  {{ pillars[activePillar as keyof typeof pillars].title }}
+                  {{ activePillarData.title }}
                 </h3>
                 <p class="pillar-desc">
-                  {{ pillars[activePillar as keyof typeof pillars].description }}
+                  {{ activePillarData.description }}
                 </p>
               </div>
             </div>
@@ -231,7 +247,9 @@ const pillars = {
   transform-origin: left center;
   z-index: 8;
   pointer-events: none;
-  transition: width 0.4s ease, transform 0.4s ease;
+  transition:
+    width 0.4s ease,
+    transform 0.4s ease;
 }
 
 .pillar-connector::after {
@@ -460,7 +478,8 @@ const pillars = {
 }
 
 .node-game.active .node-icon {
-  background: linear-gradient(#222560, #222560) padding-box,
+  background:
+    linear-gradient(#222560, #222560) padding-box,
     linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #0b091a;
   border: 2px solid transparent;
@@ -478,7 +497,8 @@ const pillars = {
 }
 
 .node-drama.active .node-icon {
-  background: linear-gradient(#222560, #222560) padding-box,
+  background:
+    linear-gradient(#222560, #222560) padding-box,
     linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #ffffff;
   border: 2px solid transparent;
@@ -496,7 +516,8 @@ const pillars = {
 }
 
 .node-social.active .node-icon {
-  background: linear-gradient(#222560, #222560) padding-box,
+  background:
+    linear-gradient(#222560, #222560) padding-box,
     linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
   color: #ffffff;
   border: 2px solid transparent;
@@ -542,7 +563,9 @@ const pillars = {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: filter 0.5s ease, transform 0.5s ease;
+  transition:
+    filter 0.5s ease,
+    transform 0.5s ease;
 }
 
 .banner-overlay {

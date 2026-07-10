@@ -1,40 +1,43 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const activeIndex = ref(2) // Card 3 (index 2) is active by default
 
-const cards = [
+const cards = computed(() => [
   {
     id: 1,
-    name: '隐秘的荣耀',
+    name: t('products.items.glory'),
     img: '/img/短剧1.png',
     link: 'https://tv.bingo.vip/#/me/detail/detail?id=1259&courseDetailsId=68205',
   },
   {
     id: 2,
-    name: '醉红楼',
+    name: t('products.items.red_chamber'),
     img: '/img/4(1).png',
     link: 'https://g.bingo.vip/#/gamedetails/content?gid=28&edition=0&key=XC9RdtCC',
   },
   {
     id: 3,
-    name: '魔物迷宫',
+    name: t('products.items.monster'),
     img: '/img/5.png',
     link: 'https://g.bingo.vip/#/gamedetails/content?gid=8&edition=0&key=XC9RdtCC',
   },
   {
     id: 4,
-    name: '仙剑缘',
+    name: t('products.items.sword'),
     img: '/img/2(1).png',
     link: 'https://g.bingo.vip/#/gamedetails/content?gid=3&edition=0&key=XC9RdtCC',
   },
   {
     id: 5,
-    name: '甜蜜约会',
+    name: t('products.items.dating'),
     img: '/img/短剧2.png',
     link: 'https://tv.bingo.vip/#/me/detail/detail?id=1253&courseDetailsId=67803',
   },
-]
+])
 
 const scrollToSection = (id: string) => {
   const el = document.getElementById(id)
@@ -55,9 +58,9 @@ const openLink = (url: string) => {
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Product</span>
+        <span class="bg-text">{{ t('products.badge') }}</span>
         <div class="title-wrap">
-          <h2>旗下平台产品</h2>
+          <h2>{{ t('products.title') }}</h2>
           <div class="divider-line"></div>
         </div>
       </div>
@@ -78,7 +81,9 @@ const openLink = (url: string) => {
               <div class="card-info">
                 <span class="card-title">{{ card.name }}</span>
                 <div class="divider"></div>
-                <span class="learn-more">{{ card.link ? '立即体验 >' : '了解更多 >' }}</span>
+                <span class="learn-more">{{
+                  card.link ? t('products.experience') + ' >' : t('products.learn_more') + ' >'
+                }}</span>
               </div>
             </div>
           </div>
@@ -88,10 +93,10 @@ const openLink = (url: string) => {
       <!-- CTA Buttons -->
       <div class="cta-buttons">
         <button class="btn btn-primary btn-purple" @click="scrollToSection('business-mode')">
-          了解我们
+          {{ t('products.know_us') }}
         </button>
         <button class="btn btn-secondary btn-outline-purple" @click="scrollToSection('contact')">
-          浅谈合作
+          {{ t('products.talk_collab') }}
         </button>
       </div>
     </div>
@@ -134,7 +139,9 @@ const openLink = (url: string) => {
 
 .character-card.has-link:hover {
   border-color: rgba(0, 240, 255, 0.45);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.15);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 240, 255, 0.15);
 }
 
 .card-inner {
@@ -205,7 +212,9 @@ const openLink = (url: string) => {
   max-width: 250px;
   height: 440px;
   border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 45px rgba(79, 70, 229, 0.3), 0 0 30px rgba(0, 240, 255, 0.1);
+  box-shadow:
+    0 15px 45px rgba(79, 70, 229, 0.3),
+    0 0 30px rgba(0, 240, 255, 0.1);
 }
 
 .character-card.active .character-img {

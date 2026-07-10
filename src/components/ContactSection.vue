@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { contactApi } from '@/api/contact'
+
+const { t } = useI18n()
 
 const name = ref('')
 const company = ref('')
@@ -33,7 +36,7 @@ const submitContact = async () => {
     description.value = ''
   } catch (error) {
     console.error('[Contact Submit Error]:', error)
-    alert(error instanceof Error ? error.message : '提交失败，请稍后重试')
+    alert(error instanceof Error ? error.message : t('contact.failed'))
   } finally {
     isLoading.value = false
     submitTimer = null
@@ -41,8 +44,13 @@ const submitContact = async () => {
 }
 
 const submitForm = () => {
-  if (!name.value.trim() || !company.value.trim() || !email.value.trim() || !description.value.trim()) {
-    alert('请填写所有必填字段')
+  if (
+    !name.value.trim() ||
+    !company.value.trim() ||
+    !email.value.trim() ||
+    !description.value.trim()
+  ) {
+    alert(t('contact.required_fields_empty'))
     return
   }
 
@@ -63,11 +71,11 @@ const submitForm = () => {
       <div class="section-header">
         <span class="bg-text">Contact</span>
         <div class="title-wrap">
-          <h2>联系我们</h2>
+          <h2>{{ t('contact.title') }}</h2>
           <div class="divider-line"></div>
         </div>
         <p class="section-subtitle font-light">
-          我们随时欢迎全球战略投资方、内容分发伙伴以及主权牌照持有机构与我们展开多元对话。所有来函通常将在 48 小时内给予回复。
+          {{ t('contact.subtitle') }}
         </p>
       </div>
 
@@ -77,14 +85,25 @@ const submitForm = () => {
           <!-- Submission success panel -->
           <div v-if="isSubmitted" class="success-panel">
             <div class="success-icon-wrap">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00f0ff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
               </svg>
             </div>
-            <h3>来函发送成功！</h3>
-            <p>感谢您的关注与留言，我们的团队将在48小时内为您回复。</p>
-            <button class="btn btn-primary btn-purple" @click="isSubmitted = false">再次留言</button>
+            <h3>{{ t('contact.success_title') }}</h3>
+            <p>{{ t('contact.success_desc') }}</p>
+            <button class="btn btn-primary btn-purple" @click="isSubmitted = false">
+              {{ t('contact.again') }}
+            </button>
           </div>
 
           <!-- Active Form -->
@@ -92,22 +111,28 @@ const submitForm = () => {
             <!-- Row 1: Name and Company -->
             <div class="form-row two-cols">
               <div class="form-group focus-glow">
-                <label for="name">姓名 <span class="required">*</span></label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  v-model="name" 
-                  placeholder="请输入您的姓名" 
+                <label for="name"
+                  >{{ t('contact.name') }}
+                  <span class="required">{{ t('contact.required') }}</span></label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  v-model="name"
+                  :placeholder="t('contact.name_placeholder')"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="company">机构/公司 <span class="required">*</span></label>
-                <input 
-                  type="text" 
-                  id="company" 
-                  v-model="company" 
-                  placeholder="请输入您的机构或公司名称" 
+                <label for="company"
+                  >{{ t('contact.company') }}
+                  <span class="required">{{ t('contact.required') }}</span></label
+                >
+                <input
+                  type="text"
+                  id="company"
+                  v-model="company"
+                  :placeholder="t('contact.company_placeholder')"
                   required
                 />
               </div>
@@ -116,12 +141,15 @@ const submitForm = () => {
             <!-- Row 2: Email -->
             <div class="form-row">
               <div class="form-group">
-                <label for="email">邮箱地址 <span class="required">*</span></label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  v-model="email" 
-                  placeholder="请输入您的联系邮箱" 
+                <label for="email"
+                  >{{ t('contact.email') }}
+                  <span class="required">{{ t('contact.required') }}</span></label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  v-model="email"
+                  :placeholder="t('contact.email_placeholder')"
                   required
                 />
               </div>
@@ -130,12 +158,15 @@ const submitForm = () => {
             <!-- Row 3: Description -->
             <div class="form-row">
               <div class="form-group">
-                <label for="description">合作意向问题或描述 <span class="required">*</span></label>
-                <textarea 
-                  id="description" 
-                  v-model="description" 
-                  rows="6" 
-                  placeholder="请在此详细描述您的合作意向或具体咨询问题" 
+                <label for="description"
+                  >{{ t('contact.desc') }}
+                  <span class="required">{{ t('contact.required') }}</span></label
+                >
+                <textarea
+                  id="description"
+                  v-model="description"
+                  rows="6"
+                  :placeholder="t('contact.desc_placeholder')"
                   required
                 ></textarea>
               </div>
@@ -143,13 +174,9 @@ const submitForm = () => {
 
             <!-- Row 4: Submit Button -->
             <div class="form-submit">
-              <button 
-                type="submit" 
-                class="btn btn-purple-submit"
-                :disabled="isLoading"
-              >
-                <span v-if="isLoading">发送中...</span>
-                <span v-else>确 认</span>
+              <button type="submit" class="btn btn-purple-submit" :disabled="isLoading">
+                <span v-if="isLoading">{{ t('contact.submitting') }}</span>
+                <span v-else>{{ t('contact.submit') }}</span>
               </button>
             </div>
           </form>
@@ -234,7 +261,6 @@ const submitForm = () => {
   font-family: inherit;
 }
 
-
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
@@ -311,14 +337,22 @@ const submitForm = () => {
 }
 
 @keyframes pulseScale {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  100% { transform: scale(1.05); opacity: 1; }
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
 }
 
 /* Slide/fade animations */
 .fade-contact-enter-active,
 .fade-contact-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .fade-contact-enter-from {

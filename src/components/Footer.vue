@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
+
 <template>
   <footer class="main-footer">
     <div class="container footer-container-inner">
@@ -7,21 +12,40 @@
           <img src="/img/bingo.png" alt="BINGO文娱" class="logo-img" />
         </div>
       </div>
-      
+
       <!-- Right side: Columns -->
       <div class="footer-columns">
         <div class="footer-column">
-          <h4>关注我们</h4>
+          <h4>{{ t('footer.follow_us') }}</h4>
           <ul>
-            <li><a href="https://webx.ai/" target="_blank" rel="noopener noreferrer">WebX 官网</a></li>
-            <li><a href="https://tv.bingo.vip/#/" target="_blank" rel="noopener noreferrer">短剧平台</a></li>
-            <li><a href="https://g.bingo.vip/#/front-page/recommendgame?key=XC9RdtCC" target="_blank" rel="noopener noreferrer">小游戏平台</a></li>
+            <li>
+              <a href="https://webx.ai/" target="_blank" rel="noopener noreferrer">{{
+                t('footer.webx')
+              }}</a>
+            </li>
+            <li>
+              <a href="https://tv.bingo.vip/#/" target="_blank" rel="noopener noreferrer">{{
+                t('footer.drama')
+              }}</a>
+            </li>
+            <li>
+              <a
+                href="https://g.bingo.vip/#/front-page/recommendgame?key=XC9RdtCC"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ t('footer.game') }}</a
+              >
+            </li>
           </ul>
         </div>
         <div class="footer-column">
-          <h4>法律信息</h4>
+          <h4>{{ t('footer.legal_info') }}</h4>
           <ul>
-            <li><a href="/privacy" target="_blank">隐私政策</a></li>
+            <li>
+              <RouterLink :to="{ name: 'privacy' }" target="_blank">{{
+                t('footer.privacy')
+              }}</RouterLink>
+            </li>
           </ul>
         </div>
       </div>
@@ -97,7 +121,7 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .footer-columns {
     gap: 60px;
     width: 100%;

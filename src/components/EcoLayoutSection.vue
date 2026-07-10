@@ -1,73 +1,78 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const tabs = {
+const { t } = useI18n()
+
+const tabs = computed(() => ({
   pos: {
     id: 'pos',
-    tabLabel: 'POS价值成长 + GGC链',
-    title: 'POS价值成长 + GGC链',
-    subtitle: '流量越大，用户越多，生态价值和用户权益越高。',
-    description: '通过独创的“注意力证明（POS）”激励机制与自研GGC链，用户看短剧、玩游戏的时间和互动数据会即时转化为生态积分权益。将平台利润通过智能合约直接倾斜给生态建设者。',
+    tabLabel: t('eco.tabs.pos.tabLabel'),
+    title: t('eco.tabs.pos.title'),
+    subtitle: t('eco.tabs.pos.subtitle'),
+    description: t('eco.tabs.pos.description'),
     nodeIndex: 0,
-    color: '#00f0ff'
+    color: '#00f0ff',
   },
   iaa_iap: {
     id: 'iaa_iap',
-    tabLabel: 'IAA+IAP混变矩阵',
-    title: 'IAA+IAP混变矩阵',
-    subtitle: '自研极致高效变现模型，实现用户与平台利益共赢。',
-    description: '打通了IAA（广告变现）与IAP（积分/数字道具付费）的双轮壁垒。平台通过全球高单价数字广告主竞价填充，将大比例广告收益投入GGC生态池，或直接向活跃看剧玩游戏的用户分配生态红利，彻底破除零和博弈。',
+    tabLabel: t('eco.tabs.iaa_iap.tabLabel'),
+    title: t('eco.tabs.iaa_iap.title'),
+    subtitle: t('eco.tabs.iaa_iap.subtitle'),
+    description: t('eco.tabs.iaa_iap.description'),
     nodeIndex: 1,
-    color: '#ec4899'
+    color: '#ec4899',
   },
   three_engines: {
     id: 'three_engines',
-    tabLabel: '短剧+游戏+社交三轮驱动',
-    title: '短剧+游戏+社交三轮驱动',
-    subtitle: '短剧、小游戏与社交平台协同，高速凝聚海量流量。',
-    description: '以精品短剧与轻量化游戏构建内容引擎，结合社交互动与本地生活场景，打造集娱乐、社交与消费体验于一体的数字生态。短剧内容、游戏资产、社交权益与生活服务相互联动，通过多场景触达与生态协同运营，激发用户参与和分享动力，助力平台实现更高效的用户增长与价值沉淀。',
+    tabLabel: t('eco.tabs.three_engines.tabLabel'),
+    title: t('eco.tabs.three_engines.title'),
+    subtitle: t('eco.tabs.three_engines.subtitle'),
+    description: t('eco.tabs.three_engines.description'),
     nodeIndex: 2,
-    color: '#8b5cf6'
+    color: '#8b5cf6',
   },
   eco_loop: {
     id: 'eco_loop',
-    tabLabel: '生态价值闭环',
-    title: '生态价值闭环',
-    subtitle: '结合区块链分布式科技，构建持续健康增长的网络。',
-    description: 'GGC通证在游戏、短剧解锁、NFT二创版权、DAO治理投票等场景形成多重消耗和流通刚需。配合手续费循环、平台盈利生态分配和生态基金沉淀，构成生态价值稳健增值的良性螺旋。',
+    tabLabel: t('eco.tabs.eco_loop.tabLabel'),
+    title: t('eco.tabs.eco_loop.title'),
+    subtitle: t('eco.tabs.eco_loop.subtitle'),
+    description: t('eco.tabs.eco_loop.description'),
     nodeIndex: 3,
-    color: '#10b981'
+    color: '#10b981',
   },
   wave_plan: {
     id: 'wave_plan',
-    tabLabel: '浪潮计划 (Wave Plan)',
-    title: '浪潮计划 (Wave Plan)',
-    subtitle: '孵化庞大的UGC内容生态与全球数字游民社区。',
-    description: '“浪潮计划”专门扶持全球超5,000万数字游民、独立剪辑手、编剧及创客授权使用Bingo文娱官方版权库，在TikTok、YouTube等社交平台进行碎片化剪辑与引流，享有超额的GGC链上二创返税与流量分成。',
+    tabLabel: t('eco.tabs.wave_plan.tabLabel'),
+    title: t('eco.tabs.wave_plan.title'),
+    subtitle: t('eco.tabs.wave_plan.subtitle'),
+    description: t('eco.tabs.wave_plan.description'),
     nodeIndex: 4,
-    color: '#f59e0b'
+    color: '#f59e0b',
   },
   beach_plan: {
     id: 'beach_plan',
-    tabLabel: '沙滩计划 (Beach Plan)',
-    title: '沙滩计划 (Beach Plan)',
-    subtitle: '支持创作者、资本与平台“三位一体”，共同富裕。',
-    description: '“沙滩计划”旨在孵化“一人公司（OPC）”及独立创客工作室。由资本池提供冷启动投资，由平台提供高匹配流量与GGC合规版权管理工具，由创作者产出爆款，三位一体打通Web3时代最高效的内容孵化飞轮。',
+    tabLabel: t('eco.tabs.beach_plan.tabLabel'),
+    title: t('eco.tabs.beach_plan.title'),
+    subtitle: t('eco.tabs.beach_plan.subtitle'),
+    description: t('eco.tabs.beach_plan.description'),
     nodeIndex: 5,
-    color: '#3b82f6'
-  }
-} as const
+    color: '#3b82f6',
+  },
+}))
 
-const activeTab = ref<keyof typeof tabs>('pos')
+type TabKey = 'pos' | 'iaa_iap' | 'three_engines' | 'eco_loop' | 'wave_plan' | 'beach_plan'
+
+const activeTab = ref<TabKey>('pos')
 const orbitActiveColor = '#07A8FF'
 
 // Computed properties for template type safety
-const activeTabData = computed(() => tabs[activeTab.value])
+const activeTabData = computed(() => tabs.value[activeTab.value] || tabs.value.pos)
 
 // Order of tabs for layout display (2 rows, 3 columns)
 const tabLayout = [
   ['pos', 'iaa_iap', 'three_engines'],
-  ['eco_loop', 'wave_plan', 'beach_plan']
+  ['eco_loop', 'wave_plan', 'beach_plan'],
 ] as const
 
 // Node positions and connector angles for the 6 nodes on the outer orbit ring.
@@ -88,20 +93,20 @@ const nodePositions = [
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Layout</span>
+        <span class="bg-text">{{ t('eco.badge') }}</span>
         <div class="title-wrap">
-          <h2>生态布局</h2>
+          <h2>{{ t('eco.title') }}</h2>
           <div class="divider-line"></div>
         </div>
         <p class="section-subtitle">
-          打破Web2平台的流量垄断与利益固化，Bingo文娱携手用户、创作者与合规资本，在GG-C&WebX全球平台的底层架构上，构筑互利共赢、指数增长的文娱生态。
+          {{ t('eco.subtitle') }}
         </p>
       </div>
 
       <!-- Mid Typography Title -->
       <div class="mid-title-wrap">
-        <h3 class="mid-title-primary">三位一体生态布局</h3>
-        <h3 class="mid-title-secondary">打造Web3娱乐黄金闭环</h3>
+        <h3 class="mid-title-primary">{{ t('eco.mid_title_primary') }}</h3>
+        <h3 class="mid-title-secondary">{{ t('eco.mid_title_secondary') }}</h3>
       </div>
 
       <!-- Eco Layout Content -->
@@ -115,32 +120,52 @@ const nodePositions = [
             <div class="orbit-ring inner-ring"></div>
 
             <!-- Connection Line from Center to Active Node -->
-            <div class="active-connector" :style="{
-              transform: `rotate(${nodePositions[activeTabData.nodeIndex].angle}deg)`,
-              color: orbitActiveColor,
-              boxShadow: `0 0 10px ${orbitActiveColor}`
-            }"></div>
+            <div
+              class="active-connector"
+              :style="{
+                transform: `rotate(${nodePositions[activeTabData ? activeTabData.nodeIndex : 0]!.angle}deg)`,
+                color: orbitActiveColor,
+                boxShadow: `0 0 10px ${orbitActiveColor}`,
+              }"
+            ></div>
 
             <!-- Central Node: GGC / Web3 Platform Base -->
             <div class="central-base">
               <div class="base-glow"></div>
               <div class="base-content">
-                <img src="/img/地球,地理,全球 (3).png" alt="全球平台底层" class="globe-icon" />
-                <span class="base-title">GGC / Web3</span>
-                <span class="base-desc">全球<br />平台底层</span>
+                <img
+                  src="/img/地球,地理,全球 (3).png"
+                  :alt="t('eco.center_title')"
+                  class="globe-icon"
+                />
+                <span class="base-title">{{ t('eco.center_title') }}</span>
+                <span class="base-desc" v-html="t('eco.center_desc')"></span>
               </div>
             </div>
 
             <!-- 6 Nodes on Outer Ring -->
             <!-- 0: Chain Link node -->
-            <div class="outer-node node-0" :class="{ active: activeTabData.nodeIndex === 0 }" :style="{
-              top: nodePositions[0].top,
-              left: nodePositions[0].left,
-              transform: nodePositions[0].transform
-            }" @click="activeTab = 'pos'">
+            <div
+              class="outer-node node-0"
+              :class="{ active: activeTabData.nodeIndex === 0 }"
+              :style="{
+                top: nodePositions[0].top,
+                left: nodePositions[0].left,
+                transform: nodePositions[0].transform,
+              }"
+              @click="activeTab = 'pos'"
+            >
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                   <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                 </svg>
@@ -148,63 +173,111 @@ const nodePositions = [
             </div>
 
             <!-- 1: Lightning node -->
-            <div class="outer-node node-1" :class="{ active: activeTabData.nodeIndex === 1 }" :style="{
-              top: nodePositions[1].top,
-              left: nodePositions[1].left,
-              transform: nodePositions[1].transform
-            }" @click="activeTab = 'iaa_iap'">
+            <div
+              class="outer-node node-1"
+              :class="{ active: activeTabData.nodeIndex === 1 }"
+              :style="{
+                top: nodePositions[1].top,
+                left: nodePositions[1].left,
+                transform: nodePositions[1].transform,
+              }"
+              @click="activeTab = 'iaa_iap'"
+            >
               <div class="node-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                 </svg>
               </div>
             </div>
 
             <!-- 2: Game node -->
-            <div class="outer-node node-2" :class="{ active: activeTabData.nodeIndex === 2 }" :style="{
-              top: nodePositions[2].top,
-              left: nodePositions[2].left,
-              transform: nodePositions[2].transform
-            }" @click="activeTab = 'three_engines'">
+            <div
+              class="outer-node node-2"
+              :class="{ active: activeTabData.nodeIndex === 2 }"
+              :style="{
+                top: nodePositions[2].top,
+                left: nodePositions[2].left,
+                transform: nodePositions[2].transform,
+              }"
+              @click="activeTab = 'three_engines'"
+            >
               <div class="node-circle">
-                <img src="/img/游戏.svg" alt="短剧+游戏+社交三轮驱动" class="node-icon-img" />
+                <img
+                  src="/img/游戏.svg"
+                  :alt="t('eco.tabs.three_engines.tabLabel')"
+                  class="node-icon-img"
+                />
               </div>
             </div>
 
             <!-- 3: Sync node -->
-            <div class="outer-node node-3" :class="{ active: activeTabData.nodeIndex === 3 }" :style="{
-              top: nodePositions[3].top,
-              left: nodePositions[3].left,
-              transform: nodePositions[3].transform
-            }" @click="activeTab = 'eco_loop'">
+            <div
+              class="outer-node node-3"
+              :class="{ active: activeTabData.nodeIndex === 3 }"
+              :style="{
+                top: nodePositions[3].top,
+                left: nodePositions[3].left,
+                transform: nodePositions[3].transform,
+              }"
+              @click="activeTab = 'eco_loop'"
+            >
               <div class="node-circle">
-                <img src="/img/闭环.svg" alt="生态价值闭环" class="node-icon-img" />
+                <img
+                  src="/img/闭环.svg"
+                  :alt="t('eco.tabs.eco_loop.tabLabel')"
+                  class="node-icon-img"
+                />
               </div>
             </div>
 
             <!-- 4: Chat node -->
-            <div class="outer-node node-4" :class="{ active: activeTabData.nodeIndex === 4 }" :style="{
-              top: nodePositions[4].top,
-              left: nodePositions[4].left,
-              transform: nodePositions[4].transform
-            }" @click="activeTab = 'wave_plan'">
+            <div
+              class="outer-node node-4"
+              :class="{ active: activeTabData.nodeIndex === 4 }"
+              :style="{
+                top: nodePositions[4].top,
+                left: nodePositions[4].left,
+                transform: nodePositions[4].transform,
+              }"
+              @click="activeTab = 'wave_plan'"
+            >
               <div class="node-circle">
-                <img src="/img/浪高.svg" alt="浪潮计划" class="node-icon-img" />
+                <img
+                  src="/img/浪高.svg"
+                  :alt="t('eco.tabs.wave_plan.tabLabel')"
+                  class="node-icon-img"
+                />
               </div>
             </div>
 
             <!-- 5: Settings node -->
-            <div class="outer-node node-5" :class="{ active: activeTabData.nodeIndex === 5 }" :style="{
-              top: nodePositions[5].top,
-              left: nodePositions[5].left,
-              transform: nodePositions[5].transform
-            }" @click="activeTab = 'beach_plan'">
+            <div
+              class="outer-node node-5"
+              :class="{ active: activeTabData.nodeIndex === 5 }"
+              :style="{
+                top: nodePositions[5].top,
+                left: nodePositions[5].left,
+                transform: nodePositions[5].transform,
+              }"
+              @click="activeTab = 'beach_plan'"
+            >
               <div class="node-circle">
-                <img src="/img/需用计划.svg" alt="沙滩计划" class="node-icon-img" />
+                <img
+                  src="/img/需用计划.svg"
+                  :alt="t('eco.tabs.beach_plan.tabLabel')"
+                  class="node-icon-img"
+                />
               </div>
             </div>
-
           </div>
         </div>
 
@@ -212,8 +285,13 @@ const nodePositions = [
         <div class="eco-details-column">
           <!-- 6 Grid Tabs -->
           <div class="eco-tabs-grid">
-            <button v-for="tabKey in tabLayout.flat()" :key="tabKey" class="eco-tab-card"
-              :class="{ active: activeTab === tabKey }" @click="activeTab = tabKey">
+            <button
+              v-for="tabKey in tabLayout.flat()"
+              :key="tabKey"
+              class="eco-tab-card"
+              :class="{ active: activeTab === tabKey }"
+              @click="activeTab = tabKey"
+            >
               <span>{{ tabs[tabKey].tabLabel }}</span>
             </button>
           </div>
@@ -324,7 +402,9 @@ const nodePositions = [
   transform-origin: left center;
   z-index: 5;
   pointer-events: none;
-  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s ease;
+  transition:
+    transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    color 0.4s ease;
 }
 
 /* Central Base node */
@@ -416,15 +496,16 @@ const nodePositions = [
 }
 
 .outer-node.active .node-circle {
-  background: #07A8FF;
-  border-color: #07A8FF;
-  color: #0B091A;
+  background: #07a8ff;
+  border-color: #07a8ff;
+  color: #0b091a;
   box-shadow: 0 0 20px rgba(7, 168, 255, 0.6);
   transform: scale(1.1);
 }
 
 .outer-node.active .node-icon-img {
-  filter: brightness(0) saturate(100%) invert(4%) sepia(34%) saturate(2535%) hue-rotate(223deg) brightness(91%) contrast(99%);
+  filter: brightness(0) saturate(100%) invert(4%) sepia(34%) saturate(2535%) hue-rotate(223deg)
+    brightness(91%) contrast(99%);
 }
 
 .outer-node:hover .node-circle {
@@ -459,7 +540,9 @@ const nodePositions = [
   letter-spacing: 0;
   transition: all 0.3s ease;
   clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
-  box-shadow: inset 0 0 0 2px #514AA0, 0 10px 18px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    inset 0 0 0 2px #514aa0,
+    0 10px 18px rgba(0, 0, 0, 0.18);
   overflow: hidden;
   cursor: pointer;
 }
@@ -485,7 +568,9 @@ const nodePositions = [
 
 .eco-tab-card:hover {
   color: rgba(0, 240, 255, 0.85);
-  box-shadow: inset 0 0 0 2px #514AA0, 0 12px 22px rgba(0, 0, 0, 0.22);
+  box-shadow:
+    inset 0 0 0 2px #514aa0,
+    0 12px 22px rgba(0, 0, 0, 0.22);
 }
 
 .eco-tab-card.active {
@@ -507,7 +592,9 @@ const nodePositions = [
   border: 1px solid rgba(7, 8, 42, 0.96);
   border-radius: 34px;
   background: rgba(3, 4, 31, 0.92);
-  box-shadow: inset 0 0 0 1px rgba(12, 13, 54, 0.68), 0 24px 60px rgba(0, 0, 0, 0.22);
+  box-shadow:
+    inset 0 0 0 1px rgba(12, 13, 54, 0.68),
+    0 24px 60px rgba(0, 0, 0, 0.22);
 }
 
 .eco-detail-title {
@@ -562,7 +649,6 @@ const nodePositions = [
 }
 
 @media (max-width: 768px) {
-
   .mid-title-primary,
   .mid-title-secondary {
     font-size: 1.75rem;
