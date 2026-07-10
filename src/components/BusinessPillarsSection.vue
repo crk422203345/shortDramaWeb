@@ -12,7 +12,7 @@ const pillars = computed(() => ({
     label: t('pillars.nodes.game_main'),
     title: t('pillars.items.game.title'),
     description: t('pillars.items.game.desc'),
-    img: '/img/小游戏.png',
+    img: '/img/捕鱼1.png',
     subBrand: t('pillars.nodes.game_sub'),
     color: '#00f0ff', // cyan
     filter: 'hue-rotate(0deg)',

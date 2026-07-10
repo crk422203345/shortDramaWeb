@@ -15,9 +15,9 @@ const cards = computed(() => [
   },
   {
     id: 2,
-    name: t('products.items.red_chamber'),
-    img: '/img/4(1).png',
-    link: 'https://g.bingo.vip/#/gamedetails/content?gid=28&edition=0&key=XC9RdtCC',
+    name: t('products.items.moonlight'),
+    img: '/img/月光.png',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=39&edition=0&key=XC9RdtCC',
   },
   {
     id: 3,
