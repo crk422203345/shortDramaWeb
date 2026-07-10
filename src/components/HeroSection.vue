@@ -9,7 +9,7 @@ const { t } = useI18n()
     <div class="hero-bg">
       <video class="hero-video" autoplay muted loop playsinline preload="auto">
         <!-- <source src="https://game.igcdn.cn/Ggame/videos/video1.94041431.mp4" type="video/mp4" /> -->
-        <source src="https://www.bingo.vip/ad3.mp4" type="video/mp4" />
+        <source src="https://www.bingo.vip/ad4.mp4" type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
     </div>
@@ -70,12 +70,10 @@ const { t } = useI18n()
      Bottom stop aligns with the page background (#1c1f54) so the video
      fades seamlessly into the content below instead of a hard seam. */
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       rgba(8, 6, 23, 0.4) 0%,
       rgba(8, 6, 23, 0.2) 55%,
-      rgba(28, 31, 84, 1) 100%
-    ),
+      rgba(28, 31, 84, 1) 100%),
     radial-gradient(circle at center, rgba(11, 9, 26, 0.1) 0%, rgba(8, 6, 23, 0.7) 100%);
 }
 
@@ -172,7 +170,8 @@ const { t } = useI18n()
 
 @media (max-width: 768px) {
   .hero-section {
-    padding-top: 32vh; /* Give more vertical breathing room */
+    padding-top: 32vh;
+    /* Give more vertical breathing room */
   }
 
   .hero-title {

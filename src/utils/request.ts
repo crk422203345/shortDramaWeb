@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import i18n from '@/i18n'
 
 // 1. 定义通用后端返回的数据格式接口
 export interface ApiResponse<T = unknown> {
@@ -84,63 +85,57 @@ service.interceptors.response.use(
     if (res.code === 401) {
       // 清除本地缓存的无效 token
       localStorage.removeItem('token')
-      showErrorToast('身份验证过期，请重新登录')
+      showErrorToast(i18n.global.t('error.unauthorized'))
       // 延迟 1 秒后跳转登录页面，让提示框有时间展示
       setTimeout(() => {
-        window.location.href = '/login'
+        window.location.href = '/'
       }, 1000)
-      return Promise.reject(new Error(res.message || '未授权'))
+      return Promise.reject(new Error(res.message || i18n.global.t('error.unauthorized')))
     }
 
     // 其他业务逻辑错误（例如：账号密码错误、短剧未购买等，code 不为 200 的情况）
-    showErrorToast(res.message || '业务处理失败')
+    showErrorToast(res.message || i18n.global.t('error.business_failed'))
     return Promise.reject(new Error(res.message || 'Business Error'))
   },
   (error) => {
-    let message = '网络请求失败，请稍后重试'
+    let message = i18n.global.t('error.network_failed')
 
     if (error.response) {
       // 根据 HTTP 状态码进行统一的友好提示
       const { status } = error.response
       switch (status) {
         case 400:
-          message = '请求参数错误 (400)'
+          message = i18n.global.t('error.network_failed') + ' (400)'
           break
         case 401:
           localStorage.removeItem('token')
-          message = '您的登录已失效，请重新登录 (401)'
+          message = i18n.global.t('error.unauthorized') + ' (401)'
           setTimeout(() => {
-            window.location.href = '/login'
+            window.location.href = '/'
           }, 1000)
           break
         case 403:
-          message = '访问被拒绝，权限不足 (403)'
+          message = i18n.global.t('error.network_failed') + ' (403)'
           break
         case 404:
-          message = '请求的接口地址不存在 (404)'
+          message = i18n.global.t('error.network_failed') + ' (404)'
           break
         case 408:
-          message = '请求超时，请重试 (408)'
+          message = i18n.global.t('error.timeout') + ' (408)'
           break
         case 500:
-          message = '服务器内部错误 (500)'
-          break
         case 502:
-          message = '网关错误 (502)'
-          break
         case 503:
-          message = '服务器正在维护中 (503)'
-          break
         case 504:
-          message = '网关超时，未能连接上服务器 (504)'
+          message = i18n.global.t('error.server_error') + ` (${status})`
           break
         default:
-          message = `系统连接异常 (${status})`
+          message = `${i18n.global.t('error.network_failed')} (${status})`
       }
     } else if (error.message && error.message.includes('timeout')) {
-      message = '请求超时，请检查网络状况后重试'
+      message = i18n.global.t('error.timeout')
     } else if (typeof window !== 'undefined' && !window.navigator.onLine) {
-      message = '当前网络已断开，请检查网络连接'
+      message = i18n.global.t('error.timeout')
     } else if (error.message) {
       message = error.message
     }

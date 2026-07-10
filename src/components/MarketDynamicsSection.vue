@@ -169,7 +169,7 @@ const { t } = useI18n()
 .pain-card {
   position: relative;
   overflow: hidden;
-  height: 160px;
+  min-height: 160px;
   display: flex;
   align-items: center;
   padding: 30px;

@@ -175,6 +175,7 @@
     }
   },
   "contact": {
+    "badge": "Contact",
     "title": "Contact Us",
     "subtitle": "We welcome strategic global investors, content distribution partners, and sovereign licensing bodies to engage in dialog. All inquiries are typically replied to within 48 hours.",
     "name": "Name",
@@ -376,5 +377,13 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
     "copyright": "© {year} BINGO. All rights reserved."
+  },
+  "error": {
+    "unauthorized": "Session expired, please log in again",
+    "network_failed": "Network request failed, please try again later",
+    "request_cancelled": "Request cancelled",
+    "server_error": "Server error, please try again later",
+    "timeout": "Connection timeout, please check your network settings",
+    "business_failed": "Operation failed"
   }
 }

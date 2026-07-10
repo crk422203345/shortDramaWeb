@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -88,6 +88,10 @@ const switchTab = (newId: RegionKey, index: number) => {
 onMounted(() => {
   updateSlider()
   window.addEventListener('resize', updateSlider)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateSlider)
 })
 </script>
 

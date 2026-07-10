@@ -175,6 +175,7 @@
     }
   },
   "contact": {
+    "badge": "Contact",
     "title": "Hubungi Kami",
     "subtitle": "Kami mengalu-alukan pelabur global strategik, rakan kongsi pengedaran kandungan, dan badan pelesenan berdaulat untuk mengadakan dialog. Semua pertanyaan biasanya dijawab dalam tempoh 48 jam.",
     "name": "Nama",
@@ -376,5 +377,13 @@
     "privacy": "Dasar Privasi",
     "terms": "Terma Penggunaan",
     "copyright": "© {year} BINGO. Hak cipta terpelihara."
+  },
+  "error": {
+    "unauthorized": "Sesi tamat tempoh, sila log masuk semula",
+    "network_failed": "Permintaan rangkaian gagal, sila cuba sebentar lagi",
+    "request_cancelled": "Permintaan dibatalkan",
+    "server_error": "Ralat pelayan, sila cuba sebentar lagi",
+    "timeout": "Masa tamat sambungan, sila periksa tetapan rangkaian anda",
+    "business_failed": "Operasi gagal"
   }
 }

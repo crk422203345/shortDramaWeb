@@ -618,31 +618,87 @@ const activePillarData = computed(() => {
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
+  .pillars-section {
+    padding: clamp(40px, 8vw, 64px) 0;
+  }
+  .section-header {
+    margin-bottom: clamp(20px, 5vw, 32px);
+  }
   .pillars-layout {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: clamp(20px, 5vw, 32px);
+    margin-top: clamp(24px, 6vw, 40px);
   }
+  .orbit-column {
+    --container-padding: 48px;
+    --scale: min(1, calc((100vw - var(--container-padding)) / 420));
+    width: 100%;
+    height: calc(420px * var(--scale));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+  }
+  .orbit-system {
+    transform: scale(var(--scale));
+    transform-origin: center center;
+    margin: 0;
+  }
+  
+  /* Shorten active connector lines on mobile/tablet */
+  .connector-game {
+    width: 140px;
+  }
+  .connector-drama {
+    width: 150px;
+  }
+  .connector-social {
+    width: 150px;
+  }
+  
+  /* Tighter text styles for left orbit nodes */
+  .orbit-node {
+    gap: 4px;
+  }
+  .node-label {
+    gap: 1px;
+  }
+  .sub-brand {
+    letter-spacing: 0px;
+    font-size: clamp(0.55rem, 2vw, 0.65rem);
+  }
+  .main-label {
+    font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+  }
+
+  /* Responsive right detail column content layout */
   .detail-column {
-    width: 96%;
+    width: min(94%, 560px);
     margin: 0 auto;
   }
+  .pillar-detail-card {
+    border-radius: clamp(16px, 4vw, 24px);
+  }
+  .banner-wrapper {
+    height: clamp(140px, 28vw, 220px);
+  }
   .pillar-text-content {
+    padding: clamp(16px, 4vw, 28px);
     text-align: center;
+  }
+  .pillar-title {
+    font-size: clamp(1.05rem, 3.5vw, 1.25rem);
+    margin-bottom: clamp(8px, 2vw, 14px);
+  }
+  .pillar-desc {
+    font-size: clamp(0.82rem, 2.4vw, 0.9rem);
+    line-height: 1.6;
   }
 }
 
-@media (max-width: 520px) {
-  .orbit-system {
-    left: 50%;
-    transform: translateX(-50%) scale(min(1, calc((100vw - 32px) / 420)));
-    transform-origin: center;
-    margin: min(0px, calc((100vw - 420px - 32px) / 4)) 0;
-  }
-  .pillar-text-content {
-    padding: 20px 16px;
-  }
-  .banner-wrapper {
-    height: 180px;
+@media (max-width: 480px) {
+  .orbit-column {
+    --container-padding: 32px;
   }
 }
 </style>

@@ -175,6 +175,7 @@
     }
   },
   "contact": {
+    "badge": "Contact",
     "title": "聯絡我們",
     "subtitle": "我們隨時歡迎全球戰略投資方、內容分發夥伴以及主權牌照持有機構與我們展開多元對話。所有來函通常將在 48 小時內給予回覆。",
     "name": "姓名",
@@ -376,5 +377,13 @@
     "privacy": "隱私政策",
     "terms": "使用條款",
     "copyright": "© {year} BINGO. 保留所有權利。"
+  },
+  "error": {
+    "unauthorized": "身份驗證過期，請重新登錄",
+    "network_failed": "網絡請求失敗，請稍後重試",
+    "request_cancelled": "請求被取消",
+    "server_error": "服務器異常，請稍後重試",
+    "timeout": "連接超時，請檢查網絡設置",
+    "business_failed": "業務處理失敗"
   }
 }

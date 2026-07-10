@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { contactApi } from '@/api/contact'
 
@@ -62,6 +62,10 @@ const submitForm = () => {
     void submitContact()
   }, 500)
 }
+
+onUnmounted(() => {
+  if (submitTimer) clearTimeout(submitTimer)
+})
 </script>
 
 <template>
@@ -69,7 +73,7 @@ const submitForm = () => {
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">
-        <span class="bg-text">Contact</span>
+        <span class="bg-text">{{ t('contact.badge') }}</span>
         <div class="title-wrap">
           <h2>{{ t('contact.title') }}</h2>
           <div class="divider-line"></div>
