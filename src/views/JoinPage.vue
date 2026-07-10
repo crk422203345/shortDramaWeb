@@ -1,93 +1,50 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { recruitmentApi, type Job } from '@/api/recruitment'
 
-const { t, tm } = useI18n()
+const { t, locale } = useI18n()
 
-interface Job {
-  id: number
-  title: string
-  location: string
-  experience: string
-  education: string
-  salary: string
-  responsibilities: string[]
-  requirements: string[]
+const jobs = ref<Job[]>([])
+const isLoading = ref(false)
+const hasError = ref(false)
+const expandedJobIds = ref<number[]>([])
+
+const getLanguageType = (localeVal: string): 'zh' | 'cht' | 'en' | 'ms' => {
+  if (localeVal === 'zh-CN') return 'zh'
+  if (localeVal === 'zh-TW') return 'cht'
+  if (localeVal === 'en') return 'en'
+  if (localeVal === 'ms') return 'ms'
+  return 'zh'
 }
 
-const getArray = (path: string): string[] => {
-  const val = tm(path)
-  return Array.isArray(val) ? (val as string[]) : []
+const fetchJobs = async () => {
+  isLoading.value = true
+  hasError.value = false
+  expandedJobIds.value = [] // Reset expanded states on reload
+  try {
+    const langType = getLanguageType(locale.value)
+    const list = await recruitmentApi.getRecruitmentList({ languageType: langType })
+    jobs.value = list
+  } catch (err) {
+    console.error('[Fetch Jobs Error]:', err)
+    hasError.value = true
+  } finally {
+    isLoading.value = false
+  }
 }
 
-const jobs = computed<Job[]>(() => [
-  {
-    id: 1,
-    title: t('join.jobs.pm.title'),
-    location: t('join.jobs.pm.location'),
-    experience: t('join.jobs.pm.experience'),
-    education: t('join.jobs.pm.education'),
-    salary: t('join.jobs.pm.salary'),
-    responsibilities: getArray('join.jobs.pm.responsibilities'),
-    requirements: getArray('join.jobs.pm.requirements'),
-  },
-  {
-    id: 2,
-    title: t('join.jobs.operations.title'),
-    location: t('join.jobs.operations.location'),
-    experience: t('join.jobs.operations.experience'),
-    education: t('join.jobs.operations.education'),
-    salary: t('join.jobs.operations.salary'),
-    responsibilities: getArray('join.jobs.operations.responsibilities'),
-    requirements: getArray('join.jobs.operations.requirements'),
-  },
-  {
-    id: 3,
-    title: t('join.jobs.blockchain.title'),
-    location: t('join.jobs.blockchain.location'),
-    experience: t('join.jobs.blockchain.experience'),
-    education: t('join.jobs.blockchain.education'),
-    salary: t('join.jobs.blockchain.salary'),
-    responsibilities: getArray('join.jobs.blockchain.responsibilities'),
-    requirements: getArray('join.jobs.blockchain.requirements'),
-  },
-  {
-    id: 4,
-    title: t('join.jobs.ai.title'),
-    location: t('join.jobs.ai.location'),
-    experience: t('join.jobs.ai.experience'),
-    education: t('join.jobs.ai.education'),
-    salary: t('join.jobs.ai.salary'),
-    responsibilities: getArray('join.jobs.ai.responsibilities'),
-    requirements: getArray('join.jobs.ai.requirements'),
-  },
-  {
-    id: 5,
-    title: t('join.jobs.market.title'),
-    location: t('join.jobs.market.location'),
-    experience: t('join.jobs.market.experience'),
-    education: t('join.jobs.market.education'),
-    salary: t('join.jobs.market.salary'),
-    responsibilities: getArray('join.jobs.market.responsibilities'),
-    requirements: getArray('join.jobs.market.requirements'),
-  },
-  {
-    id: 6,
-    title: t('join.jobs.designer.title'),
-    location: t('join.jobs.designer.location'),
-    experience: t('join.jobs.designer.experience'),
-    education: t('join.jobs.designer.education'),
-    salary: t('join.jobs.designer.salary'),
-    responsibilities: getArray('join.jobs.designer.responsibilities'),
-    requirements: getArray('join.jobs.designer.requirements'),
-  },
-])
+watch(locale, () => {
+  void fetchJobs()
+})
+
+onMounted(() => {
+  void fetchJobs()
+})
 
 const email = 'hr@bingo.vip'
 
 // Expanded state management
-const expandedJobIds = ref<number[]>([])
-
 const toggleExpand = (id: number) => {
   const index = expandedJobIds.value.indexOf(id)
   if (index > -1) {
@@ -165,7 +122,80 @@ const afterLeave = (el: Element) => {
     <!-- Job List -->
     <section class="jobs-section section-padding">
       <div class="container">
-        <div class="jobs-grid">
+        <!-- Loading Skeleton State -->
+        <div v-if="isLoading" class="jobs-grid">
+          <div v-for="i in 4" :key="i" class="job-card glass-card skeleton-card">
+            <div class="skeleton-line skeleton-title"></div>
+            <div class="skeleton-meta-row">
+              <div class="skeleton-meta-item"></div>
+              <div class="skeleton-meta-item"></div>
+              <div class="skeleton-meta-item"></div>
+              <div class="skeleton-meta-item"></div>
+            </div>
+            <div class="job-divider"></div>
+            <div class="skeleton-line skeleton-text-1"></div>
+            <div class="skeleton-line skeleton-text-2"></div>
+            <div class="skeleton-line skeleton-text-3"></div>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div v-else-if="hasError" class="error-panel">
+          <div class="error-icon-wrap">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ef4444"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h3>{{ locale === 'en' ? 'Failed to load jobs' : '获取岗位数据失败' }}</h3>
+          <p>
+            {{
+              locale === 'en'
+                ? 'Please check your connection and try again.'
+                : '请检查网络连接后重试。'
+            }}
+          </p>
+          <button class="btn btn-primary btn-purple" @click="fetchJobs">
+            {{ locale === 'en' ? 'Retry' : '重新加载' }}
+          </button>
+        </div>
+
+        <!-- Empty State -->
+        <div v-else-if="jobs.length === 0" class="empty-panel">
+          <div class="empty-icon-wrap">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#a78bfa"
+              stroke-width="2"
+            >
+              <path
+                d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+              ></path>
+            </svg>
+          </div>
+          <h3>{{ locale === 'en' ? 'No Positions Open' : '暂无热招岗位' }}</h3>
+          <p>
+            {{
+              locale === 'en'
+                ? 'Check back later or send us your open application resume.'
+                : '请稍后再试，或者直接将您的简历发送至我们的邮箱。'
+            }}
+          </p>
+        </div>
+
+        <!-- Active Vacancy List -->
+        <div v-else class="jobs-grid">
           <article v-for="job in jobs" :key="job.id" class="job-card glass-card">
             <div class="job-head">
               <h3 class="job-title">{{ job.title }}</h3>
@@ -574,7 +604,148 @@ const afterLeave = (el: Element) => {
   opacity: 0.8;
 }
 
-/* Transitions (Chevron rotation transition remains in style) */
+/* Skeleton Loading styles */
+.skeleton-card {
+  pointer-events: none;
+  min-height: 280px;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 37%,
+    rgba(255, 255, 255, 0.03) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 60%;
+  margin-bottom: 24px;
+}
+
+.skeleton-meta-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.skeleton-meta-item {
+  height: 18px;
+  width: 70px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 37%,
+    rgba(255, 255, 255, 0.03) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+
+.skeleton-text-1 {
+  height: 14px;
+  width: 80%;
+  margin-bottom: 12px;
+}
+
+.skeleton-text-2 {
+  height: 14px;
+  width: 90%;
+  margin-bottom: 12px;
+}
+
+.skeleton-text-3 {
+  height: 14px;
+  width: 75%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Error Panel */
+.error-panel {
+  text-align: center;
+  padding: 64px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  max-width: 480px;
+  margin: 0 auto 48px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.error-icon-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.error-panel h3 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.error-panel p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* Empty Panel */
+.empty-panel {
+  text-align: center;
+  padding: 64px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  max-width: 480px;
+  margin: 0 auto 48px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.empty-icon-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(167, 139, 250, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.empty-panel h3 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.empty-panel p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
 
 /* Responsive */
 @media (max-width: 1024px) {
