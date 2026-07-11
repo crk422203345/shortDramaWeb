@@ -22,20 +22,20 @@ const pillars = computed(() => ({
     label: t('pillars.nodes.drama_main'),
     title: t('pillars.items.drama.title'),
     description: t('pillars.items.drama.desc'),
-    img: '/img/小游戏.png',
+    img: '/img/全球短剧.png',
     subBrand: t('pillars.nodes.drama_sub'),
     color: '#ec4899', // pink
-    filter: 'hue-rotate(300deg) saturate(1.2)',
+    filter: 'none',
   },
   social: {
     id: 'social',
     label: t('pillars.nodes.social_main'),
     title: t('pillars.items.social.title'),
     description: t('pillars.items.social.desc'),
-    img: '/img/小游戏.png',
+    img: '/img/社交生态.png',
     subBrand: t('pillars.nodes.social_sub'),
     color: '#8b5cf6', // purple
-    filter: 'hue-rotate(240deg) brightness(0.9)',
+    filter: 'none',
   },
 }))
 

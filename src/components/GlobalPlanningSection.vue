@@ -22,7 +22,7 @@ const regions = computed(() => ({
     tag: t('planning.regions.hk.tag'),
     title: t('planning.regions.hk.title'),
     description: t('planning.regions.hk.description'),
-    img: '/img/dalu.png',
+    img: '/img/中国香港.png',
   },
   malaysia: {
     id: 'malaysia',
@@ -30,7 +30,7 @@ const regions = computed(() => ({
     tag: t('planning.regions.malaysia.tag'),
     title: t('planning.regions.malaysia.title'),
     description: t('planning.regions.malaysia.description'),
-    img: '/img/dalu.png',
+    img: '/img/马来西亚.png',
   },
   sea: {
     id: 'sea',
@@ -38,7 +38,7 @@ const regions = computed(() => ({
     tag: t('planning.regions.sea.tag'),
     title: t('planning.regions.sea.title'),
     description: t('planning.regions.sea.description'),
-    img: '/img/dalu.png',
+    img: '/img/东南亚.png',
   },
 }))
 
@@ -158,16 +158,6 @@ watch(locale, () => {
                   :src="activeRegionData.img"
                   :alt="activeRegionData.title"
                   class="visual-img"
-                  :style="{
-                    filter:
-                      activeTab === 'china'
-                        ? 'hue-rotate(0deg)'
-                        : activeTab === 'hk'
-                          ? 'hue-rotate(180deg)'
-                          : activeTab === 'malaysia'
-                            ? 'hue-rotate(90deg)'
-                            : 'hue-rotate(270deg)',
-                  }"
                 />
                 <!-- Glowing borders & particles -->
                 <div class="glow-layer"></div>
