@@ -60,7 +60,7 @@ const sliderStyle = ref({
 })
 
 const updateSlider = () => {
-  nextTick(() => {
+  const calculate = () => {
     const activeEl = tabRefs.value[activeIndex.value]
     if (activeEl) {
       const parentEl = activeEl.parentElement
@@ -74,7 +74,9 @@ const updateSlider = () => {
         }
       }
     }
-  })
+  }
+  nextTick(calculate)
+  setTimeout(calculate, 100)
 }
 
 const switchTab = (newId: RegionKey, index: number) => {

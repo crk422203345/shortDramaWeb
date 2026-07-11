@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "BINGO Entertainment - Hiburan Semua Senario · Keriangan Hentian Setempat",
-    "keywords": "BINGO, BINGO Entertainment, Web3, Drama Pendek, Permainan Mini, Ekosistem Sosial, GGC, Tokenomik",
+    "keywords": "BINGO, BINGO Entertainment, Web3, Drama Pendek, Permainan, Ekosistem Sosial, GGC, Tokenomik",
     "description": "BINGO Entertainment komited untuk memecahkan monopoli trafik platform Web2 dan penguncian keuntungan melalui rangkaian asas GGC. Drama menegak premium, permainan kasual, dan ekosistem sosial yang dibina bersama dikaitkan untuk membina rangkaian nilai hiburan digital yang saling menguntungkan dan berkembang pesat."
   },
   "nav": {
@@ -71,7 +71,7 @@
   "pillars": {
     "badge": "Business",
     "title": "Tiga Pilar Perniagaan Teras",
-    "subtitle": "Berpusat pada bumi digital, drama menegak premium, permainan mini kasual, dan ekosistem sosial yang boleh dikongsi dikaitkan bersama untuk membina rangkaian nilai Web3 yang makmur.",
+    "subtitle": "Berpusat pada bumi digital, drama menegak premium, permainan kasual, dan ekosistem sosial yang boleh dikongsi dikaitkan bersama untuk membina rangkaian nilai Web3 yang makmur.",
     "nodes": {
       "game_sub": "OLé GAME",
       "game_main": "Permainan",
@@ -105,7 +105,7 @@
         "label": "Tanah Besar China",
         "tag": "R&D Teknologi Teras & Asas Ekologi",
         "title": "Liputan Global: Kuasa R&D yang Kuat & Sumber Produk Global",
-        "description": "Rantau Greater China merupakan backend teknologi yang paling kukuh untuk BINGO. Enjin permainan mini teras yang dibangunkan sendiri, model pengklonan suara AI berbilang bahasa, dan algoritma terjemahan masa nyata dibina di sini, memperkasakan berpuluh-puluh pasaran antarabangsa."
+        "description": "Rantau Greater China merupakan backend teknologi yang paling kukuh untuk BINGO. Enjin permainan teras yang dibangunkan sendiri, model pengklonan suara AI berbilang bahasa, dan algoritma terjemahan masa nyata dibina di sini, memperkasakan berpuluh-puluh pasaran antarabangsa."
       },
       "hk": {
         "label": "Hong Kong, China",
@@ -151,14 +151,14 @@
       "three_engines": {
         "tabLabel": "Enjin Tiga Drama + Permainan + Sosial",
         "title": "Enjin Tiga Drama + Permainan + Sosial",
-        "subtitle": "Sinergi drama, permainan mini, dan platform sosial menangkap trafik yang besar.",
+        "subtitle": "Sinergi drama, permainan, dan platform sosial menangkap trafik yang besar.",
         "description": "Menggabungkan drama menegak premium dan permainan ringan dengan ciri sosial dan senario tempatan. Kandungan drama, aset permainan, hak sosial, dan perkhidmatan tempatan dihubungkan bersama. Memanfaatkan titik sentuh berbilang senario dan operasi sinergistik, ia mencetuskan dinamik perkongsian dan meningkatkan pertumbuhan pengguna."
       },
       "eco_loop": {
         "tabLabel": "Gelung Nilai Ekologi",
         "title": "Gelung Nilai Ekologi",
         "subtitle": "Mengintegrasikan teknologi rantaian blok terpencar untuk membina rangkaian yang mampan.",
-        "description": "Token GGC mewujudkan pelbagai utiliti merentasi pembukaan kunci drama, permainan mini, royalti hak cipta penciptaan bersama NFT, dan pengundian DAO. Disokong oleh pembakaran yuran, pengedaran dividen platform, dan pengumpulan dana ekosistem, ia mendorong apresiasi token yang kukuh."
+        "description": "Token GGC mewujudkan pelbagai utiliti merentasi pembukaan kunci drama, permainan, royalti hak cipta penciptaan bersama NFT, dan pengundian DAO. Disokong oleh pembakaran yuran, pengedaran dividen platform, dan pengumpulan dana ekosistem, ia mendorong apresiasi token yang kukuh."
       },
       "wave_plan": {
         "tabLabel": "Pelan Wave (Wave Plan)",
@@ -210,20 +210,20 @@
     "requirements": "Syarat Kelayakan",
     "jobs": {
       "pm": {
-        "title": "Pengurus Produk Permainan Mini",
+        "title": "Pengurus Produk Permainan",
         "location": "Shenzhen / Jarak Jauh",
         "experience": "3-5 Tahun",
         "education": "Sarjana Muda dan ke Atas",
         "salary": "25k - 40k",
         "responsibilities": [
-          "Bertanggungjawab untuk merancang dan lelaran permainan mini kasual hiper, menyelia mekanik teras dan metrik pengekalan.",
+          "Bertanggungjawab untuk merancang dan lelaran permainan kasual hiper, menyelia mekanik teras dan metrik pengekalan.",
           "Optimumkan pengalaman pengguna secara berterusan berdasarkan data, meningkatkan metrik aktif, pengekalan, dan kecekapan monetisasi.",
           "Bekerjasama dengan R&D, Seni, dan pasukan Penerbitan untuk memacu penghantaran projek berkualiti tinggi dan tepat pada masanya.",
           "Menjalankan analisis pesaing dan merangka strategi penyetempatan serta pelan operasi untuk pelepasan permainan global.",
           "Terokai reka bentuk sistem bertoken dan integrasi mendalam dengan protokol ganjaran/mata dalam permainan."
         ],
         "requirements": [
-          "Pengalaman pengurusan produk selama 3-5+ tahun dalam permainan mini atau permainan kasual hiper, dengan rekod operasi langsung yang berjaya.",
+          "Pengalaman pengurusan produk selama 3-5+ tahun dalam permainan atau permainan kasual hiper, dengan rekod operasi langsung yang berjaya.",
           "Wawasan mendalam tentang trend pasaran dan psikologi pengguna, mahir dalam reka bentuk tahap dan keseimbangan permainan.",
           "Kemahiran analisis data, komunikasi, kolaborasi, dan pengurusan tekanan yang sangat baik."
         ]
@@ -373,7 +373,7 @@
     "legal_info": "Maklumat Undang-undang",
     "webx": "Portal WebX",
     "drama": "Drama Pendek",
-    "game": "Permainan Mini",
+    "game": "Permainan",
     "privacy": "Dasar Privasi",
     "terms": "Terma Penggunaan",
     "copyright": "© {year} BINGO. Hak cipta terpelihara."

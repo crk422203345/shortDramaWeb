@@ -71,7 +71,7 @@
   "pillars": {
     "badge": "Business",
     "title": "Three Core Business Pillars",
-    "subtitle": "Centering on the digital earth, premium vertical dramas, casual minigames, and a shareable social ecosystem link together to weave a prosperous Web3 value network.",
+    "subtitle": "Centering on the digital earth, premium vertical dramas, casual games, and a shareable social ecosystem link together to weave a prosperous Web3 value network.",
     "nodes": {
       "game_sub": "OLé GAME",
       "game_main": "Games",
@@ -105,7 +105,7 @@
         "label": "China Mainland",
         "tag": "Core Tech R&D & Ecological Foundation",
         "title": "Global Coverage: Strong R&D Power & Source of Global Products",
-        "description": "The Greater China region is the most solid tech backend for BINGO. Self-developed core minigame engines, multi-lingual AI voice cloning models, and real-time translation algorithms are built here, empowering dozens of international markets."
+        "description": "The Greater China region is the most solid tech backend for BINGO. Self-developed core game engines, multi-lingual AI voice cloning models, and real-time translation algorithms are built here, empowering dozens of international markets."
       },
       "hk": {
         "label": "Hong Kong, China",
@@ -151,14 +151,14 @@
       "three_engines": {
         "tabLabel": "Dramas + Games + Social Triple Engines",
         "title": "Dramas + Games + Social Triple Engines",
-        "subtitle": "Dramas, minigames, and social platform synergy capturing massive traffic.",
+        "subtitle": "Dramas, games, and social platform synergy capturing massive traffic.",
         "description": "Combining premium vertical dramas and lightweight games with social features and local scenes. Drama content, game assets, social rights, and local services link together. Leveraging multi-scene touchpoints and synergistic operations, it triggers sharing dynamics and scales user growth."
       },
       "eco_loop": {
         "tabLabel": "Ecological Value Loop",
         "title": "Ecological Value Loop",
         "subtitle": "Integrating decentralized blockchain tech to build a sustainable network.",
-        "description": "GGC tokens establish multiple utilities across drama unlocking, minigames, NFT co-creation copyright royalties, and DAO voting. Supported by fee burns, platform dividend distribution, and ecosystem fund accumulations, it drives robust token appreciation."
+        "description": "GGC tokens establish multiple utilities across drama unlocking, games, NFT co-creation copyright royalties, and DAO voting. Supported by fee burns, platform dividend distribution, and ecosystem fund accumulations, it drives robust token appreciation."
       },
       "wave_plan": {
         "tabLabel": "Wave Plan",
@@ -210,20 +210,20 @@
     "requirements": "Requirements",
     "jobs": {
       "pm": {
-        "title": "Minigame Product Manager",
+        "title": "Game Product Manager",
         "location": "Shenzhen / Remote",
         "experience": "3-5 Years",
         "education": "Bachelor and Above",
         "salary": "25k - 40k",
         "responsibilities": [
-          "Responsible for hyper-casual minigames planning and iterations, overseeing core mechanics and retention metrics.",
+          "Responsible for hyper-casual games planning and iterations, overseeing core mechanics and retention metrics.",
           "Optimize user experience continuously based on data, raising active metrics, retention, and monetization efficiency.",
           "Coordinate with R&D, Art, and Publishing teams to drive high-quality and timely project deliveries.",
           "Conduct competitor analysis and formulate localization strategies and operations plans for global game releases.",
           "Explore tokenized system design and deep integration with in-game reward/points protocols."
         ],
         "requirements": [
-          "3-5+ years product management experience in minigames or hyper-casual games, with successful live operations records.",
+          "3-5+ years product management experience in games or hyper-casual games, with successful live operations records.",
           "Keen insights into market trends and user psychology, proficient in game balancing and level designs.",
           "Excellent data analysis, communication, collaboration, and pressure management skills."
         ]
@@ -373,7 +373,7 @@
     "legal_info": "Legal Info",
     "webx": "WebX Portal",
     "drama": "Short Drama",
-    "game": "Minigame",
+    "game": "Game",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
     "copyright": "© {year} BINGO. All rights reserved."

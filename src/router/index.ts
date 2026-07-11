@@ -38,12 +38,16 @@ const router = createRouter({
       redirect: '/zh-CN/',
     },
   ],
-  scrollBehavior(to, _from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     }
     if (to.hash) {
       return { el: to.hash, behavior: 'smooth', top: 80 }
+    }
+    // If only the language parameter changed on the same page, preserve scroll position
+    if (to.name === from.name && to.params.lang !== from.params.lang) {
+      return false
     }
     return { top: 0 }
   },
