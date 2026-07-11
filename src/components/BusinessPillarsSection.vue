@@ -59,8 +59,8 @@ const activePillarData = computed(() => {
         </p>
       </div>
 
-      <!-- Content Area -->
-      <div class="pillars-layout">
+      <!-- Content Area (PC Version: Left-Right Layout) -->
+      <div class="pillars-layout desktop-only">
         <!-- Left Column: Orbit Diagram -->
         <div class="orbit-column">
           <div class="orbit-system">
@@ -169,6 +169,89 @@ const activePillarData = computed(() => {
                 <p class="pillar-desc">
                   {{ activePillarData.description }}
                 </p>
+              </div>
+            </div>
+          </transition>
+        </div>
+      </div>
+
+      <!-- New Mobile Version (上下结构) -->
+      <div class="pillars-mobile-layout mobile-only">
+        <!-- Upper: Centered Logo Core -->
+        <div class="mobile-logo-core">
+          <div class="core-glow"></div>
+          <img src="/img/logo.png" alt="BINGO文娱" class="mobile-logo-img" />
+        </div>
+
+        <!-- Middle: Three Vertical Nodes -->
+        <div class="mobile-nodes-container">
+          <!-- The vertical connector line track -->
+          <div class="mobile-track-line">
+            <div class="mobile-track-active" :class="`active-to-${activePillar}`"></div>
+          </div>
+
+          <!-- 1. Game Node -->
+          <div
+            class="mobile-node node-game"
+            :class="{ active: activePillar === 'game' }"
+            @click="activePillar = 'game'"
+          >
+            <div class="node-icon-wrapper">
+              <img src="/img/logo(1).png" :alt="t('pillars.nodes.game_main')" class="node-icon-img" />
+            </div>
+            <div class="node-label-wrapper">
+              <span class="sub-brand">{{ t('pillars.nodes.game_sub') }}</span>
+              <span class="main-label">{{ t('pillars.nodes.game_main') }}</span>
+            </div>
+          </div>
+
+          <!-- 2. Drama Node -->
+          <div
+            class="mobile-node node-drama"
+            :class="{ active: activePillar === 'drama' }"
+            @click="activePillar = 'drama'"
+          >
+            <div class="node-icon-wrapper">
+              <img src="/img/omo.png" :alt="t('pillars.nodes.drama_main')" class="node-icon-img" />
+            </div>
+            <div class="node-label-wrapper">
+              <span class="sub-brand">{{ t('pillars.nodes.drama_sub') }}</span>
+              <span class="main-label">{{ t('pillars.nodes.drama_main') }}</span>
+            </div>
+          </div>
+
+          <!-- 3. Social Node -->
+          <div
+            class="mobile-node node-social"
+            :class="{ active: activePillar === 'social' }"
+            @click="activePillar = 'social'"
+          >
+            <div class="node-icon-wrapper">
+              <img src="/img/社交-对话框1.png" :alt="t('pillars.nodes.social_main')" class="node-icon-img" />
+            </div>
+            <div class="node-label-wrapper">
+              <span class="sub-brand">{{ t('pillars.nodes.social_sub') }}</span>
+              <span class="main-label">{{ t('pillars.nodes.social_main') }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lower: Detail Card -->
+        <div class="mobile-detail-card-wrapper">
+          <transition name="slide-fade" mode="out-in">
+            <div :key="activePillar" class="mobile-detail-card glass-card">
+              <div class="mobile-banner-wrapper">
+                <img
+                  :src="activePillarData.img"
+                  :alt="activePillarData.title"
+                  class="mobile-banner-img"
+                  :style="{ filter: activePillarData.filter }"
+                />
+                <div class="mobile-banner-overlay"></div>
+              </div>
+              <div class="mobile-text-content">
+                <h4 class="mobile-detail-title">{{ activePillarData.title }}</h4>
+                <p class="mobile-detail-desc">{{ activePillarData.description }}</p>
               </div>
             </div>
           </transition>
@@ -617,88 +700,263 @@ const activePillarData = computed(() => {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
-  .pillars-section {
-    padding: clamp(40px, 8vw, 64px) 0;
-  }
-  .section-header {
-    margin-bottom: clamp(20px, 5vw, 32px);
-  }
-  .pillars-layout {
-    grid-template-columns: 1fr;
-    gap: clamp(20px, 5vw, 32px);
-    margin-top: clamp(24px, 6vw, 40px);
-  }
-  .orbit-column {
-    --container-padding: 48px;
-    --scale: min(1, calc((100vw - var(--container-padding)) / 420));
-    width: 100%;
-    height: calc(420px * var(--scale));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
-  }
-  .orbit-system {
-    transform: scale(var(--scale));
-    transform-origin: center center;
-    margin: 0;
-  }
-  
-  /* Shorten active connector lines on mobile/tablet */
-  .connector-game {
-    width: 140px;
-  }
-  .connector-drama {
-    width: 150px;
-  }
-  .connector-social {
-    width: 150px;
-  }
-  
-  /* Tighter text styles for left orbit nodes */
-  .orbit-node {
-    gap: 4px;
-  }
-  .node-label {
-    gap: 1px;
-  }
-  .sub-brand {
-    letter-spacing: 0px;
-    font-size: clamp(0.55rem, 2vw, 0.65rem);
-  }
-  .main-label {
-    font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-  }
-
-  /* Responsive right detail column content layout */
-  .detail-column {
-    width: min(94%, 560px);
-    margin: 0 auto;
-  }
-  .pillar-detail-card {
-    border-radius: clamp(16px, 4vw, 24px);
-  }
-  .banner-wrapper {
-    height: clamp(140px, 28vw, 220px);
-  }
-  .pillar-text-content {
-    padding: clamp(16px, 4vw, 28px);
-    text-align: center;
-  }
-  .pillar-title {
-    font-size: clamp(1.05rem, 3.5vw, 1.25rem);
-    margin-bottom: clamp(8px, 2vw, 14px);
-  }
-  .pillar-desc {
-    font-size: clamp(0.82rem, 2.4vw, 0.9rem);
-    line-height: 1.6;
+@media (min-width: 1025px) {
+  .mobile-only {
+    display: none !important;
   }
 }
 
-@media (max-width: 480px) {
-  .orbit-column {
-    --container-padding: 32px;
+@media (max-width: 1024px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .pillars-section {
+    padding: clamp(40px, 8vw, 64px) 0;
+  }
+
+  .section-header {
+    margin-bottom: clamp(20px, 5vw, 32px);
+  }
+
+  /* New Mobile Version Layout and Styles */
+  .mobile-only {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  /* 1. Upper: Logo Core */
+  .mobile-logo-core {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #030763;
+    border: 2px solid #323cc6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(79, 70, 229, 0.4);
+    z-index: 10;
+  }
+
+  .core-glow {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: rgba(79, 70, 229, 0.2);
+    filter: blur(8px);
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  .mobile-logo-img {
+    width: 50px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* 2. Middle: Vertical Nodes Track */
+  .mobile-nodes-container {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 90px; /* Offset to center the track line and icons */
+    margin: 30px 0;
+    gap: 20px; /* Tight vertical gap */
+  }
+
+  /* Vertical track line */
+  .mobile-track-line {
+    position: absolute;
+    top: -30px; /* Start from the bottom of the logo core */
+    left: 116px; /* Center of the icon wrappers (90px + 26px) */
+    width: 2px;
+    height: 210px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 1;
+  }
+
+  .mobile-track-active {
+    position: absolute;
+    top: -30px;
+    left: 116px;
+    width: 2px;
+    background: linear-gradient(to bottom, #0654f2, var(--active-color, #00f0ff));
+    box-shadow: 0 0 8px var(--active-color, #00f0ff);
+    transition: height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.4s ease;
+    z-index: 2;
+  }
+
+  .mobile-track-active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--active-color, #00f0ff);
+    box-shadow: 0 0 12px var(--active-color, #00f0ff);
+  }
+
+  .mobile-track-active.active-to-game {
+    height: 56px;
+    --active-color: #00f0ff;
+  }
+
+  .mobile-track-active.active-to-drama {
+    height: 128px;
+    --active-color: #ec4899;
+  }
+
+  .mobile-track-active.active-to-social {
+    height: 200px;
+    --active-color: #8b5cf6;
+  }
+
+  /* Node item */
+  .mobile-node {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    z-index: 5;
+    width: 100%;
+    height: 52px;
+  }
+
+  .node-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #222560;
+    border: 1px solid #2e3280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .node-icon-img {
+    max-width: 32px;
+    max-height: 28px;
+    object-fit: contain;
+  }
+
+  .node-label-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .node-label-wrapper .sub-brand {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+
+  .node-label-wrapper .main-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  /* Active Node styles */
+  .mobile-node.active .node-icon-wrapper {
+    background:
+      linear-gradient(#222560, #222560) padding-box,
+      linear-gradient(90deg, #0395df 0%, #ac097a 100%) border-box;
+    border: 2px solid transparent;
+    box-shadow: 0 0 15px var(--node-color);
+    transform: scale(1.08);
+  }
+
+  .node-game.active {
+    --node-color: rgba(0, 240, 255, 0.5);
+  }
+
+  .node-drama.active {
+    --node-color: rgba(236, 72, 153, 0.5);
+  }
+
+  .node-social.active {
+    --node-color: rgba(139, 92, 246, 0.5);
+  }
+
+  .mobile-node.active .node-label-wrapper {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+
+  /* 3. Lower: Mobile Detail Card */
+  .mobile-detail-card-wrapper {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  .mobile-detail-card {
+    border-radius: clamp(16px, 4vw, 24px);
+    background-color: #0f0f31 !important;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .mobile-banner-wrapper {
+    position: relative;
+    width: 100%;
+    height: clamp(140px, 35vw, 200px);
+    overflow: hidden;
+  }
+
+  .mobile-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mobile-banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to top, rgba(15, 13, 43, 1) 0%, rgba(15, 13, 43, 0) 100%);
+  }
+
+  .mobile-text-content {
+    padding: clamp(16px, 4vw, 24px);
+    text-align: center;
+  }
+
+  .mobile-detail-title {
+    font-size: clamp(1.05rem, 3.5vw, 1.2rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: clamp(8px, 2vw, 12px);
+  }
+
+  .mobile-detail-desc {
+    font-size: clamp(0.82rem, 2.4vw, 0.9rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-weight: 300;
   }
 }
 </style>

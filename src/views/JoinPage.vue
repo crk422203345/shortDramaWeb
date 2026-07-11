@@ -42,7 +42,7 @@ onMounted(() => {
   void fetchJobs()
 })
 
-const email = 'hr@bingo.vip'
+const email = 'jackli@webx.vip'
 
 // Expanded state management
 const toggleExpand = (id: number) => {
@@ -142,14 +142,7 @@ const afterLeave = (el: Element) => {
         <!-- Error State -->
         <div v-else-if="hasError" class="error-panel">
           <div class="error-icon-wrap">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ef4444"
-              stroke-width="2"
-            >
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="8" x2="12" y2="12"></line>
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -171,17 +164,8 @@ const afterLeave = (el: Element) => {
         <!-- Empty State -->
         <div v-else-if="jobs.length === 0" class="empty-panel">
           <div class="empty-icon-wrap">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#a78bfa"
-              stroke-width="2"
-            >
-              <path
-                d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
-              ></path>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
             </svg>
           </div>
           <h3>{{ locale === 'en' ? 'No Positions Open' : '暂无热招岗位' }}</h3>
@@ -203,64 +187,32 @@ const afterLeave = (el: Element) => {
 
             <div class="job-meta">
               <span class="meta-item">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
                 {{ job.location }}
               </span>
               <span class="meta-item">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="10"></circle>
                   <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
                 {{ job.experience }}
               </span>
               <span class="meta-item">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
                   <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
                 </svg>
                 {{ job.education }}
               </span>
               <span class="meta-item meta-salary">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                   <line x1="1" y1="10" x2="23" y2="10"></line>
                 </svg>
@@ -280,15 +232,8 @@ const afterLeave = (el: Element) => {
             </div>
 
             <!-- Expanded Details -->
-            <transition
-              name="expand-fade"
-              @before-enter="beforeEnter"
-              @enter="enter"
-              @after-enter="afterEnter"
-              @before-leave="beforeLeave"
-              @leave="leave"
-              @after-leave="afterLeave"
-            >
+            <transition name="expand-fade" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"
+              @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
               <div v-if="isExpanded(job.id)" class="job-details">
                 <div class="job-divider"></div>
 
@@ -310,24 +255,11 @@ const afterLeave = (el: Element) => {
 
             <!-- Action Button -->
             <div class="job-actions">
-              <button
-                class="btn-expand"
-                :class="{ active: isExpanded(job.id) }"
-                @click="toggleExpand(job.id)"
-              >
+              <button class="btn-expand" :class="{ active: isExpanded(job.id) }" @click="toggleExpand(job.id)">
                 <span>{{ isExpanded(job.id) ? t('join.collapse') : t('join.expand') }}</span>
-                <svg
-                  class="chevron-icon"
-                  :class="{ rotated: isExpanded(job.id) }"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg class="chevron-icon" :class="{ rotated: isExpanded(job.id) }" width="14" height="14"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round">
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </button>
@@ -346,7 +278,8 @@ const afterLeave = (el: Element) => {
 
 <style scoped>
 .join-page {
-  padding-top: 80px; /* offset for fixed header */
+  padding-top: 80px;
+  /* offset for fixed header */
   flex-grow: 1;
 }
 
@@ -416,7 +349,8 @@ const afterLeave = (el: Element) => {
   padding: 32px;
   border-radius: 20px;
   transition: var(--transition-normal);
-  align-self: start; /* Avoid stretching dynamically */
+  align-self: start;
+  /* Avoid stretching dynamically */
 }
 
 .job-card:hover {
@@ -612,12 +546,10 @@ const afterLeave = (el: Element) => {
 }
 
 .skeleton-line {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.03) 25%,
-    rgba(255, 255, 255, 0.08) 37%,
-    rgba(255, 255, 255, 0.03) 63%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.03) 25%,
+      rgba(255, 255, 255, 0.08) 37%,
+      rgba(255, 255, 255, 0.03) 63%);
   background-size: 400% 100%;
   animation: skeleton-loading 1.4s ease infinite;
   border-radius: 4px;
@@ -639,12 +571,10 @@ const afterLeave = (el: Element) => {
   height: 18px;
   width: 70px;
   border-radius: 4px;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.03) 25%,
-    rgba(255, 255, 255, 0.08) 37%,
-    rgba(255, 255, 255, 0.03) 63%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.03) 25%,
+      rgba(255, 255, 255, 0.08) 37%,
+      rgba(255, 255, 255, 0.03) 63%);
   background-size: 400% 100%;
   animation: skeleton-loading 1.4s ease infinite;
 }
@@ -670,6 +600,7 @@ const afterLeave = (el: Element) => {
   0% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
