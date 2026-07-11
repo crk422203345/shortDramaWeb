@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // Ordered keys determine slide direction
 const regionKeys = ['china', 'hk', 'malaysia', 'sea'] as const
@@ -92,6 +92,10 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('resize', updateSlider)
+})
+
+watch(locale, () => {
+  updateSlider()
 })
 </script>
 

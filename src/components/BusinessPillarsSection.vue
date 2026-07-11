@@ -101,7 +101,6 @@ const activePillarData = computed(() => {
                 />
               </div>
               <div class="node-label">
-                <span class="sub-brand">{{ t('pillars.nodes.game_sub') }}</span>
                 <span class="main-label">{{ t('pillars.nodes.game_main') }}</span>
               </div>
             </div>
@@ -120,7 +119,6 @@ const activePillarData = computed(() => {
                 />
               </div>
               <div class="node-label">
-                <span class="sub-brand">{{ t('pillars.nodes.drama_sub') }}</span>
                 <span class="main-label">{{ t('pillars.nodes.drama_main') }}</span>
               </div>
             </div>
@@ -139,7 +137,6 @@ const activePillarData = computed(() => {
                 />
               </div>
               <div class="node-label">
-                <span class="sub-brand">{{ t('pillars.nodes.social_sub') }}</span>
                 <span class="main-label">{{ t('pillars.nodes.social_main') }}</span>
               </div>
             </div>
@@ -200,7 +197,6 @@ const activePillarData = computed(() => {
               <img src="/img/logo(1).png" :alt="t('pillars.nodes.game_main')" class="node-icon-img" />
             </div>
             <div class="node-label-wrapper">
-              <span class="sub-brand">{{ t('pillars.nodes.game_sub') }}</span>
               <span class="main-label">{{ t('pillars.nodes.game_main') }}</span>
             </div>
           </div>
@@ -215,7 +211,6 @@ const activePillarData = computed(() => {
               <img src="/img/omo.png" :alt="t('pillars.nodes.drama_main')" class="node-icon-img" />
             </div>
             <div class="node-label-wrapper">
-              <span class="sub-brand">{{ t('pillars.nodes.drama_sub') }}</span>
               <span class="main-label">{{ t('pillars.nodes.drama_main') }}</span>
             </div>
           </div>
@@ -230,7 +225,6 @@ const activePillarData = computed(() => {
               <img src="/img/社交-对话框1.png" :alt="t('pillars.nodes.social_main')" class="node-icon-img" />
             </div>
             <div class="node-label-wrapper">
-              <span class="sub-brand">{{ t('pillars.nodes.social_sub') }}</span>
               <span class="main-label">{{ t('pillars.nodes.social_main') }}</span>
             </div>
           </div>

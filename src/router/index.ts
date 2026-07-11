@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import i18n from '@/i18n'
 
 const SUPPORTED_LOCALES = ['zh-CN', 'zh-TW', 'en', 'ms']
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/:lang(zh-CN|zh-TW|en|ms)?',
