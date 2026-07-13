@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import { computed } from 'vue'
+
+const { t, locale } = useI18n()
+const isLongLang = computed(() => locale.value === 'en' || locale.value === 'ms')
 </script>
 
 <template>
@@ -22,7 +25,7 @@ const { t } = useI18n()
           <span class="cross">&times;</span>
           <span class="italic-text">Web3</span>
         </h1>
-        <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
+        <p class="hero-subtitle" :class="{ 'long-lang': isLongLang }">{{ t('hero.subtitle') }}</p>
       </div>
     </div>
   </section>
@@ -91,7 +94,7 @@ const { t } = useI18n()
 }
 
 .hero-title {
-  font-size: 5.5rem;
+  font-size: 7.33rem;
   font-weight: 800;
   color: #ffffff;
   margin-bottom: 24px;
@@ -114,7 +117,7 @@ const { t } = useI18n()
 
 .cross {
   font-weight: 300;
-  font-size: 4rem;
+  font-size: 5.33rem;
   opacity: 0.8;
   margin: 0 8px;
   font-family: sans-serif;
@@ -122,7 +125,7 @@ const { t } = useI18n()
 }
 
 .hero-subtitle {
-  font-size: 2rem;
+  font-size: 2.66rem;
   font-weight: 500;
   font-style: italic;
   color: #ffffff;
@@ -132,6 +135,12 @@ const { t } = useI18n()
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   opacity: 0.95;
   margin-top: 8px;
+}
+
+.hero-subtitle.long-lang {
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+  text-indent: 4px;
 }
 
 /* Animations */
@@ -152,19 +161,25 @@ const { t } = useI18n()
   }
 
   .hero-title {
-    font-size: 4.2rem;
+    font-size: 5.6rem;
     gap: 12px;
     justify-content: center;
   }
 
   .cross {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
   .hero-subtitle {
-    font-size: 1.6rem;
+    font-size: 2.13rem;
     letter-spacing: 8px;
     text-indent: 8px;
+  }
+
+  .hero-subtitle.long-lang {
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    text-indent: 3px;
   }
 }
 
@@ -175,20 +190,26 @@ const { t } = useI18n()
   }
 
   .hero-title {
-    font-size: 3.2rem;
+    font-size: 4.26rem;
     gap: 8px;
     justify-content: center;
   }
 
   .cross {
-    font-size: 2.2rem;
+    font-size: 2.93rem;
     margin: 0 4px;
   }
 
   .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.66rem;
     letter-spacing: 6px;
     text-indent: 6px;
+  }
+
+  .hero-subtitle.long-lang {
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    text-indent: 2px;
   }
 }
 
@@ -198,22 +219,37 @@ const { t } = useI18n()
   }
 
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 2.93rem;
     gap: 6px;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .cross {
-    font-size: 1.8rem;
+    font-size: 2.4rem;
     margin: 0 4px;
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 1.26rem;
     letter-spacing: 3px;
     text-indent: 3px;
     white-space: nowrap;
   }
+
+  .hero-subtitle.long-lang {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-indent: 1px;
+    white-space: normal;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>
+
+
+
+
+

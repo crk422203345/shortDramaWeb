@@ -155,7 +155,6 @@ const activePillarData = computed(() => {
                   class="banner-img"
                   :style="{ filter: activePillarData.filter }"
                 />
-                <div class="banner-overlay"></div>
               </div>
 
               <!-- Text details -->
@@ -241,7 +240,6 @@ const activePillarData = computed(() => {
                   class="mobile-banner-img"
                   :style="{ filter: activePillarData.filter }"
                 />
-                <div class="mobile-banner-overlay"></div>
               </div>
               <div class="mobile-text-content">
                 <h4 class="mobile-detail-title">{{ activePillarData.title }}</h4>
@@ -631,9 +629,10 @@ const activePillarData = computed(() => {
 
 .banner-wrapper {
   position: relative;
-  width: 100%;
   height: 240px;
   overflow: hidden;
+  margin: 24px 24px 16px 24px;
+  border-radius: 16px;
 }
 
 .banner-img {
@@ -645,18 +644,11 @@ const activePillarData = computed(() => {
     transform 0.5s ease;
 }
 
-.banner-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(to top, rgba(15, 13, 43, 1) 0%, rgba(15, 13, 43, 0) 100%);
-}
-
 .pillar-text-content {
   padding: 30px;
+  margin: 0 24px 24px 24px;
   background: rgba(15, 13, 43, 0.5);
+  border-radius: 16px;
 }
 
 .pillar-title {
@@ -914,9 +906,10 @@ const activePillarData = computed(() => {
 
   .mobile-banner-wrapper {
     position: relative;
-    width: 100%;
     height: clamp(140px, 35vw, 200px);
     overflow: hidden;
+    margin: 16px 16px 12px 16px;
+    border-radius: 12px;
   }
 
   .mobile-banner-img {
@@ -925,17 +918,11 @@ const activePillarData = computed(() => {
     object-fit: cover;
   }
 
-  .mobile-banner-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: linear-gradient(to top, rgba(15, 13, 43, 1) 0%, rgba(15, 13, 43, 0) 100%);
-  }
-
   .mobile-text-content {
     padding: clamp(16px, 4vw, 24px);
+    margin: 0 16px 16px 16px;
+    background: rgba(15, 13, 43, 0.5);
+    border-radius: 12px;
     text-align: center;
   }
 
