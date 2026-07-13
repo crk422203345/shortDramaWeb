@@ -250,6 +250,21 @@ const afterLeave = (el: Element) => {
                     <li v-for="(item, i) in job.requirements" :key="i">{{ item }}</li>
                   </ul>
                 </div>
+
+                <!-- Apply Email Section -->
+                <div class="detail-section apply-email-section">
+                  <h4 class="detail-title">{{ t('join.apply_method') }}</h4>
+                  <div class="apply-email-box">
+                    <span class="apply-label">{{ t('join.email_label') }}</span>
+                    <a :href="`mailto:${email}?subject=${encodeURIComponent((locale === 'en' ? 'Apply for ' : '应聘-') + job.title)}`" class="mail-link-badge">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mail-icon">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                      {{ email }}
+                    </a>
+                  </div>
+                </div>
               </div>
             </transition>
 
@@ -721,5 +736,50 @@ const afterLeave = (el: Element) => {
   .job-meta {
     gap: 12px;
   }
+}
+
+/* Apply Email Box styles */
+.apply-email-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.apply-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.mail-link-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(99, 34, 203, 0.15);
+  border: 1px solid rgba(99, 34, 203, 0.3);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  color: #a78bfa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.mail-link-badge:hover {
+  background: rgba(99, 34, 203, 0.3);
+  border-color: rgba(99, 34, 203, 0.6);
+  color: #c084fc;
+  box-shadow: 0 0 15px rgba(99, 34, 203, 0.3);
+  transform: translateY(-1px);
+}
+
+.mail-icon {
+  flex-shrink: 0;
 }
 </style>
