@@ -10,6 +10,22 @@ const company = ref('')
 const email = ref('')
 const description = ref('')
 
+const contactMethod = ref<'email' | 'phone'>('email')
+
+const setContactMethod = (method: 'email' | 'phone') => {
+  contactMethod.value = method
+  email.value = ''
+}
+
+const isValidEmail = (val: string) => {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)
+}
+
+const isValidPhone = (val: string) => {
+  const cleanVal = val.replace(/[^\d+]/g, '')
+  return /^\+?\d{6,14}$/.test(cleanVal)
+}
+
 const isSubmitted = ref(false)
 const isLoading = ref(false)
 let submitTimer: ReturnType<typeof setTimeout> | null = null
@@ -34,6 +50,7 @@ const submitContact = async () => {
     company.value = ''
     email.value = ''
     description.value = ''
+    contactMethod.value = 'email'
   } catch (error) {
     console.error('[Contact Submit Error]:', error)
     alert(error instanceof Error ? error.message : t('contact.failed'))
@@ -46,12 +63,24 @@ const submitContact = async () => {
 const submitForm = () => {
   if (
     !name.value.trim() ||
-    !company.value.trim() ||
     !email.value.trim() ||
     !description.value.trim()
   ) {
     alert(t('contact.required_fields_empty'))
     return
+  }
+
+  const contactVal = email.value.trim()
+  if (contactMethod.value === 'email') {
+    if (!isValidEmail(contactVal)) {
+      alert(t('contact.invalid_email'))
+      return
+    }
+  } else {
+    if (!isValidPhone(contactVal)) {
+      alert(t('contact.invalid_phone'))
+      return
+    }
   }
 
   if (submitTimer) {
@@ -124,36 +153,55 @@ onUnmounted(() => {
                   id="name"
                   v-model="name"
                   :placeholder="t('contact.name_placeholder')"
+                  maxlength="200"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="company"
-                  >{{ t('contact.company') }}
-                  <span class="required">{{ t('contact.required') }}</span></label
-                >
+                <label for="company">{{ t('contact.company') }}</label>
                 <input
                   type="text"
                   id="company"
                   v-model="company"
                   :placeholder="t('contact.company_placeholder')"
-                  required
+                  maxlength="200"
                 />
               </div>
             </div>
 
-            <!-- Row 2: Email -->
+            <!-- Row 2: Email or Phone (Switchable) -->
             <div class="form-row">
               <div class="form-group">
-                <label for="email"
-                  >{{ t('contact.email') }}
-                  <span class="required">{{ t('contact.required') }}</span></label
-                >
+                <div class="contact-label-row">
+                  <label for="contact-value">
+                    {{ contactMethod === 'email' ? t('contact.email') : t('contact.phone') }}
+                    <span class="required">{{ t('contact.required') }}</span>
+                  </label>
+                  <div class="contact-toggle-group">
+                    <button
+                      type="button"
+                      class="toggle-btn"
+                      :class="{ active: contactMethod === 'email' }"
+                      @click="setContactMethod('email')"
+                    >
+                      {{ t('contact.method_email') }}
+                    </button>
+                    <button
+                      type="button"
+                      class="toggle-btn"
+                      :class="{ active: contactMethod === 'phone' }"
+                      @click="setContactMethod('phone')"
+                    >
+                      {{ t('contact.method_phone') }}
+                    </button>
+                  </div>
+                </div>
                 <input
-                  type="email"
-                  id="email"
+                  :type="contactMethod === 'email' ? 'email' : 'text'"
+                  id="contact-value"
                   v-model="email"
-                  :placeholder="t('contact.email_placeholder')"
+                  :placeholder="contactMethod === 'email' ? t('contact.email_placeholder') : t('contact.phone_placeholder')"
+                  maxlength="200"
                   required
                 />
               </div>
@@ -171,6 +219,7 @@ onUnmounted(() => {
                   v-model="description"
                   rows="6"
                   :placeholder="t('contact.desc_placeholder')"
+                  maxlength="1000"
                   required
                 ></textarea>
               </div>
@@ -238,6 +287,44 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.contact-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.contact-toggle-group {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2px;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+  background: #6322cb;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(99, 34, 203, 0.4);
+}
+
+.toggle-btn:hover:not(.active) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .form-group label {
