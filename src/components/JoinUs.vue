@@ -706,17 +706,17 @@ body {
   color: #5c92ff;
 }
 
-/* Gold highlighted salary badge matching WebX gold accents */
+/* Neon cyan highlighted salary badge matching WebX accents */
 .badge.salary {
-  color: #ffc634;
-  border-color: rgba(255, 198, 52, 0.4);
-  background: rgba(255, 198, 52, 0.08);
+  color: #00F0FF;
+  border-color: rgba(0, 240, 255, 0.4);
+  background: rgba(0, 240, 255, 0.08);
   font-weight: 600;
 }
 
 .badge.salary .icon {
   opacity: 1;
-  color: #ffc634;
+  color: #00F0FF;
 }
 
 .section-title {
@@ -730,13 +730,13 @@ body {
   margin-bottom: 12px;
 }
 
-/* Gold accent bar to match WebX gold title styling */
+/* Cyan accent bar to match WebX title styling */
 .section-title .bar {
   width: 3px;
   height: 14px;
-  background: #ffc634;
+  background: #00F0FF;
   border-radius: 1.5px;
-  box-shadow: 0 0 8px rgba(255, 198, 52, 0.6);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
 }
 
 .bullet-list {
@@ -754,7 +754,7 @@ body {
   margin-bottom: 8px;
 }
 
-/* Gold dots for lists */
+/* Cyan dots for lists */
 .bullet-list li::before {
   content: '';
   position: absolute;
@@ -763,8 +763,8 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffc634;
-  box-shadow: 0 0 6px rgba(255, 198, 52, 0.8);
+  background: #00F0FF;
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.8);
 }
 
 /* Expansion transition setup */
@@ -799,7 +799,7 @@ body {
 
 .expand-btn:hover {
   background: rgba(0, 55, 253, 0.15);
-  color: #ffc634;
+  color: #00F0FF;
 }
 
 .chevron-icon {
@@ -940,7 +940,7 @@ body {
 .email-icon {
   width: 16px;
   height: 16px;
-  color: #ffc634;
+  color: #00F0FF;
 }
 
 .email-label {
@@ -949,7 +949,7 @@ body {
 }
 
 .email-link {
-  color: #ffc634;
+  color: #00F0FF;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.2s ease;
