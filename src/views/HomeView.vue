@@ -26,11 +26,11 @@ import ContactSection from '@/components/ContactSection.vue'
       <!-- 4. Three Core Business Pillars -->
       <BusinessPillarsSection />
 
-      <!-- 5. Global Planning Layout -->
-      <GlobalPlanningSection />
-
       <!-- 6. Ecological Layout -->
       <EcoLayoutSection />
+
+      <!-- 5. Global Planning Layout -->
+      <GlobalPlanningSection />
 
       <!-- 7. Contact Us -->
       <ContactSection />

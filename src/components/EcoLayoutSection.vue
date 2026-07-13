@@ -105,7 +105,6 @@ const nodePositions = [
 
       <!-- Mid Typography Title -->
       <div class="mid-title-wrap">
-        <h3 class="mid-title-primary">{{ t('eco.mid_title_primary') }}</h3>
         <h3 class="mid-title-secondary">{{ t('eco.mid_title_secondary') }}</h3>
       </div>
 
