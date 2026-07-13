@@ -327,11 +327,11 @@ watch(currentLang, () => {
         <div class="footer-col">
           <h4 class="footer-title">{{ t[currentLang].footerEcosystem }}</h4>
           <ul class="footer-links">
-            <li><a href="#">{{ t[currentLang].linkMerchant }}</a></li>
-            <li><a href="#">{{ t[currentLang].linkBingoEnt }}</a></li>
-            <li><a href="#">{{ t[currentLang].linkAssetSys }}</a></li>
-            <li><a href="#">{{ t[currentLang].linkBingoEnt }}</a></li>
-            <li><a href="#">{{ t[currentLang].linkWinPay }}</a></li>
+            <li><a href="https://webx.ai/chs/core-ecosystem#global" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkMerchant }}</a></li>
+            <li><a href="https://webx.ai/chs/core-ecosystem#bingo" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkBingoEnt }}</a></li>
+            <li><a href="https://webx.ai/chs/core-ecosystem#web3" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkAssetSys }}</a></li>
+            <li><a href="https://webx.ai/chs/core-ecosystem#bingo" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkBingoEnt }}</a></li>
+            <li><a href="https://webx.ai/chs/core-ecosystem#winpay" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkWinPay }}</a></li>
           </ul>
         </div>
 
@@ -339,9 +339,8 @@ watch(currentLang, () => {
         <div class="footer-col">
           <h4 class="footer-title">{{ t[currentLang].footerResources }}</h4>
           <ul class="footer-links">
-            <li><a href="#">{{ t[currentLang].linkIntro }}</a></li>
-            <li><a href="#">{{ t[currentLang].linkIntro }}</a></li>
-            <li><a href="#">{{ t[currentLang].linkModel }}</a></li>
+            <li><a href="https://webx.ai/chs/resource-center#group" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkIntro }}</a></li>
+            <li><a href="https://webx.ai/chs/resource-center#group" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkIntro }}</a></li>
           </ul>
         </div>
 
@@ -349,8 +348,8 @@ watch(currentLang, () => {
         <div class="footer-col">
           <h4 class="footer-title">{{ t[currentLang].footerStatement }}</h4>
           <ul class="footer-links">
-            <li><a href="#">{{ t[currentLang].linkTerms }}</a></li>
-            <li><a href="#">{{ t[currentLang].linkPrivacy }}</a></li>
+            <li><a href="https://webx.ai/chs/p/terms-chs" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkTerms }}</a></li>
+            <li><a href="https://webx.ai/chs/p/privacypolicy-chs" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkPrivacy }}</a></li>
           </ul>
         </div>
 
@@ -358,12 +357,12 @@ watch(currentLang, () => {
         <div class="footer-col">
           <h4 class="footer-title">{{ t[currentLang].footerSocial }}</h4>
           <div class="social-links-row">
-            <a href="#" class="social-btn" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+            <a href="https://t.me/WebX_Business" class="social-btn" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-.97.53-1.35.52-.42-.01-1.23-.24-1.83-.44-.74-.24-1.33-.37-1.28-.79.03-.22.33-.45.9-.69 3.51-1.52 5.85-2.53 7.02-3 .3-.12.59-.22.88-.22.29 0 .91.16 1.27.52.28.28.27.75.17.98z"/>
               </svg>
             </a>
-            <a href="https://x.com/webx_business?s=2" class="social-btn" aria-label="X" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/WebX_Business" class="social-btn" aria-label="X" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
@@ -373,7 +372,7 @@ watch(currentLang, () => {
                 <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.5 12 3.5 12 3.5s-7.518 0-9.388.553a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.553 9.388.553 9.388.553s7.518 0 9.388-.553a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </a>
-            <a href="#" class="social-btn" aria-label="Medium" target="_blank" rel="noopener noreferrer">
+            <a href="https://medium.com/@WebXBusiness" class="social-btn" aria-label="Medium" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
               </svg>
