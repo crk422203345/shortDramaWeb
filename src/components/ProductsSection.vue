@@ -54,7 +54,7 @@ const openLink = (url: string) => {
 </script>
 
 <template>
-  <section class="products-section section-padding">
+  <section id="products-section" class="products-section section-padding">
     <div class="container">
       <!-- Section Header -->
       <div class="section-header">

@@ -11,13 +11,6 @@ const router = useRouter()
 const isMinimalHeader = computed(() => route.name === 'privacy' || route.name === 'terms')
 
 const activeItem = ref('home')
-const menuItems = computed(() => [
-  { key: 'home', label: t('nav.home'), href: '#home' },
-  { key: 'business', label: t('nav.business'), href: '#business-mode' },
-  { key: 'eco', label: t('nav.eco'), href: '#eco-layout' },
-  { key: 'inquiry', label: t('nav.inquiry'), href: 'javascript:void(0)', isStatic: true },
-  { key: 'contact', label: t('nav.contact'), href: '/contact', isRoute: true },
-])
 
 const isMobileMenuOpen = ref(false)
 const toggleMobileMenu = () => {
@@ -52,7 +45,7 @@ watch(
   { immediate: true },
 )
 
-const navigateTo = (item: { key: string; label: string; href: string; isRoute?: boolean; isStatic?: boolean }) => {
+const navigateTo = (item: { key: string; href: string; isRoute?: boolean; isStatic?: boolean }) => {
   if (item.isStatic) {
     return
   }
@@ -69,6 +62,36 @@ const navigateTo = (item: { key: string; label: string; href: string; isRoute?: 
     } else {
       // On another page (e.g. /join) – navigate home then scroll to section
       router.push({ name: 'home', hash })
+    }
+  }
+}
+
+/* Eco dropdown */
+const showEcoDropdown = ref(false)
+let ecoTimer: any = null
+
+const openEcoDropdown = () => {
+  if (ecoTimer) clearTimeout(ecoTimer)
+  showEcoDropdown.value = true
+}
+
+const closeEcoDropdown = () => {
+  if (ecoTimer) clearTimeout(ecoTimer)
+  ecoTimer = setTimeout(() => {
+    showEcoDropdown.value = false
+  }, 350)
+}
+
+const clickEcoSub = (type: string) => {
+  showEcoDropdown.value = false
+  closeMobileMenu()
+  if (type === 'game' || type === 'drama' || type === 'social') {
+    activeItem.value = 'eco'
+    if (route.name === 'home') {
+      const el = document.getElementById('products-section')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      router.push({ name: 'home', hash: '#products-section' })
     }
   }
 }
@@ -150,6 +173,9 @@ const handleClickOutside = (event: MouseEvent) => {
   if (!target.closest('.more-menu-container')) {
     showMoreDropdown.value = false
   }
+  if (!target.closest('.eco-wrapper')) {
+    showEcoDropdown.value = false
+  }
 }
 
 onMounted(() => {
@@ -161,6 +187,7 @@ onUnmounted(() => {
   document.body.style.overflow = ''
   if (langTimer) clearTimeout(langTimer)
   if (moreTimer) clearTimeout(moreTimer)
+  if (ecoTimer) clearTimeout(ecoTimer)
 })
 </script>
 
@@ -175,14 +202,61 @@ onUnmounted(() => {
       <!-- Navigation Menu -->
       <nav class="nav-menu" v-if="!isMinimalHeader">
         <ul>
-          <li
-            v-for="item in menuItems"
-            :key="item.key"
-            :class="{ active: activeItem === item.key }"
-          >
-            <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
+          <li :class="{ active: activeItem === 'home' }">
+            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'home', href: '#home' })">{{ t('nav.home') }}</a>
+          </li>
+          <li :class="{ active: activeItem === 'business' }">
+            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'business', href: '#business-mode' })">{{ t('nav.business') }}</a>
           </li>
 
+          <!-- Eco dropdown menu -->
+          <li
+            class="has-dropdown"
+            :class="{ active: activeItem === 'eco' }"
+          >
+            <div
+              class="eco-wrapper"
+              @mouseenter="openEcoDropdown"
+              @mouseleave="closeEcoDropdown"
+            >
+              <a href="javascript:void(0)" role="button">
+                {{ t('nav.eco') }}
+                <svg
+                  class="caret"
+                  :class="{ rotated: showEcoDropdown }"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </a>
+
+              <transition name="fade">
+                <div v-if="showEcoDropdown" class="eco-dropdown">
+                  <div class="eco-dropdown-inner">
+                    <a href="javascript:void(0)" class="dropdown-item" @click="clickEcoSub('game')">{{ t('nav.eco_game') }}</a>
+                    <a href="javascript:void(0)" class="dropdown-item" @click="clickEcoSub('drama')">{{ t('nav.eco_drama') }}</a>
+                    <a href="javascript:void(0)" class="dropdown-item" @click="clickEcoSub('social')">{{ t('nav.eco_social') }}</a>
+                    <a href="https://webx.ai/" target="_blank" rel="noopener noreferrer" class="dropdown-item" @click="showEcoDropdown = false">webx</a>
+                    <a href="https://www.winpay.com/#/" target="_blank" rel="noopener noreferrer" class="dropdown-item" @click="showEcoDropdown = false">winpay</a>
+                  </div>
+                </div>
+              </transition>
+            </div>
+          </li>
+
+          <li :class="{ active: activeItem === 'inquiry' }">
+            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: 'javascript:void(0)', isStatic: true })">{{ t('nav.inquiry') }}</a>
+          </li>
+          <li :class="{ active: activeItem === 'contact' }">
+            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })">{{ t('nav.contact') }}</a>
+          </li>
         </ul>
       </nav>
 
@@ -312,12 +386,30 @@ onUnmounted(() => {
       <div v-if="isMobileMenuOpen && !isMinimalHeader" class="mobile-drawer">
         <div class="drawer-content">
           <ul class="drawer-nav">
-            <li
-              v-for="item in menuItems"
-              :key="item.key"
-              :class="{ active: activeItem === item.key }"
-            >
-              <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
+            <li :class="{ active: activeItem === 'home' }">
+              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'home', href: '#home' })">{{ t('nav.home') }}</a>
+            </li>
+            <li :class="{ active: activeItem === 'business' }">
+              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'business', href: '#business-mode' })">{{ t('nav.business') }}</a>
+            </li>
+
+            <!-- Eco Layout collapsible submenu inside mobile drawer -->
+            <li :class="{ active: activeItem === 'eco' }">
+              <div class="drawer-section-title">{{ t('nav.eco') }}</div>
+              <div class="drawer-submenu">
+                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('game')">{{ t('nav.eco_game') }}</a>
+                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('drama')">{{ t('nav.eco_drama') }}</a>
+                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('social')">{{ t('nav.eco_social') }}</a>
+                <a href="https://webx.ai/" target="_blank" rel="noopener noreferrer" class="drawer-subitem" @click="closeMobileMenu">webx</a>
+                <a href="https://www.winpay.com/#/" target="_blank" rel="noopener noreferrer" class="drawer-subitem" @click="closeMobileMenu">winpay</a>
+              </div>
+            </li>
+
+            <li :class="{ active: activeItem === 'inquiry' }">
+              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: 'javascript:void(0)', isStatic: true })">{{ t('nav.inquiry') }}</a>
+            </li>
+            <li :class="{ active: activeItem === 'contact' }">
+              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })">{{ t('nav.contact') }}</a>
             </li>
           </ul>
 
@@ -597,14 +689,16 @@ onUnmounted(() => {
   transform: rotate(180deg);
 }
 
-.contact-wrapper {
+.contact-wrapper,
+.eco-wrapper {
   position: relative;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
 }
 
-.has-dropdown .contact-dropdown {
+.has-dropdown .contact-dropdown,
+.has-dropdown .eco-dropdown {
   position: absolute;
   top: 100%;
   left: 50%;
@@ -614,7 +708,8 @@ onUnmounted(() => {
   z-index: 101;
 }
 
-.contact-dropdown-inner {
+.contact-dropdown-inner,
+.eco-dropdown-inner {
   background: #0f0d22;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -622,7 +717,8 @@ onUnmounted(() => {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-.has-dropdown .contact-dropdown .dropdown-item {
+.has-dropdown .contact-dropdown .dropdown-item,
+.has-dropdown .eco-dropdown .dropdown-item {
   padding: 10px 18px;
   font-size: 0.88rem;
   text-align: center;
