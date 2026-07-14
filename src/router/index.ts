@@ -21,6 +21,11 @@ const router = createRouter({
           component: () => import('@/views/JoinPage.vue'),
         },
         {
+          path: 'contact',
+          name: 'contact',
+          component: () => import('@/views/ContactPage.vue'),
+        },
+        {
           path: 'privacy',
           name: 'privacy',
           component: () => import('@/views/PrivacyPage.vue'),

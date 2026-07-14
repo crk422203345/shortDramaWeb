@@ -5,7 +5,6 @@ import MarketDynamicsSection from '@/components/MarketDynamicsSection.vue'
 import BusinessPillarsSection from '@/components/BusinessPillarsSection.vue'
 import GlobalPlanningSection from '@/components/GlobalPlanningSection.vue'
 import EcoLayoutSection from '@/components/EcoLayoutSection.vue'
-import ContactSection from '@/components/ContactSection.vue'
 </script>
 
 <template>
@@ -31,9 +30,6 @@ import ContactSection from '@/components/ContactSection.vue'
 
       <!-- 5. Global Planning Layout -->
       <GlobalPlanningSection />
-
-      <!-- 7. Contact Us -->
-      <ContactSection />
     </div>
   </main>
 </template>

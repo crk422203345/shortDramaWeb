@@ -15,6 +15,7 @@ const menuItems = computed(() => [
   { key: 'home', label: t('nav.home'), href: '#home' },
   { key: 'business', label: t('nav.business'), href: '#business-mode' },
   { key: 'eco', label: t('nav.eco'), href: '#eco-layout' },
+  { key: 'contact', label: t('nav.contact'), href: '/contact', isRoute: true },
 ])
 
 const isMobileMenuOpen = ref(false)
@@ -33,17 +34,38 @@ watch(isMobileMenuOpen, (isOpen) => {
   }
 })
 
-const navigateTo = (item: { key: string; label: string; href: string }) => {
+watch(
+  () => route.name,
+  (name) => {
+    if (name === 'contact') {
+      activeItem.value = 'contact'
+    } else if (name === 'home') {
+      const hash = route.hash
+      if (hash === '#business-mode') activeItem.value = 'business'
+      else if (hash === '#eco-layout') activeItem.value = 'eco'
+      else activeItem.value = 'home'
+    } else {
+      activeItem.value = ''
+    }
+  },
+  { immediate: true },
+)
+
+const navigateTo = (item: { key: string; label: string; href: string; isRoute?: boolean }) => {
   activeItem.value = item.key
-  const hash = item.href
   closeMobileMenu()
-  if (route.name === 'home') {
-    // Already on home – just smooth scroll to section
-    const el = document.querySelector(hash)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  if (item.isRoute) {
+    router.push({ name: item.key })
   } else {
-    // On another page (e.g. /join) – navigate home then scroll to section
-    router.push({ name: 'home', hash })
+    const hash = item.href
+    if (route.name === 'home') {
+      // Already on home – just smooth scroll to section
+      const el = document.querySelector(hash)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      // On another page (e.g. /join) – navigate home then scroll to section
+      router.push({ name: 'home', hash })
+    }
   }
 }
 
@@ -99,49 +121,6 @@ const closeLanguageDropdown = () => {
   }, 350) // 350ms delay to prevent accidental mouseleave closes
 }
 
-/* Contact dropdown */
-const showContactDropdown = ref(false)
-let contactTimer: any = null
-
-const toggleContactDropdown = () => {
-  if (contactTimer) clearTimeout(contactTimer)
-  showContactDropdown.value = !showContactDropdown.value
-}
-
-const openContactDropdown = () => {
-  if (contactTimer) clearTimeout(contactTimer)
-  showContactDropdown.value = true
-}
-
-const closeContactDropdown = () => {
-  if (contactTimer) clearTimeout(contactTimer)
-  contactTimer = setTimeout(() => {
-    showContactDropdown.value = false
-  }, 600) // 600ms delay – prevents accidental close on slow mouse movement
-}
-
-// Go to the contact form at the bottom of the home page.
-const goToContact = () => {
-  showContactDropdown.value = false
-  closeMobileMenu()
-  activeItem.value = 'contact'
-  if (route.name === 'home') {
-    const el = document.getElementById('contact')
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-      return
-    }
-  }
-  router.push({ name: 'home', hash: '#contact' })
-}
-
-const goToJoin = () => {
-  showContactDropdown.value = false
-  closeMobileMenu()
-  activeItem.value = 'contact'
-  router.push({ name: 'join' })
-}
-
 /* More menu dropdown */
 const showMoreDropdown = ref(false)
 let moreTimer: any = null
@@ -161,9 +140,6 @@ const closeMoreDropdown = () => {
 // Global click outside to close dropdowns
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
-  if (!target.closest('.has-dropdown')) {
-    showContactDropdown.value = false
-  }
   if (!target.closest('.lang-selector')) {
     showLanguageDropdown.value = false
   }
@@ -180,7 +156,6 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
   document.body.style.overflow = ''
   if (langTimer) clearTimeout(langTimer)
-  if (contactTimer) clearTimeout(contactTimer)
   if (moreTimer) clearTimeout(moreTimer)
 })
 </script>
@@ -204,48 +179,6 @@ onUnmounted(() => {
             <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
           </li>
 
-          <!-- Contact with dropdown -->
-          <li class="has-dropdown" :class="{ active: activeItem === 'contact' }">
-            <div
-              class="contact-wrapper"
-              @mouseenter="openContactDropdown"
-              @mouseleave="closeContactDropdown"
-            >
-              <a href="javascript:void(0)" role="button" @click="toggleContactDropdown">
-                {{ t('nav.contact') }}
-                <svg
-                  class="caret"
-                  :class="{ rotated: showContactDropdown }"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </a>
-
-              <transition name="fade">
-                <div v-if="showContactDropdown" class="contact-dropdown">
-                  <div class="contact-dropdown-inner">
-                    <div class="dropdown-item" @click="goToContact">
-                      {{ t('products.talk_collab') }}
-                    </div>
-                    <RouterLink
-                      :to="{ name: 'join' }"
-                      class="dropdown-item"
-                      @click="showContactDropdown = false"
-                      >{{ t('nav.join') }}</RouterLink
-                    >
-                  </div>
-                </div>
-              </transition>
-            </div>
-          </li>
         </ul>
       </nav>
 
@@ -381,20 +314,6 @@ onUnmounted(() => {
               :class="{ active: activeItem === item.key }"
             >
               <a href="javascript:void(0)" @click.prevent="navigateTo(item)">{{ item.label }}</a>
-            </li>
-            <li :class="{ active: activeItem === 'contact' }">
-              <div class="drawer-section-title">{{ t('nav.contact') }}</div>
-              <div class="drawer-submenu">
-                <a href="javascript:void(0)" class="drawer-subitem" @click="goToContact">{{
-                  t('products.talk_collab')
-                }}</a>
-                <RouterLink
-                  :to="{ name: 'join' }"
-                  class="drawer-subitem"
-                  @click="closeMobileMenu"
-                  >{{ t('nav.join') }}</RouterLink
-                >
-              </div>
             </li>
           </ul>
 
