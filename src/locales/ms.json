@@ -403,5 +403,46 @@
     "server_error": "Ralat pelayan, sila cuba sebentar lagi",
     "timeout": "Masa tamat sambungan, sila periksa tetapan rangkaian anda",
     "business_failed": "Operasi gagal"
+  },
+  "game_universe": {
+    "title": "Olé Game",
+    "description": "BINGO Games ialah penyelesaian sehenti untuk pengurusan pengedaran dan operasi. Ia menyepadukan modul teras seperti latar belakang kebenaran berbilang peranan, sistem promosi viral, liputan semua terminal, transaksi sub-akaun, operasi kebajikan dan statistik data, menyediakan pemilik platform, saluran dan pembangun permainan dengan perkhidmatan pautan penuh dari integrasi ke pengewangan.",
+    "tag_count": "100+ Permainan Premium",
+    "tag_p2e": "Main-untuk-Dapat",
+    "card_loop_title": "Gelung Tertutup Transaksi Permainan",
+    "card_loop_desc": "Kami menyediakan keupayaan pengedaran dan operasi permainan, dan terus menembusi senario menegak seperti studio permainan dan perkhidmatan peningkatan tahap melalui SDK sub-akaun dan sistem transaksi, menyokong penjanaan pukal, pengikatan automatik dan penyenaraian platform, dengan komisen transaksi.",
+    "card_term_title": "Liputan Semua Terminal",
+    "card_term_desc": "Platform ini menyesuaikan sepenuhnya kepada pelbagai terminal seperti tapak web PC, WAP mudah alih, operasi bersama H5, dan versi kotak web Apple, dan menyokong penjanaan tapak jenama bebas (pengedaran OEM) untuk saluran hiliran, meluaskan sempadan perniagaan secara fleksibel.",
+    "slogan": "Sambung ke Dunia Baharu, Mulakan Pengembaraan Anda!",
+    "slogan_sub": "Masuk ke lobi permainan sekarang dan mulakan perjalanan main-untuk-dapat anda. BINGO Games sedang menunggu anda.",
+    "btn_enter": "Masuk Lobi Permainan Mini"
+  },
+  "drama_universe": {
+    "title": "Drama Pendek BINGO",
+    "subtitle": "Platform Drama Pendek Premium Global, Menjadikan Hiburan Lebih Bernilai",
+    "description": "Platform drama pendek BINGO komited untuk membina ekologi drama pendek premium global, mengagregat kandungan drama pendek skrin menegak berkualiti tinggi yang besar, dan menyediakan pengguna dengan pengalaman menonton yang mendalam dan berkualiti tinggi. Platform ini menyepadukan cadangan pintar AI, enjin iklan lancar AI, operasi global dan ekologi pencipta untuk menghubungkan pengguna, kandungan, jenama dan pencipta, membina platform kandungan hiburan digital yang lebih terbuka, cekap dan mampan.",
+    "tag_count": "1000+ Drama Hangat",
+    "tag_p2e": "Tonton & Dapat",
+    "card_loop_title": "Drama Premium yang Besar",
+    "card_loop_desc": "Merangkumi genre popular seperti percintaan bandar, cinta manis, kemunculan semula, misteri, fantasi, pengembaraan masa, keluarga dan tempat kerja, sentiasa mengemas kini kandungan berkualiti tinggi untuk memuaskan penonton yang berbeza.",
+    "card_term_title": "Perkhidmatan Kandungan Global",
+    "card_term_desc": "Menyokong operasi berbilang bahasa dan berbilang wilayah, menyediakan persembahan kandungan setempat untuk negara yang berbeza. Memaparkan pensuisan berbilang bahasa, pengesyoran kandungan berbilang wilayah, operasi setempat dan sistem pembayaran global.",
+    "slogan": "Masuk ke Dunia Drama, Belayar Sekarang!",
+    "slogan_sub": "Masuk ke lobi drama sekarang dan nikmati pengalaman audio-visual yang indah. Sejumlah besar drama popular eksklusif menanti anda.",
+    "btn_enter": "Masuk Lobi Drama"
+  },
+  "social_universe": {
+    "title": "Bingo Sosial",
+    "subtitle": "Menghubungkan Minat, Menemui Lebih Banyak Keindahan",
+    "description": "Bingo Sosial ialah platform sosial berasaskan minat generasi baharu di bawah Bingo Entertainment. Melalui pemadanan pintar AI, komuniti minat, dan sambungan aktiviti luar talian, ia mencipta pengalaman sosial yang lebih tulen, selamat dan bernilai untuk pengguna global.",
+    "tag_count": "Sosial Minat × Kehidupan Luar Talian",
+    "tag_p2e": "Akan Datang",
+    "card_loop_title": "Sambungan Dalam Talian, Pengalaman Luar Talian",
+    "card_loop_desc": "Berbeza daripada aplikasi sembang tradisional, Bingo Sosial tidak hanya terhenti pada interaksi dalam talian. Ia menumpukan pada minat seperti filem, makanan, pelancongan, dan sukan untuk merapatkan pemadanan dalam talian dengan aktiviti luar talian, menjadikan setiap sambungan semula jadi dan nyata.",
+    "card_term_title": "Sinergi dengan Ekologi BINGO",
+    "card_term_desc": "Bingo Sosial, Drama Pendek, dan Permainan membina ekosistem hiburan digital yang lengkap bersama-sama. Pengguna boleh menjalin hubungan melalui drama, permainan, atau aktiviti, menemui minat bersama untuk membentuk hubungan sosial yang lebih kaya.",
+    "slogan": "Hubungkan Minat, Temui Kehidupan",
+    "slogan_sub": "Terokai lebih banyak minat, temui lebih ramai rakan, dan mulakan pengalaman sosial anda yang menarik. Bingo Sosial menanti anda.",
+    "btn_enter": "Akan Datang · Nantikan"
   }
 }

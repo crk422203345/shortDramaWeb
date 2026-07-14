@@ -26,6 +26,21 @@ const router = createRouter({
           component: () => import('@/views/ContactPage.vue'),
         },
         {
+          path: 'game',
+          name: 'game',
+          component: () => import('@/views/GamePage.vue'),
+        },
+        {
+          path: 'drama',
+          name: 'drama',
+          component: () => import('@/views/DramaPage.vue'),
+        },
+        {
+          path: 'social',
+          name: 'social',
+          component: () => import('@/views/SocialPage.vue'),
+        },
+        {
           path: 'privacy',
           name: 'privacy',
           component: () => import('@/views/PrivacyPage.vue'),

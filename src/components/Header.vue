@@ -38,6 +38,8 @@ watch(
       if (hash === '#business-mode') activeItem.value = 'business'
       else if (hash === '#eco-layout') activeItem.value = 'eco'
       else activeItem.value = 'home'
+    } else if (name === 'game' || name === 'drama' || name === 'social') {
+      activeItem.value = 'eco'
     } else {
       activeItem.value = ''
     }
@@ -85,14 +87,15 @@ const closeEcoDropdown = () => {
 const clickEcoSub = (type: string) => {
   showEcoDropdown.value = false
   closeMobileMenu()
-  if (type === 'game' || type === 'drama' || type === 'social') {
+  if (type === 'game') {
     activeItem.value = 'eco'
-    if (route.name === 'home') {
-      const el = document.getElementById('products-section')
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
-    } else {
-      router.push({ name: 'home', hash: '#products-section' })
-    }
+    router.push({ name: 'game' })
+  } else if (type === 'drama') {
+    activeItem.value = 'eco'
+    router.push({ name: 'drama' })
+  } else if (type === 'social') {
+    activeItem.value = 'eco'
+    router.push({ name: 'social' })
   }
 }
 
