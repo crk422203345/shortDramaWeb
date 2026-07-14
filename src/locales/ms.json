@@ -11,7 +11,7 @@
     "eco_game": "Permainan",
     "eco_drama": "Drama Pendek",
     "eco_social": "Sosial",
-    "inquiry": "Pertanyaan Terkini",
+    "inquiry": "Maklumat Terkini",
     "join": "Kerjaya",
     "contact": "Hubungi Kami",
     "wechat_popup": "Imbas WeChat untuk Kolaborasi",
@@ -444,5 +444,113 @@
     "slogan": "Hubungkan Minat, Temui Kehidupan",
     "slogan_sub": "Terokai lebih banyak minat, temui lebih ramai rakan, dan mulakan pengalaman sosial anda yang menarik. Bingo Sosial menanti anda.",
     "btn_enter": "Akan Datang · Nantikan"
+  },
+  "inquiry": {
+    "title": "Maklumat Terkini",
+    "subtitle": "Dapatkan pengumuman rasmi, berita syarikat, dan maklumat lelaran produk terkini daripada platform BINGO Entertainment.",
+    "badge": "Inquiry",
+    "empty": "Tiada maklumat tersedia",
+    "tabs": {
+      "all": "Semua",
+      "company": "Berita Syarikat",
+      "product": "Berita Produk"
+    },
+    "disclaimer": "[Penafian] Artikel ini bersumberkan internet dan mewakili pandangan peribadi penulis. Ia tidak mencerminkan pendirian syarikat kami dan adalah untuk rujukan sahaja. Syarikat kami tidak bertanggungjawab atas kesahihan atau ketepatan kandungan tersebut. Jika terdapat isu mengenai hak cipta, versi, atau perkara lain, sila hubungi kami dengan segera, dan kami akan membetulkannya serta-merta.",
+    "author": "Penulis",
+    "source": "Pautan Sumber",
+    "original": "Siaran Rasmi",
+    "back_btn": "Kembali ke Senarai",
+    "items": {
+      "item_0": {
+        "title": "BINGO Entertainment menyelesaikan pusingan baharu pembiayaan strategik untuk mempercepat susun atur global ekosistem Web3",
+        "desc": "Pusingan pembiayaan strategik ini akan digunakan terutamanya untuk memperdalam penyelidikan dan pembangunan teknologi rantaian asas GGC, memperluas rangkaian pengedaran drama pendek dan permainan global, serta mempercepat pembinaan ekosistem perkongsian kandungan hiburan Web3 yang terpencar.",
+        "content": [
+          "BINGO Entertainment hari ini secara rasmi mengumumkan penyelesaian pusingan baharu pembiayaan strategik bernilai puluhan juta dolar AS. Pusingan ini dipimpin oleh institusi modal teroka Web3 yang terkenal di peringkat global, dengan penyertaan daripada beberapa dana hiburan digital dan pembina bersama ekosistem awal.",
+          "Dilaporkan bahawa dana yang dikumpul dalam pusingan ini akan digunakan terutamanya untuk beberapa arah teras: pertama, untuk memperdalam penyelidikan dan pembangunan infrastruktur blockchain proprietari platform (rantaian asas GGC) untuk meningkatkan kecekapan pengesahan hak cipta terpencar dan penyelesaian edaran token; kedua, untuk memperluas perolehan hak cipta dan rangkaian pengedaran bagi drama pendek premium global dan permainan kasual berkualiti tinggi; dan akhirnya, untuk mempercepat pembinaan organisasi pencipta terpencar (DAO) untuk memupuk komuniti minat hiburan global yang dibina dan dikongsi bersama.",
+          "Rakan kongsi daripada pelabur utama menyatakan: 'BINGO Entertainment menggunakan teknologi blockchain untuk memecahkan kebuntuan yuran komisen tinggi dan monopoli trafik dalam platform Web2, mewujudkan ekonomi gelung tertutup menang-menang yang mengikat pencipta, platform dan pengguna secara erat. Kami sangat optimis tentang potensi pertumbuhan ekosistem BINGO dan ruang gangguan hiburan Web3.'"
+        ]
+      },
+      "item_1": {
+        "title": "Versi baharu BINGO Drama Pendek dalam talian: memperkenalkan enjin terjemahan lancar berbilang bahasa AI",
+        "desc": "Versi baharu ini mencapai penyelarasan gerak mulut watak dan alih suara dialek tempatan dalam video drama pendek melalui teknologi terjemahan lancar AI, membawa pengalaman tontonan mendalam yang lancar kepada pengguna dari pelbagai latar belakang budaya di seluruh dunia.",
+        "content": [
+          "Platform Drama Pendek BINGO hari ini mengeluarkan naik taraf produk utama, dengan aplikasi versi global secara rasmi melancarkan enjin terjemahan lancar berbilang bahasa AI yang dibangunkan sendiri (Seamless AI-Dubbing & Mouth-Sync Engine).",
+          "Pengedaran antarabangsa drama pendek tradisional menghadapi kos alih suara yang tinggi, kitaran penyetempatan yang panjang dan penyelarasan gerak mulut audio-visual yang lemah yang mengehadkan pengalaman pengguna dengan ketara. Versi ini menggunakan pengklonan cap suara yang canggih dan algoritma penjajaran muka pintar untuk mencapai terjemahan gerak mulut dalam masa kurang daripada seminit, mengekalkan emosi dan ciri suara asal pelakon dengan sempurna.",
+          "Pada masa ini, enjin terjemahan ini menyokong terjemahan lancar antara lebih sepuluh bahasa termasuk bahasa Cina, Inggeris, Sepanyol, Jepun, Korea dan Melayu. Kumpulan pertama video ujian telah mencapai kadar kepuasan tontonan mendalam melebihi 90% di pelbagai pasaran global, mempercepatkan langkah peluasan drama pendek Cina yang berkualiti tinggi ke luar negara."
+        ]
+      },
+      "item_2": {
+        "title": "BINGO dijemput untuk menghadiri Sidang Kemuncak Inovasi Hiburan Web3 Global dan menyampaikan ucapan utama",
+        "desc": "Di sidang kemuncak itu, pasukan BINGO berkongsi cara memecahkan monopoli trafik platform Web2 menggunakan ekonomi token dan menerangkan secara terperinci konsep ekosistem gelung tertutup bagi drama pendek, permainan dan sosial.",
+        "content": [
+          "Sidang Kemuncak Inovasi Hiburan Digital Web3 Global 2026 dibuka dengan meriah hari ini. Sebagai projek bintang dalam industri, pasukan pengasas BINGO Entertainment telah dijemput untuk menghadiri sidang kemuncak itu dan menyampaikan ucapan utama bertajuk 'Ekonomi Token Membentuk Semula Nilai Kandungan: Penerokaan dan Amalan Ekosistem BINGO'.",
+          "Ucapan itu memperdalam analisis tentang titik kesakitan industri seperti pengedaran keuntungan yang tegar, ruang kelangsungan hidup yang terhad untuk pencipta kandungan yang cemerlang, dan pengguna yang hanya bertindak sebagai pengguna pasif dalam platform hiburan tradisional. Pasukan BINGO menjelaskan secara terperinci bagaimana platform menggunakan seni bina asas rantaian GGC dan model token untuk mencapai 'menonton drama, bermain permainan, dan bersosial untuk melombong', mengembalikan penguasaan kandungan dan hak pendapatan kepada komuniti.",
+          "Selepas persidangan itu, BINGO Entertainment menandatangani memorandum persefahaman kerjasama strategik dengan beberapa penyedia rangkaian penghantaran kandungan (CDN) global yang terkemuka dan rakan kongsi ekosistem Web3 untuk bersama-sama membina infrastruktur kandungan hiburan global yang lebih terbuka dan terpencar."
+        ]
+      },
+      "item_3": {
+        "title": "Olé Game melancarkan pelbagai permainan mini popular, ujian modul transaksi leveling kuasa baharu bermula",
+        "desc": "Untuk memenuhi keperluan perdagangan pemain yang pelbagai, Olé Game melancarkan perkhidmatan penjagaan selamat dan perantara perdagangan autonomi secara rasmi untuk watak permainan dan aset maya, menutup gelung model ekonomi dengan lebih lanjut.",
+        "content": [
+          "Platform Olé Game hari ini mengumumkan bahawa lobi serba baharu bagi beberapa permainan mini premium yang dibangunkan sendiri dan dikeluarkan bersama telah dilancarkan secara rasmi untuk pengujian. Pada masa yang sama, 'Protokol Dagangan & Penjagaan Sub-akaun' yang sangat dinanti-nantikan telah memulakan ujian beta tertutup terhadnya.",
+          "Protokol ini memperkenalkan mekanisme escrow kontrak pintar, membolehkan pemain meletakkan sub-akaun terbiar, peralatan, dan rangsangan pencapaian harian secara selamat pada rantaian, menyenaraikannya dengan satu klik, dan berdagang secara bebas. Platform ini bertindak sebagai perantara, hanya mengenakan yuran padanan yang kecil, sekali gus mengehadkan penipuan biasa seperti maklumat palsu dan pemulihan akaun dalam dagangan permainan tradisional.",
+          "Ketua projek mendedahkan bahawa transaksi akaun atas rantaian pertama yang diselesaikan semasa ujian hanya mengambil masa 3 saat. Ciri-cirinya yang selamat dan cekap mendapat pujian sebulat suara daripada penguji beta, dan sistem ini dijangka dilancarkan sepenuhnya kepada semua pengguna bulan depan."
+        ]
+      },
+      "item_4": {
+        "title": "Pengguna berdaftar platform melebihi 10 juta, pengumuman pengoptimuman mekanisme pengedaran token ekosistem GGC",
+        "desc": "Untuk menjamin kestabilan jangka panjang dan inflasi yang sihat bagi sistem ekonomi, platform telah memutuskan untuk melaraskan nisbah output GGC dalam ujian dalaman ekosistem dan tugas harian, dan menambah saluran dividen pertaruhan token bernilai besar.",
+        "content": [
+          "Sejak pelancarannya, BINGO Entertainment telah secara rasmi melebihi 10 juta pengguna berdaftar di peringkat global berkat kandungan premium dan model penciptaan bersamanya. Untuk memberi ganjaran kepada komuniti, platform hari ini secara rasmi mengeluarkan pengumuman mengenai pengoptimuman pengedaran token GGC dan rancangan dividen pertaruhan jangka panjang.",
+          "Pengoptimuman ini bertujuan untuk mengekalkan kesihatan dan inflasi yang baik bagi ekonomi token ekosistem, melaraskan sedikit nisbah output GGC untuk tugas asas harian dan daftar masuk drama pendek, sambil menambah saluran dividen eksklusif untuk pengguna yang mempertaruhkan sejumlah besar token. Dengan mengunci GGC pada platform, pengguna bukan sahaja dapat menikmati hak mengundi kandungan yang lebih tinggi tetapi juga berkongsi dalam dividen hasil iklan platform dan yuran transaksi permainan.",
+          "Jurucakap rasmi menyatakan bahawa memperkenalkan dividen pertaruhan token dapat mengunci token yang beredar di pasaran secara berkesan, menarik lebih ramai pelabur nilai jangka panjang, dan membiarkan mereka menyaksikan pertumbuhan pesat ekosistem Bingo Entertainment."
+        ]
+      },
+      "item_5": {
+        "title": "Bingo Sosial versi pertama akses awal bermula, enjin pengesyoran AI pintar dinaik taraf",
+        "desc": "Versi beta pertama Bingo Sosial menumpukan pada pengoptimuman algoritma padanan tepat AI berdasarkan teg minat pengguna dan membuka saluran sembang interaktif masa nyata dengan bilik tayangan drama pendek.",
+        "content": [
+          "Produk teras yang sangat dinanti-nantikan dalam ekosistem BINGO Entertainment, Bingo Sosial, telah dilancarkan secara rasmi untuk versi ujian pertamanya. Kumpulan pertama saluran akses awal terhad kini dibuka kepada pengguna senarai putih. Kemas kini ini menyerlahkan enjin pengesyoran berasaskan minat AI pintar yang dipertingkatkan.",
+          "Bingo Sosial bertujuan untuk menghubungkan pengguna hiburan global yang berkongsi hobi yang sama. Selain daripada perbualan konvensional dan perkongsian siaran, aplikasi ini menyepadukan bilik tayangan drama pendek dan lobi pertempuran permainan mini secara mendalam. Pengguna boleh menjemput rakan-rakan untuk menonton drama pada skrin yang sama dalam masa nyata dan membolehkan sembang suara, memecahkan kemesraan secara semula jadi dalam senario hiburan.",
+          "Algoritma pengesyoran pintar menangkap ciri pelbagai dimensi untuk membantu pengguna menemui rakan menonton filem dan sekutu permainan yang mempunyai fikiran yang sama dengan cepat, mewujudkan gelung sosial tulen sehenti daripada pemadanan dalam talian yang mendebarkan hati kepada pengagregatan minat luar talian."
+        ]
+      },
+      "item_6": {
+        "title": "BINGO Entertainment bekerjasama dengan studio permainan terkenal untuk meluaskan era baharu bermain-untuk-mendapat",
+        "desc": "Kedua-dua pihak akan bersama-sama mengerami pelbagai permainan dalam talian teras yang disepadukan dengan insentif token Web3, menyokong NFTisasi alatan dan pencapaian dalam permainan pada rantaian, mencapai kebolehoperasian rentas platform dan pengesahan pemilikan aset.",
+        "content": [
+          "BINGO Entertainment hari ini mengumumkan kerjasama strategik yang mendalam dengan studio pembangunan permainan terkenal di rantau Asia-Pasifik. Kedua-dua pihak akan bersama-sama membangunkan dan mengerami dua permainan dalam talian teras yang disepadukan dengan insentif token Web3, menandakan kemasukan rasmi BINGO ke dalam pasaran permainan blockchain pertengahan hingga besar.",
+          "Difahamkan bahawa kedua-dua permainan akan menyepadukan infrastruktur pengurusan aset digital platform BINGO secara mendalam, membolehkan pemain menukar item permainan yang jarang ditemui, kulit, dan pencapaian menjadi NFT atas rantaian. Ini menjamin pemilikan mutlak dan pengesahan hak cipta aset maya, yang juga boleh didagangkan secara lancar merentas permainan.",
+          "Kerjasama ini akan memberikan kelebihan penuh kepada pangkalan pengguna BINGO yang besar dan keupayaan R&D studio permainan yang luar biasa, memberikan pesta kebolehmainan tinggi dan faedah ekonomi kepada pemain di seluruh dunia."
+        ]
+      },
+      "item_7": {
+        "title": "Perpustakaan hak cipta Drama Pendek BINGO diperluas dengan ketara, menambah 100 drama hits eksklusif",
+        "desc": "Penambahan baharu bulan ini merangkumi pelbagai klasifikasi pasaran arus perdana seperti percintaan, cinta manis, kemunculan semula, misteri, fantasi, dan perjalanan masa, menyokong keserasian semua terminal dan caching luar talian, meningkatkan lagi pengalaman tontonan.",
+        "content": [
+          "Untuk terus menyampaikan keseronokan audio-visual berkualiti tinggi kepada pengguna global, perpustakaan hak cipta platform Drama Pendek BINGO menyambut pengembangan terbesarnya sejak dilancarkan bulan ini. Ia berjaya memperkenalkan lebih daripada seratus drama hit yang ditandatangani secara eksklusif, merangkumi tema popular seperti percintaan, kemunculan semula bandar, misteri, dan sci-fi.",
+          "Drama yang baru dilancarkan menyokong main balik definisi ultra-tinggi yang lancar merentas semua terminal, dengan caching luar talian yang dioptimumkan dan pengalaman pemuatan ultra-cepat, membolehkan pengguna menonton drama dengan lancar walaupun dalam persekitaran mudah alih dengan keadaan rangkaian yang lemah.",
+          "Wakil pemegang hak cipta menyatakan: 'Enjin pengiklanan lancar AI pintar BINGO dan mekanisme pengedaran hasil yang sangat inovatif telah membawa pulangan monetisasi yang lebih baik kepada pemilik hak cipta. Kami akan terus bergandengan tangan dengan BINGO untuk mempersembahkan lebih banyak kandungan cemerlang kepada penonton global.'"
+        ]
+      },
+      "item_8": {
+        "title": "Aktiviti komuniti luar talian dilancarkan, kumpulan pertama bandar perintis 'Bingo Social Circle' diumumkan",
+        "desc": "Untuk memecahkan halangan komunikasi dalam talian, Bingo Sosial akan bekerjasama dengan entiti hiburan tempatan untuk melancarkan salon minat luar talian dan acara e-sukan di kumpulan pertama 10 bandar perintis.",
+        "content": [
+          "Untuk memecahkan pengasingan maya komunikasi dalam talian, Bingo Sosial hari ini mengumumkan pelancaran rasmi salon komuniti luar talian dan rancangan pengambilan rakan kongsi bandar tahun ini, mendedahkan kumpulan pertama 10 bandar perintis teras.",
+          "Kumpulan pertama bandar perintis akan melihat pelancaran beransur-ansur hab pertemuan berasaskan minat fizikal 'Bingo Club'. Dengan menganjurkan perlawanan e-sukan, salon tayangan drama luar talian, pengembaraan luar, dan aktiviti rasa makanan, sambungan dalam talian akan ditukar menjadi hubungan luar talian yang tulen.",
+          "Pengurus projek menyatakan: 'Kami berharap dapat mengubah Bingo Sosial menjadi rangkaian gaya hidup yang mesra disokong oleh senario fizikal, membantu pengguna muda mencari rakan yang berfikiran sama dan mengalami kehidupan sebenar yang lebih baik.'"
+        ]
+      },
+      "item_9": {
+        "title": "Gerbang pembayaran platform dinaik taraf: menyokong pembayaran arus perdana global dan dompet Web3 deposit lancar",
+        "desc": "Gerbang pembayaran yang dinaik taraf telah menyepadukan pelbagai gerak pembayaran fiat global dan dompet digital arus perdana, membolehkan pengguna menukar dan mengeluarkan mata ekosistem dengan mudah dengan satu klik, sangat meningkatkan kecekapan deposit dan pengeluaran.",
+        "content": [
+          "Untuk menyediakan pengalaman deposit dan pengeluaran aset yang lebih mudah dan cekap, gerbang pembayaran digital teras platform BINGO Entertainment telah menyelesaikan peningkatan sistem utama hari ini. Peningkatan ini menyepadukan pelbagai saluran fiat global arus perdana dan dompet Web3 secara mendalam.",
+          "Selepas peningkatan, pengguna boleh menukar atau mengeluarkan mata platform dan token GGC dengan mudah melalui gerbang fiat dan dompet kripto dengan satu klik. Transaksi tiba dalam masa beberapa saat, dan yuran pengendalian telah dikurangkan dengan ketara, meningkatkan pengalaman deposit dan pengeluaran ke tahap yang baharu.",
+          "Penyusunan semula teknikal ini sangat mengurangkan halangan bagi pengguna Web2 tradisional untuk memasuki ekosistem hiburan Web3, meletakkan asas yang kukuh untuk penggunaan yang lebih meluas dan penyelesaian pembayaran merentas sempadan."
+        ]
+      }
+    }
   }
 }

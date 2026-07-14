@@ -41,6 +41,16 @@ const router = createRouter({
           component: () => import('@/views/SocialPage.vue'),
         },
         {
+          path: 'inquiry',
+          name: 'inquiry',
+          component: () => import('@/views/InquiryPage.vue'),
+        },
+        {
+          path: 'inquiry/:id',
+          name: 'inquiry-detail',
+          component: () => import('@/views/InquiryDetailPage.vue'),
+        },
+        {
           path: 'privacy',
           name: 'privacy',
           component: () => import('@/views/PrivacyPage.vue'),

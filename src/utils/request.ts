@@ -75,8 +75,8 @@ service.interceptors.response.use(
   (response: AxiosResponse<ApiResponse>) => {
     const res = response.data
 
-    // 业务 code 判断，约定 200 为接口正常响应状态码
-    if (res.code === 200) {
+    // 业务 code 判断，约定 0 为接口正常响应状态码
+    if (res.code === 0) {
       // 成功时直接返回 data 数据，方便页面端解构使用
       return res.data as any
     }

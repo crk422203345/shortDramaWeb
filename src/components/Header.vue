@@ -40,6 +40,8 @@ watch(
       else activeItem.value = 'home'
     } else if (name === 'game' || name === 'drama' || name === 'social') {
       activeItem.value = 'eco'
+    } else if (name === 'inquiry' || name === 'inquiry-detail') {
+      activeItem.value = 'inquiry'
     } else {
       activeItem.value = ''
     }
@@ -255,7 +257,7 @@ onUnmounted(() => {
           </li>
 
           <li :class="{ active: activeItem === 'inquiry' }">
-            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: 'javascript:void(0)', isStatic: true })">{{ t('nav.inquiry') }}</a>
+            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: '/inquiry', isRoute: true })">{{ t('nav.inquiry') }}</a>
           </li>
           <li :class="{ active: activeItem === 'contact' }">
             <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })">{{ t('nav.contact') }}</a>
@@ -326,48 +328,6 @@ onUnmounted(() => {
           </transition>
         </div>
 
-        <!-- 3 Dots Menu Button -->
-        <div
-          class="more-menu-container"
-          @mouseenter="openMoreDropdown"
-          @mouseleave="closeMoreDropdown"
-        >
-          <button
-            class="more-btn"
-            aria-label="More Menu"
-            @click="showMoreDropdown = !showMoreDropdown"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" />
-              <circle cx="8" cy="12" r="1" fill="currentColor" />
-              <circle cx="12" cy="12" r="1" fill="currentColor" />
-              <circle cx="16" cy="12" r="1" fill="currentColor" />
-            </svg>
-          </button>
-
-          <!-- Dropdown items -->
-          <transition name="fade">
-            <div v-if="showMoreDropdown" class="more-dropdown">
-              <div class="more-dropdown-inner">
-                <a
-                  href="https://webx.ai/"
-                  target="_blank"
-                  class="dropdown-item"
-                  @click="showMoreDropdown = false"
-                >
-                  {{ t('footer.webx') }}
-                </a>
-              </div>
-            </div>
-          </transition>
-        </div>
       </div>
 
       <!-- Hamburger Button (Mobile Only) -->
@@ -409,7 +369,7 @@ onUnmounted(() => {
             </li>
 
             <li :class="{ active: activeItem === 'inquiry' }">
-              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: 'javascript:void(0)', isStatic: true })">{{ t('nav.inquiry') }}</a>
+              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: '/inquiry', isRoute: true })">{{ t('nav.inquiry') }}</a>
             </li>
             <li :class="{ active: activeItem === 'contact' }">
               <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })">{{ t('nav.contact') }}</a>

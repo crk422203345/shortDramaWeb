@@ -11,7 +11,7 @@
     "eco_game": "Games",
     "eco_drama": "Short Dramas",
     "eco_social": "Social",
-    "inquiry": "Latest Inquiries",
+    "inquiry": "Latest Updates",
     "join": "Careers",
     "contact": "Contact Us",
     "wechat_popup": "Scan WeChat for Collaboration",
@@ -444,5 +444,113 @@
     "slogan": "Connect Interests, Meet Life",
     "slogan_sub": "Explore more interests, meet more friends, and unlock your wonderful social experiences. Bingo Social is looking forward to meeting you.",
     "btn_enter": "Coming Soon · Stay Tuned"
+  },
+  "inquiry": {
+    "title": "Latest Updates",
+    "subtitle": "Get the latest official announcements, company news, and product iteration updates from BINGO Entertainment platform.",
+    "badge": "Inquiry",
+    "empty": "No updates available",
+    "tabs": {
+      "all": "All",
+      "company": "Company News",
+      "product": "Product News"
+    },
+    "disclaimer": "[Disclaimer] This article is sourced from the internet and represents the author's personal views. It does not reflect the position of our company and is for reference only. Our company assumes no responsibility for the authenticity or accuracy of the content. If there are issues regarding copyright, versions, or other matters, please contact us promptly, and we will address it immediately.",
+    "author": "Author",
+    "source": "Source URL",
+    "original": "Official Release",
+    "back_btn": "Back to List",
+    "items": {
+      "item_0": {
+        "title": "BINGO Entertainment completes a new round of strategic financing to accelerate the global layout of the Web3 ecosystem",
+        "desc": "This round of strategic financing will be mainly used to deepen GGC underlying chain technology R&D, expand the global short drama and game distribution network, and accelerate the construction of a decentralized Web3 entertainment content co-construction ecosystem.",
+        "content": [
+          "BINGO Entertainment today officially announced the completion of a new round of strategic financing worth tens of millions of US dollars. This round was led by globally renowned Web3 venture capital institutions, with participation from several digital entertainment funds and early ecosystem co-builders.",
+          "It is reported that the funds raised in this round will be mainly utilized for several core directions: first, to deepen the R&D of the platform's proprietary blockchain infrastructure (GGC underlying chain) to improve decentralized copyright validation and token circulation settlement efficiency; second, to expand the copyright acquisition and distribution networks for global premium short dramas and high-quality casual games; and finally, to accelerate the construction of a decentralized creators organization (DAO) to incubate a global, co-built, and shared community of entertainment interests.",
+          "A partner of the lead investor stated: 'BINGO Entertainment uses blockchain technology to break the deadlock of high commission fees and traffic monopolies in Web2 platforms, creating a win-win closed-loop economy that tightly binds creators, the platform, and users. We are highly optimistic about the growth potential of the BINGO ecosystem and the disruptive space of Web3 entertainment.'"
+        ]
+      },
+      "item_1": {
+        "title": "New version of BINGO Short Drama online: introducing AI multi-language seamless translation engine",
+        "desc": "The new version achieves character mouth-syncing and local dialect dubbing in short drama videos through AI seamless translation technology, bringing a seamless immersive viewing experience to users of different cultural backgrounds worldwide.",
+        "content": [
+          "BINGO Short Drama platform today released a major product upgrade, with the global version of the app officially launching its self-developed AI multi-language seamless translation engine (Seamless AI-Dubbing & Mouth-Sync Engine).",
+          "Traditional international distribution of short dramas faces high dubbing costs, long localization cycles, and poor audio-visual lip synchronization that significantly restricts user experience. This version uses cutting-edge voiceprint cloning and intelligent face alignment algorithms to achieve mouth-sync translation in less than a minute, perfectly preserving the actor's original emotion and voice characteristics.",
+          "Currently, this translation engine supports seamless mutual translation among more than ten languages including Chinese, English, Spanish, Japanese, Korean, and Malay. The first batch of test videos has achieved an immersive viewing satisfaction rate of over 90% across multiple global markets, significantly accelerating the expansion of high-quality Chinese short dramas overseas."
+        ]
+      },
+      "item_2": {
+        "title": "BINGO invited to attend the Global Web3 Entertainment Innovation Summit and deliver a keynote speech",
+        "desc": "At the summit, the BINGO team shared how to break Web2 platform traffic monopolies using token economics and elaborated on the closed-loop ecosystem concept of short dramas, games, and social.",
+        "content": [
+          "The 2026 Global Web3 Digital Entertainment Innovation Summit grandly opened today. As a star project in the industry, the BINGO Entertainment founding team was invited to attend the summit and delivered a keynote speech titled 'Token Economics Reshaping Content Value: The Exploration and Practice of BINGO Ecosystem'.",
+          "The speech deeply analyzed the industry pain points of rigid profit distribution, limited survival space for excellent content creators, and users acting merely as passive consumers in traditional entertainment platforms. The BINGO team explained in detail how the platform utilizes the GGC chain's underlying architecture and token model to achieve 'watch dramas, play games, and socialize to mine', returning content dominance and revenue rights to the community.",
+          "After the conference, BINGO Entertainment signed strategic cooperation memorandums of understanding with several leading global content delivery network (CDN) providers and Web3 ecosystem partners to jointly construct a more open and decentralized global entertainment content infrastructure."
+        ]
+      },
+      "item_3": {
+        "title": "Olé Game launches multiple hit mini-games, testing of the new power-leveling transaction module begins",
+        "desc": "To meet players' diverse trading needs, Olé Game officially launches secure custody and autonomous trading intermediary services for game characters and virtual assets, further closing the loop of the economic model.",
+        "content": [
+          "The Olé Game platform today announced that the brand new lobby of several self-developed and co-released premium mini-games has officially entered testing. Concurrently, the highly anticipated 'Sub-account Trading & Custody Protocol' has launched its limited closed beta.",
+          "This protocol introduces a smart contract escrow mechanism, allowing players to securely put idle sub-accounts, equipment, and daily achievement boosts on-chain, list them with one click, and trade freely. The platform acts as an intermediary, charging only a small matching fee, thereby eliminating common frauds such as false information and account recovery in traditional game trading.",
+          "The project leader revealed that the first on-chain account transaction completed during the test took only 3 seconds. Its secure and efficient properties won unanimous praise from beta testers, and the system is expected to be fully rolled out to all users next month."
+        ]
+      },
+      "item_4": {
+        "title": "Platform registered users exceed 10 million, announcement of GGC token distribution optimization",
+        "desc": "To guarantee long-term stability and healthy inflation of the economic system, the platform has decided to adjust the output ratio of GGC in ecosystem internal tests and daily tasks, and add large-amount token staking dividend channels.",
+        "content": [
+          "Since its launch, BINGO Entertainment has officially surpassed 10 million registered users globally thanks to its premium content and co-creation model. To reward the community, the platform today officially released an announcement regarding GGC token distribution optimization and long-term staking dividend plans.",
+          "This optimization aims to maintain the health and benign inflation of the ecosystem's token economy, slightly adjusting the GGC output ratio for daily basic tasks and short drama check-ins, while adding an exclusive dividend channel for users staking large amounts of tokens. By locking GGC on the platform, users can not only enjoy higher content voting rights but also share in the platform's ad revenues and game transaction fee dividends.",
+          "An official spokesperson pointed out that introducing token staking dividends can effectively lock up tokens circulating in the market, attract more long-term value investors, and let them witness the rapid growth of the Bingo Entertainment ecosystem."
+        ]
+      },
+      "item_5": {
+        "title": "Bingo Social first version early access starts, intelligent AI recommendation engine upgraded",
+        "desc": "The first beta version of Bingo Social focuses on optimizing AI precise matching algorithms based on user interest tags and opens real-time interactive chat channels with the short drama screening rooms.",
+        "content": [
+          "The highly anticipated core product of the BINGO Entertainment ecosystem, Bingo Social, has officially launched its first test version. The first batch of limited early access channels is now open to whitelisted users. This update highlights the upgraded intelligent AI interest-based recommendation engine.",
+          "Bingo Social aims to connect global pan-entertainment users who share common hobbies. In addition to conventional chatting and feed posting, the application deeply integrates short drama screening rooms and mini-game battle lobbies. Users can invite friends to watch dramas on the same screen in real-time and enable voice chat, breaking the ice naturally in entertainment scenarios.",
+          "The intelligent recommendation algorithm captures multi-dimensional features to help users quickly discover like-minded movie partners and gaming allies, creating a one-stop authentic social loop from online heart-stirring matching to offline interest aggregation."
+        ]
+      },
+      "item_6": {
+        "title": "BINGO Entertainment joins hands with well-known game studios to expand the new era of play-to-earn",
+        "desc": "Both parties will jointly incubate multiple core online games integrated with Web3 token incentives, supporting NFTization of in-game props and achievements on the chain, achieving cross-platform interoperability and ownership validation of assets.",
+        "content": [
+          "BINGO Entertainment today announced a deep strategic cooperation with a well-known game development studio in the Asia-Pacific region. The two parties will jointly develop and incubate two core online games integrated with Web3 token incentives, marking BINGO's official entry into the mid-to-large blockchain gaming market.",
+          "It is understood that both games will deeply integrate the BINGO platform's digital asset management infrastructure, allowing players to convert rare in-game items, skins, and achievements into on-chain NFTs. This guarantees absolute ownership and copyright validation of virtual assets, which can also be seamlessly traded across games.",
+          "This cooperation will give full play to BINGO's massive user base and the game studio's outstanding R&D capabilities, delivering a feast of high playability and economic benefits to players worldwide."
+        ]
+      },
+      "item_7": {
+        "title": "BINGO Short Drama copyright library significantly expanded, adding 100 exclusive hit dramas",
+        "desc": "This month's new additions cover multiple mainstream market classifications such as romance, sweet love, comeback, mystery, fantasy, and time-travel, supporting all-terminal compatibility and offline caching, further improving the viewing experience.",
+        "content": [
+          "To continuously deliver high-quality audio-visual enjoyment to global users, the BINGO Short Drama platform's copyright library welcomed its largest expansion since launch this month. It successfully introduced over a hundred exclusively signed hit dramas, covering popular themes such as romance, urban comeback, mystery, and sci-fi.",
+          "The newly launched dramas support smooth, ultra-high-definition playback across all terminals, with optimized offline caching and ultra-fast loading experiences, allowing users to watch dramas smoothly even in mobile environments with poor network conditions.",
+          "A representative of the copyright holders stated: 'BINGO's intelligent AI seamless advertising engine and highly innovative revenue distribution mechanism have brought better monetization returns to copyright owners. We will continue to join hands with BINGO to present more excellent content to global audiences.'"
+        ]
+      },
+      "item_8": {
+        "title": "Offline community activities launch, first batch of 'Bingo Social Circle' pilot cities announced",
+        "desc": "To break online communication barriers, Bingo Social will collaborate with local entertainment entities to launch offline interest salons and e-sports events in the first batch of 10 pilot cities.",
+        "content": [
+          "To break the virtual isolation of online communication, Bingo Social today announced the official launch of this year's offline community salons and city partner recruitment plans, revealing the first batch of 10 core pilot cities.",
+          "The first batch of pilot cities will see the gradual rollout of 'Bingo Club' physical interest-based meetup hubs. By organizing e-sports matches, offline drama screening salons, outdoor adventures, and food tasting activities, online connections will be converted into authentic offline relationships.",
+          "The project manager expressed: 'We hope to turn Bingo Social into a warm, lifestyle-oriented network supported by physical scenarios, helping young users find like-minded friends and experience a better, real life.'"
+        ]
+      },
+      "item_9": {
+        "title": "Platform payment gateway upgraded: supporting global mainstream payments and Web3 wallets seamless deposit",
+        "desc": "The upgraded payment gateway has deeply integrated multiple global fiat payment gateways and mainstream digital wallets, allowing users to conveniently exchange and withdraw ecosystem points with one click, greatly improving deposit and withdrawal efficiency.",
+        "content": [
+          "To provide a more convenient and efficient asset deposit and withdrawal experience, the core digital payment gateway of the BINGO Entertainment platform has completed a major system upgrade today. This upgrade deeply integrates multiple mainstream global fiat channels and Web3 wallets.",
+          "After the upgrade, users can conveniently exchange or withdraw platform points and GGC tokens via fiat gateways and crypto wallets with one click. Transactions arrive in seconds, and handling fees have been significantly reduced, elevating the deposit and withdrawal experience to a new level.",
+          "This technical restructuring greatly lowers the barrier for traditional Web2 users to enter the Web3 entertainment ecosystem, laying a solid foundation for wider adoption and cross-border payment settlements."
+        ]
+      }
+    }
   }
 }
