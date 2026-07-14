@@ -156,7 +156,7 @@ const getCategoryLabel = (category: 'company' | 'product') => {
       <!-- 1. Top Banner Area -->
       <section class="banner-section">
         <div class="banner-wrapper glass-card">
-          <img src="/img/bingo_inquiry_banner.png" :alt="t('inquiry.title')" class="banner-img" />
+          <img src="/img/bingo_inquiry_banner.jpg" :alt="t('inquiry.title')" class="banner-img" />
           <div class="banner-glow-overlay"></div>
         </div>
       </section>
@@ -415,6 +415,20 @@ const getCategoryLabel = (category: 'company' | 'product') => {
     gap: 20px;
     padding: 24px;
     margin-bottom: 20px;
+  }
+
+  .card-title {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  .loading-state,
+  .empty-state {
+    padding: 60px 20px;
+    font-size: 0.95rem;
   }
 }
 

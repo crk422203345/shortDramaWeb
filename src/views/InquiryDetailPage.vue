@@ -402,6 +402,12 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
   .warning-icon-wrapper {
     padding-top: 0;
   }
+
+  .loading-state,
+  .empty-state {
+    padding: 60px 20px;
+    font-size: 0.95rem;
+  }
 }
 
 .loading-state,

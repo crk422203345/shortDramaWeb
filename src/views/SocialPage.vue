@@ -10,7 +10,7 @@ const { t } = useI18n()
       <!-- 1. Top Banner Area -->
       <section class="banner-section">
         <div class="banner-wrapper glass-card">
-          <img src="/img/bingo_social_banner.png" :alt="t('social_universe.title')" class="banner-img" />
+          <img src="/img/bingo_social_banner.jpg" :alt="t('social_universe.title')" class="banner-img" />
           <div class="banner-glow-overlay"></div>
         </div>
       </section>
