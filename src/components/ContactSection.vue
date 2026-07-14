@@ -61,11 +61,7 @@ const submitContact = async () => {
 }
 
 const submitForm = () => {
-  if (
-    !name.value.trim() ||
-    !email.value.trim() ||
-    !description.value.trim()
-  ) {
+  if (!name.value.trim() || !email.value.trim() || !description.value.trim()) {
     alert(t('contact.required_fields_empty'))
     return
   }
@@ -200,7 +196,11 @@ onUnmounted(() => {
                   :type="contactMethod === 'email' ? 'email' : 'text'"
                   id="contact-value"
                   v-model="email"
-                  :placeholder="contactMethod === 'email' ? t('contact.email_placeholder') : t('contact.phone_placeholder')"
+                  :placeholder="
+                    contactMethod === 'email'
+                      ? t('contact.email_placeholder')
+                      : t('contact.phone_placeholder')
+                  "
                   maxlength="200"
                   required
                 />

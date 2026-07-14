@@ -156,11 +156,7 @@ watch(locale, () => {
             <!-- Right Futuristic Visual -->
             <div class="region-visual">
               <div class="visual-border-wrap">
-                <img
-                  :src="activeRegionData.img"
-                  :alt="activeRegionData.title"
-                  class="visual-img"
-                />
+                <img :src="activeRegionData.img" :alt="activeRegionData.title" class="visual-img" />
                 <!-- Glowing borders & particles -->
                 <div class="glow-layer"></div>
               </div>

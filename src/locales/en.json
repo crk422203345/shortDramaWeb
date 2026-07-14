@@ -11,6 +11,8 @@
     "eco_game": "Games",
     "eco_drama": "Short Dramas",
     "eco_social": "Social",
+    "eco_webx": "WebX",
+    "eco_winpay": "WinPay",
     "inquiry": "Latest Updates",
     "join": "Careers",
     "contact": "Contact Us",
@@ -390,10 +392,12 @@
     "follow_us": "Follow Us",
     "legal_info": "Legal Info",
     "webx": "WebX Portal",
+    "winpay": "WinPay Portal",
     "drama": "Short Drama",
     "game": "Game",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
+    "social_media": "Social Media",
     "copyright": "© {year} BINGO. All rights reserved."
   },
   "error": {

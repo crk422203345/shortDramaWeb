@@ -193,7 +193,11 @@ const activePillarData = computed(() => {
             @click="activePillar = 'game'"
           >
             <div class="node-icon-wrapper">
-              <img src="/img/logo(1).png" :alt="t('pillars.nodes.game_main')" class="node-icon-img" />
+              <img
+                src="/img/logo(1).png"
+                :alt="t('pillars.nodes.game_main')"
+                class="node-icon-img"
+              />
             </div>
             <div class="node-label-wrapper">
               <span class="main-label">{{ t('pillars.nodes.game_main') }}</span>
@@ -221,7 +225,11 @@ const activePillarData = computed(() => {
             @click="activePillar = 'social'"
           >
             <div class="node-icon-wrapper">
-              <img src="/img/社交-对话框1.png" :alt="t('pillars.nodes.social_main')" class="node-icon-img" />
+              <img
+                src="/img/社交-对话框1.png"
+                :alt="t('pillars.nodes.social_main')"
+                class="node-icon-img"
+              />
             </div>
             <div class="node-label-wrapper">
               <span class="main-label">{{ t('pillars.nodes.social_main') }}</span>
@@ -775,7 +783,9 @@ const activePillarData = computed(() => {
     width: 2px;
     background: linear-gradient(to bottom, #0654f2, var(--active-color, #00f0ff));
     box-shadow: 0 0 8px var(--active-color, #00f0ff);
-    transition: height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.4s ease;
+    transition:
+      height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+      background 0.4s ease;
     z-index: 2;
   }
 

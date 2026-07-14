@@ -208,22 +208,23 @@ onUnmounted(() => {
       <nav class="nav-menu" v-if="!isMinimalHeader">
         <ul>
           <li :class="{ active: activeItem === 'home' }">
-            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'home', href: '#home' })">{{ t('nav.home') }}</a>
+            <a
+              href="javascript:void(0)"
+              @click.prevent="navigateTo({ key: 'home', href: '#home' })"
+              >{{ t('nav.home') }}</a
+            >
           </li>
           <li :class="{ active: activeItem === 'business' }">
-            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'business', href: '#business-mode' })">{{ t('nav.business') }}</a>
+            <a
+              href="javascript:void(0)"
+              @click.prevent="navigateTo({ key: 'business', href: '#business-mode' })"
+              >{{ t('nav.business') }}</a
+            >
           </li>
 
           <!-- Eco dropdown menu -->
-          <li
-            class="has-dropdown"
-            :class="{ active: activeItem === 'eco' }"
-          >
-            <div
-              class="eco-wrapper"
-              @mouseenter="openEcoDropdown"
-              @mouseleave="closeEcoDropdown"
-            >
+          <li class="has-dropdown" :class="{ active: activeItem === 'eco' }">
+            <div class="eco-wrapper" @mouseenter="openEcoDropdown" @mouseleave="closeEcoDropdown">
               <a href="javascript:void(0)" role="button">
                 {{ t('nav.eco') }}
                 <svg
@@ -245,11 +246,40 @@ onUnmounted(() => {
               <transition name="fade">
                 <div v-if="showEcoDropdown" class="eco-dropdown">
                   <div class="eco-dropdown-inner">
-                    <a href="javascript:void(0)" class="dropdown-item" @click="clickEcoSub('game')">{{ t('nav.eco_game') }}</a>
-                    <a href="javascript:void(0)" class="dropdown-item" @click="clickEcoSub('drama')">{{ t('nav.eco_drama') }}</a>
-                    <a href="javascript:void(0)" class="dropdown-item" @click="clickEcoSub('social')">{{ t('nav.eco_social') }}</a>
-                    <a href="https://webx.ai/" target="_blank" rel="noopener noreferrer" class="dropdown-item" @click="showEcoDropdown = false">webx</a>
-                    <a href="https://www.winpay.com/#/" target="_blank" rel="noopener noreferrer" class="dropdown-item" @click="showEcoDropdown = false">winpay</a>
+                    <a
+                      href="javascript:void(0)"
+                      class="dropdown-item"
+                      @click="clickEcoSub('game')"
+                      >{{ t('nav.eco_game') }}</a
+                    >
+                    <a
+                      href="javascript:void(0)"
+                      class="dropdown-item"
+                      @click="clickEcoSub('drama')"
+                      >{{ t('nav.eco_drama') }}</a
+                    >
+                    <a
+                      href="javascript:void(0)"
+                      class="dropdown-item"
+                      @click="clickEcoSub('social')"
+                      >{{ t('nav.eco_social') }}</a
+                    >
+                    <a
+                      href="https://webx.ai/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="dropdown-item"
+                      @click="showEcoDropdown = false"
+                      >{{ t('nav.eco_webx') }}</a
+                    >
+                    <a
+                      href="https://www.winpay.com/#/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="dropdown-item"
+                      @click="showEcoDropdown = false"
+                      >{{ t('nav.eco_winpay') }}</a
+                    >
                   </div>
                 </div>
               </transition>
@@ -257,10 +287,18 @@ onUnmounted(() => {
           </li>
 
           <li :class="{ active: activeItem === 'inquiry' }">
-            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: '/inquiry', isRoute: true })">{{ t('nav.inquiry') }}</a>
+            <a
+              href="javascript:void(0)"
+              @click.prevent="navigateTo({ key: 'inquiry', href: '/inquiry', isRoute: true })"
+              >{{ t('nav.inquiry') }}</a
+            >
           </li>
           <li :class="{ active: activeItem === 'contact' }">
-            <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })">{{ t('nav.contact') }}</a>
+            <a
+              href="javascript:void(0)"
+              @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })"
+              >{{ t('nav.contact') }}</a
+            >
           </li>
         </ul>
       </nav>
@@ -327,7 +365,6 @@ onUnmounted(() => {
             </div>
           </transition>
         </div>
-
       </div>
 
       <!-- Hamburger Button (Mobile Only) -->
@@ -350,29 +387,68 @@ onUnmounted(() => {
         <div class="drawer-content">
           <ul class="drawer-nav">
             <li :class="{ active: activeItem === 'home' }">
-              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'home', href: '#home' })">{{ t('nav.home') }}</a>
+              <a
+                href="javascript:void(0)"
+                @click.prevent="navigateTo({ key: 'home', href: '#home' })"
+                >{{ t('nav.home') }}</a
+              >
             </li>
             <li :class="{ active: activeItem === 'business' }">
-              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'business', href: '#business-mode' })">{{ t('nav.business') }}</a>
+              <a
+                href="javascript:void(0)"
+                @click.prevent="navigateTo({ key: 'business', href: '#business-mode' })"
+                >{{ t('nav.business') }}</a
+              >
             </li>
 
             <!-- Eco Layout collapsible submenu inside mobile drawer -->
             <li :class="{ active: activeItem === 'eco' }">
               <div class="drawer-section-title">{{ t('nav.eco') }}</div>
               <div class="drawer-submenu">
-                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('game')">{{ t('nav.eco_game') }}</a>
-                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('drama')">{{ t('nav.eco_drama') }}</a>
-                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('social')">{{ t('nav.eco_social') }}</a>
-                <a href="https://webx.ai/" target="_blank" rel="noopener noreferrer" class="drawer-subitem" @click="closeMobileMenu">webx</a>
-                <a href="https://www.winpay.com/#/" target="_blank" rel="noopener noreferrer" class="drawer-subitem" @click="closeMobileMenu">winpay</a>
+                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('game')">{{
+                  t('nav.eco_game')
+                }}</a>
+                <a href="javascript:void(0)" class="drawer-subitem" @click="clickEcoSub('drama')">{{
+                  t('nav.eco_drama')
+                }}</a>
+                <a
+                  href="javascript:void(0)"
+                  class="drawer-subitem"
+                  @click="clickEcoSub('social')"
+                  >{{ t('nav.eco_social') }}</a
+                >
+                <a
+                  href="https://webx.ai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="drawer-subitem"
+                  @click="closeMobileMenu"
+                  >{{ t('nav.eco_webx') }}</a
+                >
+                <a
+                  href="https://www.winpay.com/#/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="drawer-subitem"
+                  @click="closeMobileMenu"
+                  >{{ t('nav.eco_winpay') }}</a
+                >
               </div>
             </li>
 
             <li :class="{ active: activeItem === 'inquiry' }">
-              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'inquiry', href: '/inquiry', isRoute: true })">{{ t('nav.inquiry') }}</a>
+              <a
+                href="javascript:void(0)"
+                @click.prevent="navigateTo({ key: 'inquiry', href: '/inquiry', isRoute: true })"
+                >{{ t('nav.inquiry') }}</a
+              >
             </li>
             <li :class="{ active: activeItem === 'contact' }">
-              <a href="javascript:void(0)" @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })">{{ t('nav.contact') }}</a>
+              <a
+                href="javascript:void(0)"
+                @click.prevent="navigateTo({ key: 'contact', href: '/contact', isRoute: true })"
+                >{{ t('nav.contact') }}</a
+              >
             </li>
           </ul>
 

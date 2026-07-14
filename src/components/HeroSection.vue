@@ -73,10 +73,12 @@ const isLongLang = computed(() => locale.value === 'en' || locale.value === 'ms'
      Bottom stop aligns with the page background (#1c1f54) so the video
      fades seamlessly into the content below instead of a hard seam. */
   background:
-    linear-gradient(180deg,
+    linear-gradient(
+      180deg,
       rgba(8, 6, 23, 0.4) 0%,
       rgba(8, 6, 23, 0.2) 55%,
-      rgba(28, 31, 84, 1) 100%),
+      rgba(28, 31, 84, 1) 100%
+    ),
     radial-gradient(circle at center, rgba(11, 9, 26, 0.1) 0%, rgba(8, 6, 23, 0.7) 100%);
 }
 
@@ -248,8 +250,3 @@ const isLongLang = computed(() => locale.value === 'en' || locale.value === 'ms'
   }
 }
 </style>
-
-
-
-
-

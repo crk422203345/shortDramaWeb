@@ -11,6 +11,8 @@
     "eco_game": "Permainan",
     "eco_drama": "Drama Pendek",
     "eco_social": "Sosial",
+    "eco_webx": "WebX",
+    "eco_winpay": "WinPay",
     "inquiry": "Maklumat Terkini",
     "join": "Kerjaya",
     "contact": "Hubungi Kami",
@@ -390,10 +392,12 @@
     "follow_us": "Ikuti Kami",
     "legal_info": "Maklumat Undang-undang",
     "webx": "Portal WebX",
+    "winpay": "Portal WinPay",
     "drama": "Drama Pendek",
     "game": "Permainan",
     "privacy": "Dasar Privasi",
     "terms": "Terma Penggunaan",
+    "social_media": "Media Sosial",
     "copyright": "© {year} BINGO. Hak cipta terpelihara."
   },
   "error": {

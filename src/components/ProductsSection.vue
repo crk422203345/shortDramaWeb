@@ -95,9 +95,9 @@ const openLink = (url: string) => {
         <button class="btn btn-primary btn-purple" @click="scrollToSection('business-mode')">
           {{ t('products.know_us') }}
         </button>
-        <button class="btn btn-secondary btn-outline-purple" @click="scrollToSection('contact')">
-          {{ t('products.talk_collab') }}
-        </button>
+        <RouterLink :to="{ name: 'contact' }" class="btn btn-secondary btn-outline-purple">
+          {{ t('nav.contact') }}
+        </RouterLink>
       </div>
     </div>
   </section>

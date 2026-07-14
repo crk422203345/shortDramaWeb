@@ -62,7 +62,7 @@ export const consultationApi = {
    */
   getArticleDetail(params: ArticleDetailParams): Promise<ArticleItem> {
     return http.get<ArticleItem>('/sqx_fast/app/articles/detail', params)
-  }
+  },
 }
 
 export default consultationApi

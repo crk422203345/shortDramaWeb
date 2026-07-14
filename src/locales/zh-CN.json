@@ -11,6 +11,8 @@
     "eco_game": "游戏",
     "eco_drama": "短剧",
     "eco_social": "社交",
+    "eco_webx": "WebX",
+    "eco_winpay": "WinPay",
     "inquiry": "最新资讯",
     "join": "加入我们",
     "contact": "联系我们",
@@ -134,7 +136,7 @@
   "eco": {
     "badge": "Highlights",
     "title": "六大高光",
-    "subtitle": "打破Web2平台的流量垄断与利益固化，Bingo文娱携手用户、创作者与合规资本，在GG-C&WebX全球平台的底层架构上，构筑互利共赢、指数增长的文娱生态。",
+    "subtitle": "打破Web2平台的流量垄断与利益固化，Bingo文娱携手用户、创作者与合规资本，在GGC&WebX全球平台的底层架构上，构筑互利共赢、指数增长的文娱生态。",
     "mid_title_secondary": "打造Web3娱乐黄金闭环",
     "center_title": "GGC / Web3",
     "center_desc": "全球<br />平台底层",
@@ -390,10 +392,12 @@
     "follow_us": "关注我们",
     "legal_info": "法律信息",
     "webx": "WebX 官网",
+    "winpay": "WinPay 官网",
     "drama": "短剧平台",
     "game": "游戏平台",
     "privacy": "隐私政策",
     "terms": "使用条款",
+    "social_media": "社群媒体",
     "copyright": "© {year} BINGO. 保留所有权利。"
   },
   "error": {

@@ -29,7 +29,7 @@ const fetchData = async () => {
       page: String(currentPage.value),
       limit: String(itemsPerPage),
       keyword: '',
-      category: currentTab.value === 'all' ? undefined : currentTab.value
+      category: currentTab.value === 'all' ? undefined : currentTab.value,
     }
     const res = await consultationApi.getArticleList(params)
     if (res) {
@@ -42,10 +42,14 @@ const fetchData = async () => {
         return undefined
       }
 
-      const rawTotal = res.total !== undefined ? res.total :
-                       res.totalCount !== undefined ? res.totalCount :
-                       res.total_count !== undefined ? res.total_count :
-                       undefined
+      const rawTotal =
+        res.total !== undefined
+          ? res.total
+          : res.totalCount !== undefined
+            ? res.totalCount
+            : res.total_count !== undefined
+              ? res.total_count
+              : undefined
 
       const resolvedTotal = parseTotal(rawTotal)
 
@@ -145,6 +149,11 @@ const visiblePages = computed(() => {
   return pages
 })
 
+const selectTab = (tabVal: TabKey) => {
+  currentTab.value = tabVal
+  currentPage.value = 1
+}
+
 const getCategoryLabel = (category: 'company' | 'product') => {
   return category === 'company' ? t('inquiry.tabs.company') : t('inquiry.tabs.product')
 }
@@ -176,8 +185,13 @@ const getCategoryLabel = (category: 'company' | 'product') => {
       <!-- 3. Tabs Selector -->
       <section class="tabs-section">
         <div class="tabs-row">
-          <button v-for="tab in tabs" :key="tab.value" class="tab-btn" :class="{ active: currentTab === tab.value }"
-            @click="currentTab = tab.value; currentPage = 1">
+          <button
+            v-for="tab in tabs"
+            :key="tab.value"
+            class="tab-btn"
+            :class="{ active: currentTab === tab.value }"
+            @click="selectTab(tab.value)"
+          >
             {{ tab.label }}
           </button>
         </div>
@@ -192,8 +206,12 @@ const getCategoryLabel = (category: 'company' | 'product') => {
           </div>
 
           <transition-group name="list" tag="div" v-else>
-            <RouterLink v-for="item in allInquiries" :key="item.id"
-              :to="{ name: 'inquiry-detail', params: { id: item.id } }" class="inquiry-card glass-card">
+            <RouterLink
+              v-for="item in allInquiries"
+              :key="item.id"
+              :to="{ name: 'inquiry-detail', params: { id: item.id } }"
+              class="inquiry-card glass-card"
+            >
               <!-- Card Content on Left -->
               <div class="card-content">
                 <span class="card-tag" :class="item.category">
@@ -220,26 +238,55 @@ const getCategoryLabel = (category: 'company' | 'product') => {
       <section class="pagination-section" v-if="totalPages >= 1">
         <div class="pagination">
           <!-- Prev Button -->
-          <button class="page-nav-btn" :disabled="currentPage === 1" @click="changePage(currentPage - 1)"
-            aria-label="Previous Page">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
+          <button
+            class="page-nav-btn"
+            :disabled="currentPage === 1"
+            @click="changePage(currentPage - 1)"
+            aria-label="Previous Page"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
 
           <!-- Pages Numbers -->
-          <button v-for="(page, idx) in visiblePages" :key="idx" class="page-num-btn"
-            :class="{ active: currentPage === page, separator: page === '...' }" :disabled="page === '...'"
-            @click="changePage(page)">
+          <button
+            v-for="(page, idx) in visiblePages"
+            :key="idx"
+            class="page-num-btn"
+            :class="{ active: currentPage === page, separator: page === '...' }"
+            :disabled="page === '...'"
+            @click="changePage(page)"
+          >
             {{ page }}
           </button>
 
           <!-- Next Button -->
-          <button class="page-nav-btn" :disabled="currentPage === totalPages" @click="changePage(currentPage + 1)"
-            aria-label="Next Page">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
+          <button
+            class="page-nav-btn"
+            :disabled="currentPage === totalPages"
+            @click="changePage(currentPage + 1)"
+            aria-label="Next Page"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>

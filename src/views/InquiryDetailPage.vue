@@ -81,7 +81,17 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
       <!-- 1. Back Navigation Button -->
       <div class="navigation-row">
         <RouterLink :to="{ name: 'inquiry' }" class="back-btn btn btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="back-icon">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="back-icon"
+          >
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           {{ t('inquiry.back_btn') }}
@@ -99,9 +109,7 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
             {{ getCategoryLabel(category) }}
           </span>
           <div class="meta-items">
-            <span class="meta-item author">
-              {{ t('inquiry.author') }}: {{ author }}
-            </span>
+            <span class="meta-item author"> {{ t('inquiry.author') }}: {{ author }} </span>
             <span class="meta-divider">/</span>
             <span class="meta-item date">
               {{ date }}
@@ -109,9 +117,25 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
             <span class="meta-divider">/</span>
             <span class="meta-item source">
               {{ t('inquiry.source') }}:
-              <a v-if="hasSourceUrl" :href="sourceUrl" target="_blank" rel="noopener noreferrer" class="source-link">
+              <a
+                v-if="hasSourceUrl"
+                :href="sourceUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="source-link"
+              >
                 {{ sourceDomain }}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-icon">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="external-icon"
+                >
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                   <polyline points="15 3 21 3 21 9"></polyline>
                   <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -130,7 +154,17 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
         <!-- 6. Disclaimer Banner -->
         <footer class="disclaimer-banner">
           <div class="warning-icon-wrapper">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="warning-svg">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="warning-svg"
+            >
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="8" x2="12" y2="12"></line>
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -360,45 +394,45 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
     padding: 28px 20px;
     border-radius: 16px;
   }
-  
+
   .detail-title {
     font-size: 1.5rem;
     margin-bottom: 18px;
   }
-  
+
   .detail-meta {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 24px;
   }
-  
+
   .meta-items {
     font-size: 0.85rem;
   }
-  
+
   .meta-divider {
     display: none;
   }
-  
+
   .meta-items > * {
     width: 100%;
     margin-bottom: 6px;
   }
-  
+
   .detail-content {
     font-size: 0.98rem;
     line-height: 1.7;
     margin-bottom: 32px;
   }
-  
+
   .disclaimer-banner {
     padding: 16px;
     margin-top: 36px;
     flex-direction: column;
     gap: 12px;
   }
-  
+
   .warning-icon-wrapper {
     padding-top: 0;
   }
