@@ -15,6 +15,7 @@ const menuItems = computed(() => [
   { key: 'home', label: t('nav.home'), href: '#home' },
   { key: 'business', label: t('nav.business'), href: '#business-mode' },
   { key: 'eco', label: t('nav.eco'), href: '#eco-layout' },
+  { key: 'inquiry', label: t('nav.inquiry'), href: 'javascript:void(0)', isStatic: true },
   { key: 'contact', label: t('nav.contact'), href: '/contact', isRoute: true },
 ])
 
@@ -51,7 +52,10 @@ watch(
   { immediate: true },
 )
 
-const navigateTo = (item: { key: string; label: string; href: string; isRoute?: boolean }) => {
+const navigateTo = (item: { key: string; label: string; href: string; isRoute?: boolean; isStatic?: boolean }) => {
+  if (item.isStatic) {
+    return
+  }
   activeItem.value = item.key
   closeMobileMenu()
   if (item.isRoute) {
