@@ -154,7 +154,7 @@ onMounted(() => {
               <div class="contact-info-block">
                 <p class="company-name">深圳市链商创新网络有限公司</p>
                 <p class="company-name">Shenzhen Chain Commerce Innovation Network Co., Ltd.</p>
-                <p>电邮：<a href="mailto:webx65313176@gmail.com">webx65313176@gmail.com</a></p>
+                <p>电邮：<a href="mailto:Bingo-KF@webx.ai">Bingo-KF@webx.ai</a></p>
                 <p>地址：深圳市南山区科技园·金融基地1栋6楼</p>
               </div>
             </div>
@@ -279,7 +279,7 @@ onMounted(() => {
               <div class="contact-info-block">
                 <p class="company-name">深圳市鏈商創新網絡有限公司</p>
                 <p class="company-name">Shenzhen Chain Commerce Innovation Network Co., Ltd.</p>
-                <p>電郵：<a href="mailto:webx65313176@gmail.com">webx65313176@gmail.com</a></p>
+                <p>電郵：<a href="mailto:Bingo-KF@webx.ai">Bingo-KF@webx.ai</a></p>
                 <p>地址：深圳市南山區科技園·金融基地1棟6樓</p>
               </div>
             </div>
@@ -456,7 +456,7 @@ onMounted(() => {
               </p>
               <div class="contact-info-block">
                 <p class="company-name">Shenzhen Chain Commerce Innovation Network Co., Ltd.</p>
-                <p>Email: <a href="mailto:webx65313176@gmail.com">webx65313176@gmail.com</a></p>
+                <p>Email: <a href="mailto:Bingo-KF@webx.ai">Bingo-KF@webx.ai</a></p>
                 <p>
                   Address: 6/F, Building 1, Financial Base, High-tech Park, Nanshan District,
                   Shenzhen
@@ -649,7 +649,7 @@ onMounted(() => {
               </p>
               <div class="contact-info-block">
                 <p class="company-name">Shenzhen Chain Commerce Innovation Network Co., Ltd.</p>
-                <p>E-mel: <a href="mailto:webx65313176@gmail.com">webx65313176@gmail.com</a></p>
+                <p>E-mel: <a href="mailto:Bingo-KF@webx.ai">Bingo-KF@webx.ai</a></p>
                 <p>
                   Alamat: 6/F, Bangunan 1, Pangkalan Kewangan, Taman Teknologi Tinggi, Daerah
                   Nanshan, Shenzhen

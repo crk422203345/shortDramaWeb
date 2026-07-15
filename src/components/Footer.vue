@@ -23,11 +23,7 @@ const { t } = useI18n()
                 t('footer.webx')
               }}</a>
             </li>
-            <li>
-              <a href="https://www.winpay.com/#/" target="_blank" rel="noopener noreferrer">{{
-                t('footer.winpay')
-              }}</a>
-            </li>
+
             <li>
               <a href="https://tv.bingo.vip/#/" target="_blank" rel="noopener noreferrer">{{
                 t('footer.drama')

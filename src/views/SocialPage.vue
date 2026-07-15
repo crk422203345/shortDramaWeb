@@ -174,18 +174,12 @@ const { t } = useI18n()
 .banner-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: 520px;
+  aspect-ratio: 1717 / 916;
+  max-height: 615px;
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid rgba(0, 240, 255, 0.15);
   box-shadow: 0 10px 40px rgba(0, 240, 255, 0.05);
-}
-
-@media (max-width: 768px) {
-  .banner-wrapper {
-    aspect-ratio: 16 / 10;
-  }
 }
 
 .banner-img {

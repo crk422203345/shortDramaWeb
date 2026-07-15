@@ -11,7 +11,7 @@
     "eco_game": "Games",
     "eco_drama": "Short Dramas",
     "eco_social": "Social",
-    "eco_webx": "WebX",
+    "eco_webx": "WebX Ecosystem",
     "eco_winpay": "WinPay",
     "inquiry": "Latest Updates",
     "join": "Careers",
@@ -410,7 +410,7 @@
   },
   "game_universe": {
     "title": "Olé Game",
-    "description": "BINGO Games is a one-stop solution for distribution and operation management. It integrates core modules such as multi-role permission backend, viral promotion system, all-terminal coverage, sub-account transactions, welfare operations, and data statistics, providing platform owners, channels, and game developers with full-link services from integration to monetization.",
+    "description": "Bingo Entertainment Games is a one-stop solution for distribution and operation management. It integrates core modules such as multi-role permission backend, viral promotion system, all-terminal coverage, sub-account transactions, welfare operations, and data statistics, providing platform owners, channels, and game developers with full-link services from integration to monetization.",
     "tag_count": "100+ Premium Games",
     "tag_p2e": "Play-to-Earn",
     "card_loop_title": "Game Transaction Closed Loop",
@@ -418,13 +418,13 @@
     "card_term_title": "All-Terminal Coverage",
     "card_term_desc": "The platform fully adapts to multiple terminals such as PC websites, mobile WAP, H5 joint operations, and Apple web boxes, and supports generating independent brand sites (OEM distribution) for downstream channels, flexibly expanding business boundaries.",
     "slogan": "Connect to the New World, Start Your Adventure!",
-    "slogan_sub": "Enter the game lobby now and start your play-to-earn journey. BINGO Games is waiting for you.",
+    "slogan_sub": "Enter the game lobby now and start your play-to-earn journey. olé game is waiting for you.",
     "btn_enter": "Enter Mini-Game Lobby"
   },
   "drama_universe": {
-    "title": "BINGO Short Drama",
+    "title": "OMO DRAMA",
     "subtitle": "Global Premium Short Drama Platform, Making Entertainment More Valuable",
-    "description": "The BINGO short drama platform is committed to building a globalized premium short drama ecology, aggregating massive high-quality vertical screen short drama content, and providing users with immersive, high-quality viewing experiences. The platform integrates AI intelligent recommendation, AI seamless ad engine, globalized operations, and creator ecology to connect users, content, brands, and creators, building a more open, efficient, and sustainable digital entertainment content platform.",
+    "description": "The Bingo Entertainment Short Drama platform is committed to building a globalized premium short drama ecology, aggregating massive high-quality vertical screen short drama content, and providing users with immersive, high-quality viewing experiences. The platform integrates AI intelligent recommendation, AI seamless ad engine, globalized operations, and creator ecology to connect users, content, brands, and creators, building a more open, efficient, and sustainable digital entertainment content platform.",
     "tag_count": "1000+ Hot Dramas",
     "tag_p2e": "Watch & Earn",
     "card_loop_title": "Massive Premium Dramas",
@@ -438,7 +438,7 @@
   "social_universe": {
     "title": "Bingo Social",
     "subtitle": "Connecting Interests, Meeting More Wonders",
-    "description": "Bingo Social is a new generation interest-based social platform under Bingo Entertainment. Through AI intelligent matching, interest communities, and offline activity connections, it creates a more authentic, secure, and valuable social experience for global users.",
+    "description": "Bingo Entertainment Social is a new generation interest-based social platform under Bingo Entertainment. Through AI intelligent matching, interest communities, and offline activity connections, it creates a more authentic, secure, and valuable social experience for global users.",
     "tag_count": "Interest Social × Offline Life",
     "tag_p2e": "Coming Soon",
     "card_loop_title": "Online Connection, Offline Experience",

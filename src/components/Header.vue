@@ -265,21 +265,14 @@ onUnmounted(() => {
                       >{{ t('nav.eco_social') }}</a
                     >
                     <a
-                      href="https://webx.ai/"
+                      href="https://webx.ai/cht/core-ecosystem"
                       target="_blank"
                       rel="noopener noreferrer"
                       class="dropdown-item"
                       @click="showEcoDropdown = false"
                       >{{ t('nav.eco_webx') }}</a
                     >
-                    <a
-                      href="https://www.winpay.com/#/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="dropdown-item"
-                      @click="showEcoDropdown = false"
-                      >{{ t('nav.eco_winpay') }}</a
-                    >
+
                   </div>
                 </div>
               </transition>
@@ -418,21 +411,14 @@ onUnmounted(() => {
                   >{{ t('nav.eco_social') }}</a
                 >
                 <a
-                  href="https://webx.ai/"
+                  href="https://webx.ai/cht/core-ecosystem"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="drawer-subitem"
                   @click="closeMobileMenu"
                   >{{ t('nav.eco_webx') }}</a
                 >
-                <a
-                  href="https://www.winpay.com/#/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="drawer-subitem"
-                  @click="closeMobileMenu"
-                  >{{ t('nav.eco_winpay') }}</a
-                >
+
               </div>
             </li>
 

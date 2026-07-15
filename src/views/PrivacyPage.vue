@@ -33,7 +33,7 @@ onMounted(() => {
               <h2>1. 您的隐私</h2>
               <p>
                 Shenzhen Chain Commerce Innovation Network Co.,
-                Ltd.（「WebX」、「我们」或「我们的」）在收集、存储、使用、处理和传输个人数据时，尊重您合法的隐私权利，本声明旨在说明我们的隐私政策惯例。我们在收集、持有、使用及/或处理您的个人数据时，会严格遵守香港特别行业区法例的《个人资料（私隐）条例》（第486章）的规定。为此，我们将确保员工遵守最严格的保安及保密标准。
+                Ltd.（「我们」或「我们的」）在收集、存储、使用、处理和传输个人数据时，尊重您合法的隐私权利，本声明旨在说明我们的隐私政策惯例。我们在收集、持有、使用及/或处理您的个人数据时，会严格遵守香港特别行业区法例的《个人资料（私隐）条例》（第486章）的规定。为此，我们将确保员工遵守最严格的保安及保密标准。
               </p>
               <p>
                 请仔细阅读以下内容，以了解我们收集、处理及使用您个人数据的政策和惯例。您向我们提供个人数据，即表示您同意本声明，并同意我们按本声明所述收集、使用、转移、存储及处理您的个人数据。如您未满18岁，必须由法定代表（如父母或监护人）代为接受本政策，方可向我们提供任何个人数据。
@@ -110,7 +110,7 @@ onMounted(() => {
                 Cookies。
               </p>
               <p>
-                您可随时更改浏览器设置来拒绝全部 or 部分 Cookies，但请注意，如删除或限制
+                您可随时更改浏览器设置来拒绝全部或部分 Cookies，但请注意，如删除或限制
                 Cookies，您可能无法使用本网站的部分功能。
               </p>
             </div>
@@ -152,7 +152,7 @@ onMounted(() => {
                 <p><strong>地址：</strong>深圳市南山区科技园·金融基地1栋6楼</p>
                 <p>
                   <strong>电邮：</strong
-                  ><a href="mailto:webx65313176@gmail.com">webx65313176@gmail.com</a>
+                  ><a href="mailto:Bingo-KF@webx.ai">Bingo-KF@webx.ai</a>
                 </p>
               </div>
             </div>
@@ -174,7 +174,7 @@ onMounted(() => {
               <h2>1. 您的隱私</h2>
               <p>
                 Shenzhen Chain Commerce Innovation Network Co.,
-                Ltd.（「WebX」、「我們」或「我們的」）在收集、存儲、使用、處理和傳輸個人數據時，尊重您合法的隱私權利，本聲明旨在說明我們的隱私政策慣例。我們在收集、持有、使用及/或處理您的個人數據時，會嚴格遵守香港特別行政區法例的《個人資料（私隱）條例》（第486章）的規定。為此，我們將確保員工遵守最嚴格的保安及保密標準。
+                Ltd.（「我們」或「我們的」）在收集、存儲、使用、處理和傳輸個人數據時，尊重您合法的隱私權利，本聲明旨在說明我們的隱私政策慣例。我們在收集、持有、使用及/或處理您的個人數據時，會嚴格遵守香港特別行政區法例的《個人資料（私隱）條例》（第486章）的規定。為此，我們將確保員工遵守最嚴格的保安及保密標準。
               </p>
               <p>
                 請意細閱讀以下內容，以了解我們收集、處理及使用您個人數據的政策和慣例。您向我們提供個人數據，即表示您同意本聲明，並同意我們按本聲明所述收集、使用、轉移、存儲及處理您的個人數據。如您未滿18歲，必須由法定代表（如父母或監護人）代為接受本政策，方可向我們提供任何個人數據。
@@ -294,7 +294,7 @@ onMounted(() => {
                 <p><strong>地址：</strong>深圳市南山區科技園·金融基地1棟6樓</p>
                 <p>
                   <strong>電郵：</strong
-                  ><a href="mailto:webx65313176@gmail.com">webx65313176@gmail.com</a>
+                  ><a href="mailto:Bingo-KF@webx.ai">Bingo-KF@webx.ai</a>
                 </p>
               </div>
             </div>
@@ -315,7 +315,7 @@ onMounted(() => {
             <div class="document-section">
               <h2>1. Your Privacy</h2>
               <p>
-                Shenzhen Chain Commerce Innovation Network Co., Ltd. ("WebX", "we", "us", or "our")
+                Shenzhen Chain Commerce Innovation Network Co., Ltd. ("we", "us", or "our")
                 respects your legal rights of privacy when collecting, storing, using, processing,
                 and transmitting personal data. This statement describes our privacy policy
                 practices. We strictly comply with the provisions of the Personal Data (Privacy)
@@ -499,7 +499,7 @@ onMounted(() => {
                 </p>
                 <p>
                   <strong>Email: </strong
-                  ><a href="mailto:webx65313176@gmail.com">webx65313176@gmail.com</a>
+                  ><a href="mailto:Bingo-KF@webx.ai">Bingo-KF@webx.ai</a>
                 </p>
               </div>
             </div>

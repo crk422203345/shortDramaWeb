@@ -11,7 +11,7 @@
     "eco_game": "Permainan",
     "eco_drama": "Drama Pendek",
     "eco_social": "Sosial",
-    "eco_webx": "WebX",
+    "eco_webx": "Ekosistem WebX",
     "eco_winpay": "WinPay",
     "inquiry": "Maklumat Terkini",
     "join": "Kerjaya",
@@ -410,7 +410,7 @@
   },
   "game_universe": {
     "title": "Olé Game",
-    "description": "BINGO Games ialah penyelesaian sehenti untuk pengurusan pengedaran dan operasi. Ia menyepadukan modul teras seperti latar belakang kebenaran berbilang peranan, sistem promosi viral, liputan semua terminal, transaksi sub-akaun, operasi kebajikan dan statistik data, menyediakan pemilik platform, saluran dan pembangun permainan dengan perkhidmatan pautan penuh dari integrasi ke pengewangan.",
+    "description": "Bingo Entertainment Games ialah penyelesaian sehenti untuk pengurusan pengedaran dan operasi. Ia menyepadukan modul teras seperti latar belakang kebenaran berbilang peranan, sistem promosi viral, liputan semua terminal, transaksi sub-akaun, operasi kebajikan dan statistik data, menyediakan pemilik platform, saluran dan pembangun permainan dengan perkhidmatan pautan penuh dari integrasi ke pengewangan.",
     "tag_count": "100+ Permainan Premium",
     "tag_p2e": "Main-untuk-Dapat",
     "card_loop_title": "Gelung Tertutup Transaksi Permainan",
@@ -418,13 +418,13 @@
     "card_term_title": "Liputan Semua Terminal",
     "card_term_desc": "Platform ini menyesuaikan sepenuhnya kepada pelbagai terminal seperti tapak web PC, WAP mudah alih, operasi bersama H5, dan versi kotak web Apple, dan menyokong penjanaan tapak jenama bebas (pengedaran OEM) untuk saluran hiliran, meluaskan sempadan perniagaan secara fleksibel.",
     "slogan": "Sambung ke Dunia Baharu, Mulakan Pengembaraan Anda!",
-    "slogan_sub": "Masuk ke lobi permainan sekarang dan mulakan perjalanan main-untuk-dapat anda. BINGO Games sedang menunggu anda.",
+    "slogan_sub": "Masuk ke lobi permainan sekarang dan mulakan perjalanan main-untuk-dapat anda. olé game sedang menunggu anda.",
     "btn_enter": "Masuk Lobi Permainan Mini"
   },
   "drama_universe": {
-    "title": "Drama Pendek BINGO",
+    "title": "OMO DRAMA",
     "subtitle": "Platform Drama Pendek Premium Global, Menjadikan Hiburan Lebih Bernilai",
-    "description": "Platform drama pendek BINGO komited untuk membina ekologi drama pendek premium global, mengagregat kandungan drama pendek skrin menegak berkualiti tinggi yang besar, dan menyediakan pengguna dengan pengalaman menonton yang mendalam dan berkualiti tinggi. Platform ini menyepadukan cadangan pintar AI, enjin iklan lancar AI, operasi global dan ekologi pencipta untuk menghubungkan pengguna, kandungan, jenama dan pencipta, membina platform kandungan hiburan digital yang lebih terbuka, cekap dan mampan.",
+    "description": "Platform drama pendek Bingo Entertainment komited untuk membina ekologi drama pendek premium global, mengagregat kandungan drama pendek skrin menegak berkualiti tinggi yang besar, dan menyediakan pengguna dengan pengalaman menonton yang mendalam dan berkualiti tinggi. Platform ini menyepadukan cadangan pintar AI, enjin iklan lancar AI, operasi global dan ekologi pencipta untuk menghubungkan pengguna, kandungan, jenama dan pencipta, membina platform kandungan hiburan digital yang lebih terbuka, cekap dan mampan.",
     "tag_count": "1000+ Drama Hangat",
     "tag_p2e": "Tonton & Dapat",
     "card_loop_title": "Drama Premium yang Besar",
@@ -438,7 +438,7 @@
   "social_universe": {
     "title": "Bingo Sosial",
     "subtitle": "Menghubungkan Minat, Menemui Lebih Banyak Keindahan",
-    "description": "Bingo Sosial ialah platform sosial berasaskan minat generasi baharu di bawah Bingo Entertainment. Melalui pemadanan pintar AI, komuniti minat, dan sambungan aktiviti luar talian, ia mencipta pengalaman sosial yang lebih tulen, selamat dan bernilai untuk pengguna global.",
+    "description": "Bingo Entertainment Sosial ialah platform sosial berasaskan minat generasi baharu di bawah Bingo Entertainment. Melalui pemadanan pintar AI, komuniti minat, dan sambungan aktiviti luar talian, ia mencipta pengalaman sosial yang lebih tulen, selamat dan bernilai untuk pengguna global.",
     "tag_count": "Sosial Minat × Kehidupan Luar Talian",
     "tag_p2e": "Akan Datang",
     "card_loop_title": "Sambungan Dalam Talian, Pengalaman Luar Talian",
