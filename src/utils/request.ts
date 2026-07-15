@@ -85,7 +85,7 @@ service.interceptors.response.use(
       showErrorToast('身份验证过期，请重新登录');
       // 延迟 1 秒后跳转登录页面，让提示框有时间展示
       setTimeout(() => {
-        window.location.href = '/login';
+        window.location.href = '/join/login';
       }, 1000);
       return Promise.reject(new Error(res.message || '未授权'));
     }
@@ -108,7 +108,7 @@ service.interceptors.response.use(
           localStorage.removeItem('token');
           message = '您的登录已失效，请重新登录 (401)';
           setTimeout(() => {
-            window.location.href = '/login';
+            window.location.href = '/join/login';
           }, 1000);
           break;
         case 403:

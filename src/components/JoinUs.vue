@@ -7,7 +7,23 @@ interface Job extends RecruitmentItem {
   expanded: boolean
 }
 
-const currentLang = ref<'zh' | 'cht' | 'en'>('zh')
+// Initial language detection from URL hash (e.g. #/zh-CN#home, #/en#home, #/cht#home)
+const getInitialLanguage = (): 'zh' | 'cht' | 'en' => {
+  const hash = typeof window !== 'undefined' ? window.location.hash : ''
+  if (hash) {
+    const lowerHash = hash.toLowerCase()
+    if (lowerHash.includes('zh-cn') || lowerHash.includes('/zh')) {
+      return 'zh'
+    } else if (lowerHash.includes('cht') || lowerHash.includes('zh-tw') || lowerHash.includes('zh-hk')) {
+      return 'cht'
+    } else if (lowerHash.includes('en')) {
+      return 'en'
+    }
+  }
+  return 'zh'
+}
+
+const currentLang = ref<'zh' | 'cht' | 'en'>(getInitialLanguage())
 const jobs = ref<Job[]>([])
 const loading = ref(false)
 
@@ -138,6 +154,12 @@ const changeLang = (lang: 'zh' | 'cht' | 'en') => {
 
 // Fetch on mount
 onMounted(() => {
+  // Remove the useless hash (e.g. #/zh-CN#home) from the URL to keep it clean
+  if (typeof window !== 'undefined' && window.location.hash) {
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search)
+    }
+  }
   fetchJobs()
 })
 
@@ -151,7 +173,7 @@ watch(currentLang, () => {
   <div class="join-us-container">
     <!-- Header with WebX logo (#1A1B47 background, fixed, glassmorphism, transparent) -->
     <header class="header">
-      <a href="#" class="logo">
+      <a href="/join/" class="logo">
         <svg class="logo-svg" version="1.1" id="logo_header" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="285 235 273 124" style="enable-background:new 285 235 273 124;" xml:space="preserve">
           <g>
