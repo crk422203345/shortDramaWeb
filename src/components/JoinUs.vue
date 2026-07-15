@@ -352,7 +352,6 @@ watch(currentLang, () => {
             <li><a href="https://webx.ai/chs/core-ecosystem#global" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkMerchant }}</a></li>
             <li><a href="https://webx.ai/chs/core-ecosystem#bingo" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkBingoEnt }}</a></li>
             <li><a href="https://webx.ai/chs/core-ecosystem#web3" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkAssetSys }}</a></li>
-            <li><a href="https://webx.ai/chs/core-ecosystem#bingo" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkBingoEnt }}</a></li>
             <li><a href="https://webx.ai/chs/core-ecosystem#winpay" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkWinPay }}</a></li>
           </ul>
         </div>
@@ -361,7 +360,6 @@ watch(currentLang, () => {
         <div class="footer-col">
           <h4 class="footer-title">{{ t[currentLang].footerResources }}</h4>
           <ul class="footer-links">
-            <li><a href="https://webx.ai/chs/resource-center#group" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkIntro }}</a></li>
             <li><a href="https://webx.ai/chs/resource-center#group" target="_blank" rel="noopener noreferrer">{{ t[currentLang].linkIntro }}</a></li>
           </ul>
         </div>
