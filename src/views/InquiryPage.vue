@@ -206,10 +206,11 @@ const getCategoryLabel = (category: 'company' | 'product') => {
           </div>
 
           <transition-group name="list" tag="div" v-else>
-            <RouterLink
+            <component
+              :is="item.sourceUrl || item.source_url ? 'a' : 'RouterLink'"
+              v-bind="item.sourceUrl || item.source_url ? { href: item.sourceUrl || item.source_url, target: '_blank', rel: 'noopener noreferrer' } : { to: { name: 'inquiry-detail', params: { id: item.id } } }"
               v-for="item in allInquiries"
               :key="item.id"
-              :to="{ name: 'inquiry-detail', params: { id: item.id } }"
               class="inquiry-card glass-card"
             >
               <!-- Card Content on Left -->
@@ -224,7 +225,7 @@ const getCategoryLabel = (category: 'company' | 'product') => {
               <div class="card-img-wrapper" v-if="item.coverImage || item.image">
                 <img :src="item.coverImage || item.image" :alt="item.title" class="card-img" />
               </div>
-            </RouterLink>
+            </component>
           </transition-group>
 
           <!-- Empty State -->
