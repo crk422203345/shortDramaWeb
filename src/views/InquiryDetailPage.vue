@@ -81,17 +81,8 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
       <!-- 1. Back Navigation Button -->
       <div class="navigation-row">
         <RouterLink :to="{ name: 'inquiry' }" class="back-btn btn btn-secondary">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="back-icon"
-          >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" class="back-icon">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           {{ t('inquiry.back_btn') }}
@@ -110,39 +101,37 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
           </span>
           <div class="meta-items">
             <span class="meta-item author"> {{ t('inquiry.author') }}: {{ author }} </span>
-            <span class="meta-divider">/</span>
-            <span class="meta-item date">
-              {{ date }}
-            </span>
-            <span class="meta-divider">/</span>
-            <span class="meta-item source">
-              {{ t('inquiry.source') }}:
-              <a
-                v-if="hasSourceUrl"
-                :href="sourceUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="source-link"
-              >
-                {{ sourceDomain }}
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="external-icon"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </a>
-              <span v-else class="no-source">{{ t('inquiry.original') }}</span>
-            </span>
+            <template v-if="article.detailLinkUrl || article.detail_link_url">
+              <span class="meta-divider">/</span>
+              <span class="meta-item detail-link-item">
+                <span class="link-label">{{ t('inquiry.detail_link') }}:</span>
+                <a :href="article.detailLinkUrl || article.detail_link_url" target="_blank" rel="noopener noreferrer"
+                  class="link-url">
+                  {{ article.detailLinkUrl || article.detail_link_url }}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="external-icon">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </span>
+            </template>
+            <template v-if="hasSourceUrl">
+              <span class="meta-divider">/</span>
+              <span class="meta-item source">
+                {{ t('inquiry.source') }}:
+                <a :href="sourceUrl" target="_blank" rel="noopener noreferrer" class="source-link">
+                  {{ sourceDomain }}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="external-icon">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </span>
+            </template>
           </div>
         </div>
 
@@ -154,17 +143,8 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
         <!-- 6. Disclaimer Banner -->
         <footer class="disclaimer-banner">
           <div class="warning-icon-wrapper">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="warning-svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" class="warning-svg">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="8" x2="12" y2="12"></line>
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -339,7 +319,8 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
 
 .detail-content :deep(p) {
   margin-bottom: 24px;
-  text-indent: 2em; /* Standard indentation for editorial layouts */
+  text-indent: 2em;
+  /* Standard indentation for editorial layouts */
   text-align: justify;
 }
 
@@ -415,7 +396,7 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
     display: none;
   }
 
-  .meta-items > * {
+  .meta-items>* {
     width: 100%;
     margin-bottom: 6px;
   }
@@ -455,5 +436,29 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
   justify-content: center;
   font-size: 1.1rem;
   letter-spacing: 1px;
+}
+
+.detail-link-item {
+  display: flex;
+  align-items: center;
+}
+
+.link-label {
+  color: var(--text-muted);
+}
+
+.link-url {
+  color: var(--accent-cyan);
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.3);
+  transition: var(--transition-normal);
+}
+
+.link-url:hover {
+  color: #ffffff;
+  border-bottom-color: #ffffff;
 }
 </style>
