@@ -36,7 +36,7 @@ onMounted(() => {
 })
 
 const category = computed(() => article.value?.category || 'company')
-const date = computed(() => article.value?.date || '')
+const date = computed(() => article.value?.publishDate || '')
 const author = computed(() => {
   if (article.value?.author) return article.value.author
   const isZh = locale.value.startsWith('zh')
@@ -101,6 +101,10 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
           </span>
           <div class="meta-items">
             <span class="meta-item author"> {{ t('inquiry.author') }}: {{ author }} </span>
+            <span class="meta-divider">/</span>
+            <span class="meta-item date">
+              {{ date }}
+            </span>
             <template v-if="article.detailLinkUrl || article.detail_link_url">
               <span class="meta-divider">/</span>
               <span class="meta-item detail-link-item">

@@ -219,6 +219,9 @@ const getCategoryLabel = (category: 'company' | 'product') => {
                   {{ getCategoryLabel(item.category) }}
                 </span>
                 <h3 class="card-title" :title="item.title">{{ item.title }}</h3>
+                <div class="card-meta" v-if="item.publishDate">
+                  <span class="card-date">{{ item.publishDate }}</span>
+                </div>
               </div>
 
               <!-- Card Image on Right -->
