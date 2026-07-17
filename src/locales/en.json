@@ -419,7 +419,38 @@
     "card_term_desc": "The platform fully adapts to multiple terminals such as PC websites, mobile WAP, H5 joint operations, and Apple web boxes, and supports generating independent brand sites (OEM distribution) for downstream channels, flexibly expanding business boundaries.",
     "slogan": "Connect to the New World, Start Your Adventure!",
     "slogan_sub": "Enter the game lobby now and start your play-to-earn journey. Olé Game is waiting for you.",
-    "btn_enter": "Enter Mini-Game Lobby"
+    "btn_enter": "Enter Mini-Game Lobby",
+    "featured_games": {
+      "try_now": "Play Now",
+      "video_placeholder": "Video 16:9",
+      "video_unsupported": "Your browser does not support video playback.",
+      "items": {
+        "golden_toad": {
+          "title": "Fishing: Where Did the Golden Toad Go?",
+          "genres": {
+            "genre_1": "Action Adventure",
+            "genre_2": "Casual Puzzle"
+          },
+          "description": "A brand-new upgrade with high-fidelity visuals, explosive skills, stunning fishing grounds, and cinematic effects for a thrilling experience."
+        },
+        "three_kingdoms": {
+          "title": "Three Kingdoms War Song",
+          "genres": {
+            "genre_1": "Chinese Fantasy",
+            "genre_2": "Card"
+          },
+          "description": "Form clever formations on a nine-grid battlefield and recruit legendary generals. Three Kingdoms War Song offers high-rate combo draws, one-tap army building, and idle gameplay across an epic Three Kingdoms world. My lord, the battle awaits!"
+        },
+        "savage_chronicle": {
+          "title": "Savage Chronicle",
+          "genres": {
+            "genre_1": "Fantasy",
+            "genre_2": "Strategy"
+          },
+          "description": "Awaken and step into Azeroth: no light or shadow, only words. Wear beast hide as armor, carry a staff as your companion, and walk through whispering forests. Become a night elf, master shapeshifting secrets, and write your legend in a pure text world."
+        }
+      }
+    }
   },
   "drama_universe": {
     "title": "OMO DRAMA",

@@ -2,6 +2,27 @@
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+
+const featuredGames = [
+  {
+    key: 'golden_toad',
+    genreKeys: ['genre_1', 'genre_2'],
+    video: 'https://www.bingo.vip/ad4.mp5',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=41&edition=0&key=XC9RdtCC',
+  },
+  {
+    key: 'three_kingdoms',
+    genreKeys: ['genre_1', 'genre_2'],
+    video: 'https://www.bingo.vip/ad4.mp6',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=23&edition=0&key=XC9RdtCC',
+  },
+  {
+    key: 'savage_chronicle',
+    genreKeys: ['genre_1', 'genre_2'],
+    video: 'https://www.bingo.vip/ad4.mp7',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=44&edition=0&key=XC9RdtCC',
+  },
+]
 </script>
 
 <template>
@@ -131,7 +152,56 @@ const { t } = useI18n()
         </div>
       </section>
 
-      <!-- 4. Bottom CTA Box -->
+      <!-- 4. Featured Games Section -->
+      <section class="featured-games-section">
+        <article
+          v-for="(game, index) in featuredGames"
+          :key="game.key"
+          class="featured-game-row"
+          :class="{ 'is-reversed': index % 2 === 1 }"
+        >
+          <div class="featured-video-wrap">
+            <span class="featured-video-placeholder" aria-hidden="true">
+              {{ t('game_universe.featured_games.video_placeholder') }}
+            </span>
+            <video
+              class="featured-video"
+              :src="game.video"
+              autoplay
+              muted
+              loop
+              playsinline
+              controls
+              preload="metadata"
+            >
+              {{ t('game_universe.featured_games.video_unsupported') }}
+            </video>
+          </div>
+          <div class="featured-game-content">
+            <h3 class="featured-game-title">
+              {{ t(`game_universe.featured_games.items.${game.key}.title`) }}
+            </h3>
+            <div class="featured-game-tags">
+              <span v-for="genreKey in game.genreKeys" :key="genreKey" class="featured-game-tag">
+                {{ t(`game_universe.featured_games.items.${game.key}.genres.${genreKey}`) }}
+              </span>
+            </div>
+            <p class="featured-game-desc">
+              {{ t(`game_universe.featured_games.items.${game.key}.description`) }}
+            </p>
+            <a
+              :href="game.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="featured-game-btn"
+            >
+              {{ t('game_universe.featured_games.try_now') }}
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <!-- 5. Bottom CTA Box -->
       <section class="cta-section">
         <div class="cta-box glass-card">
           <h2 class="cta-slogan">{{ t('game_universe.slogan') }}</h2>
@@ -154,7 +224,8 @@ const { t } = useI18n()
 
 <style scoped>
 .game-page {
-  padding-top: 80px; /* Header offset */
+  padding-top: 80px;
+  /* Header offset */
   padding-bottom: 96px;
   min-height: calc(100vh - 80px);
   overflow-x: hidden;
@@ -330,7 +401,165 @@ const { t } = useI18n()
   font-weight: 300;
 }
 
-/* 4. Bottom CTA */
+/* 4. Featured Games Section */
+.featured-games-section {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  margin-bottom: 72px;
+}
+
+.featured-game-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.featured-game-row.is-reversed {
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+}
+
+.featured-game-row.is-reversed .featured-video-wrap {
+  order: 2;
+}
+
+.featured-game-row.is-reversed .featured-game-content {
+  order: 1;
+}
+
+.featured-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(139, 92, 246, 0.08)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.featured-video-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.featured-video {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background: transparent;
+}
+
+.featured-game-content {
+  min-width: 0;
+}
+
+.featured-game-title {
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.featured-game-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.featured-game-tag {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.96rem;
+  line-height: 1.4;
+}
+
+.featured-game-desc {
+  max-width: 520px;
+  margin-bottom: 28px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.featured-game-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 108px;
+  min-height: 40px;
+  padding: 10px 22px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.22) 0%, rgba(139, 92, 246, 0.32) 100%);
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.12);
+  transition: var(--transition-normal);
+}
+
+.featured-game-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 240, 255, 0.22);
+}
+
+@media (max-width: 900px) {
+  .featured-games-section {
+    gap: 44px;
+    margin-bottom: 60px;
+  }
+
+  .featured-game-row,
+  .featured-game-row.is-reversed {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .featured-game-row.is-reversed .featured-video-wrap,
+  .featured-game-row.is-reversed .featured-game-content {
+    order: initial;
+  }
+
+  .featured-game-content {
+    padding: 0 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-game-title {
+    font-size: 1.35rem;
+  }
+
+  .featured-game-tags {
+    margin-bottom: 20px;
+  }
+
+  .featured-game-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+}
+
+/* 5. Bottom CTA */
 .cta-section {
   margin-top: 24px;
 }
@@ -398,9 +627,11 @@ const { t } = useI18n()
   .cta-box {
     padding: 40px 24px;
   }
+
   .cta-slogan {
     font-size: 1.7rem;
   }
+
   .logo-text {
     font-size: 1.4rem;
   }

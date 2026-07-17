@@ -419,7 +419,38 @@
     "card_term_desc": "平台全面适配PC官网、手机WAP、H5联运及苹果网页版盒子等多元终端，并支持为下游渠道生成独立品牌站点（贴牌分发），灵活开拓业务边界。",
     "slogan": "连接新世界，启动你的冒险！",
     "slogan_sub": "立即进入游戏大厅，开启边玩边赚之旅。Olé Game正等着你体验。",
-    "btn_enter": "进入小游戏大厅"
+    "btn_enter": "进入小游戏大厅",
+    "featured_games": {
+      "try_now": "立即试玩",
+      "video_placeholder": "视频16：9",
+      "video_unsupported": "当前浏览器不支持视频播放。",
+      "items": {
+        "golden_toad": {
+          "title": "捕鱼：金蟾去哪了",
+          "genres": {
+            "genre_1": "动作冒险",
+            "genre_2": "休闲益智"
+          },
+          "description": "全新升级，超高还原度，技能燃爆，精美渔场地图集体亮相，特效炸裂，震撼体验！"
+        },
+        "three_kingdoms": {
+          "title": "三国志战歌",
+          "genres": {
+            "genre_1": "国风",
+            "genre_2": "卡牌"
+          },
+          "description": "九宫格上布奇阵，万千名将入囊中。《三国志战歌》无限连抽高爆率，率领养成一键成军，放置玩法尽享史诗三国。主公，等你来战！"
+        },
+        "savage_chronicle": {
+          "title": "野人纪",
+          "genres": {
+            "genre_1": "魔幻",
+            "genre_2": "策略"
+          },
+          "description": "意识归来，踏入艾泽拉斯。无光影，唯文字。兽皮为甲，法杖为伴，密林低语，野兽潜行。化身暗夜精灵，修习变形秘法，以熊之躯，踏上征途。纯文字世界，书写你的传奇。"
+        }
+      }
+    }
   },
   "drama_universe": {
     "title": "OMO DRAMA",

@@ -419,7 +419,38 @@
     "card_term_desc": "Platform ini menyesuaikan sepenuhnya kepada pelbagai terminal seperti tapak web PC, WAP mudah alih, operasi bersama H5, dan versi kotak web Apple, dan menyokong penjanaan tapak jenama bebas (pengedaran OEM) untuk saluran hiliran, meluaskan sempadan perniagaan secara fleksibel.",
     "slogan": "Sambung ke Dunia Baharu, Mulakan Pengembaraan Anda!",
     "slogan_sub": "Masuk ke lobi permainan sekarang dan mulakan perjalanan main-untuk-dapat anda. Olé Game sedang menunggu anda.",
-    "btn_enter": "Masuk Lobi Permainan Mini"
+    "btn_enter": "Masuk Lobi Permainan Mini",
+    "featured_games": {
+      "try_now": "Main Sekarang",
+      "video_placeholder": "Video 16:9",
+      "video_unsupported": "Pelayar anda tidak menyokong main balik video.",
+      "items": {
+        "golden_toad": {
+          "title": "Memancing: Ke Mana Katak Emas Pergi?",
+          "genres": {
+            "genre_1": "Aksi Pengembaraan",
+            "genre_2": "Santai Teka-teki"
+          },
+          "description": "Naik taraf serba baharu dengan tahap pemulihan yang tinggi, kemahiran yang hebat, peta kolam pancing yang indah, kesan visual yang meletup dan pengalaman yang mengagumkan."
+        },
+        "three_kingdoms": {
+          "title": "Lagu Perang Tiga Kerajaan",
+          "genres": {
+            "genre_1": "Gaya Cina",
+            "genre_2": "Kad"
+          },
+          "description": "Susun formasi di grid sembilan petak dan kumpulkan ribuan jeneral terkenal. Lagu Perang Tiga Kerajaan menawarkan cabutan kombo tanpa had dengan kadar tinggi, pembentukan tentera satu ketik, dan permainan idle dalam dunia epik Tiga Kerajaan. Tuanku, medan perang menanti!"
+        },
+        "savage_chronicle": {
+          "title": "Kronik Orang Liar",
+          "genres": {
+            "genre_1": "Fantasi",
+            "genre_2": "Strategi"
+          },
+          "description": "Kesedaran kembali, lalu anda melangkah ke Azeroth. Tiada cahaya dan bayang, hanya teks. Kulit binatang menjadi perisai, tongkat menjadi teman, hutan berbisik, dan binatang buas mengintai. Jelma sebagai night elf, pelajari rahsia perubahan bentuk, dan tulis legenda anda dalam dunia teks murni."
+        }
+      }
+    }
   },
   "drama_universe": {
     "title": "OMO DRAMA",
