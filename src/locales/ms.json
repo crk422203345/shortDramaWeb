@@ -464,7 +464,26 @@
     "card_term_desc": "Menyokong operasi berbilang bahasa dan berbilang wilayah, menyediakan persembahan kandungan setempat untuk negara yang berbeza. Memaparkan pensuisan berbilang bahasa, pengesyoran kandungan berbilang wilayah, operasi setempat dan sistem pembayaran global.",
     "slogan": "Masuk ke Dunia Drama, Belayar Sekarang!",
     "slogan_sub": "Masuk ke lobi drama sekarang dan nikmati pengalaman audio-visual yang indah. Sejumlah besar drama popular eksklusif menanti anda.",
-    "btn_enter": "Masuk Lobi Drama"
+    "btn_enter": "Masuk Lobi Drama",
+    "featured_dramas": {
+      "watch_now": "Tonton Sekarang",
+      "video_placeholder": "Drama Menegak",
+      "video_unsupported": "Pelayar anda tidak menyokong main balik video.",
+      "items": {
+        "sweet_date": {
+          "title": "Janji Temu Manis",
+          "description": "Chi Miao menyamar sebagai gadis nakal untuk menghadiri temu janji buta bagi sahabatnya, tetapi lelaki itu rupa-rupanya CEO baharu Fu Jinyan dan dia kemudian menjadi setiausahanya. Setelah Fu Jinyan mengetahui kebenaran, dia mengajaknya keluar sepuluh kali. Identiti gandanya terbongkar, salah faham tercetus, namun cinta membawa mereka kembali bersama."
+        },
+        "thank_you_teacher_lin": {
+          "title": "Terima Kasih, Cikgu Lin",
+          "description": "Lin Qing mengajar di desa, sementara muridnya Xiaofeng mara dalam pertandingan matematik dan dipaksa berkahwin oleh orang tua. Lin Qing membawanya menduduki peperiksaan dan meraih markah tinggi, tetapi mereka dituduh menipu. Apabila jawatankuasa hadir untuk menjelaskan kebenaran, asal-usul Xiaofeng turut terbongkar."
+        },
+        "agent_wife_contract": {
+          "title": "Kontrak Perkahwinan Bilion Dolar Isteri Ejen",
+          "description": "Seorang ejen wanita menerima tugasan untuk berkahwin dengan Huo Muze, dan ujiannya membangkitkan kenangan lelaki itu tentang penyelamat masa kecilnya. Selepas perkahwinan kilat, perasaan mula tumbuh, tetapi lukisan terkenal, identiti ejen, dan krisis keluarga membuatnya tersepit antara misi dan cinta."
+        }
+      }
+    }
   },
   "social_universe": {
     "title": "Bingo Sosial",

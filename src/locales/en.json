@@ -464,7 +464,26 @@
     "card_term_desc": "Supports multi-lingual and multi-regional operations, providing localized content presentation for different countries. Features multi-language switching, multi-regional content recommendation, localized operations, and global payment systems.",
     "slogan": "Enter the World of Drama, Set Sail Now!",
     "slogan_sub": "Enter the drama lobby now and enjoy wonderful audiovisual experiences. A large number of exclusive hit dramas are waiting for you.",
-    "btn_enter": "Enter Drama Lobby"
+    "btn_enter": "Enter Drama Lobby",
+    "featured_dramas": {
+      "watch_now": "Watch Now",
+      "video_placeholder": "Vertical Drama",
+      "video_unsupported": "Your browser does not support video playback.",
+      "items": {
+        "sweet_date": {
+          "title": "Sweet Date",
+          "description": "Chi Miao dresses as a rebellious girl to attend a blind date for her best friend, only to meet Fu Jinyan, the new CEO, and later become his secretary. After he discovers the truth, he asks her out on ten dates. As her double identity unravels, misunderstandings, an engagement, and an unexpected pregnancy lead them back to each other."
+        },
+        "thank_you_teacher_lin": {
+          "title": "Thank You, Teacher Lin",
+          "description": "Lin Qing teaches in a rural village, where her student Xiaofeng advances in a math competition while facing pressure from elders to marry. Lin Qing takes her to the exam and helps her earn a high score, only to be falsely accused of cheating. When the committee arrives to clear her name, Xiaofeng's hidden background is also revealed."
+        },
+        "agent_wife_contract": {
+          "title": "The Agent Wife's Billion-Dollar Marriage Contract",
+          "description": "A female agent accepts a mission to marry Huo Muze, and her tests stir memories of how she saved him as a child. After a flash marriage, feelings grow, but a famous painting, her secret identity, and family turmoil force her to choose between duty and love."
+        }
+      }
+    }
   },
   "social_universe": {
     "title": "Bingo Social",

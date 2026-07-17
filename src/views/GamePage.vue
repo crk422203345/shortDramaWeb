@@ -7,19 +7,19 @@ const featuredGames = [
   {
     key: 'golden_toad',
     genreKeys: ['genre_1', 'genre_2'],
-    video: 'https://www.bingo.vip/ad4.mp5',
+    video: 'https://www.bingo.vip/ad5.mp4',
     link: 'https://g.bingo.vip/#/gamedetails/content?gid=41&edition=0&key=XC9RdtCC',
   },
   {
     key: 'three_kingdoms',
     genreKeys: ['genre_1', 'genre_2'],
-    video: 'https://www.bingo.vip/ad4.mp6',
+    video: 'https://www.bingo.vip/ad6.mp4',
     link: 'https://g.bingo.vip/#/gamedetails/content?gid=23&edition=0&key=XC9RdtCC',
   },
   {
     key: 'savage_chronicle',
     genreKeys: ['genre_1', 'genre_2'],
-    video: 'https://www.bingo.vip/ad4.mp7',
+    video: 'https://www.bingo.vip/ad7.mp4',
     link: 'https://g.bingo.vip/#/gamedetails/content?gid=44&edition=0&key=XC9RdtCC',
   },
 ]
@@ -31,11 +31,7 @@ const featuredGames = [
       <!-- 1. Top Banner Area -->
       <section class="banner-section">
         <div class="banner-wrapper glass-card">
-          <img
-            src="/img/bingo_game_banner.jpg"
-            :alt="t('game_universe.title')"
-            class="banner-img"
-          />
+          <img src="/img/bingo_game_banner.jpg" :alt="t('game_universe.title')" class="banner-img" />
           <div class="banner-glow-overlay"></div>
         </div>
       </section>
@@ -52,17 +48,8 @@ const featuredGames = [
         <!-- Tags list -->
         <div class="tags-row">
           <div class="tag-item tag-cyan">
-            <svg
-              class="tag-icon"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+            <svg class="tag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="2"></rect>
               <path d="M6 12h4m-2-2v4"></path>
               <line x1="15" y1="13" x2="15.01" y2="13"></line>
@@ -71,17 +58,8 @@ const featuredGames = [
             <span>{{ t('game_universe.tag_count') }}</span>
           </div>
           <div class="tag-item tag-purple">
-            <svg
-              class="tag-icon"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+            <svg class="tag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="16" rx="2"></rect>
               <line x1="3" y1="10" x2="21" y2="10"></line>
               <line x1="3" y1="14" x2="21" y2="14"></line>
@@ -100,19 +78,11 @@ const featuredGames = [
           <div class="glass-card feature-card">
             <div class="card-header">
               <div class="icon-wrapper icon-cyan">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <path
-                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
-                  ></path>
+                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z">
+                  </path>
                 </svg>
               </div>
               <h3 class="card-title">{{ t('game_universe.card_loop_title') }}</h3>
@@ -126,16 +96,8 @@ const featuredGames = [
           <div class="glass-card feature-card">
             <div class="card-header">
               <div class="icon-wrapper icon-purple">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="18" cy="5" r="3"></circle>
                   <circle cx="6" cy="12" r="3"></circle>
                   <circle cx="18" cy="19" r="3"></circle>
@@ -154,26 +116,13 @@ const featuredGames = [
 
       <!-- 4. Featured Games Section -->
       <section class="featured-games-section">
-        <article
-          v-for="(game, index) in featuredGames"
-          :key="game.key"
-          class="featured-game-row"
-          :class="{ 'is-reversed': index % 2 === 1 }"
-        >
+        <article v-for="(game, index) in featuredGames" :key="game.key" class="featured-game-row"
+          :class="{ 'is-reversed': index % 2 === 1 }">
           <div class="featured-video-wrap">
             <span class="featured-video-placeholder" aria-hidden="true">
               {{ t('game_universe.featured_games.video_placeholder') }}
             </span>
-            <video
-              class="featured-video"
-              :src="game.video"
-              autoplay
-              muted
-              loop
-              playsinline
-              controls
-              preload="metadata"
-            >
+            <video class="featured-video" :src="game.video" autoplay muted loop playsinline controls preload="metadata">
               {{ t('game_universe.featured_games.video_unsupported') }}
             </video>
           </div>
@@ -189,12 +138,7 @@ const featuredGames = [
             <p class="featured-game-desc">
               {{ t(`game_universe.featured_games.items.${game.key}.description`) }}
             </p>
-            <a
-              :href="game.link"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="featured-game-btn"
-            >
+            <a :href="game.link" target="_blank" rel="noopener noreferrer" class="featured-game-btn">
               {{ t('game_universe.featured_games.try_now') }}
             </a>
           </div>
@@ -208,12 +152,8 @@ const featuredGames = [
           <p class="cta-subtitle">
             {{ t('game_universe.slogan_sub') }}
           </p>
-          <a
-            href="https://g.bingo.vip/#/front-page/recommendgame?key=XC9RdtCC"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="cta-btn"
-          >
+          <a href="https://g.bingo.vip/#/front-page/recommendgame?key=XC9RdtCC" target="_blank"
+            rel="noopener noreferrer" class="cta-btn">
             {{ t('game_universe.btn_enter') }}
           </a>
         </div>

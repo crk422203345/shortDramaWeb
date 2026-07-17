@@ -1,7 +1,64 @@
 <script setup lang="ts">
+import { nextTick, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+
+const activeDramaIndex = ref(1)
+const dramaVideoRefs = ref<HTMLVideoElement[]>([])
+
+const featuredDramas = [
+  {
+    key: 'sweet_date',
+    video: 'https://www.bingo.vip/ad8.mp4',
+    poster: '/img/短剧6.png',
+    link: 'https://tv.bingo.vip/#/me/detail/detail?id=1253&courseDetailsId=67803',
+  },
+  {
+    key: 'agent_wife_contract',
+    video: 'https://www.bingo.vip/ad10.mp4',
+    poster: '/img/短剧7.jpg',
+    link: 'https://tv.bingo.vip/#/me/detail/detail?id=1238&courseDetailsId=66527',
+  },
+  {
+    key: 'thank_you_teacher_lin',
+    video: 'https://www.bingo.vip/ad9.mp4',
+    poster: '/img/短剧5.png',
+    link: 'https://tv.bingo.vip/#/me/detail/detail?id=1255&courseDetailsId=67959',
+  },
+]
+
+const setDramaVideoRef = (el: HTMLVideoElement | null, index: number) => {
+  if (el) {
+    dramaVideoRefs.value[index] = el
+  }
+}
+
+const syncDramaVideos = () => {
+  dramaVideoRefs.value.forEach((video, index) => {
+    if (!video) return
+
+    if (index === activeDramaIndex.value) {
+      const playPromise = video.play()
+      if (playPromise) {
+        playPromise.catch(() => undefined)
+      }
+      return
+    }
+
+    video.pause()
+    video.currentTime = 0
+  })
+}
+
+const setActiveDrama = (index: number) => {
+  activeDramaIndex.value = index
+  nextTick(syncDramaVideos)
+}
+
+onMounted(() => {
+  nextTick(syncDramaVideos)
+})
 </script>
 
 <template>
@@ -30,8 +87,17 @@ const { t } = useI18n()
         <!-- Tags list -->
         <div class="tags-row">
           <div class="tag-item tag-cyan">
-            <svg class="tag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              class="tag-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <rect x="2" y="6" width="20" height="12" rx="2"></rect>
               <path d="M6 12h4m-2-2v4"></path>
               <line x1="15" y1="13" x2="15.01" y2="13"></line>
@@ -40,8 +106,17 @@ const { t } = useI18n()
             <span>{{ t('drama_universe.tag_count') }}</span>
           </div>
           <div class="tag-item tag-purple">
-            <svg class="tag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              class="tag-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <rect x="3" y="4" width="18" height="16" rx="2"></rect>
               <line x1="3" y1="10" x2="21" y2="10"></line>
               <line x1="3" y1="14" x2="21" y2="14"></line>
@@ -60,11 +135,19 @@ const { t } = useI18n()
           <div class="glass-card feature-card">
             <div class="card-header">
               <div class="icon-wrapper icon-cyan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <path
-                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z">
-                  </path>
+                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
+                  ></path>
                 </svg>
               </div>
               <h3 class="card-title">{{ t('drama_universe.card_loop_title') }}</h3>
@@ -78,8 +161,16 @@ const { t } = useI18n()
           <div class="glass-card feature-card">
             <div class="card-header">
               <div class="icon-wrapper icon-purple">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <circle cx="18" cy="5" r="3"></circle>
                   <circle cx="6" cy="12" r="3"></circle>
                   <circle cx="18" cy="19" r="3"></circle>
@@ -96,14 +187,80 @@ const { t } = useI18n()
         </div>
       </section>
 
-      <!-- 4. Bottom CTA Box -->
+      <!-- 4. Featured Dramas Section -->
+      <section class="featured-dramas-section">
+        <div class="featured-drama-stage">
+          <article
+            v-for="(drama, index) in featuredDramas"
+            :key="drama.key"
+            class="featured-drama-card"
+            :class="{ 'is-active': activeDramaIndex === index }"
+            tabindex="0"
+            @mouseenter="setActiveDrama(index)"
+            @click="setActiveDrama(index)"
+            @focusin="setActiveDrama(index)"
+            @keydown.enter.prevent="setActiveDrama(index)"
+            @keydown.space.prevent="setActiveDrama(index)"
+          >
+            <div class="drama-video-frame">
+              <span class="drama-video-placeholder" aria-hidden="true">
+                {{ t('drama_universe.featured_dramas.video_placeholder') }}
+              </span>
+              <img
+                class="drama-poster"
+                :class="{ 'is-hidden': activeDramaIndex === index }"
+                :src="drama.poster"
+                :alt="t(`drama_universe.featured_dramas.items.${drama.key}.title`)"
+              />
+              <video
+                :ref="(el) => setDramaVideoRef(el as HTMLVideoElement | null, index)"
+                class="drama-video"
+                :src="drama.video"
+                :poster="drama.poster"
+                muted
+                loop
+                playsinline
+                controls
+                preload="metadata"
+              >
+                {{ t('drama_universe.featured_dramas.video_unsupported') }}
+              </video>
+            </div>
+            <div class="featured-drama-copy">
+              <h3 class="featured-drama-title">
+                {{ t(`drama_universe.featured_dramas.items.${drama.key}.title`) }}
+              </h3>
+              <p class="featured-drama-desc">
+                {{ t(`drama_universe.featured_dramas.items.${drama.key}.description`) }}
+              </p>
+              <a
+                :href="drama.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="featured-drama-link"
+                @click.stop
+              >
+                {{ t('drama_universe.featured_dramas.watch_now') }}
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 5. Bottom CTA Box -->
       <section class="cta-section">
         <div class="cta-box glass-card">
           <h2 class="cta-slogan">{{ t('drama_universe.slogan') }}</h2>
           <p class="cta-subtitle">
             {{ t('drama_universe.slogan_sub') }}
           </p>
-          <a href="https://tv.bingo.vip/#/" target="_blank" rel="noopener noreferrer" class="cta-btn">
+          <a
+            href="https://tv.bingo.vip/#/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-btn"
+          >
             {{ t('drama_universe.btn_enter') }}
           </a>
         </div>
@@ -236,7 +393,7 @@ const { t } = useI18n()
 
 /* 3. Cards Section */
 .cards-section {
-  margin-bottom: 64px;
+  margin-bottom: 72px;
 }
 
 .cards-grid {
@@ -299,7 +456,194 @@ const { t } = useI18n()
   font-weight: 300;
 }
 
-/* 4. Bottom CTA */
+/* 4. Featured Dramas Section */
+.featured-dramas-section {
+  margin-bottom: 80px;
+}
+
+.featured-drama-stage {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+  align-items: center;
+}
+
+.featured-drama-card {
+  min-width: 0;
+  padding: 14px 14px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  opacity: 0.72;
+  transform: scale(0.9);
+  transform-origin: center;
+  transition: var(--transition-normal);
+  outline: none;
+}
+
+.featured-drama-card.is-active {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  transform: scale(1.04);
+  border-color: rgba(0, 168, 255, 0.95);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 0 1px rgba(0, 168, 255, 0.45),
+    0 22px 58px rgba(0, 0, 0, 0.28),
+    0 0 36px rgba(0, 168, 255, 0.28);
+}
+
+.featured-drama-card:focus-visible {
+  border-color: rgba(0, 240, 255, 0.85);
+  box-shadow:
+    0 0 0 2px rgba(0, 240, 255, 0.28),
+    0 18px 44px rgba(0, 0, 0, 0.2);
+}
+
+.drama-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+    rgba(255, 255, 255, 0.06);
+}
+
+.drama-video-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.drama-video {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: transparent;
+}
+
+.drama-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.06);
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.drama-poster.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.featured-drama-copy {
+  padding: 20px 2px 0;
+}
+
+.featured-drama-title {
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-size: 1.18rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.featured-drama-desc {
+  display: -webkit-box;
+  min-height: 5.4em;
+  margin-bottom: 18px;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.8;
+  text-align: left;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.featured-drama-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 42px;
+  color: var(--accent-cyan);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-radius: 9999px;
+  background: rgba(0, 240, 255, 0.07);
+  transition: var(--transition-normal);
+}
+
+.featured-drama-link:hover {
+  color: #ffffff;
+  border-color: rgba(0, 240, 255, 0.55);
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(139, 92, 246, 0.28));
+}
+
+@media (max-width: 1024px) {
+  .featured-drama-stage {
+    gap: 22px;
+  }
+
+  .featured-drama-card {
+    transform: scale(0.94);
+  }
+
+  .featured-drama-card.is-active {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-dramas-section {
+    margin-bottom: 60px;
+  }
+
+  .featured-drama-stage {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .featured-drama-card,
+  .featured-drama-card.is-active {
+    opacity: 1;
+    transform: none;
+  }
+
+  .featured-drama-title {
+    font-size: 1.08rem;
+  }
+}
+
+/* 5. Bottom CTA */
 .cta-section {
   margin-top: 24px;
 }
