@@ -4,7 +4,7 @@ export const BASE_URL = 'https://tv.bingo.vip';
 export const RECRUITMENT_LIST_PATH = '/sqx_fast/app/recruitment/list';
 export const RECRUITMENT_FILTER_OPTIONS_PATH = '/sqx_fast/app/recruitment/filter-options';
 
-export type RecruitmentLanguageType = 'zh' | 'cht' | 'en';
+export type RecruitmentLanguageType = 'zh' | 'cht' | 'en' | 'ms';
 
 export interface RecruitmentParams {
   languageType: RecruitmentLanguageType;

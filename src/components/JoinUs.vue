@@ -34,6 +34,8 @@ const getInitialLanguage = (): RecruitmentLanguageType => {
       return 'cht'
     } else if (lowerHash.includes('en')) {
       return 'en'
+    } else if (lowerHash.includes('ms')) {
+      return 'ms'
     }
   }
   return 'zh'
@@ -120,6 +122,29 @@ const t = {
     linkModel: 'WebX Model Explanation',
     linkTerms: 'Terms of Use',
     linkPrivacy: 'Privacy Policy'
+  },
+  ms: {
+    heroTitle: 'Sertai Kami',
+    heroSubtitle: 'Sertai BINGO Entertainment untuk membina ekosistem hiburan Web3 global bersama-sama. Setiap idea kreatif anda dihargai di sini.',
+    responsibilities: 'Tanggungjawab Utama',
+    requirements: 'Keperluan',
+    expand: 'Lihat Lagi',
+    collapse: 'Tutup',
+    noJobs: 'Tiada jawatan tersedia',
+    loading: 'Memuatkan...',
+    applyEmail: 'Hantar Resume Ke',
+    footerEcosystem: 'Ekosistem',
+    footerResources: 'Sumber',
+    footerStatement: 'Undang-undang',
+    footerSocial: 'Media Sosial',
+    linkMerchant: 'Peniaga Terdesentralisasi Global',
+    linkBingoEnt: 'Bingo Global Entertainment',
+    linkAssetSys: 'Sistem Aset Digital Web3',
+    linkWinPay: 'Pembayaran WinPay',
+    linkIntro: 'Pengenalan Perniagaan Kumpulan',
+    linkModel: 'Penerangan Model WebX',
+    linkTerms: 'Terma Penggunaan',
+    linkPrivacy: 'Dasar Privasi'
   }
 }
 
@@ -181,7 +206,27 @@ const uiText = computed(() => {
       openRole: 'Open Position',
       langZh: '简体中文',
       langCht: '繁体中文',
-      langEn: 'English'
+      langEn: 'English',
+      langMs: 'Melayu'
+    }
+  }
+
+  if (currentLang.value === 'ms') {
+    return {
+      searchPlaceholder: 'Cari jawatan, kata kunci...',
+      department: 'Jabatan',
+      location: 'Lokasi',
+      salary: 'Gaji',
+      experience: 'Pengalaman',
+      all: 'Semua',
+      noFilterData: 'Tiada data',
+      clear: 'Kosongkan penapis',
+      fullTime: 'Sepenuh masa',
+      openRole: 'Jawatan Terbuka',
+      langZh: '简体中文',
+      langCht: '繁体中文',
+      langEn: 'English',
+      langMs: 'Melayu'
     }
   }
 
@@ -199,7 +244,8 @@ const uiText = computed(() => {
       openRole: '開放職位',
       langZh: '简体中文',
       langCht: '繁体中文',
-      langEn: 'English'
+      langEn: 'English',
+      langMs: 'Melayu'
     }
   }
 
@@ -216,7 +262,8 @@ const uiText = computed(() => {
     openRole: '开放职位',
     langZh: '简体中文',
     langCht: '繁体中文',
-    langEn: 'English'
+    langEn: 'English',
+    langMs: 'Melayu'
   }
 })
 
@@ -485,6 +532,13 @@ watch(searchTerm, () => {
           class="lang-btn"
         >
           {{ uiText.langEn }}
+        </button>
+        <button
+          :class="{ active: currentLang === 'ms' }"
+          @click="changeLang('ms')"
+          class="lang-btn"
+        >
+          {{ uiText.langMs }}
         </button>
       </div>
     </header>
