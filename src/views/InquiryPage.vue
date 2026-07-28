@@ -3,7 +3,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { consultationApi, type ArticleItem } from '@/api/consultation'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
 // Active tab and current page state
 type TabKey = 'all' | 'company' | 'product'
@@ -13,15 +13,6 @@ const itemsPerPage = 5
 const loading = ref(false)
 const allInquiries = ref<ArticleItem[]>([])
 const totalItems = ref(0)
-
-type LanguageType = 'zh' | 'cht' | 'en' | 'ms'
-
-const getLanguageType = (localeVal: string): LanguageType => {
-  if (localeVal === 'zh-CN') return 'zh'
-  if (localeVal === 'zh-TW') return 'cht'
-  if (localeVal === 'ms') return 'ms'
-  return 'en'
-}
 
 // Tabs definition
 const tabs = computed(() => [
@@ -38,7 +29,6 @@ const fetchData = async () => {
       page: String(currentPage.value),
       limit: String(itemsPerPage),
       keyword: '',
-      languageType: getLanguageType(locale.value),
       category: currentTab.value === 'all' ? undefined : currentTab.value,
     }
     const res = await consultationApi.getArticleList(params)
@@ -97,14 +87,6 @@ watch(currentTab, () => {
 
 watch(currentPage, () => {
   fetchData()
-})
-
-watch(locale, () => {
-  if (currentPage.value !== 1) {
-    currentPage.value = 1
-  } else {
-    fetchData()
-  }
 })
 
 onMounted(() => {
