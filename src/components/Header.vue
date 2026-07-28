@@ -110,9 +110,14 @@ const langMap: Record<string, string> = {
   ms: 'Bahasa Melayu',
 }
 const selectedLanguage = computed(() => {
-  return langMap[locale.value] || '简体中文'
+  return langMap[locale.value] || '繁體中文'
 })
-const languages = ['简体中文', '繁體中文', 'English', 'Bahasa Melayu']
+const languages = [
+  // '简体中文',
+  '繁體中文',
+  'English',
+  'Bahasa Melayu',
+]
 let langTimer: any = null
 
 const selectLanguage = (lang: string) => {

@@ -9,9 +9,13 @@ export type LocaleType = 'zh-CN' | 'zh-TW' | 'en' | 'ms'
 
 const SUPPORTED_LOCALES: LocaleType[] = ['zh-CN', 'zh-TW', 'en', 'ms']
 
-// Read persisted language choice, fall back to browser detection, then 'zh-CN'
+// Read persisted language choice, fall back to browser detection, then 'zh-TW'
 const getInitialLocale = (): LocaleType => {
   const saved = localStorage.getItem('user-language') as LocaleType | null
+  if (saved === 'zh-CN') {
+    localStorage.setItem('user-language', 'zh-TW')
+    return 'zh-TW'
+  }
   if (saved && SUPPORTED_LOCALES.includes(saved)) {
     return saved
   }
@@ -25,13 +29,13 @@ const getInitialLocale = (): LocaleType => {
     return 'zh-TW'
   }
   if (browserLang.startsWith('zh')) {
-    return 'zh-CN'
+    return 'zh-TW'
   }
   if (browserLang.startsWith('en')) {
     return 'en'
   }
 
-  return 'zh-CN'
+  return 'zh-TW'
 }
 
 const i18n = createI18n({

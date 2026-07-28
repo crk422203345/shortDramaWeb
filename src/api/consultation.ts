@@ -24,6 +24,7 @@ export interface ArticleListParams {
   page: string // 分页页码，必填
   limit: string // 单页条数，必填
   keyword: string // 搜索关键词，必填，无搜索时传空
+  languageType: 'zh' | 'cht' | 'en' | 'ms' // 语种：简体 zh、繁体 cht、英文 en、马来语 ms
   category?: 'company' | 'product' // 筛选分类，可选
 }
 
@@ -50,7 +51,7 @@ export interface ArticleDetailParams {
 export const consultationApi = {
   /**
    * 获取文章列表
-   * @param params Query 请求参数 (page, limit, keyword, category)
+   * @param params Query 请求参数 (page, limit, keyword, languageType, category)
    */
   getArticleList(params: ArticleListParams): Promise<ArticleListResponse> {
     return http.get<ArticleListResponse>('/sqx_fast/app/articles/list', params)

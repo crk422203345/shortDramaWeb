@@ -65,7 +65,7 @@ const router = createRouter({
     // Fallback for unmatched routes
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/zh-CN/',
+      redirect: '/zh-TW/',
     },
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -100,6 +100,10 @@ router.beforeEach((to, _from, next) => {
   } else {
     // Auto-detect language
     let targetLang = localStorage.getItem('user-language')
+    if (targetLang === 'zh-CN') {
+      targetLang = 'zh-TW'
+      localStorage.setItem('user-language', targetLang)
+    }
     if (!targetLang || !SUPPORTED_LOCALES.includes(targetLang)) {
       const browserLang = navigator.language.toLowerCase()
       if (browserLang.startsWith('ms')) {
@@ -107,11 +111,11 @@ router.beforeEach((to, _from, next) => {
       } else if (browserLang.startsWith('zh-tw') || browserLang.startsWith('zh-hk')) {
         targetLang = 'zh-TW'
       } else if (browserLang.startsWith('zh')) {
-        targetLang = 'zh-CN'
+        targetLang = 'zh-TW'
       } else if (browserLang.startsWith('en')) {
         targetLang = 'en'
       } else {
-        targetLang = 'zh-CN'
+        targetLang = 'zh-TW'
       }
     }
 
