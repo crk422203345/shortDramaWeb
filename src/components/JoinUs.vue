@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 import { getRecruitmentList, type RecruitmentItem } from '@/api/recruitment'
 
 // Extended recruitment item type with reactive UI expanded state
 interface Job extends RecruitmentItem {
   expanded: boolean
 }
+
+type FilterKey = 'department' | 'location' | 'salary' | 'experience'
 
 // Initial language detection from URL hash (e.g. #/zh-CN#home, #/en#home, #/cht#home)
 const getInitialLanguage = (): 'zh' | 'cht' | 'en' => {
@@ -26,6 +28,13 @@ const getInitialLanguage = (): 'zh' | 'cht' | 'en' => {
 const currentLang = ref<'zh' | 'cht' | 'en'>(getInitialLanguage())
 const jobs = ref<Job[]>([])
 const loading = ref(false)
+const searchTerm = ref('')
+const selectedDepartment = ref('all')
+const selectedLocation = ref('all')
+const selectedSalary = ref('all')
+const selectedExperience = ref('all')
+const activeFilter = ref<FilterKey | null>(null)
+const searchPanelRef = ref<HTMLElement | null>(null)
 
 const t = {
   zh: {
@@ -142,14 +151,196 @@ const fetchJobs = async () => {
   }
 }
 
-const toggleExpand = (index: number) => {
-  if (jobs.value[index]) {
-    jobs.value[index].expanded = !jobs.value[index].expanded
+const uiText = computed(() => {
+  if (currentLang.value === 'en') {
+    return {
+      searchPlaceholder: 'Search for job titles, keywords...',
+      department: 'Department',
+      location: 'Location',
+      salary: 'Salary',
+      experience: 'Experience',
+      all: 'All',
+      clear: 'Clear filters',
+      fullTime: 'Full-time',
+      openRole: 'Open Position',
+      langZh: '简体中文',
+      langCht: '繁体中文',
+      langEn: 'English'
+    }
   }
+
+  if (currentLang.value === 'cht') {
+    return {
+      searchPlaceholder: '搜尋職位、關鍵字...',
+      department: '部門',
+      location: '地點',
+      salary: '薪資',
+      experience: '經驗',
+      all: '全部',
+      clear: '清除篩選',
+      fullTime: '全職',
+      openRole: '開放職位',
+      langZh: '简体中文',
+      langCht: '繁体中文',
+      langEn: 'English'
+    }
+  }
+
+  return {
+    searchPlaceholder: '搜索职位、关键词...',
+    department: '部门',
+    location: '地点',
+    salary: '薪资',
+    experience: '经验',
+    all: '全部',
+    clear: '清除筛选',
+    fullTime: '全职',
+    openRole: '开放职位',
+    langZh: '简体中文',
+    langCht: '繁体中文',
+    langEn: 'English'
+  }
+})
+
+const normalizeText = (value: unknown) => String(value || '').trim()
+
+const getJobDepartment = (job: Job) => normalizeText(
+  job.department ||
+  job.departmentName ||
+  job.deptName ||
+  job.category ||
+  job.positionType ||
+  job.type
+) || uiText.value.openRole
+
+const getJobWorkType = (job: Job) => normalizeText(
+  job.workType ||
+  job.employmentType ||
+  job.jobNature ||
+  job.nature
+) || uiText.value.fullTime
+
+const uniqueOptions = (values: string[]) => {
+  return Array.from(new Set(values.filter(Boolean)))
+}
+
+const departmentOptions = computed(() => uniqueOptions(jobs.value.map(getJobDepartment)))
+const locationOptions = computed(() => uniqueOptions(jobs.value.map(job => normalizeText(job.location))))
+const salaryOptions = computed(() => uniqueOptions(jobs.value.map(job => normalizeText(job.salary))))
+const experienceOptions = computed(() => uniqueOptions(jobs.value.map(job => normalizeText(job.experience))))
+
+const getSelectedFilterValue = (key: FilterKey) => {
+  if (key === 'department') return selectedDepartment.value
+  if (key === 'location') return selectedLocation.value
+  if (key === 'salary') return selectedSalary.value
+  return selectedExperience.value
+}
+
+const setSelectedFilterValue = (key: FilterKey, value: string) => {
+  if (key === 'department') selectedDepartment.value = value
+  if (key === 'location') selectedLocation.value = value
+  if (key === 'salary') selectedSalary.value = value
+  if (key === 'experience') selectedExperience.value = value
+  activeFilter.value = null
+}
+
+const toFilterOptions = (options: string[]) => [
+  { label: uiText.value.all, value: 'all' },
+  ...options.map(option => ({ label: option, value: option }))
+]
+
+const filterConfigs = computed(() => [
+  {
+    key: 'department' as const,
+    label: uiText.value.department,
+    value: selectedDepartment.value,
+    options: toFilterOptions(departmentOptions.value)
+  },
+  {
+    key: 'location' as const,
+    label: uiText.value.location,
+    value: selectedLocation.value,
+    options: toFilterOptions(locationOptions.value)
+  },
+  {
+    key: 'salary' as const,
+    label: uiText.value.salary,
+    value: selectedSalary.value,
+    options: toFilterOptions(salaryOptions.value)
+  },
+  {
+    key: 'experience' as const,
+    label: uiText.value.experience,
+    value: selectedExperience.value,
+    options: toFilterOptions(experienceOptions.value)
+  }
+])
+
+const toggleFilterMenu = (key: FilterKey) => {
+  activeFilter.value = activeFilter.value === key ? null : key
+}
+
+const matchesSelect = (value: string, selected: string) => selected === 'all' || value === selected
+
+const filteredJobs = computed(() => {
+  const keyword = searchTerm.value.trim().toLowerCase()
+
+  return jobs.value.filter(job => {
+    const department = getJobDepartment(job)
+    const location = normalizeText(job.location)
+    const salary = normalizeText(job.salary)
+    const experience = normalizeText(job.experience)
+
+    const searchPool = [
+      job.title,
+      department,
+      location,
+      salary,
+      experience,
+      job.education,
+      ...(Array.isArray(job.responsibilities) ? job.responsibilities : []),
+      ...(Array.isArray(job.requirements) ? job.requirements : [])
+    ].map(item => normalizeText(item).toLowerCase())
+
+    return (
+      (!keyword || searchPool.some(item => item.includes(keyword))) &&
+      matchesSelect(department, selectedDepartment.value) &&
+      matchesSelect(location, selectedLocation.value) &&
+      matchesSelect(salary, selectedSalary.value) &&
+      matchesSelect(experience, selectedExperience.value)
+    )
+  })
+})
+
+const hasActiveFilters = computed(() => {
+  return Boolean(searchTerm.value.trim()) ||
+    selectedDepartment.value !== 'all' ||
+    selectedLocation.value !== 'all' ||
+    selectedSalary.value !== 'all' ||
+    selectedExperience.value !== 'all'
+})
+
+const clearFilters = () => {
+  searchTerm.value = ''
+  selectedDepartment.value = 'all'
+  selectedLocation.value = 'all'
+  selectedSalary.value = 'all'
+  selectedExperience.value = 'all'
+  activeFilter.value = null
+}
+
+const toggleExpand = (job: Job) => {
+  job.expanded = !job.expanded
 }
 
 const changeLang = (lang: 'zh' | 'cht' | 'en') => {
   currentLang.value = lang
+}
+
+const handleDocumentClick = (event: MouseEvent) => {
+  if (!searchPanelRef.value?.contains(event.target as Node)) {
+    activeFilter.value = null
+  }
 }
 
 // Fetch on mount
@@ -161,10 +352,16 @@ onMounted(() => {
     }
   }
   fetchJobs()
+  document.addEventListener('click', handleDocumentClick)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleDocumentClick)
 })
 
 // Refetch on language change
 watch(currentLang, () => {
+  clearFilters()
   fetchJobs()
 })
 </script>
@@ -186,6 +383,29 @@ watch(currentLang, () => {
           </g>
         </svg>
       </a>
+      <div class="lang-selector compact">
+        <button
+          :class="{ active: currentLang === 'zh' }"
+          @click="changeLang('zh')"
+          class="lang-btn"
+        >
+          {{ uiText.langZh }}
+        </button>
+        <button
+          :class="{ active: currentLang === 'cht' }"
+          @click="changeLang('cht')"
+          class="lang-btn"
+        >
+          {{ uiText.langCht }}
+        </button>
+        <button
+          :class="{ active: currentLang === 'en' }"
+          @click="changeLang('en')"
+          class="lang-btn"
+        >
+          {{ uiText.langEn }}
+        </button>
+      </div>
     </header>
 
     <!-- Hero section -->
@@ -195,6 +415,61 @@ watch(currentLang, () => {
       <p class="hero-subtitle">
         {{ t[currentLang].heroSubtitle }}
       </p>
+      <div class="search-panel" ref="searchPanelRef" role="search" @click.stop>
+        <label class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input v-model="searchTerm" type="search" :placeholder="uiText.searchPlaceholder" />
+        </label>
+
+        <div class="filter-row">
+          <div
+            v-for="filter in filterConfigs"
+            :key="filter.key"
+            class="filter-select"
+            :class="{ open: activeFilter === filter.key, selected: filter.value !== 'all' }"
+          >
+            <button
+              class="filter-trigger"
+              type="button"
+              :aria-expanded="activeFilter === filter.key"
+              @click="toggleFilterMenu(filter.key)"
+              @keydown.esc="activeFilter = null"
+            >
+              <span class="filter-label">{{ filter.label }}</span>
+              <span class="filter-value">{{ filter.value === 'all' ? uiText.all : filter.value }}</span>
+              <svg class="filter-chevron" :class="{ open: activeFilter === filter.key }" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+
+            <div v-if="activeFilter === filter.key" class="filter-menu">
+              <button
+                v-for="option in filter.options"
+                :key="option.value"
+                class="filter-option"
+                :class="{ active: getSelectedFilterValue(filter.key) === option.value }"
+                type="button"
+                @click="setSelectedFilterValue(filter.key, option.value)"
+              >
+                <span>{{ option.label }}</span>
+                <svg v-if="getSelectedFilterValue(filter.key) === option.value" class="filter-check" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button v-if="hasActiveFilters" class="clear-filter-btn" type="button" @click="clearFilters">
+            {{ uiText.clear }}
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Jobs grid -->
@@ -232,12 +507,16 @@ watch(currentLang, () => {
       </div>
 
       <!-- No Jobs State -->
-      <div v-else-if="jobs.length === 0" class="no-jobs-state">
+      <div v-else-if="filteredJobs.length === 0" class="no-jobs-state">
         <p>{{ t[currentLang].noJobs }}</p>
       </div>
 
       <div v-else class="jobs-grid">
-        <div v-for="(job, index) in jobs" :key="job.id || index" class="job-card">
+        <div v-for="(job, index) in filteredJobs" :key="job.id || index" class="job-card">
+          <div class="job-card-top">
+            <span class="department-label">{{ getJobDepartment(job) }}</span>
+            <span class="work-type-pill">{{ getJobWorkType(job) }}</span>
+          </div>
           <h3 class="job-title">{{ job.title }}</h3>
 
           <div class="job-badges">
@@ -313,7 +592,7 @@ watch(currentLang, () => {
             <a href="mailto:jackli@webx.vip" class="email-link">jackli@webx.vip</a>
           </div>
 
-          <button @click="toggleExpand(index)" class="expand-btn">
+          <button @click="toggleExpand(job)" class="expand-btn">
             {{ job.expanded ? t[currentLang].collapse : t[currentLang].expand }}
             <svg class="chevron-icon" :class="{ 'is-expanded': job.expanded }" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -979,5 +1258,435 @@ body {
 .email-link:hover {
   text-decoration: underline;
   color: #ffffff;
+}
+
+/* Reference-inspired recruitment controls while preserving the current palette */
+.header {
+  min-height: 76px;
+  padding: 8px clamp(18px, 5vw, 72px);
+}
+
+.lang-selector.compact {
+  padding: 3px;
+  border-color: rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 24px rgba(0, 55, 253, 0.18);
+}
+
+.lang-selector.compact .lang-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.lang-selector-wrapper {
+  display: none;
+}
+
+.hero {
+  padding: 140px 20px 48px 20px;
+  z-index: 40;
+}
+
+.hero-subtitle {
+  max-width: 720px;
+}
+
+.search-panel {
+  width: min(860px, calc(100vw - 40px));
+  margin: 44px auto 0;
+  position: relative;
+  z-index: 100;
+}
+
+.search-box {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 28px;
+  background: rgba(26, 27, 71, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 18px 50px rgba(0, 3, 20, 0.24);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.search-icon {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  color: #00F0FF;
+}
+
+.search-box input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.search-box input::placeholder {
+  color: rgba(184, 212, 255, 0.46);
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+  position: relative;
+  z-index: 110;
+}
+
+.filter-select {
+  min-width: 170px;
+  position: relative;
+  display: inline-flex;
+  z-index: 120;
+}
+
+.filter-select.open {
+  z-index: 140;
+}
+
+.filter-trigger {
+  width: 100%;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 16px 0 18px;
+  background: rgba(26, 27, 71, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  color: rgba(184, 212, 255, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  font: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-trigger:hover,
+.filter-select.open .filter-trigger {
+  border-color: rgba(0, 240, 255, 0.45);
+  background: rgba(26, 27, 71, 0.78);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 20px rgba(0, 55, 253, 0.18);
+}
+
+.filter-select.selected .filter-trigger {
+  border-color: rgba(0, 240, 255, 0.32);
+}
+
+.filter-label {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: rgba(184, 212, 255, 0.82);
+}
+
+.filter-value {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.filter-chevron {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  color: rgba(184, 212, 255, 0.95);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.filter-chevron.open {
+  transform: rotate(180deg);
+  color: #00F0FF;
+}
+
+.filter-menu {
+  position: absolute;
+  z-index: 150;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(280px, 86vw);
+  max-height: 270px;
+  padding: 8px;
+  overflow-y: auto;
+  background:
+    linear-gradient(180deg, rgba(26, 27, 71, 0.98), rgba(0, 13, 81, 0.98));
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 12px;
+  box-shadow:
+    0 18px 44px rgba(0, 3, 20, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 28px rgba(0, 55, 253, 0.2);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.filter-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-menu::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+
+.filter-menu::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.42);
+  border-radius: 999px;
+}
+
+.filter-option {
+  width: 100%;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: transparent;
+  color: rgba(225, 236, 255, 0.82);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.filter-option span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-option:hover {
+  background: rgba(0, 240, 255, 0.1);
+  color: #ffffff;
+}
+
+.filter-option.active {
+  background: rgba(0, 55, 253, 0.52);
+  color: #ffffff;
+  box-shadow: inset 3px 0 0 #00F0FF;
+}
+
+.filter-check {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  color: #00F0FF;
+}
+
+.clear-filter-btn {
+  height: 52px;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 12px;
+  padding: 0 18px;
+  background: rgba(0, 240, 255, 0.08);
+  color: #00F0FF;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-filter-btn:hover {
+  border-color: rgba(0, 240, 255, 0.7);
+  background: rgba(0, 240, 255, 0.14);
+}
+
+.jobs-section {
+  max-width: 1360px;
+  padding-top: 18px;
+  z-index: 1;
+}
+
+.jobs-grid {
+  gap: 24px;
+}
+
+.job-card {
+  min-height: 360px;
+  border-radius: 12px;
+  padding: 26px;
+  position: relative;
+}
+
+.job-card::after {
+  content: '';
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 0;
+  height: 3px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(90deg, transparent, #00F0FF 18%, #0037FD 82%, transparent);
+  opacity: 0.9;
+}
+
+.job-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.department-label {
+  color: #00F0FF;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.work-type-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(0, 240, 255, 0.16);
+  color: #00F0FF;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.job-title {
+  font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+  margin-bottom: 14px;
+}
+
+.job-badges {
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.badge {
+  max-width: 100%;
+  min-height: 26px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.job-content {
+  flex: 1;
+}
+
+.section-title {
+  color: #00F0FF;
+}
+
+.job-email {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 18px;
+  }
+
+  .logo-svg {
+    height: 48px;
+  }
+
+  .lang-selector.compact {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .lang-selector.compact .lang-btn {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .hero {
+    padding-top: 160px;
+    padding-bottom: 34px;
+  }
+
+  .search-panel {
+    width: min(100%, calc(100vw - 28px));
+    margin-top: 30px;
+  }
+
+  .search-box {
+    height: 62px;
+    padding: 0 18px;
+    gap: 14px;
+  }
+
+  .search-box input {
+    font-size: 15px;
+  }
+
+  .filter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .filter-select,
+  .clear-filter-btn {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .filter-menu {
+    width: 100%;
+    max-height: 220px;
+  }
+
+  .clear-filter-btn {
+    grid-column: 1 / -1;
+  }
+
+  .job-card {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 </style>
