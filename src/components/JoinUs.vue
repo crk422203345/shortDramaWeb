@@ -15,7 +15,7 @@ interface Job extends RecruitmentItem {
   expanded: boolean
 }
 
-type FilterKey = 'department' | 'location' | 'salary' | 'experience'
+type FilterKey = 'department' | 'location' | 'experience'
 
 interface FilterOption {
   label: string
@@ -46,7 +46,6 @@ const filterOptions = ref<RecruitmentFilterOptions>({})
 const searchTerm = ref('')
 const selectedDepartment = ref('all')
 const selectedLocation = ref('all')
-const selectedSalary = ref('all')
 const selectedExperience = ref('all')
 const activeFilter = ref<FilterKey | null>(null)
 const searchPanelRef = ref<HTMLElement | null>(null)
@@ -271,13 +270,6 @@ const locationOptions = computed(() => {
   return fromConfigItems(filterOptions.value.location)
 })
 
-const salaryOptions = computed(() => {
-  if (Array.isArray(filterOptions.value.salary) && filterOptions.value.salary.length) {
-    return fromTextValues(filterOptions.value.salary)
-  }
-  return []
-})
-
 const experienceOptions = computed(() => {
   return fromConfigItems(filterOptions.value.experience)
 })
@@ -285,14 +277,12 @@ const experienceOptions = computed(() => {
 const getSelectedFilterValue = (key: FilterKey) => {
   if (key === 'department') return selectedDepartment.value
   if (key === 'location') return selectedLocation.value
-  if (key === 'salary') return selectedSalary.value
   return selectedExperience.value
 }
 
 const setSelectedFilterValue = (key: FilterKey, value: string) => {
   if (key === 'department') selectedDepartment.value = value
   if (key === 'location') selectedLocation.value = value
-  if (key === 'salary') selectedSalary.value = value
   if (key === 'experience') selectedExperience.value = value
   activeFilter.value = null
 }
@@ -314,12 +304,6 @@ const filterConfigs = computed(() => [
     label: uiText.value.location,
     value: selectedLocation.value,
     options: toFilterOptions(locationOptions.value)
-  },
-  {
-    key: 'salary' as const,
-    label: uiText.value.salary,
-    value: selectedSalary.value,
-    options: toFilterOptions(salaryOptions.value)
   },
   {
     key: 'experience' as const,
@@ -378,10 +362,6 @@ const buildRecruitmentParams = (): RecruitmentParams => {
   applyFilterParam(params, 'location', 'locationKey', 'location')
   applyFilterParam(params, 'experience', 'experienceKey', 'experience')
 
-  if (selectedSalary.value !== 'all') {
-    params.salary = getSelectedFilterOption('salary')?.label || selectedSalary.value
-  }
-
   return params
 }
 
@@ -391,7 +371,6 @@ const hasActiveFilters = computed(() => {
   return Boolean(searchTerm.value.trim()) ||
     selectedDepartment.value !== 'all' ||
     selectedLocation.value !== 'all' ||
-    selectedSalary.value !== 'all' ||
     selectedExperience.value !== 'all'
 })
 
@@ -399,7 +378,6 @@ const clearFilters = () => {
   searchTerm.value = ''
   selectedDepartment.value = 'all'
   selectedLocation.value = 'all'
-  selectedSalary.value = 'all'
   selectedExperience.value = 'all'
   activeFilter.value = null
 }
@@ -454,7 +432,7 @@ watch(currentLang, () => {
   fetchJobs()
 })
 
-watch([selectedDepartment, selectedLocation, selectedSalary, selectedExperience], () => {
+watch([selectedDepartment, selectedLocation, selectedExperience], () => {
   fetchJobs()
 })
 
