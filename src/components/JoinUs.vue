@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
-import { getRecruitmentList, type RecruitmentItem } from '@/api/recruitment'
+import {
+  getRecruitmentFilterOptions,
+  getRecruitmentList,
+  type RecruitmentFilterConfigItem,
+  type RecruitmentFilterOptions,
+  type RecruitmentItem,
+  type RecruitmentLanguageType,
+  type RecruitmentParams
+} from '@/api/recruitment'
 
 // Extended recruitment item type with reactive UI expanded state
 interface Job extends RecruitmentItem {
@@ -9,8 +17,14 @@ interface Job extends RecruitmentItem {
 
 type FilterKey = 'department' | 'location' | 'salary' | 'experience'
 
+interface FilterOption {
+  label: string
+  value: string
+  usesKey?: boolean
+}
+
 // Initial language detection from URL hash (e.g. #/zh-CN#home, #/en#home, #/cht#home)
-const getInitialLanguage = (): 'zh' | 'cht' | 'en' => {
+const getInitialLanguage = (): RecruitmentLanguageType => {
   const hash = typeof window !== 'undefined' ? window.location.hash : ''
   if (hash) {
     const lowerHash = hash.toLowerCase()
@@ -25,9 +39,10 @@ const getInitialLanguage = (): 'zh' | 'cht' | 'en' => {
   return 'zh'
 }
 
-const currentLang = ref<'zh' | 'cht' | 'en'>(getInitialLanguage())
+const currentLang = ref<RecruitmentLanguageType>(getInitialLanguage())
 const jobs = ref<Job[]>([])
 const loading = ref(false)
+const filterOptions = ref<RecruitmentFilterOptions>({})
 const searchTerm = ref('')
 const selectedDepartment = ref('all')
 const selectedLocation = ref('all')
@@ -35,6 +50,7 @@ const selectedSalary = ref('all')
 const selectedExperience = ref('all')
 const activeFilter = ref<FilterKey | null>(null)
 const searchPanelRef = ref<HTMLElement | null>(null)
+let searchTimer: ReturnType<typeof setTimeout> | null = null
 
 const t = {
   zh: {
@@ -111,7 +127,7 @@ const t = {
 const fetchJobs = async () => {
   try {
     loading.value = true
-    const data = await getRecruitmentList({ languageType: currentLang.value })
+    const data = await getRecruitmentList(buildRecruitmentParams())
     
     jobs.value = data.map(item => {
       // Handle potential string-serialized arrays returned from the API
@@ -160,6 +176,7 @@ const uiText = computed(() => {
       salary: 'Salary',
       experience: 'Experience',
       all: 'All',
+      noFilterData: 'No data',
       clear: 'Clear filters',
       fullTime: 'Full-time',
       openRole: 'Open Position',
@@ -177,6 +194,7 @@ const uiText = computed(() => {
       salary: '薪資',
       experience: '經驗',
       all: '全部',
+      noFilterData: '暫無資料',
       clear: '清除篩選',
       fullTime: '全職',
       openRole: '開放職位',
@@ -193,6 +211,7 @@ const uiText = computed(() => {
     salary: '薪资',
     experience: '经验',
     all: '全部',
+    noFilterData: '暂无数据',
     clear: '清除筛选',
     fullTime: '全职',
     openRole: '开放职位',
@@ -224,10 +243,44 @@ const uniqueOptions = (values: string[]) => {
   return Array.from(new Set(values.filter(Boolean)))
 }
 
-const departmentOptions = computed(() => uniqueOptions(jobs.value.map(getJobDepartment)))
-const locationOptions = computed(() => uniqueOptions(jobs.value.map(job => normalizeText(job.location))))
-const salaryOptions = computed(() => uniqueOptions(jobs.value.map(job => normalizeText(job.salary))))
-const experienceOptions = computed(() => uniqueOptions(jobs.value.map(job => normalizeText(job.experience))))
+const fromConfigItems = (items?: RecruitmentFilterConfigItem[] | null): FilterOption[] => {
+  if (!Array.isArray(items)) return []
+
+  return items
+    .filter(item => item?.name && item?.groupKey)
+    .sort((a, b) => (a.sort || 0) - (b.sort || 0))
+    .map(item => ({
+      label: item.name,
+      value: item.groupKey,
+      usesKey: true
+    }))
+}
+
+const fromTextValues = (values: string[]): FilterOption[] => {
+  return uniqueOptions(values.map(normalizeText)).map(value => ({
+    label: value,
+    value
+  }))
+}
+
+const departmentOptions = computed(() => {
+  return fromConfigItems(filterOptions.value.department)
+})
+
+const locationOptions = computed(() => {
+  return fromConfigItems(filterOptions.value.location)
+})
+
+const salaryOptions = computed(() => {
+  if (Array.isArray(filterOptions.value.salary) && filterOptions.value.salary.length) {
+    return fromTextValues(filterOptions.value.salary)
+  }
+  return []
+})
+
+const experienceOptions = computed(() => {
+  return fromConfigItems(filterOptions.value.experience)
+})
 
 const getSelectedFilterValue = (key: FilterKey) => {
   if (key === 'department') return selectedDepartment.value
@@ -244,9 +297,9 @@ const setSelectedFilterValue = (key: FilterKey, value: string) => {
   activeFilter.value = null
 }
 
-const toFilterOptions = (options: string[]) => [
-  { label: uiText.value.all, value: 'all' },
-  ...options.map(option => ({ label: option, value: option }))
+const toFilterOptions = (options: FilterOption[]) => [
+  ...(options.length ? [{ label: uiText.value.all, value: 'all' } as FilterOption] : []),
+  ...options
 ]
 
 const filterConfigs = computed(() => [
@@ -280,37 +333,59 @@ const toggleFilterMenu = (key: FilterKey) => {
   activeFilter.value = activeFilter.value === key ? null : key
 }
 
-const matchesSelect = (value: string, selected: string) => selected === 'all' || value === selected
+const getFilterOptionsByKey = (key: FilterKey) => {
+  return filterConfigs.value.find(filter => filter.key === key)?.options || []
+}
 
-const filteredJobs = computed(() => {
-  const keyword = searchTerm.value.trim().toLowerCase()
+const getSelectedFilterOption = (key: FilterKey) => {
+  const selectedValue = getSelectedFilterValue(key)
+  return getFilterOptionsByKey(key).find(option => option.value === selectedValue)
+}
 
-  return jobs.value.filter(job => {
-    const department = getJobDepartment(job)
-    const location = normalizeText(job.location)
-    const salary = normalizeText(job.salary)
-    const experience = normalizeText(job.experience)
+const getSelectedFilterLabel = (key: FilterKey, value: string) => {
+  if (value === 'all') return uiText.value.all
+  return getSelectedFilterOption(key)?.label || value
+}
 
-    const searchPool = [
-      job.title,
-      department,
-      location,
-      salary,
-      experience,
-      job.education,
-      ...(Array.isArray(job.responsibilities) ? job.responsibilities : []),
-      ...(Array.isArray(job.requirements) ? job.requirements : [])
-    ].map(item => normalizeText(item).toLowerCase())
+const applyFilterParam = (
+  params: RecruitmentParams,
+  key: FilterKey,
+  keyParam: keyof RecruitmentParams,
+  textParam: keyof RecruitmentParams
+) => {
+  const selectedValue = getSelectedFilterValue(key)
+  if (selectedValue === 'all') return
 
-    return (
-      (!keyword || searchPool.some(item => item.includes(keyword))) &&
-      matchesSelect(department, selectedDepartment.value) &&
-      matchesSelect(location, selectedLocation.value) &&
-      matchesSelect(salary, selectedSalary.value) &&
-      matchesSelect(experience, selectedExperience.value)
-    )
-  })
-})
+  const selectedOption = getSelectedFilterOption(key)
+  if (selectedOption?.usesKey) {
+    params[keyParam] = selectedOption.value as any
+  } else {
+    params[textParam] = (selectedOption?.label || selectedValue) as any
+  }
+}
+
+const buildRecruitmentParams = (): RecruitmentParams => {
+  const params: RecruitmentParams = {
+    languageType: currentLang.value
+  }
+  const keyword = searchTerm.value.trim()
+
+  if (keyword) {
+    params.keyword = keyword
+  }
+
+  applyFilterParam(params, 'department', 'departmentKey', 'department')
+  applyFilterParam(params, 'location', 'locationKey', 'location')
+  applyFilterParam(params, 'experience', 'experienceKey', 'experience')
+
+  if (selectedSalary.value !== 'all') {
+    params.salary = getSelectedFilterOption('salary')?.label || selectedSalary.value
+  }
+
+  return params
+}
+
+const filteredJobs = computed(() => jobs.value)
 
 const hasActiveFilters = computed(() => {
   return Boolean(searchTerm.value.trim()) ||
@@ -333,13 +408,22 @@ const toggleExpand = (job: Job) => {
   job.expanded = !job.expanded
 }
 
-const changeLang = (lang: 'zh' | 'cht' | 'en') => {
+const changeLang = (lang: RecruitmentLanguageType) => {
   currentLang.value = lang
 }
 
 const handleDocumentClick = (event: MouseEvent) => {
   if (!searchPanelRef.value?.contains(event.target as Node)) {
     activeFilter.value = null
+  }
+}
+
+const fetchFilterOptions = async () => {
+  try {
+    filterOptions.value = await getRecruitmentFilterOptions(currentLang.value)
+  } catch (error) {
+    console.error('Failed to load recruitment filter options:', error)
+    filterOptions.value = {}
   }
 }
 
@@ -351,18 +435,37 @@ onMounted(() => {
       window.history.replaceState(null, '', window.location.pathname + window.location.search)
     }
   }
+  fetchFilterOptions()
   fetchJobs()
   document.addEventListener('click', handleDocumentClick)
 })
 
 onUnmounted(() => {
+  if (searchTimer) {
+    clearTimeout(searchTimer)
+  }
   document.removeEventListener('click', handleDocumentClick)
 })
 
 // Refetch on language change
 watch(currentLang, () => {
   clearFilters()
+  fetchFilterOptions()
   fetchJobs()
+})
+
+watch([selectedDepartment, selectedLocation, selectedSalary, selectedExperience], () => {
+  fetchJobs()
+})
+
+watch(searchTerm, () => {
+  if (searchTimer) {
+    clearTimeout(searchTimer)
+  }
+
+  searchTimer = setTimeout(() => {
+    fetchJobs()
+  }, 300)
 })
 </script>
 
@@ -440,7 +543,7 @@ watch(currentLang, () => {
               @keydown.esc="activeFilter = null"
             >
               <span class="filter-label">{{ filter.label }}</span>
-              <span class="filter-value">{{ filter.value === 'all' ? uiText.all : filter.value }}</span>
+              <span class="filter-value">{{ getSelectedFilterLabel(filter.key, filter.value) }}</span>
               <svg class="filter-chevron" :class="{ open: activeFilter === filter.key }" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -448,21 +551,26 @@ watch(currentLang, () => {
             </button>
 
             <div v-if="activeFilter === filter.key" class="filter-menu">
-              <button
-                v-for="option in filter.options"
-                :key="option.value"
-                class="filter-option"
-                :class="{ active: getSelectedFilterValue(filter.key) === option.value }"
-                type="button"
-                @click="setSelectedFilterValue(filter.key, option.value)"
-              >
-                <span>{{ option.label }}</span>
-                <svg v-if="getSelectedFilterValue(filter.key) === option.value" class="filter-check" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </button>
+              <template v-if="filter.options.length">
+                <button
+                  v-for="option in filter.options"
+                  :key="option.value"
+                  class="filter-option"
+                  :class="{ active: getSelectedFilterValue(filter.key) === option.value }"
+                  type="button"
+                  @click="setSelectedFilterValue(filter.key, option.value)"
+                >
+                  <span>{{ option.label }}</span>
+                  <svg v-if="getSelectedFilterValue(filter.key) === option.value" class="filter-check" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </button>
+              </template>
+              <div v-else class="filter-empty">
+                {{ uiText.noFilterData }}
+              </div>
             </div>
           </div>
           <button v-if="hasActiveFilters" class="clear-filter-btn" type="button" @click="clearFilters">
@@ -1499,6 +1607,17 @@ body {
   width: 15px;
   height: 15px;
   color: #00F0FF;
+}
+
+.filter-empty {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: rgba(184, 212, 255, 0.62);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .clear-filter-btn {

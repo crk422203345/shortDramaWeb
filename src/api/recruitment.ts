@@ -1,33 +1,32 @@
 import http from '@/utils/request';
 
-/**
- * 基础域名常量管理
- */
 export const BASE_URL = 'https://tv.bingo.vip';
-
-/**
- * 招聘列表接口路由地址
- */
 export const RECRUITMENT_LIST_PATH = '/sqx_fast/app/recruitment/list';
+export const RECRUITMENT_FILTER_OPTIONS_PATH = '/sqx_fast/app/recruitment/filter-options';
 
-/**
- * 获取招聘列表的查询参数
- */
+export type RecruitmentLanguageType = 'zh' | 'cht' | 'en';
+
 export interface RecruitmentParams {
-  /**
-   * 多语言标识：zh 简体中文、en 英文等
-   */
-  languageType: string;
+  languageType: RecruitmentLanguageType;
+  keyword?: string;
+  departmentKey?: string;
+  department?: string;
+  locationKey?: string;
+  location?: string;
+  salary?: string;
+  experienceKey?: string;
+  experience?: string;
 }
 
-/**
- * 招聘职位列表项数据结构
- */
 export interface RecruitmentItem {
   id: number;
   title: string;
+  department?: string;
+  departmentKey?: string | null;
   location: string;
+  locationKey?: string | null;
   experience: string;
+  experienceKey?: string | null;
   education: string;
   salary: string;
   responsibilities: string[] | string;
@@ -37,28 +36,30 @@ export interface RecruitmentItem {
   [key: string]: any;
 }
 
-/**
- * 获取招聘列表数据
- * 
- * @param params 查询参数对象，包含 languageType (多语言标识)
- * @returns 招聘列表数据 Promise，利用项目全局拦截器处理成功后解构的 data
- * 
- * @example
- * ```typescript
- * import { getRecruitmentList } from '@/api/recruitment';
- * 
- * // 组件中调用示例
- * getRecruitmentList({ languageType: 'zh' })
- *   .then((data) => {
- *     console.log('获取招聘列表成功:', data);
- *   })
- *   .catch((error) => {
- *     console.error('获取招聘列表失败:', error);
- *   });
- * ```
- */
+export interface RecruitmentFilterConfigItem {
+  groupKey: string;
+  configType: 'department' | 'location' | 'experience' | string;
+  languageType: RecruitmentLanguageType | string;
+  name: string;
+  sort: number;
+  state: number;
+}
+
+export interface RecruitmentFilterOptions {
+  department?: RecruitmentFilterConfigItem[] | null;
+  location?: RecruitmentFilterConfigItem[] | null;
+  experience?: RecruitmentFilterConfigItem[] | null;
+  salary?: string[] | null;
+}
+
 export function getRecruitmentList(params: RecruitmentParams): Promise<RecruitmentItem[]> {
   return http.get<RecruitmentItem[]>(RECRUITMENT_LIST_PATH, params, {
+    baseURL: BASE_URL,
+  });
+}
+
+export function getRecruitmentFilterOptions(languageType: RecruitmentLanguageType): Promise<RecruitmentFilterOptions> {
+  return http.get<RecruitmentFilterOptions>(RECRUITMENT_FILTER_OPTIONS_PATH, { languageType }, {
     baseURL: BASE_URL,
   });
 }
