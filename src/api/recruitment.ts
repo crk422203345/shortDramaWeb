@@ -29,6 +29,7 @@ export interface RecruitmentItem {
   experienceKey?: string | null;
   education: string;
   salary: string;
+  resumeEmail?: string | null;
   responsibilities: string[] | string;
   requirements: string[] | string;
   createTime?: string;
