@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { consultationApi, type ArticleItem } from '@/api/consultation'
+import { consultationApi, type ArticleCategory, type ArticleItem } from '@/api/consultation'
 
 const { t } = useI18n()
 
 // Active tab and current page state
-type TabKey = 'all' | 'company' | 'product'
+type TabKey = 'all' | ArticleCategory
 const currentTab = ref<TabKey>('all')
 const currentPage = ref(1)
 const itemsPerPage = 5
@@ -19,6 +19,7 @@ const tabs = computed(() => [
   { value: 'all' as TabKey, label: t('inquiry.tabs.all') },
   { value: 'company' as TabKey, label: t('inquiry.tabs.company') },
   { value: 'product' as TabKey, label: t('inquiry.tabs.product') },
+  { value: 'industry' as TabKey, label: t('inquiry.tabs.industry') },
 ])
 
 // Fetch list data from API
@@ -154,8 +155,8 @@ const selectTab = (tabVal: TabKey) => {
   currentPage.value = 1
 }
 
-const getCategoryLabel = (category: 'company' | 'product') => {
-  return category === 'company' ? t('inquiry.tabs.company') : t('inquiry.tabs.product')
+const getCategoryLabel = (category: ArticleCategory) => {
+  return t(`inquiry.tabs.${category}`)
 }
 </script>
 
@@ -510,6 +511,12 @@ const getCategoryLabel = (category: 'company' | 'product') => {
   background: rgba(139, 92, 246, 0.08);
   border: 1px solid rgba(139, 92, 246, 0.25);
   color: var(--accent-purple);
+}
+
+.card-tag.industry {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #55f3a4;
 }
 
 .card-title {

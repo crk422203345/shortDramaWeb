@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { consultationApi, type ArticleItem } from '@/api/consultation'
+import { consultationApi, type ArticleCategory, type ArticleItem } from '@/api/consultation'
 
 const route = useRoute()
 const { t, locale } = useI18n()
@@ -35,7 +35,7 @@ onMounted(() => {
   getArticleData()
 })
 
-const category = computed(() => article.value?.category || 'company')
+const category = computed<ArticleCategory>(() => article.value?.category || 'company')
 const date = computed(() => article.value?.publishDate || '')
 const author = computed(() => {
   if (article.value?.author) return article.value.author
@@ -70,8 +70,8 @@ const sourceDomain = computed(() => {
 })
 
 // Helper for category label
-const getCategoryLabel = (cat: 'company' | 'product') => {
-  return cat === 'company' ? t('inquiry.tabs.company') : t('inquiry.tabs.product')
+const getCategoryLabel = (cat: ArticleCategory) => {
+  return t(`inquiry.tabs.${cat}`)
 }
 </script>
 
@@ -256,6 +256,12 @@ const getCategoryLabel = (cat: 'company' | 'product') => {
   background: rgba(139, 92, 246, 0.1);
   color: var(--accent-purple);
   border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.category-pill.industry {
+  background: rgba(34, 197, 94, 0.1);
+  color: #55f3a4;
+  border: 1px solid rgba(34, 197, 94, 0.25);
 }
 
 /* Meta list text layout */

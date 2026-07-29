@@ -507,7 +507,8 @@
     "tabs": {
       "all": "All",
       "company": "Company News",
-      "product": "Product News"
+      "product": "Product News",
+      "industry": "Industry News"
     },
     "disclaimer": "[Disclaimer] This article is sourced from the internet and represents the author's personal views. It does not reflect the position of our company and is for reference only. Our company assumes no responsibility for the authenticity or accuracy of the content. If there are issues regarding copyright, versions, or other matters, please contact us promptly, and we will address it immediately.",
     "author": "Author",
