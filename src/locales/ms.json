@@ -228,6 +228,21 @@
     "responsibilities": "Tanggungjawab Utama",
     "requirements": "Syarat Kelayakan",
     "apply_method": "Cara Memohon",
+    "search_placeholder": "Cari jawatan dan kata kunci...",
+    "load_failed": "Gagal memuatkan jawatan",
+    "load_failed_desc": "Sila semak sambungan anda dan cuba lagi.",
+    "retry": "Muat Semula",
+    "empty_title": "Tiada Jawatan Kosong",
+    "empty_desc": "Tiada jawatan yang sepadan dengan penapis semasa. Cuba ubah pilihan anda.",
+    "mail_subject": "Permohonan - {title}",
+    "filters": {
+      "department": "Jabatan",
+      "location": "Lokasi",
+      "experience": "Pengalaman",
+      "all": "Semua",
+      "no_data": "Tiada data",
+      "clear": "Kosongkan penapis"
+    },
     "jobs": {
       "pm": {
         "title": "Pengurus Produk Permainan",
@@ -504,6 +519,10 @@
     "subtitle": "Dapatkan pengumuman rasmi, berita syarikat, dan maklumat lelaran produk terkini daripada platform BINGO Entertainment.",
     "badge": "Inquiry",
     "empty": "Tiada maklumat tersedia",
+    "loading": "Memuatkan...",
+    "load_failed": "Gagal memuatkan artikel. Sila cuba lagi.",
+    "author_company": "Pusat Berita Rasmi BINGO",
+    "author_operations": "Pasukan Operasi BINGO",
     "tabs": {
       "all": "Semua",
       "company": "Berita Syarikat",

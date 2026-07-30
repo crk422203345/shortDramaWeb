@@ -1,16 +1,51 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { recruitmentApi, type Job } from '@/api/recruitment'
+import {
+  recruitmentApi,
+  type Job,
+  type RecruitmentFilterOption,
+  type RecruitmentFilterOptions,
+  type RecruitmentLanguageType,
+  type RecruitmentListParams,
+} from '@/api/recruitment'
 
 const { t, locale } = useI18n()
 
-const jobs = ref<Job[]>([])
+type FilterKey = 'department' | 'location' | 'experience'
+type NormalizedJob = Omit<Job, 'responsibilities' | 'requirements'> & {
+  responsibilities: string[]
+  requirements: string[]
+}
+
+interface FilterConfig {
+  key: FilterKey
+  label: string
+  value: string
+  options: RecruitmentFilterOption[]
+}
+
+const jobs = ref<NormalizedJob[]>([])
 const isLoading = ref(false)
 const hasError = ref(false)
 const expandedJobIds = ref<number[]>([])
+const filterOptions = ref<RecruitmentFilterOptions>({
+  department: [],
+  location: [],
+  experience: [],
+  salary: [],
+})
+const searchTerm = ref('')
+const selectedDepartment = ref('all')
+const selectedLocation = ref('all')
+const selectedExperience = ref('all')
+const activeFilter = ref<FilterKey | null>(null)
+const searchPanelRef = ref<HTMLElement | null>(null)
+let jobsRequestId = 0
+let filtersRequestId = 0
+let searchTimer: ReturnType<typeof setTimeout> | null = null
 
-const getLanguageType = (localeVal: string): 'zh' | 'cht' | 'en' | 'ms' => {
+const getLanguageType = (localeVal: string): RecruitmentLanguageType => {
   if (localeVal === 'zh-CN') return 'zh'
   if (localeVal === 'zh-TW') return 'cht'
   if (localeVal === 'en') return 'en'
@@ -18,31 +53,207 @@ const getLanguageType = (localeVal: string): 'zh' | 'cht' | 'en' | 'ms' => {
   return 'zh'
 }
 
+const normalizeStringArray = (value: string[] | string): string[] => {
+  if (Array.isArray(value)) return value.filter((item) => typeof item === 'string' && item.trim())
+
+  try {
+    const parsed: unknown = JSON.parse(value)
+    if (Array.isArray(parsed)) {
+      return parsed.filter(
+        (item): item is string => typeof item === 'string' && Boolean(item.trim()),
+      )
+    }
+  } catch {
+    // The API may return newline-delimited text instead of JSON.
+  }
+
+  return value
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+}
+
+const normalizeEmail = (value: string | null | undefined): string | null => {
+  const email = value?.trim() || ''
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : null
+}
+
+const getSelectedFilterValue = (key: FilterKey): string => {
+  if (key === 'department') return selectedDepartment.value
+  if (key === 'location') return selectedLocation.value
+  return selectedExperience.value
+}
+
+const setSelectedFilterValue = (key: FilterKey, value: string) => {
+  if (key === 'department') selectedDepartment.value = value
+  if (key === 'location') selectedLocation.value = value
+  if (key === 'experience') selectedExperience.value = value
+  activeFilter.value = null
+}
+
+const normalizeFilterOptions = (
+  options: RecruitmentFilterOption[] | null | undefined,
+): RecruitmentFilterOption[] => {
+  if (!Array.isArray(options)) return []
+  return [...options]
+    .filter((option) => option.state === 1 && Boolean(option.groupKey) && Boolean(option.name))
+    .sort((a, b) => a.sort - b.sort)
+}
+
+const filterConfigs = computed<FilterConfig[]>(() => [
+  {
+    key: 'department',
+    label: t('join.filters.department'),
+    value: selectedDepartment.value,
+    options: normalizeFilterOptions(filterOptions.value.department),
+  },
+  {
+    key: 'location',
+    label: t('join.filters.location'),
+    value: selectedLocation.value,
+    options: normalizeFilterOptions(filterOptions.value.location),
+  },
+  {
+    key: 'experience',
+    label: t('join.filters.experience'),
+    value: selectedExperience.value,
+    options: normalizeFilterOptions(filterOptions.value.experience),
+  },
+])
+
+const getSelectedFilterLabel = (filter: FilterConfig): string => {
+  if (filter.value === 'all') return t('join.filters.all')
+  return (
+    filter.options.find((option) => option.groupKey === filter.value)?.name || t('join.filters.all')
+  )
+}
+
+const buildRecruitmentParams = (): RecruitmentListParams => {
+  const params: RecruitmentListParams = {
+    languageType: getLanguageType(locale.value),
+  }
+  const keyword = searchTerm.value.trim()
+
+  if (keyword) params.keyword = keyword
+  if (selectedDepartment.value !== 'all') params.departmentKey = selectedDepartment.value
+  if (selectedLocation.value !== 'all') params.locationKey = selectedLocation.value
+  if (selectedExperience.value !== 'all') params.experienceKey = selectedExperience.value
+
+  return params
+}
+
 const fetchJobs = async () => {
+  const requestId = ++jobsRequestId
   isLoading.value = true
   hasError.value = false
-  expandedJobIds.value = [] // Reset expanded states on reload
   try {
-    const langType = getLanguageType(locale.value)
-    const list = await recruitmentApi.getRecruitmentList({ languageType: langType })
-    jobs.value = list
+    const list = await recruitmentApi.getRecruitmentList(buildRecruitmentParams())
+    if (requestId !== jobsRequestId) return
+
+    jobs.value = list.map((job) => ({
+      ...job,
+      resumeEmail: normalizeEmail(job.resumeEmail),
+      responsibilities: normalizeStringArray(job.responsibilities),
+      requirements: normalizeStringArray(job.requirements),
+    }))
+    expandedJobIds.value = []
   } catch (err) {
+    if (requestId !== jobsRequestId) return
     console.error('[Fetch Jobs Error]:', err)
+    jobs.value = []
     hasError.value = true
   } finally {
-    isLoading.value = false
+    if (requestId === jobsRequestId) {
+      isLoading.value = false
+    }
+  }
+}
+
+const fetchFilterOptions = async () => {
+  const requestId = ++filtersRequestId
+  try {
+    const options = await recruitmentApi.getFilterOptions(getLanguageType(locale.value))
+    if (requestId === filtersRequestId) {
+      filterOptions.value = options
+    }
+  } catch (error) {
+    if (requestId !== filtersRequestId) return
+    console.error('[Fetch Recruitment Filters Error]:', error)
+    filterOptions.value = {
+      department: [],
+      location: [],
+      experience: [],
+      salary: [],
+    }
+  }
+}
+
+const scheduleFetchJobs = (delay = 0) => {
+  if (searchTimer) clearTimeout(searchTimer)
+  searchTimer = setTimeout(() => {
+    void fetchJobs()
+  }, delay)
+}
+
+const clearFilters = () => {
+  searchTerm.value = ''
+  selectedDepartment.value = 'all'
+  selectedLocation.value = 'all'
+  selectedExperience.value = 'all'
+  activeFilter.value = null
+}
+
+const hasActiveFilters = computed(() => {
+  return (
+    Boolean(searchTerm.value.trim()) ||
+    selectedDepartment.value !== 'all' ||
+    selectedLocation.value !== 'all' ||
+    selectedExperience.value !== 'all'
+  )
+})
+
+const toggleFilterMenu = (key: FilterKey) => {
+  activeFilter.value = activeFilter.value === key ? null : key
+}
+
+const handleDocumentClick = (event: MouseEvent) => {
+  if (!searchPanelRef.value?.contains(event.target as Node)) {
+    activeFilter.value = null
   }
 }
 
 watch(locale, () => {
-  void fetchJobs()
+  clearFilters()
+  void fetchFilterOptions()
+  scheduleFetchJobs()
+})
+
+watch([selectedDepartment, selectedLocation, selectedExperience], () => {
+  scheduleFetchJobs()
+})
+
+watch(searchTerm, () => {
+  scheduleFetchJobs(300)
 })
 
 onMounted(() => {
   void fetchJobs()
+  void fetchFilterOptions()
+  document.addEventListener('click', handleDocumentClick)
 })
 
-const email = 'jackli@webx.vip'
+onBeforeUnmount(() => {
+  jobsRequestId++
+  filtersRequestId++
+  if (searchTimer) clearTimeout(searchTimer)
+  document.removeEventListener('click', handleDocumentClick)
+})
+
+const getMailHref = (job: NormalizedJob): string => {
+  if (!job.resumeEmail) return ''
+  const subject = t('join.mail_subject', { title: job.title })
+  return `mailto:${job.resumeEmail}?subject=${encodeURIComponent(subject)}`
+}
 
 // Expanded state management
 const toggleExpand = (id: number) => {
@@ -116,6 +327,124 @@ const afterLeave = (el: Element) => {
         <p class="join-subtitle">
           {{ t('join.subtitle') }}
         </p>
+
+        <div ref="searchPanelRef" class="search-panel" role="search" @click.stop>
+          <label class="search-box">
+            <svg
+              class="search-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input
+              v-model="searchTerm"
+              type="search"
+              :aria-label="t('join.search_placeholder')"
+              :placeholder="t('join.search_placeholder')"
+            />
+          </label>
+
+          <div class="filter-row">
+            <div
+              v-for="filter in filterConfigs"
+              :key="filter.key"
+              class="filter-select"
+              :class="{ open: activeFilter === filter.key, selected: filter.value !== 'all' }"
+            >
+              <button
+                class="filter-trigger"
+                type="button"
+                :aria-expanded="activeFilter === filter.key"
+                @click="toggleFilterMenu(filter.key)"
+                @keydown.esc="activeFilter = null"
+              >
+                <span class="filter-label">{{ filter.label }}</span>
+                <span class="filter-value">{{ getSelectedFilterLabel(filter) }}</span>
+                <svg
+                  class="filter-chevron"
+                  :class="{ open: activeFilter === filter.key }"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div v-if="activeFilter === filter.key" class="filter-menu">
+                <template v-if="filter.options.length">
+                  <button
+                    class="filter-option"
+                    :class="{ active: filter.value === 'all' }"
+                    type="button"
+                    @click="setSelectedFilterValue(filter.key, 'all')"
+                  >
+                    <span>{{ t('join.filters.all') }}</span>
+                    <svg
+                      v-if="filter.value === 'all'"
+                      class="filter-check"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </button>
+                  <button
+                    v-for="option in filter.options"
+                    :key="option.groupKey"
+                    class="filter-option"
+                    :class="{ active: filter.value === option.groupKey }"
+                    type="button"
+                    @click="setSelectedFilterValue(filter.key, option.groupKey)"
+                  >
+                    <span>{{ option.name }}</span>
+                    <svg
+                      v-if="filter.value === option.groupKey"
+                      class="filter-check"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </button>
+                </template>
+                <div v-else class="filter-empty">
+                  {{ t('join.filters.no_data') }}
+                </div>
+              </div>
+            </div>
+
+            <button
+              v-if="hasActiveFilters"
+              class="clear-filter-btn"
+              type="button"
+              @click="clearFilters"
+            >
+              {{ t('join.filters.clear') }}
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -155,16 +484,10 @@ const afterLeave = (el: Element) => {
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
             </svg>
           </div>
-          <h3>{{ locale === 'en' ? 'Failed to load jobs' : '获取岗位数据失败' }}</h3>
-          <p>
-            {{
-              locale === 'en'
-                ? 'Please check your connection and try again.'
-                : '请检查网络连接后重试。'
-            }}
-          </p>
+          <h3>{{ t('join.load_failed') }}</h3>
+          <p>{{ t('join.load_failed_desc') }}</p>
           <button class="btn btn-primary btn-purple" @click="fetchJobs">
-            {{ locale === 'en' ? 'Retry' : '重新加载' }}
+            {{ t('join.retry') }}
           </button>
         </div>
 
@@ -184,14 +507,8 @@ const afterLeave = (el: Element) => {
               ></path>
             </svg>
           </div>
-          <h3>{{ locale === 'en' ? 'No Positions Open' : '暂无热招岗位' }}</h3>
-          <p>
-            {{
-              locale === 'en'
-                ? 'Check back later or send us your open application resume.'
-                : '请稍后再试，或者直接将您的简历发送至我们的邮箱。'
-            }}
-          </p>
+          <h3>{{ t('join.empty_title') }}</h3>
+          <p>{{ t('join.empty_desc') }}</p>
         </div>
 
         <!-- Active Vacancy List -->
@@ -307,14 +624,11 @@ const afterLeave = (el: Element) => {
                 </div>
 
                 <!-- Apply Email Section -->
-                <div class="detail-section apply-email-section">
+                <div v-if="job.resumeEmail" class="detail-section apply-email-section">
                   <h4 class="detail-title">{{ t('join.apply_method') }}</h4>
                   <div class="apply-email-box">
                     <span class="apply-label">{{ t('join.email_label') }}</span>
-                    <a
-                      :href="`mailto:${email}?subject=${encodeURIComponent((locale === 'en' ? 'Apply for ' : '应聘-') + job.title)}`"
-                      class="mail-link-badge"
-                    >
+                    <a :href="getMailHref(job)" class="mail-link-badge">
                       <svg
                         width="14"
                         height="14"
@@ -331,7 +645,7 @@ const afterLeave = (el: Element) => {
                         ></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                       </svg>
-                      {{ email }}
+                      {{ job.resumeEmail }}
                     </a>
                   </div>
                 </div>
@@ -364,11 +678,6 @@ const afterLeave = (el: Element) => {
             </div>
           </article>
         </div>
-
-        <p class="jobs-foot">
-          {{ t('join.email_label') }}
-          <a :href="`mailto:${email}?subject=应聘BINGO相关岗位`" class="mail-link">{{ email }}</a>
-        </p>
       </div>
     </section>
   </main>
@@ -386,9 +695,15 @@ const afterLeave = (el: Element) => {
   position: relative;
   padding: 96px 0 64px;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 20;
   background:
     radial-gradient(circle at 50% 30%, rgba(79, 70, 229, 0.18) 0%, transparent 60%), transparent;
+}
+
+.join-hero .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-bg-text {
@@ -432,8 +747,240 @@ const afterLeave = (el: Element) => {
   margin: 0 auto;
 }
 
+.search-panel {
+  width: min(860px, calc(100vw - 40px));
+  margin: 44px auto 0;
+  position: relative;
+  z-index: 100;
+}
+
+.search-box {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 28px;
+  background: rgba(26, 27, 71, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 18px 50px rgba(0, 3, 20, 0.24);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.search-icon {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  color: var(--accent-cyan);
+}
+
+.search-box input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.search-box input::placeholder {
+  color: rgba(184, 212, 255, 0.46);
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+  position: relative;
+  z-index: 110;
+}
+
+.filter-select {
+  min-width: 190px;
+  position: relative;
+  display: inline-flex;
+  z-index: 120;
+}
+
+.filter-select.open {
+  z-index: 140;
+}
+
+.filter-trigger {
+  width: 100%;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 16px 0 18px;
+  background: rgba(26, 27, 71, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  color: rgba(184, 212, 255, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  font: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-trigger:hover,
+.filter-select.open .filter-trigger {
+  border-color: rgba(0, 240, 255, 0.45);
+  background: rgba(26, 27, 71, 0.78);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 20px rgba(0, 55, 253, 0.18);
+}
+
+.filter-select.selected .filter-trigger {
+  border-color: rgba(0, 240, 255, 0.32);
+}
+
+.filter-label {
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(184, 212, 255, 0.82);
+  white-space: nowrap;
+}
+
+.filter-value {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-chevron {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  color: rgba(184, 212, 255, 0.95);
+  transition: transform 0.2s ease;
+}
+
+.filter-chevron.open {
+  transform: rotate(180deg);
+  color: var(--accent-cyan);
+}
+
+.filter-menu {
+  position: absolute;
+  z-index: 150;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(290px, 86vw);
+  max-height: 270px;
+  padding: 8px;
+  overflow-y: auto;
+  background: rgba(14, 20, 54, 0.98);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  border-radius: 8px;
+  box-shadow:
+    0 18px 44px rgba(0, 3, 20, 0.55),
+    0 0 28px rgba(0, 55, 253, 0.2);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.filter-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-menu::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.42);
+  border-radius: 999px;
+}
+
+.filter-option {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filter-option span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-option:hover {
+  background: rgba(0, 240, 255, 0.1);
+  color: #ffffff;
+}
+
+.filter-option.active {
+  background: rgba(0, 55, 253, 0.52);
+  color: #ffffff;
+  box-shadow: inset 3px 0 0 var(--accent-cyan);
+}
+
+.filter-check {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  color: var(--accent-cyan);
+}
+
+.filter-empty {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.clear-filter-btn {
+  height: 52px;
+  padding: 0 18px;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 8px;
+  background: rgba(0, 240, 255, 0.06);
+  color: var(--accent-cyan);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-filter-btn:hover {
+  border-color: rgba(0, 240, 255, 0.7);
+  background: rgba(0, 240, 255, 0.14);
+}
+
 /* Job list */
 .jobs-section {
+  position: relative;
+  z-index: 1;
   padding-top: 40px;
 }
 
@@ -800,6 +1347,37 @@ const afterLeave = (el: Element) => {
     font-size: 5rem;
   }
 
+  .search-panel {
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  .search-box {
+    height: 64px;
+    padding: 0 20px;
+  }
+
+  .filter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .filter-select,
+  .clear-filter-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .filter-menu {
+    width: 100%;
+    max-height: 220px;
+  }
+
+  .clear-filter-btn {
+    grid-column: 1 / -1;
+  }
+
   .job-card {
     padding: 24px;
   }
@@ -812,6 +1390,14 @@ const afterLeave = (el: Element) => {
 
   .join-title {
     font-size: 1.75rem;
+  }
+
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .clear-filter-btn {
+    grid-column: auto;
   }
 
   .job-head {

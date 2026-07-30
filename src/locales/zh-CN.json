@@ -228,6 +228,21 @@
     "responsibilities": "岗位职责",
     "requirements": "岗位要求",
     "apply_method": "申请方式",
+    "search_placeholder": "搜索职位、关键词...",
+    "load_failed": "获取岗位数据失败",
+    "load_failed_desc": "请检查网络连接后重试。",
+    "retry": "重新加载",
+    "empty_title": "暂无热招岗位",
+    "empty_desc": "当前筛选条件下暂无岗位，请调整条件后再试。",
+    "mail_subject": "应聘 - {title}",
+    "filters": {
+      "department": "部门",
+      "location": "地点",
+      "experience": "经验",
+      "all": "全部",
+      "no_data": "暂无数据",
+      "clear": "清除筛选"
+    },
     "jobs": {
       "pm": {
         "title": "游戏产品经理",
@@ -504,6 +519,10 @@
     "subtitle": "获取 Bingo文娱平台的最新官方公告、公司动态与产品迭代资讯。",
     "badge": "Inquiry",
     "empty": "暂无资讯记录",
+    "loading": "加载中...",
+    "load_failed": "文章加载失败，请重试",
+    "author_company": "BINGO 官方新闻中心",
+    "author_operations": "BINGO 运营团队",
     "tabs": {
       "all": "全部",
       "company": "公司动态",

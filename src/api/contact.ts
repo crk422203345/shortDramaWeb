@@ -15,7 +15,7 @@ interface ContactSubmitResponse {
 }
 
 const contactService = axios.create({
-  baseURL: __API_BASE_URL__,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 10000,
 })
 
@@ -32,7 +32,7 @@ export const contactApi = {
     const response = await contactService.post<ContactSubmitResponse>(CONTACT_SUBMIT_PATH, formData)
     const result = response.data
 
-    if (result?.code && result.code !== 200) {
+    if (typeof result?.code === 'number' && result.code !== 0 && result.code !== 200) {
       throw new Error(result.message || '提交失败')
     }
 

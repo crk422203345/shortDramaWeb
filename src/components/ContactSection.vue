@@ -10,20 +10,8 @@ const company = ref('')
 const email = ref('')
 const description = ref('')
 
-const contactMethod = ref<'email' | 'phone'>('email')
-
-const setContactMethod = (method: 'email' | 'phone') => {
-  contactMethod.value = method
-  email.value = ''
-}
-
 const isValidEmail = (val: string) => {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)
-}
-
-const isValidPhone = (val: string) => {
-  const cleanVal = val.replace(/[^\d+]/g, '')
-  return /^\+?\d{6,14}$/.test(cleanVal)
 }
 
 const isSubmitted = ref(false)
@@ -50,7 +38,6 @@ const submitContact = async () => {
     company.value = ''
     email.value = ''
     description.value = ''
-    contactMethod.value = 'email'
   } catch (error) {
     console.error('[Contact Submit Error]:', error)
     alert(error instanceof Error ? error.message : t('contact.failed'))
@@ -66,17 +53,9 @@ const submitForm = () => {
     return
   }
 
-  const contactVal = email.value.trim()
-  if (contactMethod.value === 'email') {
-    if (!isValidEmail(contactVal)) {
-      alert(t('contact.invalid_email'))
-      return
-    }
-  } else {
-    if (!isValidPhone(contactVal)) {
-      alert(t('contact.invalid_phone'))
-      return
-    }
+  if (!isValidEmail(email.value.trim())) {
+    alert(t('contact.invalid_email'))
+    return
   }
 
   if (submitTimer) {
@@ -165,42 +144,18 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <!-- Row 2: Email or Phone (Switchable) -->
+            <!-- Row 2: Email -->
             <div class="form-row">
               <div class="form-group">
-                <div class="contact-label-row">
-                  <label for="contact-value">
-                    {{ contactMethod === 'email' ? t('contact.email') : t('contact.phone') }}
-                    <span class="required">{{ t('contact.required') }}</span>
-                  </label>
-                  <div class="contact-toggle-group">
-                    <button
-                      type="button"
-                      class="toggle-btn"
-                      :class="{ active: contactMethod === 'email' }"
-                      @click="setContactMethod('email')"
-                    >
-                      {{ t('contact.method_email') }}
-                    </button>
-                    <button
-                      type="button"
-                      class="toggle-btn"
-                      :class="{ active: contactMethod === 'phone' }"
-                      @click="setContactMethod('phone')"
-                    >
-                      {{ t('contact.method_phone') }}
-                    </button>
-                  </div>
-                </div>
+                <label for="contact-value">
+                  {{ t('contact.email') }}
+                  <span class="required">{{ t('contact.required') }}</span>
+                </label>
                 <input
-                  :type="contactMethod === 'email' ? 'email' : 'text'"
+                  type="email"
                   id="contact-value"
                   v-model="email"
-                  :placeholder="
-                    contactMethod === 'email'
-                      ? t('contact.email_placeholder')
-                      : t('contact.phone_placeholder')
-                  "
+                  :placeholder="t('contact.email_placeholder')"
                   maxlength="200"
                   required
                 />

@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { consultationApi, type ArticleCategory, type ArticleItem } from '@/api/consultation'
+import { sanitizeArticleHtml, toSafeExternalUrl } from '@/utils/content'
 
 const route = useRoute()
 const { t, locale } = useI18n()
 
 const loading = ref(false)
 const article = ref<ArticleItem | null>(null)
+let latestRequestId = 0
 
 // Retrieve and validate ID
 const articleId = computed(() => {
@@ -20,43 +22,53 @@ const articleId = computed(() => {
 // Fetch article details from API
 const getArticleData = async () => {
   if (!articleId.value) return
+  const requestId = ++latestRequestId
   loading.value = true
+  article.value = null
   try {
     const res = await consultationApi.getArticleDetail({ id: articleId.value })
+    if (requestId !== latestRequestId) return
     article.value = res
   } catch (error) {
+    if (requestId !== latestRequestId) return
     console.error('Failed to fetch article details:', error)
   } finally {
-    loading.value = false
+    if (requestId === latestRequestId) {
+      loading.value = false
+    }
   }
 }
 
-onMounted(() => {
-  getArticleData()
+watch(
+  articleId,
+  () => {
+    void getArticleData()
+  },
+  {
+    immediate: true,
+  },
+)
+
+onBeforeUnmount(() => {
+  latestRequestId++
 })
 
 const category = computed<ArticleCategory>(() => article.value?.category || 'company')
 const date = computed(() => article.value?.publishDate || '')
 const author = computed(() => {
   if (article.value?.author) return article.value.author
-  const isZh = locale.value.startsWith('zh')
   if (category.value === 'company') {
-    if (isZh) return 'BINGO 官方新聞中心'
-    if (locale.value === 'ms') return 'Pusat Berita Rasmi BINGO'
-    return 'BINGO Official News Center'
-  } else {
-    if (isZh) return 'BINGO 運營團隊'
-    if (locale.value === 'ms') return 'Pasukan Operasi BINGO'
-    return 'BINGO Operations Team'
+    return t('inquiry.author_company')
   }
-})
-
-const hasSourceUrl = computed(() => {
-  return !!article.value?.sourceUrl
+  return t('inquiry.author_operations')
 })
 
 const sourceUrl = computed(() => {
-  return article.value?.sourceUrl || ''
+  return toSafeExternalUrl(article.value?.sourceUrl || article.value?.source_url)
+})
+
+const detailLinkUrl = computed(() => {
+  return toSafeExternalUrl(article.value?.detailLinkUrl || article.value?.detail_link_url)
 })
 
 const sourceDomain = computed(() => {
@@ -64,10 +76,12 @@ const sourceDomain = computed(() => {
   try {
     const url = new URL(sourceUrl.value)
     return url.hostname
-  } catch (e) {
-    return 'news.bingo-entertainment.com'
+  } catch {
+    return ''
   }
 })
+
+const sanitizedContent = computed(() => sanitizeArticleHtml(article.value?.content))
 
 // Helper for category label
 const getCategoryLabel = (cat: ArticleCategory) => {
@@ -81,8 +95,17 @@ const getCategoryLabel = (cat: ArticleCategory) => {
       <!-- 1. Back Navigation Button -->
       <div class="navigation-row">
         <RouterLink :to="{ name: 'inquiry' }" class="back-btn btn btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round" class="back-icon">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="back-icon"
+          >
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           {{ t('inquiry.back_btn') }}
@@ -105,15 +128,23 @@ const getCategoryLabel = (cat: ArticleCategory) => {
             <span class="meta-item date">
               {{ date }}
             </span>
-            <template v-if="article.detailLinkUrl || article.detail_link_url">
+            <template v-if="detailLinkUrl">
               <span class="meta-divider">/</span>
               <span class="meta-item detail-link-item">
                 <span class="link-label">{{ t('inquiry.detail_link') }}:</span>
-                <a :href="article.detailLinkUrl || article.detail_link_url" target="_blank" rel="noopener noreferrer"
-                  class="link-url">
-                  {{ article.detailLinkUrl || article.detail_link_url }}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="external-icon">
+                <a :href="detailLinkUrl" target="_blank" rel="noopener noreferrer" class="link-url">
+                  {{ detailLinkUrl }}
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="external-icon"
+                  >
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
                     <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -121,14 +152,23 @@ const getCategoryLabel = (cat: ArticleCategory) => {
                 </a>
               </span>
             </template>
-            <template v-if="hasSourceUrl">
+            <template v-if="sourceUrl">
               <span class="meta-divider">/</span>
               <span class="meta-item source">
                 {{ t('inquiry.source') }}:
                 <a :href="sourceUrl" target="_blank" rel="noopener noreferrer" class="source-link">
                   {{ sourceDomain }}
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="external-icon">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="external-icon"
+                  >
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
                     <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -142,13 +182,22 @@ const getCategoryLabel = (cat: ArticleCategory) => {
         <div class="gradient-line"></div>
 
         <!-- 5. Main Body Text ("正文") -->
-        <section class="detail-content" v-html="article.content"></section>
+        <section class="detail-content" v-html="sanitizedContent"></section>
 
         <!-- 6. Disclaimer Banner -->
         <footer class="disclaimer-banner">
           <div class="warning-icon-wrapper">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round" class="warning-svg">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="warning-svg"
+            >
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="8" x2="12" y2="12"></line>
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -162,12 +211,12 @@ const getCategoryLabel = (cat: ArticleCategory) => {
 
       <!-- Loading State -->
       <div v-else-if="loading" class="loading-state glass-card">
-        <p>加载中...</p>
+        <p>{{ t('inquiry.loading') }}</p>
       </div>
 
       <!-- Error / Fallback State -->
       <div v-else class="empty-state glass-card">
-        <p>文章加载失败，请重试</p>
+        <p>{{ t('inquiry.load_failed') }}</p>
       </div>
     </div>
   </main>
@@ -406,7 +455,7 @@ const getCategoryLabel = (cat: ArticleCategory) => {
     display: none;
   }
 
-  .meta-items>* {
+  .meta-items > * {
     width: 100%;
     margin-bottom: 6px;
   }

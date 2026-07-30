@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { syncHtmlLang } from '@/i18n'
+import { syncHtmlLang, type LocaleType } from '@/i18n'
 
 const { t, locale } = useI18n()
 
@@ -112,12 +112,7 @@ const langMap: Record<string, string> = {
 const selectedLanguage = computed(() => {
   return langMap[locale.value] || '繁體中文'
 })
-const languages = [
-  // '简体中文',
-  '繁體中文',
-  'English',
-  'Bahasa Melayu',
-]
+const languages = ['简体中文', '繁體中文', 'English', 'Bahasa Melayu']
 let langTimer: any = null
 
 const selectLanguage = (lang: string) => {
@@ -131,7 +126,7 @@ const selectLanguage = (lang: string) => {
   if (targetLocale) {
     locale.value = targetLocale
     localStorage.setItem('user-language', targetLocale)
-    syncHtmlLang(targetLocale as any)
+    syncHtmlLang(targetLocale as LocaleType)
 
     // Redirect to prefixed URL
     const cleanPath = route.fullPath.replace(/^\/(zh-CN|zh-TW|en|ms)/, '')
@@ -277,7 +272,6 @@ onUnmounted(() => {
                       @click="showEcoDropdown = false"
                       >{{ t('nav.eco_webx') }}</a
                     >
-
                   </div>
                 </div>
               </transition>
@@ -423,7 +417,6 @@ onUnmounted(() => {
                   @click="closeMobileMenu"
                   >{{ t('nav.eco_webx') }}</a
                 >
-
               </div>
             </li>
 

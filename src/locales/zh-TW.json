@@ -228,6 +228,21 @@
     "responsibilities": "崗位職責",
     "requirements": "崗位要求",
     "apply_method": "申請方式",
+    "search_placeholder": "搜尋職位、關鍵字...",
+    "load_failed": "獲取職位資料失敗",
+    "load_failed_desc": "請檢查網路連線後重試。",
+    "retry": "重新載入",
+    "empty_title": "暫無招聘職位",
+    "empty_desc": "目前篩選條件下暫無職位，請調整條件後再試。",
+    "mail_subject": "應聘 - {title}",
+    "filters": {
+      "department": "部門",
+      "location": "地點",
+      "experience": "經驗",
+      "all": "全部",
+      "no_data": "暫無資料",
+      "clear": "清除篩選"
+    },
     "jobs": {
       "pm": {
         "title": "遊戲產品經理",
@@ -504,6 +519,10 @@
     "subtitle": "獲取 Bingo文娛平台的最新官方公告、公司動態與產品迭代資訊。",
     "badge": "Inquiry",
     "empty": "暫無資訊記錄",
+    "loading": "載入中...",
+    "load_failed": "文章載入失敗，請重試",
+    "author_company": "BINGO 官方新聞中心",
+    "author_operations": "BINGO 營運團隊",
     "tabs": {
       "all": "全部",
       "company": "公司動態",

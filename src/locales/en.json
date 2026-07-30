@@ -228,6 +228,21 @@
     "responsibilities": "Key Responsibilities",
     "requirements": "Requirements",
     "apply_method": "How to Apply",
+    "search_placeholder": "Search job titles and keywords...",
+    "load_failed": "Failed to load positions",
+    "load_failed_desc": "Please check your connection and try again.",
+    "retry": "Reload",
+    "empty_title": "No Open Positions",
+    "empty_desc": "No positions match the current filters. Try adjusting your selection.",
+    "mail_subject": "Application - {title}",
+    "filters": {
+      "department": "Department",
+      "location": "Location",
+      "experience": "Experience",
+      "all": "All",
+      "no_data": "No data",
+      "clear": "Clear filters"
+    },
     "jobs": {
       "pm": {
         "title": "Game Product Manager",
@@ -504,6 +519,10 @@
     "subtitle": "Get the latest official announcements, company news, and product iteration updates from BINGO Entertainment platform.",
     "badge": "Inquiry",
     "empty": "No updates available",
+    "loading": "Loading...",
+    "load_failed": "Failed to load the article. Please try again.",
+    "author_company": "BINGO Official News Center",
+    "author_operations": "BINGO Operations Team",
     "tabs": {
       "all": "All",
       "company": "Company News",

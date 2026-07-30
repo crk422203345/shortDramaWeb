@@ -12,10 +12,6 @@ const SUPPORTED_LOCALES: LocaleType[] = ['zh-CN', 'zh-TW', 'en', 'ms']
 // Read persisted language choice, fall back to browser detection, then 'zh-TW'
 const getInitialLocale = (): LocaleType => {
   const saved = localStorage.getItem('user-language') as LocaleType | null
-  if (saved === 'zh-CN') {
-    localStorage.setItem('user-language', 'zh-TW')
-    return 'zh-TW'
-  }
   if (saved && SUPPORTED_LOCALES.includes(saved)) {
     return saved
   }
@@ -29,7 +25,7 @@ const getInitialLocale = (): LocaleType => {
     return 'zh-TW'
   }
   if (browserLang.startsWith('zh')) {
-    return 'zh-TW'
+    return 'zh-CN'
   }
   if (browserLang.startsWith('en')) {
     return 'en'
@@ -38,9 +34,11 @@ const getInitialLocale = (): LocaleType => {
   return 'zh-TW'
 }
 
+const initialLocale = getInitialLocale()
+
 const i18n = createI18n({
   legacy: false, // Use Vue 3 Composition API style
-  locale: getInitialLocale(),
+  locale: initialLocale,
   fallbackLocale: 'en', // Automatically fallback to English if key is missing
   messages: {
     'zh-CN': zhCN,
@@ -56,6 +54,6 @@ export const syncHtmlLang = (locale: LocaleType) => {
 }
 
 // Initial sync
-syncHtmlLang(getInitialLocale())
+syncHtmlLang(initialLocale)
 
 export default i18n

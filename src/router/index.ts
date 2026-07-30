@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import i18n from '@/i18n'
+import i18n, { type LocaleType } from '@/i18n'
 
-const SUPPORTED_LOCALES = ['zh-CN', 'zh-TW', 'en', 'ms']
+const SUPPORTED_LOCALES: LocaleType[] = ['zh-CN', 'zh-TW', 'en', 'ms']
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -86,32 +86,23 @@ const router = createRouter({
 router.beforeEach((to, _from, next) => {
   const lang = to.params.lang as string | undefined
 
-  if (lang && SUPPORTED_LOCALES.includes(lang)) {
+  if (lang && SUPPORTED_LOCALES.includes(lang as LocaleType)) {
     // Sync active locale to i18n
-    const i18nLocale = i18n.global.locale
-    if (typeof i18nLocale === 'object' && 'value' in i18nLocale) {
-      ;(i18nLocale as any).value = lang
-    } else {
-      ;(i18n.global as any).locale = lang
-    }
+    i18n.global.locale.value = lang as LocaleType
     localStorage.setItem('user-language', lang)
     document.documentElement.setAttribute('lang', lang)
     next()
   } else {
     // Auto-detect language
     let targetLang = localStorage.getItem('user-language')
-    if (targetLang === 'zh-CN') {
-      targetLang = 'zh-TW'
-      localStorage.setItem('user-language', targetLang)
-    }
-    if (!targetLang || !SUPPORTED_LOCALES.includes(targetLang)) {
+    if (!targetLang || !SUPPORTED_LOCALES.includes(targetLang as LocaleType)) {
       const browserLang = navigator.language.toLowerCase()
       if (browserLang.startsWith('ms')) {
         targetLang = 'ms'
       } else if (browserLang.startsWith('zh-tw') || browserLang.startsWith('zh-hk')) {
         targetLang = 'zh-TW'
       } else if (browserLang.startsWith('zh')) {
-        targetLang = 'zh-TW'
+        targetLang = 'zh-CN'
       } else if (browserLang.startsWith('en')) {
         targetLang = 'en'
       } else {

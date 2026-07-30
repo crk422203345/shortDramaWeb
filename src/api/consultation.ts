@@ -1,31 +1,37 @@
 import http from '@/utils/request'
 
 export type ArticleCategory = 'company' | 'product' | 'industry'
+export type ArticleLanguageType = 'zh' | 'cht' | 'en' | 'ms'
 
 export interface ArticleItem {
-  id: string
+  id: number | string
   title: string
-  desc: string
-  content?: string
   category: ArticleCategory
-  image: string
-  date: string
-  author?: string
-  source?: string
-  [key: string]: any
+  author: string | null
+  publishDate: string
+  coverImage: string | null
+  content: string | null
+  languageType: ArticleLanguageType
+  sourceUrl: string | null
+  detailLinkUrl: string | null
+  source_url?: string | null
+  detail_link_url?: string | null
 }
 
 export interface ArticleListParams {
   page: string
   limit: string
   keyword: string
+  languageType: ArticleLanguageType
   category?: ArticleCategory
 }
 
 export interface ArticleListResponse {
   list: ArticleItem[]
-  total: number
-  [key: string]: any
+  totalCount: number
+  pageSize: number
+  totalPage: number
+  currPage: number
 }
 
 export interface ArticleDetailParams {

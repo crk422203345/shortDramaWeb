@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { consultationApi, type ArticleCategory, type ArticleItem } from '@/api/consultation'
+import {
+  consultationApi,
+  type ArticleCategory,
+  type ArticleItem,
+  type ArticleLanguageType,
+} from '@/api/consultation'
+import { toSafeExternalUrl } from '@/utils/content'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // Active tab and current page state
 type TabKey = 'all' | ArticleCategory
@@ -13,6 +19,14 @@ const itemsPerPage = 5
 const loading = ref(false)
 const allInquiries = ref<ArticleItem[]>([])
 const totalItems = ref(0)
+let latestRequestId = 0
+
+const getLanguageType = (localeValue: string): ArticleLanguageType => {
+  if (localeValue === 'zh-CN') return 'zh'
+  if (localeValue === 'zh-TW') return 'cht'
+  if (localeValue === 'ms') return 'ms'
+  return 'en'
+}
 
 // Tabs definition
 const tabs = computed(() => [
@@ -24,74 +38,54 @@ const tabs = computed(() => [
 
 // Fetch list data from API
 const fetchData = async () => {
+  const requestId = ++latestRequestId
   loading.value = true
   try {
     const params = {
       page: String(currentPage.value),
       limit: String(itemsPerPage),
       keyword: '',
+      languageType: getLanguageType(locale.value),
       category: currentTab.value === 'all' ? undefined : currentTab.value,
     }
     const res = await consultationApi.getArticleList(params)
-    if (res) {
-      const parseTotal = (val: any) => {
-        if (typeof val === 'number') return val
-        if (typeof val === 'string') {
-          const parsed = parseInt(val, 10)
-          return isNaN(parsed) ? undefined : parsed
-        }
-        return undefined
-      }
+    if (requestId !== latestRequestId) return
 
-      const rawTotal =
-        res.total !== undefined
-          ? res.total
-          : res.totalCount !== undefined
-            ? res.totalCount
-            : res.total_count !== undefined
-              ? res.total_count
-              : undefined
-
-      const resolvedTotal = parseTotal(rawTotal)
-
-      if (Array.isArray(res)) {
-        allInquiries.value = res
-        totalItems.value = res.length
-      } else if (res.list && Array.isArray(res.list)) {
-        allInquiries.value = res.list
-        totalItems.value = resolvedTotal !== undefined ? resolvedTotal : res.list.length
-      } else if (res.data && Array.isArray(res.data)) {
-        allInquiries.value = res.data
-        totalItems.value = resolvedTotal !== undefined ? resolvedTotal : res.data.length
-      } else {
-        allInquiries.value = []
-        totalItems.value = 0
-      }
-    } else {
-      allInquiries.value = []
-      totalItems.value = 0
-    }
+    allInquiries.value = Array.isArray(res.list) ? res.list : []
+    totalItems.value = Number.isFinite(Number(res.totalCount))
+      ? Number(res.totalCount)
+      : allInquiries.value.length
   } catch (error) {
+    if (requestId !== latestRequestId) return
     console.error('Failed to fetch articles:', error)
     allInquiries.value = []
     totalItems.value = 0
   } finally {
-    loading.value = false
+    if (requestId === latestRequestId) {
+      loading.value = false
+    }
   }
 }
 
 // Watchers to trigger refetch when tab or page shifts
-watch(currentTab, () => {
-  currentPage.value = 1
-  fetchData()
+watch([currentTab, locale], () => {
+  if (currentPage.value !== 1) {
+    currentPage.value = 1
+  } else {
+    void fetchData()
+  }
 })
 
 watch(currentPage, () => {
-  fetchData()
+  void fetchData()
 })
 
 onMounted(() => {
-  fetchData()
+  void fetchData()
+})
+
+onBeforeUnmount(() => {
+  latestRequestId++
 })
 
 // Pagination logic
@@ -152,11 +146,14 @@ const visiblePages = computed(() => {
 
 const selectTab = (tabVal: TabKey) => {
   currentTab.value = tabVal
-  currentPage.value = 1
 }
 
 const getCategoryLabel = (category: ArticleCategory) => {
   return t(`inquiry.tabs.${category}`)
+}
+
+const getItemExternalUrl = (item: ArticleItem) => {
+  return toSafeExternalUrl(item.sourceUrl || item.source_url)
 }
 </script>
 
@@ -203,13 +200,17 @@ const getCategoryLabel = (category: ArticleCategory) => {
         <div class="inquiry-list">
           <!-- Loading State -->
           <div v-if="loading" class="loading-state glass-card">
-            <p>加载中...</p>
+            <p>{{ t('inquiry.loading') }}</p>
           </div>
 
           <transition-group name="list" tag="div" v-else>
             <component
-              :is="item.sourceUrl || item.source_url ? 'a' : 'RouterLink'"
-              v-bind="item.sourceUrl || item.source_url ? { href: item.sourceUrl || item.source_url, target: '_blank', rel: 'noopener noreferrer' } : { to: { name: 'inquiry-detail', params: { id: item.id } } }"
+              :is="getItemExternalUrl(item) ? 'a' : 'RouterLink'"
+              v-bind="
+                getItemExternalUrl(item)
+                  ? { href: getItemExternalUrl(item), target: '_blank', rel: 'noopener noreferrer' }
+                  : { to: { name: 'inquiry-detail', params: { id: item.id } } }
+              "
               v-for="item in allInquiries"
               :key="item.id"
               class="inquiry-card glass-card"
@@ -226,8 +227,8 @@ const getCategoryLabel = (category: ArticleCategory) => {
               </div>
 
               <!-- Card Image on Right -->
-              <div class="card-img-wrapper" v-if="item.coverImage || item.image">
-                <img :src="item.coverImage || item.image" :alt="item.title" class="card-img" />
+              <div class="card-img-wrapper" v-if="item.coverImage">
+                <img :src="item.coverImage" :alt="item.title" class="card-img" />
               </div>
             </component>
           </transition-group>
