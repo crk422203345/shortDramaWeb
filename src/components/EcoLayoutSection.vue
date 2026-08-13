@@ -1,9 +1,13 @@
 <script setup lang="ts">
+/**
+ * 首页「生态布局」区块：通过六个轨道节点展示不同商业模式，并同步高亮连线与详情。
+ */
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
+// 业务文案依赖 i18n，因此使用计算属性保证切换语言后内容立即更新。
 const tabs = computed(() => ({
   pos: {
     id: 'pos',
@@ -63,6 +67,7 @@ const tabs = computed(() => ({
 
 type TabKey = 'pos' | 'iaa_iap' | 'three_engines' | 'eco_loop' | 'wave_plan' | 'beach_plan'
 
+// 当前选中的生态节点及轨道连线的默认强调色。
 const activeTab = ref<TabKey>('pos')
 const orbitActiveColor = '#07A8FF'
 
@@ -75,6 +80,7 @@ const tabLayout = [
   ['eco_loop', 'wave_plan', 'beach_plan'],
 ] as const
 
+// 六个外环节点的绝对位置与连线角度；角度遵循浏览器坐标系。
 // Node positions and connector angles for the 6 nodes on the outer orbit ring.
 // The connector is a horizontal line that starts at center and rotates toward
 // the selected node, matching the browser coordinate system.
@@ -136,6 +142,8 @@ const nodePositions = [
                   src="/img/地球,地理,全球 (3).png"
                   :alt="t('eco.center_title')"
                   class="globe-icon"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span class="base-title">{{ t('eco.center_title') }}</span>
                 <span class="base-desc" v-html="t('eco.center_desc')"></span>
@@ -152,7 +160,13 @@ const nodePositions = [
                 left: nodePositions[0].left,
                 transform: nodePositions[0].transform,
               }"
+              role="button"
+              tabindex="0"
+              :aria-label="tabs.pos.tabLabel"
+              :aria-pressed="activeTab === 'pos'"
               @click="activeTab = 'pos'"
+              @keydown.enter.prevent="activeTab = 'pos'"
+              @keydown.space.prevent="activeTab = 'pos'"
             >
               <div class="node-circle">
                 <svg
@@ -180,7 +194,13 @@ const nodePositions = [
                 left: nodePositions[1].left,
                 transform: nodePositions[1].transform,
               }"
+              role="button"
+              tabindex="0"
+              :aria-label="tabs.iaa_iap.tabLabel"
+              :aria-pressed="activeTab === 'iaa_iap'"
               @click="activeTab = 'iaa_iap'"
+              @keydown.enter.prevent="activeTab = 'iaa_iap'"
+              @keydown.space.prevent="activeTab = 'iaa_iap'"
             >
               <div class="node-circle">
                 <svg
@@ -207,7 +227,13 @@ const nodePositions = [
                 left: nodePositions[2].left,
                 transform: nodePositions[2].transform,
               }"
+              role="button"
+              tabindex="0"
+              :aria-label="tabs.three_engines.tabLabel"
+              :aria-pressed="activeTab === 'three_engines'"
               @click="activeTab = 'three_engines'"
+              @keydown.enter.prevent="activeTab = 'three_engines'"
+              @keydown.space.prevent="activeTab = 'three_engines'"
             >
               <div class="node-circle">
                 <img
@@ -227,7 +253,13 @@ const nodePositions = [
                 left: nodePositions[3].left,
                 transform: nodePositions[3].transform,
               }"
+              role="button"
+              tabindex="0"
+              :aria-label="tabs.eco_loop.tabLabel"
+              :aria-pressed="activeTab === 'eco_loop'"
               @click="activeTab = 'eco_loop'"
+              @keydown.enter.prevent="activeTab = 'eco_loop'"
+              @keydown.space.prevent="activeTab = 'eco_loop'"
             >
               <div class="node-circle">
                 <img
@@ -247,7 +279,13 @@ const nodePositions = [
                 left: nodePositions[4].left,
                 transform: nodePositions[4].transform,
               }"
+              role="button"
+              tabindex="0"
+              :aria-label="tabs.wave_plan.tabLabel"
+              :aria-pressed="activeTab === 'wave_plan'"
               @click="activeTab = 'wave_plan'"
+              @keydown.enter.prevent="activeTab = 'wave_plan'"
+              @keydown.space.prevent="activeTab = 'wave_plan'"
             >
               <div class="node-circle">
                 <img
@@ -267,7 +305,13 @@ const nodePositions = [
                 left: nodePositions[5].left,
                 transform: nodePositions[5].transform,
               }"
+              role="button"
+              tabindex="0"
+              :aria-label="tabs.beach_plan.tabLabel"
+              :aria-pressed="activeTab === 'beach_plan'"
               @click="activeTab = 'beach_plan'"
+              @keydown.enter.prevent="activeTab = 'beach_plan'"
+              @keydown.space.prevent="activeTab = 'beach_plan'"
             >
               <div class="node-circle">
                 <img

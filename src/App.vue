@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 根组件：固定承载页头、路由页面与页脚，并在语言切换时同步页面语言和 SEO 元信息。
+ */
 import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Header from './components/Header.vue'
@@ -13,6 +16,7 @@ const { locale, t } = useI18n()
 watch(
   locale,
   (newLang) => {
+    // 将运行时语言状态同步到 HTML 属性及搜索引擎可读取的页面元数据。
     syncHtmlLang(newLang as LocaleType)
     // Update Title
     document.title = t('seo.title')

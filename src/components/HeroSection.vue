@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 首页首屏：以循环视频作为背景，并针对较长的英文、马来文标题使用紧凑排版。
+ */
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 

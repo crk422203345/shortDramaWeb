@@ -1,8 +1,12 @@
 <script setup lang="ts">
+/**
+ * 全站固定页头：维护路由高亮、桌面端下拉菜单、移动端抽屉与语言切换。
+ * 法律页面使用精简页头，其余页面共享同一套导航状态。
+ */
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { syncHtmlLang, type LocaleType } from '@/i18n'
+import { type LocaleType } from '@/i18n'
 
 const { t, locale } = useI18n()
 
@@ -28,9 +32,10 @@ watch(isMobileMenuOpen, (isOpen) => {
   }
 })
 
+// 依据当前路由及首页锚点同步导航高亮状态。
 watch(
-  () => route.name,
-  (name) => {
+  () => [route.name, route.hash] as const,
+  ([name]) => {
     if (name === 'contact') {
       activeItem.value = 'contact'
     } else if (name === 'home') {
@@ -49,6 +54,7 @@ watch(
   { immediate: true },
 )
 
+// 统一处理页面路由跳转和首页锚点平滑滚动，并在跳转前收起移动端菜单。
 const navigateTo = (item: { key: string; href: string; isRoute?: boolean; isStatic?: boolean }) => {
   if (item.isStatic) {
     return
@@ -72,7 +78,7 @@ const navigateTo = (item: { key: string; href: string; isRoute?: boolean; isStat
 
 /* Eco dropdown */
 const showEcoDropdown = ref(false)
-let ecoTimer: any = null
+let ecoTimer: ReturnType<typeof setTimeout> | null = null
 
 const openEcoDropdown = () => {
   if (ecoTimer) clearTimeout(ecoTimer)
@@ -103,20 +109,21 @@ const clickEcoSub = (type: string) => {
 
 /* Language dropdown */
 const showLanguageDropdown = ref(false)
-const langMap: Record<string, string> = {
+const langMap: Record<LocaleType, string> = {
   'zh-CN': '简体中文',
   'zh-TW': '繁體中文',
   en: 'English',
   ms: 'Bahasa Melayu',
 }
 const selectedLanguage = computed(() => {
-  return langMap[locale.value] || '繁體中文'
+  return langMap[locale.value as LocaleType]
 })
-const languages = ['简体中文', '繁體中文', 'English', 'Bahasa Melayu']
-let langTimer: any = null
+const languages = Object.values(langMap)
+let langTimer: ReturnType<typeof setTimeout> | null = null
 
+// 语言切换只发起带前缀的路由导航，资源加载和状态提交由路由层统一处理。
 const selectLanguage = (lang: string) => {
-  const reverseMap: Record<string, string> = {
+  const reverseMap: Record<string, LocaleType> = {
     简体中文: 'zh-CN',
     繁體中文: 'zh-TW',
     English: 'en',
@@ -124,14 +131,12 @@ const selectLanguage = (lang: string) => {
   }
   const targetLocale = reverseMap[lang]
   if (targetLocale) {
-    locale.value = targetLocale
-    localStorage.setItem('user-language', targetLocale)
-    syncHtmlLang(targetLocale as LocaleType)
-
-    // Redirect to prefixed URL
+    // 仅发起导航；路由守卫会在语言包加载成功后统一提交语言状态。
     const cleanPath = route.fullPath.replace(/^\/(zh-CN|zh-TW|en|ms)/, '')
     const targetPath = `/${targetLocale}${cleanPath === '/' ? '' : cleanPath}`
-    router.push({ path: targetPath })
+    void router.push({ path: targetPath }).catch((error) => {
+      console.error(`[Language Navigation Error]: ${targetLocale}`, error)
+    })
   }
   showLanguageDropdown.value = false
 }
@@ -153,30 +158,12 @@ const closeLanguageDropdown = () => {
   }, 350) // 350ms delay to prevent accidental mouseleave closes
 }
 
-/* More menu dropdown */
-const showMoreDropdown = ref(false)
-let moreTimer: any = null
-
-const openMoreDropdown = () => {
-  if (moreTimer) clearTimeout(moreTimer)
-  showMoreDropdown.value = true
-}
-
-const closeMoreDropdown = () => {
-  if (moreTimer) clearTimeout(moreTimer)
-  moreTimer = setTimeout(() => {
-    showMoreDropdown.value = false
-  }, 350)
-}
-
 // Global click outside to close dropdowns
+// 监听文档点击，避免任意一个下拉菜单在失焦后仍保持打开。
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
   if (!target.closest('.lang-selector')) {
     showLanguageDropdown.value = false
-  }
-  if (!target.closest('.more-menu-container')) {
-    showMoreDropdown.value = false
   }
   if (!target.closest('.eco-wrapper')) {
     showEcoDropdown.value = false
@@ -191,7 +178,6 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
   document.body.style.overflow = ''
   if (langTimer) clearTimeout(langTimer)
-  if (moreTimer) clearTimeout(moreTimer)
   if (ecoTimer) clearTimeout(ecoTimer)
 })
 </script>
@@ -225,7 +211,13 @@ onUnmounted(() => {
           <!-- Eco dropdown menu -->
           <li class="has-dropdown" :class="{ active: activeItem === 'eco' }">
             <div class="eco-wrapper" @mouseenter="openEcoDropdown" @mouseleave="closeEcoDropdown">
-              <a href="javascript:void(0)" role="button">
+              <a
+                href="javascript:void(0)"
+                role="button"
+                aria-haspopup="true"
+                :aria-expanded="showEcoDropdown"
+                @click.prevent="showEcoDropdown = !showEcoDropdown"
+              >
                 {{ t('nav.eco') }}
                 <svg
                   class="caret"
@@ -303,7 +295,12 @@ onUnmounted(() => {
           @mouseenter="openLanguageDropdown"
           @mouseleave="closeLanguageDropdown"
         >
-          <button class="lang-btn" @click="showLanguageDropdown = !showLanguageDropdown">
+          <button
+            class="lang-btn"
+            aria-haspopup="true"
+            :aria-expanded="showLanguageDropdown"
+            @click="showLanguageDropdown = !showLanguageDropdown"
+          >
             <!-- Globe Icon SVG -->
             <svg
               class="icon-globe"
@@ -366,6 +363,8 @@ onUnmounted(() => {
         :class="{ active: isMobileMenuOpen }"
         @click="toggleMobileMenu"
         aria-label="Toggle Menu"
+        aria-controls="mobile-navigation"
+        :aria-expanded="isMobileMenuOpen"
       >
         <span class="bar"></span>
         <span class="bar"></span>
@@ -375,7 +374,11 @@ onUnmounted(() => {
 
     <!-- Mobile Drawer Menu (Mobile Only) -->
     <transition name="drawer-fade">
-      <div v-if="isMobileMenuOpen && !isMinimalHeader" class="mobile-drawer">
+      <div
+        v-if="isMobileMenuOpen && !isMinimalHeader"
+        id="mobile-navigation"
+        class="mobile-drawer"
+      >
         <div class="drawer-content">
           <ul class="drawer-nav">
             <li :class="{ active: activeItem === 'home' }">
@@ -639,61 +642,6 @@ onUnmounted(() => {
   background: #1b192d;
   color: #ffffff;
   font-weight: 500;
-}
-
-.more-menu-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.more-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.7);
-  transition: var(--transition-normal);
-  padding: 4px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.more-btn:hover {
-  color: #ffffff;
-  transform: scale(1.05);
-}
-
-.more-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 140px;
-  padding-top: 8px; /* gap bridge */
-  z-index: 101;
-}
-
-.more-dropdown-inner {
-  background: #0f0d22;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
-
-.more-dropdown-inner .dropdown-item {
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  padding: 10px 18px;
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.75);
-  transition: var(--transition-normal);
-}
-
-.more-dropdown-inner .dropdown-item:hover {
-  background: #1b192d;
-  color: #ffffff;
 }
 
 /* Contact dropdown */

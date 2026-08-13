@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 首页页面编排器：按品牌叙事顺序组合首屏、产品、市场、业务、全球与生态区块。
+ */
 import HeroSection from '@/components/HeroSection.vue'
 import ProductsSection from '@/components/ProductsSection.vue'
 import MarketDynamicsSection from '@/components/MarketDynamicsSection.vue'

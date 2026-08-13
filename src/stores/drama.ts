@@ -1,3 +1,6 @@
+/**
+ * 短剧全局状态仓库：缓存列表、当前详情与播放进度，并协调短剧相关接口调用。
+ */
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import {

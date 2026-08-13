@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 首页「市场动态」展示区块：内容和标题均由国际化资源提供。
+ */
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 </script>

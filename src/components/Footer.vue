@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 全站页脚：提供品牌入口、业务/法律链接以及外部社交媒体链接。
+ */
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 </script>
@@ -9,7 +12,13 @@ const { t } = useI18n()
       <!-- Left side: Brand Logo -->
       <div class="footer-brand">
         <div class="logo-area">
-          <img src="/img/bingo.png" alt="BINGO文娱" class="logo-img" />
+          <img
+            src="/img/bingo.png"
+            alt="BINGO文娱"
+            class="logo-img"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
 

@@ -1,3 +1,6 @@
+/**
+ * 招聘接口模块：声明职位与筛选项的数据结构，并封装职位列表、筛选配置请求。
+ */
 import http from '@/utils/request'
 
 export type RecruitmentLanguageType = 'zh' | 'cht' | 'en' | 'ms'
@@ -44,10 +47,12 @@ export interface RecruitmentFilterOptions {
 }
 
 export const recruitmentApi = {
+  // 根据语言、关键词和筛选条件查询职位。
   getRecruitmentList(params: RecruitmentListParams): Promise<Job[]> {
     return http.get<Job[]>('/sqx_fast/app/recruitment/list', params)
   },
 
+  // 获取当前语言对应的部门、地点和经验筛选配置。
   getFilterOptions(languageType: RecruitmentLanguageType): Promise<RecruitmentFilterOptions> {
     return http.get<RecruitmentFilterOptions>('/sqx_fast/app/recruitment/filter-options', {
       languageType,

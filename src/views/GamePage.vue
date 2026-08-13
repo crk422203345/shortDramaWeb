@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 游戏生态页：维护精选游戏的展示配置，模板通过 key 获取多语言标题与类型文案。
+ */
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -23,6 +27,43 @@ const featuredGames = [
     link: 'https://g.bingo.vip/#/gamedetails/content?gid=44&edition=0&key=XC9RdtCC',
   },
 ]
+
+const gameVideoRefs = ref<HTMLVideoElement[]>([])
+let videoObserver: IntersectionObserver | null = null
+
+const setGameVideoRef = (el: HTMLVideoElement | null, index: number) => {
+  if (el) gameVideoRefs.value[index] = el
+}
+
+// 只播放进入视口的宣传视频，避免页面加载后同时下载并解码三路视频。
+onMounted(() => {
+  if (!('IntersectionObserver' in window)) {
+    const firstVideo = gameVideoRefs.value[0]
+    if (firstVideo) void firstVideo.play().catch(() => undefined)
+    return
+  }
+
+  videoObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement
+        if (entry.isIntersecting) {
+          void video.play().catch(() => undefined)
+        } else {
+          video.pause()
+        }
+      })
+    },
+    { threshold: 0.35 },
+  )
+
+  gameVideoRefs.value.forEach((video) => videoObserver?.observe(video))
+})
+
+onBeforeUnmount(() => {
+  videoObserver?.disconnect()
+  gameVideoRefs.value.forEach((video) => video.pause())
+})
 </script>
 
 <template>
@@ -122,7 +163,16 @@ const featuredGames = [
             <span class="featured-video-placeholder" aria-hidden="true">
               {{ t('game_universe.featured_games.video_placeholder') }}
             </span>
-            <video class="featured-video" :src="game.video" autoplay muted loop playsinline controls preload="metadata">
+            <video
+              :ref="(el) => setGameVideoRef(el as HTMLVideoElement | null, index)"
+              class="featured-video"
+              :src="game.video"
+              muted
+              loop
+              playsinline
+              controls
+              preload="metadata"
+            >
               {{ t('game_universe.featured_games.video_unsupported') }}
             </video>
           </div>

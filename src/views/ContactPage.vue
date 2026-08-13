@@ -1,9 +1,13 @@
 <script setup lang="ts">
+/**
+ * 联系页面：提供页内锚点滚动，并复用首页的联系表单组件完成咨询提交。
+ */
 import { useI18n } from 'vue-i18n'
 import ContactSection from '@/components/ContactSection.vue'
 
 const { t } = useI18n()
 
+// 两个滚动方法分别定位到表单和联系信息区域。
 const scrollToForm = () => {
   const el = document.getElementById('contact')
   if (el) {

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 短剧生态页：展示精选剧集，并确保同一时刻仅播放当前激活卡片的视频。
+ */
 import { nextTick, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -7,6 +10,7 @@ const { t } = useI18n()
 const activeDramaIndex = ref(1)
 const dramaVideoRefs = ref<HTMLVideoElement[]>([])
 
+// 精选短剧的媒体与跳转地址为页面静态配置，展示文案由 key 从 i18n 读取。
 const featuredDramas = [
   {
     key: 'sweet_date',
@@ -34,6 +38,7 @@ const setDramaVideoRef = (el: HTMLVideoElement | null, index: number) => {
   }
 }
 
+// 激活卡片自动播放，其余视频暂停并归零，避免多路音视频资源同时占用。
 const syncDramaVideos = () => {
   dramaVideoRefs.value.forEach((video, index) => {
     if (!video) return
@@ -211,6 +216,8 @@ onMounted(() => {
                 :class="{ 'is-hidden': activeDramaIndex === index }"
                 :src="drama.poster"
                 :alt="t(`drama_universe.featured_dramas.items.${drama.key}.title`)"
+                loading="lazy"
+                decoding="async"
               />
               <video
                 :ref="(el) => setDramaVideoRef(el as HTMLVideoElement | null, index)"

@@ -1,11 +1,26 @@
+/**
+ * HTTP 基础设施：统一配置 Axios、鉴权请求头、业务响应解包和全局错误提示。
+ * 各业务 API 通过本模块导出的 http 方法发起请求，避免重复处理网络细节。
+ */
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import i18n from '@/i18n'
 
 // 1. 定义通用后端返回的数据格式接口
 export interface ApiResponse<T = unknown> {
   code: number
-  message: string
-  data: T
+  message?: string
+  msg?: string
+  data?: T
+}
+
+type ApiSuccessResponse<T> = ApiResponse<T> & { data: T }
+
+const getApiMessage = (response: ApiResponse): string => {
+  return response.message || response.msg || ''
+}
+
+const hasApiData = <T>(response: ApiResponse<T>): response is ApiSuccessResponse<T> => {
+  return Object.prototype.hasOwnProperty.call(response, 'data')
 }
 
 // 2. 统一错误消息提示函数（在实际项目中可与 Element Plus / Vant / Ant Design 的 Message/Toast 组件对接）
@@ -39,9 +54,22 @@ const showErrorToast = (message: string) => {
     setTimeout(() => {
       toast.style.opacity = '0'
       toast.style.transform = 'translateY(-20px)'
-      setTimeout(() => toast.remove(), 300)
+      setTimeout(() => {
+        toast.remove()
+        if (!container.childElementCount) container.remove()
+      }, 300)
     }, 3000)
   }
+}
+
+let authRedirectTimer: ReturnType<typeof setTimeout> | null = null
+
+const scheduleAuthRedirect = () => {
+  if (authRedirectTimer) return
+  authRedirectTimer = setTimeout(() => {
+    authRedirectTimer = null
+    window.location.hash = `#/${i18n.global.locale.value}`
+  }, 1000)
 }
 
 // 3. 创建 Axios 实例
@@ -72,30 +100,29 @@ service.interceptors.request.use(
 
 // 5. 响应拦截器
 service.interceptors.response.use(
-  (response: AxiosResponse<ApiResponse>) => {
+  (response: AxiosResponse<ApiResponse<unknown>>) => {
     const res = response.data
 
     // 业务 code 判断，约定 0 为接口正常响应状态码
-    if (res.code === 0) {
-      // 成功时直接返回 data 数据，方便页面端解构使用
-      return res.data as any
+    if (res.code === 0 || res.code === 200) {
+      return response
     }
 
     // 401 登录失效逻辑
     if (res.code === 401) {
       // 清除本地缓存的无效 token
       localStorage.removeItem('token')
-      showErrorToast(i18n.global.t('error.unauthorized'))
+      const message = getApiMessage(res) || i18n.global.t('error.unauthorized')
+      showErrorToast(message)
       // 延迟 1 秒后跳转登录页面，让提示框有时间展示
-      setTimeout(() => {
-        window.location.href = '/'
-      }, 1000)
-      return Promise.reject(new Error(res.message || i18n.global.t('error.unauthorized')))
+      scheduleAuthRedirect()
+      return Promise.reject(new Error(message))
     }
 
     // 其他业务逻辑错误（例如：账号密码错误、短剧未购买等，code 不为 200 的情况）
-    showErrorToast(res.message || i18n.global.t('error.business_failed'))
-    return Promise.reject(new Error(res.message || 'Business Error'))
+    const message = getApiMessage(res) || i18n.global.t('error.business_failed')
+    showErrorToast(message)
+    return Promise.reject(new Error(message))
   },
   (error) => {
     let message = i18n.global.t('error.network_failed')
@@ -110,9 +137,7 @@ service.interceptors.response.use(
         case 401:
           localStorage.removeItem('token')
           message = i18n.global.t('error.unauthorized') + ' (401)'
-          setTimeout(() => {
-            window.location.href = '/'
-          }, 1000)
+          scheduleAuthRedirect()
           break
         case 403:
           message = i18n.global.t('error.network_failed') + ' (403)'
@@ -146,12 +171,17 @@ service.interceptors.response.use(
 )
 
 // 6. 包装工具导出，利用泛型彻底规范请求方法返回值类型
+const unwrapApiData = <T>(response: AxiosResponse<ApiResponse<T>>): T => {
+  if (hasApiData(response.data)) return response.data.data
+  throw new Error(getApiMessage(response.data) || i18n.global.t('error.business_failed'))
+}
+
 export const http = {
   /**
    * 通用请求方法
    */
   request<T = unknown>(config: AxiosRequestConfig): Promise<T> {
-    return service(config) as unknown as Promise<T>
+    return service.request<ApiResponse<T>>(config).then(unwrapApiData)
   },
 
   /**
@@ -161,7 +191,9 @@ export const http = {
    * @param config 额外 Axios 配置
    */
   get<T = unknown>(url: string, params?: object, config?: AxiosRequestConfig): Promise<T> {
-    return service.get(url, { params, ...config }) as unknown as Promise<T>
+    return service
+      .get<ApiResponse<T>>(url, { params, ...config })
+      .then(unwrapApiData)
   },
 
   /**
@@ -171,7 +203,7 @@ export const http = {
    * @param config 额外 Axios 配置
    */
   post<T = unknown>(url: string, data?: object, config?: AxiosRequestConfig): Promise<T> {
-    return service.post(url, data, config) as unknown as Promise<T>
+    return service.post<ApiResponse<T>>(url, data, config).then(unwrapApiData)
   },
 
   /**
@@ -181,7 +213,7 @@ export const http = {
    * @param config 额外 Axios 配置
    */
   put<T = unknown>(url: string, data?: object, config?: AxiosRequestConfig): Promise<T> {
-    return service.put(url, data, config) as unknown as Promise<T>
+    return service.put<ApiResponse<T>>(url, data, config).then(unwrapApiData)
   },
 
   /**
@@ -191,7 +223,9 @@ export const http = {
    * @param config 额外 Axios 配置
    */
   delete<T = unknown>(url: string, params?: object, config?: AxiosRequestConfig): Promise<T> {
-    return service.delete(url, { params, ...config }) as unknown as Promise<T>
+    return service
+      .delete<ApiResponse<T>>(url, { params, ...config })
+      .then(unwrapApiData)
   },
 }
 

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+/**
+ * 首页联系表单区块：负责输入校验、防重复提交及提交状态管理。
+ * 实际网络提交由 contactApi 统一处理，组件只保留界面交互职责。
+ */
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { contactApi } from '@/api/contact'
 
@@ -10,14 +14,15 @@ const company = ref('')
 const email = ref('')
 const description = ref('')
 
+// 使用基础正则拦截明显不合法的邮箱格式，提交前仍会由服务端做最终校验。
 const isValidEmail = (val: string) => {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)
 }
 
 const isSubmitted = ref(false)
 const isLoading = ref(false)
-let submitTimer: ReturnType<typeof setTimeout> | null = null
 
+// 真实提交阶段：防止并发重复提交，并在成功后清空表单。
 const submitContact = async () => {
   if (isLoading.value) {
     return
@@ -43,10 +48,10 @@ const submitContact = async () => {
     alert(error instanceof Error ? error.message : t('contact.failed'))
   } finally {
     isLoading.value = false
-    submitTimer = null
   }
 }
 
+// 表单入口：先完成前端必填/格式校验，再触发网络请求。
 const submitForm = () => {
   if (!name.value.trim() || !email.value.trim() || !description.value.trim()) {
     alert(t('contact.required_fields_empty'))
@@ -58,18 +63,8 @@ const submitForm = () => {
     return
   }
 
-  if (submitTimer) {
-    clearTimeout(submitTimer)
-  }
-
-  submitTimer = setTimeout(() => {
-    void submitContact()
-  }, 500)
+  void submitContact()
 }
-
-onUnmounted(() => {
-  if (submitTimer) clearTimeout(submitTimer)
-})
 </script>
 
 <template>

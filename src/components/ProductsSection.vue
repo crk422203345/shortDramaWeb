@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 首页产品展示区块：通过悬停切换主视觉卡片，点击后跳转至对应游戏或短剧产品页。
+ */
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -6,6 +9,7 @@ const { t } = useI18n()
 
 const activeIndex = ref(2) // Card 3 (index 2) is active by default
 
+// 产品名称取自多语言资源；链接和图片保留为固定产品配置。
 const cards = computed(() => [
   {
     id: 1,
@@ -39,6 +43,7 @@ const cards = computed(() => [
   },
 ])
 
+// 固定页头会遮挡锚点，因此滚动时额外上移 80px。
 const scrollToSection = (id: string) => {
   const el = document.getElementById(id)
   if (el) {
@@ -72,11 +77,22 @@ const openLink = (url: string) => {
           :key="card.id"
           class="character-card"
           :class="{ active: activeIndex === index, 'has-link': card.link }"
+          role="button"
+          tabindex="0"
+          :aria-label="card.name"
           @mouseenter="activeIndex = index"
           @click="openLink(card.link)"
+          @keydown.enter.prevent="openLink(card.link)"
+          @keydown.space.prevent="openLink(card.link)"
         >
           <div class="card-inner">
-            <img :src="card.img" :alt="card.name" class="character-img" />
+            <img
+              :src="card.img"
+              :alt="card.name"
+              class="character-img"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="card-overlay">
               <div class="card-info">
                 <span class="card-title">{{ card.name }}</span>

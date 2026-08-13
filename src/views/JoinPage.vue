@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 招聘页面：加载职位与筛选配置，规范化后端字段，并管理搜索防抖、展开动画和请求竞态。
+ */
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
@@ -45,6 +48,7 @@ let jobsRequestId = 0
 let filtersRequestId = 0
 let searchTimer: ReturnType<typeof setTimeout> | null = null
 
+// 将网站语言转换为招聘接口所需的语言参数。
 const getLanguageType = (localeVal: string): RecruitmentLanguageType => {
   if (localeVal === 'zh-CN') return 'zh'
   if (localeVal === 'zh-TW') return 'cht'
@@ -53,6 +57,7 @@ const getLanguageType = (localeVal: string): RecruitmentLanguageType => {
   return 'zh'
 }
 
+// 后端可能返回数组、JSON 字符串或换行文本，统一转成便于模板遍历的字符串数组。
 const normalizeStringArray = (value: string[] | string): string[] => {
   if (Array.isArray(value)) return value.filter((item) => typeof item === 'string' && item.trim())
 
@@ -91,6 +96,7 @@ const setSelectedFilterValue = (key: FilterKey, value: string) => {
   activeFilter.value = null
 }
 
+// 只保留启用的筛选项，并按后台配置的排序值稳定展示。
 const normalizeFilterOptions = (
   options: RecruitmentFilterOption[] | null | undefined,
 ): RecruitmentFilterOption[] => {
@@ -142,6 +148,7 @@ const buildRecruitmentParams = (): RecruitmentListParams => {
   return params
 }
 
+// 请求序号防止旧请求覆盖新筛选条件下的职位结果。
 const fetchJobs = async () => {
   const requestId = ++jobsRequestId
   isLoading.value = true
@@ -188,6 +195,7 @@ const fetchFilterOptions = async () => {
   }
 }
 
+// 搜索输入使用防抖，筛选切换则可立即请求。
 const scheduleFetchJobs = (delay = 0) => {
   if (searchTimer) clearTimeout(searchTimer)
   searchTimer = setTimeout(() => {
@@ -249,6 +257,7 @@ onBeforeUnmount(() => {
   document.removeEventListener('click', handleDocumentClick)
 })
 
+// 为每个职位生成带多语言主题的安全 mailto 链接。
 const getMailHref = (job: NormalizedJob): string => {
   if (!job.resumeEmail) return ''
   const subject = t('join.mail_subject', { title: job.title })
@@ -268,6 +277,7 @@ const toggleExpand = (id: number) => {
 const isExpanded = (id: number) => expandedJobIds.value.includes(id)
 
 // Smooth height transition hooks
+// 以下六个钩子手动驱动职位详情的高度/透明度过渡。
 const beforeEnter = (el: Element) => {
   const htmlEl = el as HTMLElement
   htmlEl.style.height = '0'

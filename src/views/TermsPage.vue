@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 使用条款页面：根据当前语言呈现静态条款，并在进入时回到文档顶部。
+ */
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 

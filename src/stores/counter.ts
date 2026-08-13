@@ -1,3 +1,6 @@
+/**
+ * Pinia 示例计数器：演示 Setup Store 中状态、派生状态和动作的组织方式。
+ */
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 

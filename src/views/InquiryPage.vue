@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 资讯列表页：按语言、分类与页码请求文章，处理竞态请求，并生成带省略号的分页器。
+ */
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
@@ -21,6 +24,7 @@ const allInquiries = ref<ArticleItem[]>([])
 const totalItems = ref(0)
 let latestRequestId = 0
 
+// 前端 locale 与后端 languageType 使用不同枚举，所有请求在此集中转换。
 const getLanguageType = (localeValue: string): ArticleLanguageType => {
   if (localeValue === 'zh-CN') return 'zh'
   if (localeValue === 'zh-TW') return 'cht'
@@ -37,6 +41,7 @@ const tabs = computed(() => [
 ])
 
 // Fetch list data from API
+// 请求序号用于忽略过期响应，避免快速切换筛选条件时旧数据覆盖新数据。
 const fetchData = async () => {
   const requestId = ++latestRequestId
   loading.value = true
@@ -68,6 +73,7 @@ const fetchData = async () => {
 }
 
 // Watchers to trigger refetch when tab or page shifts
+// 切换分类或语言时回到第一页；页码变更则由下方监听器单独请求。
 watch([currentTab, locale], () => {
   if (currentPage.value !== 1) {
     currentPage.value = 1
@@ -107,6 +113,7 @@ const changePage = (page: number | string) => {
 }
 
 // Generate the visible page numbers for pagination with ellipses
+// 始终保留首页/末页，仅在当前页附近展示有限的连续页码。
 const visiblePages = computed(() => {
   const total = totalPages.value
   const current = currentPage.value
@@ -228,7 +235,13 @@ const getItemExternalUrl = (item: ArticleItem) => {
 
               <!-- Card Image on Right -->
               <div class="card-img-wrapper" v-if="item.coverImage">
-                <img :src="item.coverImage" :alt="item.title" class="card-img" />
+                <img
+                  :src="item.coverImage"
+                  :alt="item.title"
+                  class="card-img"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </component>
           </transition-group>

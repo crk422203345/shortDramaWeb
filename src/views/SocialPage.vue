@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 社交生态页：展示社交业务介绍及其多语言文案。
+ */
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()

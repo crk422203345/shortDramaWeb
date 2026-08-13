@@ -1,5 +1,16 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+/**
+ * 首页「全球布局」区块：按地区切换内容卡片，并根据实际按钮尺寸计算滑动指示器。
+ */
+import {
+  ref,
+  computed,
+  onMounted,
+  onUnmounted,
+  nextTick,
+  watch,
+  type ComponentPublicInstance,
+} from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
@@ -7,6 +18,7 @@ const { t, locale } = useI18n()
 // Ordered keys determine slide direction
 const regionKeys = ['china', 'hk', 'malaysia', 'sea'] as const
 
+// 地区文案由当前语言决定，使用计算属性确保多语言切换后数据同步更新。
 const regions = computed(() => ({
   china: {
     id: 'china',
@@ -53,12 +65,18 @@ const activeIndex = ref(0)
 const slideDirection = ref<'left' | 'right'>('left')
 
 // Track tab button elements to calculate sliding indicator position
-const tabRefs = ref<any[]>([])
+const tabRefs = ref<(HTMLButtonElement | null)[]>([])
+let sliderTimer: ReturnType<typeof setTimeout> | null = null
 const sliderStyle = ref({
   width: '0px',
   transform: 'translateX(0px)',
 })
 
+const setTabRef = (el: Element | ComponentPublicInstance | null, index: number) => {
+  tabRefs.value[index] = el instanceof HTMLButtonElement ? el : null
+}
+
+// 标签尺寸会受语言和窗口宽度影响，需在 DOM 更新后重新测量指示器位置。
 const updateSlider = () => {
   const calculate = () => {
     const activeEl = tabRefs.value[activeIndex.value]
@@ -76,9 +94,11 @@ const updateSlider = () => {
     }
   }
   nextTick(calculate)
-  setTimeout(calculate, 100)
+  if (sliderTimer) clearTimeout(sliderTimer)
+  sliderTimer = setTimeout(calculate, 100)
 }
 
+// 通过新旧索引推导内容切换方向，同时更新标签与指示器。
 const switchTab = (newId: RegionKey, index: number) => {
   const currentIndex = activeIndex.value
   slideDirection.value = index >= currentIndex ? 'left' : 'right'
@@ -94,6 +114,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('resize', updateSlider)
+  if (sliderTimer) clearTimeout(sliderTimer)
 })
 
 watch(locale, () => {
@@ -128,11 +149,7 @@ watch(locale, () => {
           <button
             v-for="(key, index) in regionKeys"
             :key="key"
-            :ref="
-              (el: any) => {
-                if (el) tabRefs[index] = el
-              }
-            "
+            :ref="(el) => setTabRef(el, index)"
             class="tab-btn"
             :class="{ active: activeTab === key }"
             @click="switchTab(key, index)"
@@ -156,7 +173,13 @@ watch(locale, () => {
             <!-- Right Futuristic Visual -->
             <div class="region-visual">
               <div class="visual-border-wrap">
-                <img :src="activeRegionData.img" :alt="activeRegionData.title" class="visual-img" />
+                <img
+                  :src="activeRegionData.img"
+                  :alt="activeRegionData.title"
+                  class="visual-img"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <!-- Glowing borders & particles -->
                 <div class="glow-layer"></div>
               </div>

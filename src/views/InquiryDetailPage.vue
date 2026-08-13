@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 资讯详情页：依据路由文章 ID 拉取详情，清洗富文本，并校验可能渲染为外链的地址。
+ */
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -13,6 +16,7 @@ const article = ref<ArticleItem | null>(null)
 let latestRequestId = 0
 
 // Retrieve and validate ID
+// 路由参数可能为 string 或 string[]，统一收敛为单个非空 ID。
 const articleId = computed(() => {
   const idStr = route.params.id
   const resolvedIdStr = String((Array.isArray(idStr) ? idStr[0] : idStr) || '')
@@ -20,6 +24,7 @@ const articleId = computed(() => {
 })
 
 // Fetch article details from API
+// 以请求序号屏蔽过期响应，路由快速变动时不会出现内容错位。
 const getArticleData = async () => {
   if (!articleId.value) return
   const requestId = ++latestRequestId
@@ -81,6 +86,7 @@ const sourceDomain = computed(() => {
   }
 })
 
+// 服务端文章正文会以 v-html 呈现，先经 DOMPurify 清洗后再供模板使用。
 const sanitizedContent = computed(() => sanitizeArticleHtml(article.value?.content))
 
 // Helper for category label

@@ -1,3 +1,6 @@
+/**
+ * 资讯中心接口模块：定义文章数据契约，并提供列表、详情两个请求入口。
+ */
 import http from '@/utils/request'
 
 export type ArticleCategory = 'company' | 'product' | 'industry'
@@ -39,10 +42,12 @@ export interface ArticleDetailParams {
 }
 
 export const consultationApi = {
+  // 按语言、分类和分页条件获取资讯列表。
   getArticleList(params: ArticleListParams): Promise<ArticleListResponse> {
     return http.get<ArticleListResponse>('/sqx_fast/app/articles/list', params)
   },
 
+  // 根据文章 ID 获取完整正文及来源链接。
   getArticleDetail(params: ArticleDetailParams): Promise<ArticleItem> {
     return http.get<ArticleItem>('/sqx_fast/app/articles/detail', params)
   },

@@ -1,9 +1,14 @@
 <script setup lang="ts">
+/**
+ * 首页「业务支柱」区块：以可交互的轨道节点切换游戏、短剧和社交三条业务线。
+ * 文案通过计算属性读取，因而能随当前语言自动刷新。
+ */
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
+// 当前被选中的业务节点，默认展示游戏业务。
 const activePillar = ref('game')
 
 const pillars = computed(() => ({
@@ -39,6 +44,7 @@ const pillars = computed(() => ({
   },
 }))
 
+// 模板只消费当前节点对应的数据，避免在模板内重复按 key 查找。
 const activePillarData = computed(() => {
   return pillars.value[activePillar.value as keyof typeof pillars.value]
 })
@@ -82,7 +88,13 @@ const activePillarData = computed(() => {
                 <span class="particle particle-yellow"></span>
               </div>
               <div class="center-content">
-                <img src="/img/logo.png" alt="BINGO文娱" class="center-logo-img" />
+                <img
+                  src="/img/logo.png"
+                  alt="BINGO文娱"
+                  class="center-logo-img"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
 
@@ -91,7 +103,12 @@ const activePillarData = computed(() => {
             <div
               class="orbit-node node-game"
               :class="{ active: activePillar === 'game' }"
+              role="button"
+              tabindex="0"
+              :aria-pressed="activePillar === 'game'"
               @click="activePillar = 'game'"
+              @keydown.enter.prevent="activePillar = 'game'"
+              @keydown.space.prevent="activePillar = 'game'"
             >
               <div class="node-icon">
                 <img
@@ -109,7 +126,12 @@ const activePillarData = computed(() => {
             <div
               class="orbit-node node-drama"
               :class="{ active: activePillar === 'drama' }"
+              role="button"
+              tabindex="0"
+              :aria-pressed="activePillar === 'drama'"
               @click="activePillar = 'drama'"
+              @keydown.enter.prevent="activePillar = 'drama'"
+              @keydown.space.prevent="activePillar = 'drama'"
             >
               <div class="node-icon">
                 <img
@@ -127,7 +149,12 @@ const activePillarData = computed(() => {
             <div
               class="orbit-node node-social"
               :class="{ active: activePillar === 'social' }"
+              role="button"
+              tabindex="0"
+              :aria-pressed="activePillar === 'social'"
               @click="activePillar = 'social'"
+              @keydown.enter.prevent="activePillar = 'social'"
+              @keydown.space.prevent="activePillar = 'social'"
             >
               <div class="node-icon">
                 <img
@@ -154,6 +181,8 @@ const activePillarData = computed(() => {
                   :alt="activePillarData.title"
                   class="banner-img"
                   :style="{ filter: activePillarData.filter }"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -176,7 +205,13 @@ const activePillarData = computed(() => {
         <!-- Upper: Centered Logo Core -->
         <div class="mobile-logo-core">
           <div class="core-glow"></div>
-          <img src="/img/logo.png" alt="BINGO文娱" class="mobile-logo-img" />
+          <img
+            src="/img/logo.png"
+            alt="BINGO文娱"
+            class="mobile-logo-img"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         <!-- Middle: Three Vertical Nodes -->
@@ -190,7 +225,12 @@ const activePillarData = computed(() => {
           <div
             class="mobile-node node-game"
             :class="{ active: activePillar === 'game' }"
+            role="button"
+            tabindex="0"
+            :aria-pressed="activePillar === 'game'"
             @click="activePillar = 'game'"
+            @keydown.enter.prevent="activePillar = 'game'"
+            @keydown.space.prevent="activePillar = 'game'"
           >
             <div class="node-icon-wrapper">
               <img
@@ -208,7 +248,12 @@ const activePillarData = computed(() => {
           <div
             class="mobile-node node-drama"
             :class="{ active: activePillar === 'drama' }"
+            role="button"
+            tabindex="0"
+            :aria-pressed="activePillar === 'drama'"
             @click="activePillar = 'drama'"
+            @keydown.enter.prevent="activePillar = 'drama'"
+            @keydown.space.prevent="activePillar = 'drama'"
           >
             <div class="node-icon-wrapper">
               <img src="/img/omo.png" :alt="t('pillars.nodes.drama_main')" class="node-icon-img" />
@@ -222,7 +267,12 @@ const activePillarData = computed(() => {
           <div
             class="mobile-node node-social"
             :class="{ active: activePillar === 'social' }"
+            role="button"
+            tabindex="0"
+            :aria-pressed="activePillar === 'social'"
             @click="activePillar = 'social'"
+            @keydown.enter.prevent="activePillar = 'social'"
+            @keydown.space.prevent="activePillar = 'social'"
           >
             <div class="node-icon-wrapper">
               <img
@@ -247,6 +297,8 @@ const activePillarData = computed(() => {
                   :alt="activePillarData.title"
                   class="mobile-banner-img"
                   :style="{ filter: activePillarData.filter }"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div class="mobile-text-content">
