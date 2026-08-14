@@ -19,15 +19,15 @@ const cards = computed(() => [
   },
   {
     id: 2,
-    name: t('products.items.moonlight'),
+    name: t('products.items.three_kingdoms'),
     img: '/img/月光.png',
-    link: 'https://g.bingo.vip/#/gamedetails/content?gid=39&edition=0&key=XC9RdtCC',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=23&edition=0&key=XC9RdtCC',
   },
   {
     id: 3,
     name: t('products.items.monster'),
     img: '/img/5.png',
-    link: 'https://g.bingo.vip/#/gamedetails/content?gid=8&edition=0&key=XC9RdtCC',
+    link: 'https://g.bingo.vip/#/gamedetails/content?gid=45&edition=0&key=XC9RdtCC',
   },
   {
     id: 4,
