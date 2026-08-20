@@ -83,8 +83,8 @@
       "game_main": "游戏",
       "drama_sub": "OMO DRAMA",
       "drama_main": "短剧",
-      "social_sub": "社交生态",
-      "social_main": "社交生态"
+      "social_sub": "社交",
+      "social_main": "社交"
     },
     "items": {
       "game": {
@@ -96,8 +96,8 @@
         "desc": "精品内容库，低消费无感观看，刷剧享受生态红利，结合实时多模态 AI，打通跨国流量与高效增值通道。"
       },
       "social": {
-        "title": "UGC & 数字游民社区",
-        "desc": "线上线下产融结合，本地生活 X 社交，构建新型的全球化社区与价值网络。"
+        "title": "WebChat 全生态社交",
+        "desc": "集即时通讯、朋友圈与生态服务于一体的综合社交入口，连接全球用户与 WebX 全场景服务，构建一站式数字生活网络。"
       }
     }
   },
